@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Section } from '@/components/ui/Section';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
+import { HeroReveal } from '@/components/motion/HeroReveal';
+import { FadeIn } from '@/components/motion/FadeIn';
 import { getProductBySlug } from '@/lib/wix-products';
 
 interface PageProps {
@@ -33,7 +35,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     <Section>
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
-          <div className="space-y-4">
+          <FadeIn className="space-y-4" duration={0.7}>
             <div className="relative aspect-square bg-onyx overflow-hidden">
               {mainImage && (
                 <Image
@@ -66,30 +68,40 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 ))}
               </div>
             )}
-          </div>
+          </FadeIn>
           <div>
-            <p className="text-gold font-display tracking-[0.3em] uppercase text-xs mb-3">
-              Corvo Athletics
-            </p>
-            <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-tight mb-6">
-              {product.name}
-            </h1>
-            <p className="text-gold font-display text-3xl mb-8">
-              {product.priceData?.formatted?.price}
-            </p>
-            <div className="border-t border-graphite my-8" />
+            <HeroReveal delay={0.1} y={20}>
+              <p className="text-gold font-display tracking-[0.3em] uppercase text-xs mb-3">
+                Corvo Athletics
+              </p>
+            </HeroReveal>
+            <HeroReveal delay={0.2} y={30}>
+              <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-tight mb-6">
+                {product.name}
+              </h1>
+            </HeroReveal>
+            <HeroReveal delay={0.35}>
+              <p className="text-gold font-display text-3xl mb-8">
+                {product.priceData?.formatted?.price}
+              </p>
+              <div className="border-t border-graphite my-8" />
+            </HeroReveal>
             {product.description && (
-              <div
-                className="prose-corvo text-ash text-sm leading-relaxed mb-10 max-w-prose [&>br]:block"
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
+              <HeroReveal delay={0.5}>
+                <div
+                  className="text-ash text-sm leading-relaxed mb-10 max-w-prose"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+              </HeroReveal>
             )}
-            {product._id && <AddToCartButton productId={product._id} />}
-            <div className="mt-10 pt-8 border-t border-graphite space-y-3 text-xs text-ash uppercase tracking-wider">
-              <p>Free Shipping on Orders Over $100</p>
-              <p>30-Day Returns</p>
-              <p>Lab-Tested & Verified</p>
-            </div>
+            <HeroReveal delay={0.65}>
+              {product._id && <AddToCartButton productId={product._id} />}
+              <div className="mt-10 pt-8 border-t border-graphite space-y-3 text-xs text-ash uppercase tracking-wider">
+                <p>Free Shipping on Orders Over $100</p>
+                <p>30-Day Returns</p>
+                <p>Lab-Tested & Verified</p>
+              </div>
+            </HeroReveal>
           </div>
         </div>
       </Container>
