@@ -19,15 +19,73 @@ const inter = Inter({
   display: 'swap',
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corvoathletic.com';
+
 export const metadata: Metadata = {
-  title: 'Corvo Athletics — Performance Fuel & Gym Apparel',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
+    template: '%s — Corvo Athletics',
+  },
   description:
-    "Premium protein, supplements, and training apparel. Engineered for athletes who don't quit.",
+    "Corvo Athletics. Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
+  keywords: [
+    'Corvo Athletics',
+    'Corvo Athletic',
+    'gym',
+    'athleisure',
+    'luxury',
+    'sports',
+    'premium gym apparel',
+    'protein powder',
+    'gym supplements',
+    'luxury sportswear',
+    'athletic wear',
+  ],
+  applicationName: 'Corvo Athletics',
+  authors: [{ name: 'Corvo Athletics' }],
+  creator: 'Corvo Athletics',
+  publisher: 'Corvo Athletics',
+  alternates: { canonical: siteUrl },
+  openGraph: {
+    type: 'website',
+    locale: 'en_NZ',
+    url: siteUrl,
+    siteName: 'Corvo Athletics',
+    title: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
+    description:
+      "Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
+    description:
+      "Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
+  },
+  robots: { index: true, follow: true },
+  formatDetection: { telephone: false },
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Corvo Athletics',
+  alternateName: 'Corvo Athletic',
+  url: siteUrl,
+  description:
+    "Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
+  sameAs: [],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${anton.variable} ${inter.variable} h-full antialiased`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-ink text-bone font-sans">
         <CartProvider>
           <Header />

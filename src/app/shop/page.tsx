@@ -8,8 +8,11 @@ import { getAllProducts } from '@/lib/wix-products';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Shop — Corvo Athletics',
-  description: 'Premium protein, supplements, and training apparel.',
+  title: 'Shop All',
+  description:
+    'Shop premium gym apparel, luxury athleisure, sports gear, and supplements from Corvo Athletics. Engineered for athletes who refuse average.',
+  keywords: ['gym apparel', 'athleisure', 'luxury sportswear', 'sports gear', 'supplements'],
+  alternates: { canonical: '/shop' },
 };
 
 export default async function ShopPage() {

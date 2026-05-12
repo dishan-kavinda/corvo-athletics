@@ -16,10 +16,19 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) return { title: 'Not found — Corvo Athletics' };
+  if (!product) return { title: 'Not found' };
+  const cleanDesc = (product.description ?? '').replace(/<[^>]+>/g, '').slice(0, 160);
+  const imageUrl = product.media?.mainMedia?.image?.url;
   return {
-    title: `${product.name} — Corvo Athletics`,
-    description: (product.description ?? '').replace(/<[^>]+>/g, '').slice(0, 160),
+    title: product.name ?? 'Product',
+    description: cleanDesc || `${product.name} — premium gym & athleisure from Corvo Athletics.`,
+    alternates: { canonical: `/shop/${slug}` },
+    openGraph: {
+      title: product.name ?? 'Product',
+      description: cleanDesc,
+      type: 'website',
+      ...(imageUrl ? { images: [{ url: imageUrl }] } : {}),
+    },
   };
 }
 
@@ -31,8 +40,31 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const mainImage = product.media?.mainMedia?.image?.url;
   const gallery = product.media?.items ?? [];
 
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: (product.description ?? '').replace(/<[^>]+>/g, '').slice(0, 500),
+    image: mainImage ? [mainImage] : [],
+    brand: { '@type': 'Brand', name: 'Corvo Athletics' },
+    sku: product._id,
+    offers: {
+      '@type': 'Offer',
+      url: `https://corvoathletic.com/shop/${slug}`,
+      priceCurrency: product.priceData?.currency ?? 'NZD',
+      price: product.priceData?.price ?? 0,
+      availability: product.stock?.inStock
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+    },
+  };
+
   return (
     <Section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
           <FadeIn className="space-y-4" duration={0.7}>

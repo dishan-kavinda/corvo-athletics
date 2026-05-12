@@ -3,7 +3,8 @@ import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Order Confirmed — Corvo Athletics',
+  title: 'Order Confirmed',
+  robots: { index: false, follow: false },
 };
 
 export default function ThankYouPage() {

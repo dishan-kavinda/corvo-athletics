@@ -6,8 +6,11 @@ import { FadeIn } from '@/components/motion/FadeIn';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
 
 export const metadata = {
-  title: 'About — Corvo Athletics',
-  description: 'Engineered for athletes who refuse average.',
+  title: 'About',
+  description:
+    'Corvo Athletics is a luxury sports brand built for serious athletes. Premium gym apparel, athleisure, and lab-tested supplements — no compromise.',
+  keywords: ['Corvo Athletics', 'luxury gym brand', 'premium athleisure', 'sports brand story'],
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {

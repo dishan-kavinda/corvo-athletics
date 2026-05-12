@@ -3,7 +3,9 @@ import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Account — Corvo Athletics',
+  title: 'Account',
+  alternates: { canonical: '/account' },
+  robots: { index: false, follow: false },
 };
 
 export default function AccountPage() {
