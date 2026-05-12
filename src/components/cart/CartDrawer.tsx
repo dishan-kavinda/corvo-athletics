@@ -20,7 +20,15 @@ export function CartDrawer() {
   }, [isOpen]);
 
   const lineItems = cart?.lineItems ?? [];
-  const subtotal = cart?.subtotal?.formattedAmount ?? '$0.00';
+  const currency = cart?.currency ?? 'NZD';
+  const subtotalNum = lineItems.reduce((sum, item) => {
+    const amount = parseFloat(item.price?.amount ?? '0');
+    return sum + amount * (item.quantity ?? 0);
+  }, 0);
+  const subtotal = new Intl.NumberFormat('en-NZ', {
+    style: 'currency',
+    currency,
+  }).format(subtotalNum);
 
   return (
     <>
