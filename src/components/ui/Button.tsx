@@ -31,7 +31,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-100 cursor-pointer',
+    'inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-100 cursor-pointer disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed',
     variants[variant],
     sizes[size],
     className,

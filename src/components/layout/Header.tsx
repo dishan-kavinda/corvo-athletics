@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
+import { CartIcon } from '@/components/cart/CartIcon';
 
 const navItems = [
   { label: 'Protein & Supplements', href: '/shop/supplements' },
@@ -36,12 +37,7 @@ export function Header() {
           >
             Account
           </Link>
-          <Link
-            href="/cart"
-            className="text-xs uppercase tracking-[0.2em] hover:text-gold transition-colors"
-          >
-            Cart (0)
-          </Link>
+          <CartIcon />
         </div>
       </Container>
     </header>

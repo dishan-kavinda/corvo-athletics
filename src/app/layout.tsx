@@ -3,6 +3,8 @@ import { Anton, Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { CartProvider } from '@/components/cart/CartProvider';
+import { CartDrawer } from '@/components/cart/CartDrawer';
 
 const anton = Anton({
   weight: '400',
@@ -27,9 +29,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${anton.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-ink text-bone font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
