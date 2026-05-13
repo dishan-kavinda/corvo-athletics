@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "bugs": [
+    {
+      "id": "bug-001",
+      "timestamp": "2026-05-13T07:10:00Z",
+      "error_message": "Type error: Property 'subtotal' does not exist on type 'Cart & { __applicationErrorsType?: GetCurrentCartApplicationErrors | undefined; }'.",
+      "file": "src/components/cart/CartDrawer.tsx",
+      "root_cause": "The raw getCurrentCart() response from @wix/ecom does NOT have a top-level `subtotal` field. That `subtotal` property exists on the higher-level @wix/headless-ecom Cart abstraction (a wrapper component library), NOT the bare cart object returned by currentCart.getCurrentCart().",
+      "fix": "Compute subtotal client-side from line items: `lineItems.reduce((sum, item) => sum + parseFloat(item.price?.amount ?? '0') * (item.quantity ?? 0), 0)`, then format with `new Intl.NumberFormat('en-NZ', { style: 'currency', currency: cart?.currency ?? 'NZD' })`. This is a numerical approximation that matches Wix's subtotal except in cases with cart-level discounts (acceptable for v1; Wix re-computes on the hosted checkout).",
+      "tags": ["wix", "ecom", "typescript", "vercel-build", "cart"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-13T07:10:00Z"
+    }
+  ]
+}

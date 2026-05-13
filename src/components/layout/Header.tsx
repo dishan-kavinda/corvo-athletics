@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { CartIcon } from '@/components/cart/CartIcon';
+import { MobileNav } from '@/components/layout/MobileNav';
 
 const navItems = [
   { label: 'Protein & Supplements', href: '/shop/supplements' },
@@ -11,14 +12,17 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-graphite/50 bg-ink/80 backdrop-blur-md">
-      <Container className="flex h-20 items-center justify-between">
-        <Link
-          href="/"
-          className="font-display text-2xl tracking-[0.3em] uppercase hover:text-gold transition-colors"
-        >
-          Corvo
-        </Link>
+    <header className="sticky top-0 z-30 border-b border-graphite/50 bg-ink/80 backdrop-blur-md">
+      <Container className="flex h-20 items-center justify-between gap-4">
+        <div className="flex items-center gap-4 md:gap-0">
+          <MobileNav />
+          <Link
+            href="/"
+            className="font-display text-2xl tracking-[0.3em] uppercase hover:text-gold transition-colors"
+          >
+            Corvo
+          </Link>
+        </div>
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
