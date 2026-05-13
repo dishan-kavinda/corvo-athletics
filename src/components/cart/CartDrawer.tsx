@@ -6,7 +6,8 @@ import { useCart } from './CartProvider';
 import { Button } from '@/components/ui/Button';
 
 export function CartDrawer() {
-  const { cart, isOpen, close, removeFromCart, updateQuantity, checkout, loading } = useCart();
+  const { cart, isOpen, close, removeFromCart, updateQuantity, checkout, loading, error, clearError } =
+    useCart();
 
   useEffect(() => {
     if (isOpen) {
@@ -40,7 +41,8 @@ export function CartDrawer() {
         aria-hidden="true"
       />
       <aside
-        className={`fixed right-0 top-0 z-50 h-full w-full max-w-md bg-onyx border-l border-graphite shadow-2xl transition-transform duration-500 ease-out flex flex-col ${
+        style={{ backgroundColor: '#000000' }}
+        className={`fixed right-0 top-0 z-[60] h-full w-full max-w-md border-l border-graphite shadow-2xl transition-transform duration-500 ease-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-hidden={!isOpen}
@@ -60,12 +62,31 @@ export function CartDrawer() {
         </header>
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
+          {error && (
+            <div className="mb-6 border border-red-500/40 bg-red-500/10 p-4">
+              <p className="text-red-300 text-xs uppercase tracking-wider font-display mb-2">
+                Couldn&apos;t add to cart
+              </p>
+              <p className="text-red-200/80 text-xs leading-relaxed break-words">{error}</p>
+              <button
+                type="button"
+                onClick={clearError}
+                className="mt-3 text-[10px] text-red-300/70 hover:text-red-200 uppercase tracking-wider cursor-pointer"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
           {lineItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <p className="text-ash text-sm uppercase tracking-widest mb-6">Your cart is empty</p>
-              <Button href="/shop" variant="ghost" size="md" className="cursor-pointer">
+              <button
+                type="button"
+                onClick={close}
+                className="inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-100 cursor-pointer border border-graphite text-bone hover:border-bone hover:bg-onyx h-11 px-6 text-sm"
+              >
                 Continue Shopping
-              </Button>
+              </button>
             </div>
           ) : (
             <ul className="space-y-6">

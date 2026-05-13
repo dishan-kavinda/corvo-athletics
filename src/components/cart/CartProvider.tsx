@@ -28,6 +28,8 @@ interface CartContextValue {
   itemCount: number;
   isOpen: boolean;
   loading: boolean;
+  error: string | null;
+  clearError: () => void;
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -43,6 +45,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     try {
@@ -60,6 +63,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = useCallback(
     async (catalogItemId: string, quantity = 1) => {
       setLoading(true);
+      setError(null);
       try {
         await browserClient.currentCart.addToCurrentCart({
           lineItems: [
@@ -73,6 +77,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
           ],
         });
         await refresh();
+        setIsOpen(true);
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e);
+        console.error('[cart] addToCart failed:', e);
+        setError(msg || 'Could not add to cart. Try again.');
         setIsOpen(true);
       } finally {
         setLoading(false);
@@ -145,6 +154,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       itemCount,
       isOpen,
       loading,
+      error,
+      clearError: () => setError(null),
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
       toggle: () => setIsOpen((v) => !v),
@@ -153,7 +164,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       updateQuantity,
       checkout,
     }),
-    [cart, itemCount, isOpen, loading, addToCart, removeFromCart, updateQuantity, checkout],
+    [cart, itemCount, isOpen, loading, error, addToCart, removeFromCart, updateQuantity, checkout],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
