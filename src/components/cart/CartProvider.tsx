@@ -13,7 +13,7 @@ import { createClient, OAuthStrategy } from '@wix/sdk';
 import { currentCart } from '@wix/ecom';
 import { redirects } from '@wix/redirects';
 
-const WIX_STORES_APP_ID = '1380b703-ce81-ff05-f115-39571d94dfcd';
+const WIX_STORES_APP_ID = '215238eb-22a5-4c36-9e7b-e7c08025e04e';
 const clientId = process.env.NEXT_PUBLIC_WIX_CLIENT_ID!;
 
 const browserClient = createClient({
