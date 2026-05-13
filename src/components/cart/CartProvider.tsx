@@ -157,10 +157,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return;
       }
       console.log('[checkout] redirecting to:', fullUrl);
-      // eslint-disable-next-line no-alert
-      if (typeof window !== 'undefined' && window.confirm(`Redirect to checkout?\n\n${fullUrl}`)) {
-        window.location.href = fullUrl;
-      }
+      window.location.href = fullUrl;
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : JSON.stringify(e);
       console.error('[checkout] failed:', e);
