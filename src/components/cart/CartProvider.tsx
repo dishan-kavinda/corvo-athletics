@@ -133,11 +133,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const checkout = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const { checkoutId } = await browserClient.currentCart.createCheckoutFromCurrentCart({
         channelType: currentCart.ChannelType.WEB,
       });
-      if (!checkoutId) throw new Error('No checkout id returned');
+      if (!checkoutId) {
+        setError('Checkout failed: Wix did not return a checkoutId.');
+        return;
+      }
       const { redirectSession } = await browserClient.redirects.createRedirectSession({
         ecomCheckout: { checkoutId },
         callbacks: {
@@ -145,9 +149,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
           thankYouPageUrl: `${window.location.origin}/thank-you`,
         },
       });
-      if (redirectSession?.fullUrl) {
-        window.location.href = redirectSession.fullUrl;
+      const fullUrl = redirectSession?.fullUrl;
+      if (!fullUrl) {
+        setError(
+          `Checkout failed: no redirect URL. checkoutId=${checkoutId.slice(-8)}, redirectSession=${JSON.stringify(redirectSession ?? {}).slice(0, 200)}`,
+        );
+        return;
       }
+      console.log('[checkout] redirecting to:', fullUrl);
+      // eslint-disable-next-line no-alert
+      if (typeof window !== 'undefined' && window.confirm(`Redirect to checkout?\n\n${fullUrl}`)) {
+        window.location.href = fullUrl;
+      }
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : JSON.stringify(e);
+      console.error('[checkout] failed:', e);
+      setError(`Checkout error: ${msg.slice(0, 400)}`);
     } finally {
       setLoading(false);
     }
