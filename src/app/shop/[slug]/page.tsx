@@ -40,15 +40,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const mainImage = product.media?.mainMedia?.image?.url;
   const gallery = product.media?.items ?? [];
 
-  const defaultOptions: Record<string, string> = {};
-  if (product.manageVariants && product.productOptions) {
-    for (const opt of product.productOptions) {
-      const name = opt.name;
-      const firstChoice = opt.choices?.find((c) => c.inStock !== false && c.visible !== false);
-      if (name && firstChoice?.value) {
-        defaultOptions[name] = firstChoice.value;
-      }
-    }
+  let defaultVariantId: string | undefined;
+  if (product.manageVariants && product.variants && product.variants.length > 0) {
+    const inStock = product.variants.find((v) => v.stock?.inStock !== false);
+    defaultVariantId = (inStock ?? product.variants[0])?._id;
   }
 
   const productSchema = {
@@ -139,12 +134,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             )}
             <HeroReveal delay={0.65}>
               {product._id && (
-                <AddToCartButton
-                  productId={product._id}
-                  defaultOptions={
-                    Object.keys(defaultOptions).length > 0 ? defaultOptions : undefined
-                  }
-                />
+                <AddToCartButton productId={product._id} variantId={defaultVariantId} />
               )}
               <div className="mt-10 pt-8 border-t border-graphite space-y-3 text-xs text-ash uppercase tracking-wider">
                 <p>Free Shipping on Orders Over $100</p>

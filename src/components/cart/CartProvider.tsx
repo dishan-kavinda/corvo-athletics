@@ -23,8 +23,6 @@ const browserClient = createClient({
 
 type Cart = Awaited<ReturnType<typeof browserClient.currentCart.getCurrentCart>> | null;
 
-type VariantOptionMap = Record<string, string>;
-
 interface CartContextValue {
   cart: Cart;
   itemCount: number;
@@ -35,11 +33,7 @@ interface CartContextValue {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  addToCart: (
-    catalogItemId: string,
-    quantity?: number,
-    options?: VariantOptionMap,
-  ) => Promise<void>;
+  addToCart: (catalogItemId: string, quantity?: number, variantId?: string) => Promise<void>;
   removeFromCart: (lineItemId: string) => Promise<void>;
   updateQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   checkout: () => Promise<void>;
@@ -67,20 +61,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const addToCart = useCallback(
-    async (catalogItemId: string, quantity = 1, options?: VariantOptionMap) => {
+    async (catalogItemId: string, quantity = 1, variantId?: string) => {
       setLoading(true);
       setError(null);
       try {
         const catalogReference: {
           appId: string;
           catalogItemId: string;
-          options?: { options: VariantOptionMap };
+          options?: { variantId: string };
         } = {
           appId: WIX_STORES_APP_ID,
           catalogItemId,
         };
-        if (options && Object.keys(options).length > 0) {
-          catalogReference.options = { options };
+        if (variantId) {
+          catalogReference.options = { variantId };
         }
         await browserClient.currentCart.addToCurrentCart({
           lineItems: [{ catalogReference, quantity }],
@@ -89,7 +83,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCart(fresh);
         if ((fresh.lineItems?.length ?? 0) === 0) {
           setError(
-            'Cart is still empty after adding — this product may need variant options selected. Tell Claude in the chat.',
+            `Cart is still empty after adding. productId=${catalogItemId.slice(-8)} variantId=${variantId?.slice(-8) ?? 'none'}. Send this to Claude.`,
           );
         }
         setIsOpen(true);
