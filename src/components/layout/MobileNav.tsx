@@ -45,7 +45,7 @@ export function MobileNav() {
       />
 
       <aside
-        className={`fixed left-0 top-0 z-50 h-full w-full max-w-sm bg-onyx border-r border-graphite shadow-2xl transition-transform duration-500 ease-out flex flex-col md:hidden ${
+        className={`fixed left-0 top-0 z-50 h-full w-full max-w-sm bg-black border-r border-graphite shadow-2xl transition-transform duration-500 ease-out flex flex-col md:hidden ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-hidden={!isOpen}
