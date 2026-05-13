@@ -56,7 +56,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     sku: product._id,
     offers: {
       '@type': 'Offer',
-      url: `https://corvoathletic.com/shop/${slug}`,
+      url: `https://www.corvoathletic.com/shop/${slug}`,
       priceCurrency: product.priceData?.currency ?? 'NZD',
       price: product.priceData?.price ?? 0,
       availability: product.stock?.inStock

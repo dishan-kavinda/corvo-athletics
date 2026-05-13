@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getAllProducts } from '@/lib/wix-products';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://corvoathletic.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.corvoathletic.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
