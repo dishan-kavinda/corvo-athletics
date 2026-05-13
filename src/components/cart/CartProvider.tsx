@@ -23,6 +23,8 @@ const browserClient = createClient({
 
 type Cart = Awaited<ReturnType<typeof browserClient.currentCart.getCurrentCart>> | null;
 
+type VariantOptionMap = Record<string, string>;
+
 interface CartContextValue {
   cart: Cart;
   itemCount: number;
@@ -33,7 +35,11 @@ interface CartContextValue {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  addToCart: (catalogItemId: string, quantity?: number) => Promise<void>;
+  addToCart: (
+    catalogItemId: string,
+    quantity?: number,
+    options?: VariantOptionMap,
+  ) => Promise<void>;
   removeFromCart: (lineItemId: string) => Promise<void>;
   updateQuantity: (lineItemId: string, quantity: number) => Promise<void>;
   checkout: () => Promise<void>;
@@ -61,41 +67,34 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const addToCart = useCallback(
-    async (catalogItemId: string, quantity = 1) => {
+    async (catalogItemId: string, quantity = 1, options?: VariantOptionMap) => {
       setLoading(true);
       setError(null);
-      const debug = (msg: string) => {
-        console.log('[cart-debug]', msg);
-        if (typeof window !== 'undefined') {
-          // eslint-disable-next-line no-alert
-          window.alert(msg);
-        }
-      };
       try {
-        debug(`STEP 1: Calling Wix addToCurrentCart with productId=${catalogItemId}`);
-        const addResult = await browserClient.currentCart.addToCurrentCart({
-          lineItems: [
-            {
-              catalogReference: {
-                appId: WIX_STORES_APP_ID,
-                catalogItemId,
-              },
-              quantity,
-            },
-          ],
+        const catalogReference: {
+          appId: string;
+          catalogItemId: string;
+          options?: { options: VariantOptionMap };
+        } = {
+          appId: WIX_STORES_APP_ID,
+          catalogItemId,
+        };
+        if (options && Object.keys(options).length > 0) {
+          catalogReference.options = { options };
+        }
+        await browserClient.currentCart.addToCurrentCart({
+          lineItems: [{ catalogReference, quantity }],
         });
-        debug(
-          `STEP 2: addToCurrentCart returned. lineItems in response: ${
-            (addResult as { cart?: { lineItems?: unknown[] } })?.cart?.lineItems?.length ?? 'unknown'
-          }`,
-        );
         const fresh = await browserClient.currentCart.getCurrentCart();
-        debug(`STEP 3: getCurrentCart returned. lineItems: ${fresh.lineItems?.length ?? 0}`);
         setCart(fresh);
+        if ((fresh.lineItems?.length ?? 0) === 0) {
+          setError(
+            'Cart is still empty after adding — this product may need variant options selected. Tell Claude in the chat.',
+          );
+        }
         setIsOpen(true);
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : JSON.stringify(e);
-        debug(`ERROR: ${msg.slice(0, 500)}`);
         console.error('[cart] addToCart failed:', e);
         setError(msg.slice(0, 500) || 'Could not add to cart. Try again.');
         setIsOpen(true);

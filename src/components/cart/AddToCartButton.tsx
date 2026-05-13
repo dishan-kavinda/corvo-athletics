@@ -4,14 +4,19 @@ import { useState } from 'react';
 import { useCart } from './CartProvider';
 import { Button } from '@/components/ui/Button';
 
-export function AddToCartButton({ productId }: { productId: string }) {
+interface AddToCartButtonProps {
+  productId: string;
+  defaultOptions?: Record<string, string>;
+}
+
+export function AddToCartButton({ productId, defaultOptions }: AddToCartButtonProps) {
   const { addToCart } = useCart();
   const [loading, setLoading] = useState(false);
 
   const handle = async () => {
     setLoading(true);
     try {
-      await addToCart(productId, 1);
+      await addToCart(productId, 1, defaultOptions);
     } finally {
       setLoading(false);
     }
