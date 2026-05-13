@@ -1,13 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useCart } from './CartProvider';
 import { Button } from '@/components/ui/Button';
 
 export function CartDrawer() {
   const { cart, isOpen, close, removeFromCart, updateQuantity, checkout, loading, error, clearError } =
     useCart();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -20,6 +26,8 @@ export function CartDrawer() {
     };
   }, [isOpen]);
 
+  if (!mounted) return null;
+
   const lineItems = cart?.lineItems ?? [];
   const currency = cart?.currency ?? 'NZD';
   const subtotalNum = lineItems.reduce((sum, item) => {
@@ -31,20 +39,40 @@ export function CartDrawer() {
     currency,
   }).format(subtotalNum);
 
-  return (
+  const drawer = (
     <>
       <div
         onClick={close}
-        className={`fixed inset-0 z-40 bg-ink/70 backdrop-blur-sm transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(10, 10, 10, 0.85)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+          zIndex: 9998,
+          opacity: isOpen ? 1 : 0,
+          pointerEvents: isOpen ? 'auto' : 'none',
+          transition: 'opacity 300ms ease',
+        }}
         aria-hidden="true"
       />
       <aside
-        style={{ backgroundColor: '#000000' }}
-        className={`fixed right-0 top-0 z-[60] h-full w-full max-w-md border-l border-graphite shadow-2xl transition-transform duration-500 ease-out flex flex-col ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        style={{
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          height: '100%',
+          width: '100%',
+          maxWidth: '28rem',
+          backgroundColor: '#000000',
+          borderLeft: '1px solid #262626',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+          zIndex: 9999,
+          transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
         aria-hidden={!isOpen}
       >
         <header className="flex items-center justify-between px-6 py-5 border-b border-graphite">
@@ -176,4 +204,6 @@ export function CartDrawer() {
       </aside>
     </>
   );
+
+  return createPortal(drawer, document.body);
 }
