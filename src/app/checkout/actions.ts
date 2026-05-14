@@ -36,53 +36,68 @@ export async function createCheckoutPaymentIntent(
   lines: CartLineItemIn[],
   email: string,
 ): Promise<CreatePaymentIntentResult> {
-  if (!lines.length) throw new Error('Cart is empty');
+  try {
+    if (!lines.length) throw new Error('Cart is empty');
 
-  const productsRes = await wixClient.products.queryProducts().find();
-  const products = new Map(productsRes.items.map((p) => [p._id ?? '', p]));
-
-  const items: CreatePaymentIntentResult['items'] = [];
-  let subtotalCents = 0;
-  for (const line of lines) {
-    const product = products.get(line.productId);
-    if (!product) throw new Error(`Product ${line.productId} not found`);
-    const unit = product.priceData?.discountedPrice ?? product.priceData?.price ?? 0;
-    const lineTotal = unit * line.quantity;
-    items.push({
-      name: product.name ?? 'Product',
-      qty: line.quantity,
-      unitPrice: unit,
-      lineTotal,
+    console.log('[checkout] createCheckoutPaymentIntent start', {
+      lineCount: lines.length,
+      hasEmail: !!email,
+      hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+      hasWixClientId: !!process.env.NEXT_PUBLIC_WIX_CLIENT_ID,
     });
-    subtotalCents += Math.round(lineTotal * 100);
+
+    const productsRes = await wixClient.products.queryProducts().find();
+    console.log('[checkout] Wix products fetched', { count: productsRes.items.length });
+    const products = new Map(productsRes.items.map((p) => [p._id ?? '', p]));
+
+    const items: CreatePaymentIntentResult['items'] = [];
+    let subtotalCents = 0;
+    for (const line of lines) {
+      const product = products.get(line.productId);
+      if (!product) throw new Error(`Product ${line.productId} not found`);
+      const unit = product.priceData?.discountedPrice ?? product.priceData?.price ?? 0;
+      const lineTotal = unit * line.quantity;
+      items.push({
+        name: product.name ?? 'Product',
+        qty: line.quantity,
+        unitPrice: unit,
+        lineTotal,
+      });
+      subtotalCents += Math.round(lineTotal * 100);
+    }
+    const totalCents = subtotalCents + Math.round(SHIPPING_FLAT_NZD * 100);
+    const currency = (productsRes.items[0]?.priceData?.currency ?? 'NZD').toLowerCase();
+    console.log('[checkout] cart priced', { totalCents, currency });
+
+    const intent = await stripe.paymentIntents.create({
+      amount: totalCents,
+      currency,
+      receipt_email: email,
+      automatic_payment_methods: { enabled: true },
+      metadata: {
+        cart_line_count: String(lines.length),
+        cart_items: JSON.stringify(
+          lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
+        ).slice(0, 500),
+      },
+    });
+    console.log('[checkout] Stripe PI created', { id: intent.id, status: intent.status });
+
+    if (!intent.client_secret) {
+      throw new Error('Stripe did not return a client_secret');
+    }
+
+    return {
+      clientSecret: intent.client_secret,
+      paymentIntentId: intent.id,
+      amount: totalCents,
+      currency,
+      items,
+    };
+  } catch (err) {
+    console.error('[checkout] createCheckoutPaymentIntent FAILED:', err instanceof Error ? `${err.name}: ${err.message}\n${err.stack}` : err);
+    throw err;
   }
-  const totalCents = subtotalCents + Math.round(SHIPPING_FLAT_NZD * 100);
-  const currency = (productsRes.items[0]?.priceData?.currency ?? 'NZD').toLowerCase();
-
-  const intent = await stripe.paymentIntents.create({
-    amount: totalCents,
-    currency,
-    receipt_email: email,
-    automatic_payment_methods: { enabled: true },
-    metadata: {
-      cart_line_count: String(lines.length),
-      cart_items: JSON.stringify(
-        lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
-      ).slice(0, 500),
-    },
-  });
-
-  if (!intent.client_secret) {
-    throw new Error('Stripe did not return a client_secret');
-  }
-
-  return {
-    clientSecret: intent.client_secret,
-    paymentIntentId: intent.id,
-    amount: totalCents,
-    currency,
-    items,
-  };
 }
 
 export interface CompleteOrderInput {
