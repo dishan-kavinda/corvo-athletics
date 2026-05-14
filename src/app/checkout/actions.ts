@@ -69,19 +69,28 @@ export async function createCheckoutPaymentIntent(
     const currency = (productsRes.items[0]?.priceData?.currency ?? 'NZD').toLowerCase();
     console.log('[checkout] cart priced', { totalCents, currency });
 
-    const intent = await stripe.paymentIntents.create({
-      amount: totalCents,
-      currency,
-      receipt_email: email,
-      automatic_payment_methods: { enabled: true },
-      metadata: {
-        cart_line_count: String(lines.length),
-        cart_items: JSON.stringify(
-          lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
-        ).slice(0, 500),
-      },
-    });
-    console.log('[checkout] Stripe PI created', { id: intent.id, status: intent.status });
+    console.log(`STRIPE_CALL amount=${totalCents} ccy=${currency} keyPrefix=${(process.env.STRIPE_SECRET_KEY ?? '').slice(0, 7)}`);
+
+    let intent;
+    try {
+      intent = await stripe.paymentIntents.create({
+        amount: totalCents,
+        currency,
+        receipt_email: email,
+        automatic_payment_methods: { enabled: true },
+        metadata: {
+          cart_line_count: String(lines.length),
+          cart_items: JSON.stringify(
+            lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
+          ).slice(0, 500),
+        },
+      });
+    } catch (stripeErr: unknown) {
+      const e = stripeErr as { type?: string; code?: string; statusCode?: number; message?: string; raw?: { message?: string } };
+      console.error(`STRIPE_ERR ${e.type ?? '?'} ${e.code ?? '?'} ${e.statusCode ?? '?'}: ${(e.message ?? e.raw?.message ?? String(stripeErr)).slice(0, 200)}`);
+      throw stripeErr;
+    }
+    console.log(`STRIPE_OK pi=${intent.id} status=${intent.status}`);
 
     if (!intent.client_secret) {
       throw new Error('Stripe did not return a client_secret');
@@ -95,7 +104,8 @@ export async function createCheckoutPaymentIntent(
       items,
     };
   } catch (err) {
-    console.error('[checkout] createCheckoutPaymentIntent FAILED:', err instanceof Error ? `${err.name}: ${err.message}\n${err.stack}` : err);
+    const msg = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+    console.error(`CHECKOUT_FAIL ${msg.slice(0, 200)}`);
     throw err;
   }
 }
