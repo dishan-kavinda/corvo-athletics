@@ -12,6 +12,7 @@ import {
 import { createClient, OAuthStrategy } from '@wix/sdk';
 import { currentCart } from '@wix/ecom';
 import { redirects } from '@wix/redirects';
+import { useRouter } from 'next/navigation';
 
 const WIX_STORES_APP_ID = '215238eb-22a5-4c36-9e7b-e7c08025e04e';
 const clientId = process.env.NEXT_PUBLIC_WIX_CLIENT_ID!;
@@ -46,6 +47,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const refresh = useCallback(async () => {
     try {
@@ -132,40 +134,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 
   const checkout = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { checkoutId } = await browserClient.currentCart.createCheckoutFromCurrentCart({
-        channelType: currentCart.ChannelType.WEB,
-      });
-      if (!checkoutId) {
-        setError('Checkout failed: Wix did not return a checkoutId.');
-        return;
-      }
-      const { redirectSession } = await browserClient.redirects.createRedirectSession({
-        ecomCheckout: { checkoutId },
-        callbacks: {
-          postFlowUrl: window.location.origin,
-          thankYouPageUrl: `${window.location.origin}/thank-you`,
-        },
-      });
-      const fullUrl = redirectSession?.fullUrl;
-      if (!fullUrl) {
-        setError(
-          `Checkout failed: no redirect URL. checkoutId=${checkoutId.slice(-8)}, redirectSession=${JSON.stringify(redirectSession ?? {}).slice(0, 200)}`,
-        );
-        return;
-      }
-      console.log('[checkout] redirecting to:', fullUrl);
-      window.location.href = fullUrl;
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : JSON.stringify(e);
-      console.error('[checkout] failed:', e);
-      setError(`Checkout error: ${msg.slice(0, 400)}`);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    setIsOpen(false);
+    router.push('/checkout');
+  }, [router]);
 
   const itemCount = useMemo(() => {
     return (cart?.lineItems ?? []).reduce((sum, item) => sum + (item.quantity ?? 0), 0);
