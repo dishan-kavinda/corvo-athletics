@@ -290,8 +290,10 @@ async function createWixOrder(payload: {
     console.error(`WIX_E_BODY ${text.slice(0, 400)}`);
     throw new Error(`Wix Order create failed (${res.status}): ${text.slice(0, 300)}`);
   }
-  const data = (await res.json()) as { order?: { _id?: string; number?: string } };
-  const orderId = data.order?._id;
+  const data = (await res.json()) as { order?: { id?: string; _id?: string; number?: string } };
+  // Wix eCom Orders v1 returns `id` (not `_id` like Wix Stores Products API).
+  // Accept either defensively in case the schema changes.
+  const orderId = data.order?.id ?? data.order?._id;
   const orderNum = data.order?.number;
   console.log(`WIX_OK id=${orderId} num=${orderNum}`);
   return orderId ?? `stripe_${payload.paymentIntentId}`;
