@@ -7,11 +7,191 @@
       "error_message": "Type error: Property 'subtotal' does not exist on type 'Cart & { __applicationErrorsType?: GetCurrentCartApplicationErrors | undefined; }'.",
       "file": "src/components/cart/CartDrawer.tsx",
       "root_cause": "The raw getCurrentCart() response from @wix/ecom does NOT have a top-level `subtotal` field. That `subtotal` property exists on the higher-level @wix/headless-ecom Cart abstraction (a wrapper component library), NOT the bare cart object returned by currentCart.getCurrentCart().",
-      "fix": "Compute subtotal client-side from line items: `lineItems.reduce((sum, item) => sum + parseFloat(item.price?.amount ?? '0') * (item.quantity ?? 0), 0)`, then format with `new Intl.NumberFormat('en-NZ', { style: 'currency', currency: cart?.currency ?? 'NZD' })`. This is a numerical approximation that matches Wix's subtotal except in cases with cart-level discounts (acceptable for v1; Wix re-computes on the hosted checkout).",
-      "tags": ["wix", "ecom", "typescript", "vercel-build", "cart"],
+      "fix": "Compute subtotal client-side from line items: `lineItems.reduce((sum, item) => sum + parseFloat(item.price?.amount ?? '0') * (item.quantity ?? 0), 0)`, then format with `new Intl.NumberFormat('en-NZ', { style: 'currency', currency: cart?.currency ?? 'NZD' })`.",
+      "tags": [
+        "wix",
+        "ecom",
+        "typescript",
+        "vercel-build",
+        "cart"
+      ],
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-13T07:10:00Z"
+    },
+    {
+      "id": "bug-002",
+      "timestamp": "2026-05-13T11:00:00Z",
+      "error_message": "Vercel deployment Blocked: 'commit author does not have contributing access. Hobby teams do not support collaboration.'",
+      "file": "(git history)",
+      "root_cause": "Vercel Hobby plan rejects deploys whose commit author email doesn't match the project owner's GitHub verified email. Commits were authored via `git -c user.email=\"<plain email>\"` which Vercel sees as a different author.",
+      "fix": "Rewrite all commits using GitHub no-reply email pattern: `git filter-branch -f --env-filter 'export GIT_AUTHOR_EMAIL=\"<userId>+<username>@users.noreply.github.com\"; export GIT_AUTHOR_NAME=\"...\"; export GIT_COMMITTER_EMAIL=...; export GIT_COMMITTER_NAME=...' -- --all` then `git push --force origin main`. Get userId via `gh api users/<username> --jq .id`. Also made repo public (Hobby requires public OR matching author).",
+      "tags": [
+        "vercel",
+        "git",
+        "deploy",
+        "hobby-plan"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-13T11:00:00Z"
+    },
+    {
+      "id": "bug-003",
+      "timestamp": "2026-05-13T15:00:00Z",
+      "error_message": "Cart add silently succeeds (200 OK) but lineItems=0 — cart stays empty.",
+      "file": "src/components/cart/CartProvider.tsx",
+      "root_cause": "Used wrong WIX_STORES_APP_ID constant `1380b703-ce81-ff05-f115-39571d94dfcd` (outdated). Wix silently ignores requests with unknown appIds — no error thrown.",
+      "fix": "Use correct app ID `215238eb-22a5-4c36-9e7b-e7c08025e04e` (confirmed from CatalogReference JSDoc in @wix/auto_sdk_ecom_current-cart types). Also for products with manageVariants: include `options.variantId` in catalogReference (not options.options name/value map).",
+      "tags": [
+        "wix",
+        "cart",
+        "appId",
+        "silent-failure"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-13T15:00:00Z"
+    },
+    {
+      "id": "bug-004",
+      "timestamp": "2026-05-13T16:00:00Z",
+      "error_message": "Mobile nav and cart drawer panels appear transparent on phone — menu items visible but no panel background.",
+      "file": "src/components/layout/MobileNav.tsx, src/components/cart/CartDrawer.tsx",
+      "root_cause": "Both panels rendered inside <Header> which has position:sticky + z-index:30 creating a stacking context. Even with z-index:60+ on the aside, page content paints over because z-index only competes within the same stacking context. Tailwind class `bg-onyx` was being correctly applied but visually trapped.",
+      "fix": "Use `createPortal(panel, document.body)` to render panels at document root, escaping all parent stacking contexts. Also moved critical styles inline (backgroundColor, position, z-index, borders) to avoid CSS load order issues.",
+      "tags": [
+        "css",
+        "z-index",
+        "stacking-context",
+        "react",
+        "portal",
+        "mobile"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-13T16:00:00Z"
+    },
+    {
+      "id": "bug-005",
+      "timestamp": "2026-05-14T08:00:00Z",
+      "error_message": "Wix-hosted checkout redirect to https://www.corvoathletic.com/_api/iam/... → 'site can't be reached'.",
+      "file": "(architecture)",
+      "root_cause": "After DNS swap (www→Vercel, root→Wix), Wix's checkout flow generates URLs at the site's primary domain (corvoathletic.com root), which auto 301-redirects to www. www now serves Vercel which doesn't have Wix's /_api or /__ecom paths.",
+      "fix": "Architectural pivot to Option B (Stripe custom checkout). Wix-hosted checkout fundamentally incompatible with the www→Vercel setup we want. Built /checkout page with Stripe PaymentElement, server actions for PaymentIntent + Wix Order creation.",
+      "tags": [
+        "wix",
+        "dns",
+        "checkout",
+        "architecture",
+        "redirect"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-14T08:00:00Z"
+    },
+    {
+      "id": "bug-006",
+      "timestamp": "2026-05-14T10:00:00Z",
+      "error_message": "Vercel build TypeScript error: Type '\"2025-08-27.basil\"' is not assignable to type '\"2026-04-22.dahlia\"'.",
+      "file": "src/lib/stripe.ts",
+      "root_cause": "Stripe Node SDK v22.x types pin apiVersion to the latest version at SDK build time. Used outdated version string.",
+      "fix": "Updated `apiVersion: '2026-04-22.dahlia'` in Stripe client init.",
+      "tags": [
+        "stripe",
+        "typescript",
+        "vercel-build",
+        "api-version"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-14T10:00:00Z"
+    },
+    {
+      "id": "bug-007",
+      "timestamp": "2026-05-14T22:00:00Z",
+      "error_message": "Couldn't start checkout — 'An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details.' Underlying: StripeConnectionError thrown by stripe.paymentIntents.create on every checkout attempt.",
+      "file": "src/lib/stripe.ts + src/app/checkout/actions.ts + (Vercel env var paste)",
+      "root_cause": "Chain of THREE separate issues under one opaque error: (1) Vercel 'Redeploy' reuses the cached build artifact — newly-added env vars never reached the function bundle. (2) Even after clean rebuild, Stripe SDK kept throwing StripeConnectionError — Next.js production server-action boundary masked it as 'An error occurred with...'. (3) ROOT CAUSE: the value stored in Vercel's STRIPE_SECRET_KEY had a different byte-length than the clean key (107 chars for sk_test_*). Paste from clipboard introduced invisible characters (zero-width space U+200B / non-breaking space U+00A0 / soft hyphen U+00AD). undici (Node 24 fetch impl) rejects HTTP headers containing such chars and Stripe SDK wraps the resulting TypeError as ConnectionError WITHOUT an HTTP response — indistinguishable from genuine network failure. .trim() does NOT strip these characters.",
+      "fix": "Three layers: (a) ALWAYS force a clean rebuild via `git commit --allow-empty -m '...'` after changing env vars — Vercel's 'Redeploy' button reuses the cached build. (b) src/lib/stripe.ts: defensively `rawKey.trim().replace(/^[\"']|[\"']$/g, '')` AND `httpClient: Stripe.createFetchHttpClient()` (Stripe's recommendation for serverless / Node 24). (c) Delete the corrupted env var in Vercel UI, re-paste from a fresh copy in Stripe dashboard. Verification recipe: log `kLen=${rawKey.length} kTrLen=${trimKey.length}` — clean sk_test_ is exactly 107 chars; ALSO run a sanity `fetch('https://api.stripe.com/v1/charges')` from the same function to rule out genuine network issues (expect 401 = reachable). Resolved 2026-05-16; first successful PaymentIntent created at 06:26 UTC.",
+      "tags": [
+        "vercel",
+        "env-vars",
+        "stripe",
+        "deploy",
+        "checkout",
+        "invisible-chars",
+        "undici",
+        "paste-corruption",
+        "fetch-http-client"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:26:00Z"
+    },
+    {
+      "id": "bug-008",
+      "timestamp": "2026-05-14T10:36:27.508Z",
+      "error_message": "Missing error handling in function",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-14T10:36:27.508Z"
+    },
+    {
+      "id": "bug-009",
+      "timestamp": "2026-05-14T10:41:44.366Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-14T10:41:44.366Z"
+    },
+    {
+      "id": "bug-010",
+      "timestamp": "2026-05-16T06:15:37.444Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 21→36 lines (3 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:15:37.444Z"
+    },
+    {
+      "id": "bug-011",
+      "timestamp": "2026-05-16T06:29:41.307Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "34 lines replaced/restructured",
+      "fix": "Rewrote 92→52 lines (34 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:29:41.307Z"
     }
   ]
 }

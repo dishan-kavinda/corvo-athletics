@@ -29,9 +29,88 @@ This OpenWolf project was initialized 2026-05-13. The full multi-day session log
 | 07:30 | **SEO pass** — metadataBase, title template, OG, Twitter, canonical, Organization JSON-LD in root; per-page metadata tuned with brand keywords (gym/athleisure/luxury/sports/Corvo Athletics/Corvo Athletic); /account /thank-you marked noindex; Product JSON-LD on product pages; src/app/robots.ts + src/app/sitemap.ts (includes products w/ lastUpdated) | layout, all pages, robots.ts, sitemap.ts | committed + pushed |
 | 07:55 | Smoke-test of live Vercel showed old metadata still serving — Vercel deploy still propagating for latest commit | — | re-verify next |
 
-## Pending right now
+## 2026-05-13 (continued) — Vercel auth blocker + staging cutover
 
-- Verify SEO live on `corvo-athletics.vercel.app` once Vercel finishes deploying commit `5a33b51`.
-- **Phase 8** — Stage at `new.corvoathletic.com` subdomain (add subdomain in Vercel → set CNAME at Wix DNS).
-- **Phase 9** — Production cutover (point `corvoathletic.com` A record at Vercel; old Wix Editor site goes dark).
-- Post-launch: submit sitemap to Google Search Console; verify site ownership.
+| later | Vercel "Blocked" deploy on SEO commit — Hobby plan rejected commits from non-team-member git author (mismatched email) | — | rewrote git history w/ filter-branch + force push, made repo public — fixed |
+| later | Staging URL `new.corvoathletic.com` live; verified SEO live (sitemap, robots, JSON-LD all working) | — | ok |
+| later | DNS swap: www → Vercel (CNAME `cname.vercel-dns.com`), root stays on Wix | — | ok |
+| later | Cart bug: products added with `1380b703-...` appId silently failed. Correct ID is `215238eb-22a5-4c36-9e7b-e7c08025e04e` — bug logged | CartProvider.tsx | ✅ fixed |
+| later | Variant bug: Catalog V1 products w/ manageVariants need `catalogReference.options.variantId` (NOT options map) | shop/[slug]/page.tsx | ✅ fixed |
+| later | Mobile nav + cart drawer "transparent" — fixed via createPortal to escape Header's z-index stacking context | MobileNav.tsx, CartDrawer.tsx | ✅ fixed |
+
+## 2026-05-14 — Custom checkout pivot
+
+| early | Wix-hosted checkout redirect URL goes to `corvoathletic.com/_api/iam/...` but Wix 301-redirects root → www → Vercel = checkout broken | — | architectural blocker |
+| early | Tried Path A (split-domain w/ www→Vercel root→Wix→checkout). Wix's auto 301 from root→www breaks /_api paths | — | dead end via Wix UI/API |
+| early | Tried `checkout.corvoathletic.com` subdomain approach — Wix doesn't allow setting subdomain as primary in UI, blocked until Friday May 15 verification | — | dead end |
+| early | User picked **Option B (Stripe custom checkout)** — Wix becomes pure backend (catalog + order storage + analytics), Stripe processes payments on Vercel | — | path locked |
+| build | Installed `@stripe/stripe-js`, `@stripe/react-stripe-js`, `stripe` v22 | package.json | ok |
+| build | Built `/checkout` page: full shipping form + Stripe PaymentElement w/ dark night theme matched to brand | src/app/checkout/* | ok |
+| build | Server actions: `createCheckoutPaymentIntent` (prices cart server-side from Wix, creates Stripe PI), `completeCheckoutOrder` (verifies Stripe success, creates Wix Order via Admin API) | src/app/checkout/actions.ts | ok |
+| build | `CartProvider.checkout()` now `router.push('/checkout')` — no more Wix redirect | src/components/cart/CartProvider.tsx | ok |
+| build | Committed + pushed (commit `e583169`) | — | Vercel auto-deployed |
+| env | User added 4 env vars in Vercel: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `WIX_ADMIN_API_KEY`, `WIX_SITE_ID` | (Vercel dashboard) | env vars saved |
+| test | User tested checkout → got "Couldn't start checkout" error (server action threw) | — | likely needs redeploy w/ fresh build cache to pick up env vars |
+| mcp | Added Vercel MCP to project config (`https://mcp.vercel.com`, HTTP transport) | ~/.claude.json | needs auth + session restart |
+
+## Pending right now — restart Claude Code to continue
+
+1. **Restart Claude Code session** (Ctrl+D, then `cd ~/code/corvo-athletics && claude`)
+2. Run `/mcp` and authenticate Vercel (OAuth flow in browser, like Wix earlier)
+3. Use Vercel MCP to:
+   - Verify all 4 env vars are present on the project
+   - Trigger a fresh redeploy (uncheck "Use existing Build Cache") if last deploy was before env vars added
+   - Read runtime logs from the failing `/checkout` server action to see exact error
+4. Once redeploy is green, retest end-to-end on phone with test card `4242 4242 4242 4242`
+5. Verify the order shows up in Wix Dashboard → Sales → Orders
+
+## Key context for restart
+
+- **Premium storefront live at `https://www.corvoathletic.com`** (Vercel)
+- **Wix is now pure backend** — catalog, orders, customers, analytics (we use Wix Admin API key server-side to create orders post-Stripe-payment)
+- **Repo**: `dishan-kavinda/corvo-athletics` (public, auto-deploys to Vercel on push to main)
+- **Latest commit on main**: `e583169` "feat(checkout): Stripe-based custom checkout"
+- **Tasks #42 (update /thank-you with real order details) and #43 (end-to-end test) are pending** — verify after redeploy works
+- **All 4 env vars locally in `.env.local`** (gitignored) for dev too, but the bug is at Vercel runtime
+- **DO NOT** put Stripe secret key or Wix Admin API key in cerebrum/memory/anywhere committed
+
+## Session: 2026-05-14 22:26
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 22:36 | Edited src/app/checkout/actions.ts | added error handling | ~702 |
+| 22:36 | Session end: 1 writes across 1 files (actions.ts) | 2 reads | ~702 tok |
+| 22:38 | Session end: 1 writes across 1 files (actions.ts) | 2 reads | ~702 tok |
+| 22:40 | Session end: 1 writes across 1 files (actions.ts) | 2 reads | ~702 tok |
+| 22:41 | Edited src/app/checkout/actions.ts | added nullish coalescing | ~418 |
+| 22:42 | Session end: 2 writes across 1 files (actions.ts) | 2 reads | ~1120 tok |
+| 18:10 | Edited src/lib/stripe.ts | modified if() | ~86 |
+| 18:11 | Session end: 3 writes across 2 files (actions.ts, stripe.ts) | 2 reads | ~1206 tok |
+| 18:13 | Session end: 3 writes across 2 files (actions.ts, stripe.ts) | 2 reads | ~1206 tok |
+| 18:15 | Edited src/lib/stripe.ts | modified if() | ~107 |
+| 18:15 | Edited src/app/checkout/actions.ts | modified reach() | ~503 |
+| 18:16 | Session end: 5 writes across 2 files (actions.ts, stripe.ts) | 2 reads | ~1816 tok |
+| 18:20 | Session end: 5 writes across 2 files (actions.ts, stripe.ts) | 2 reads | ~1816 tok |
+| 18:20 | Session end: 5 writes across 2 files (actions.ts, stripe.ts) | 2 reads | ~1816 tok |
+| 18:24 | Session end: 5 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~6098 tok |
+| 18:29 | Edited src/app/checkout/actions.ts | modified createCheckoutPaymentIntent() | ~482 |
+
+## 2026-05-16 — Stripe checkout RESOLVED ✅
+
+Multi-hour debug arc concluded. End-to-end Stripe checkout now working on production: `POST /checkout 200`, `STRIPE_OK pi=...`, user redirected to `/thank-you`. First successful PaymentIntent at 06:26 UTC.
+
+**The arc:**
+1. **Phase 1 (2026-05-14):** Built /checkout, server actions, env vars added to Vercel. Cached redeploys didn't pick up env vars — first error was the clear `STRIPE_SECRET_KEY is not set` at module init.
+2. **Phase 2 (2026-05-14):** Forced clean rebuild via empty commit. Module init passed but PaymentIntent call threw, masked by Next.js prod boundary as `An error occurred with...`.
+3. **Phase 3 (2026-05-16):** Added try/catch + console.error diagnostic. Captured `StripeConnectionError` — but only the type name fit in Vercel runtime_logs preview window (~28 chars).
+4. **Phase 4:** Reformatted diagnostic to put critical info at the start, split error fields across multiple `console.error` calls queryable individually. Switched Stripe SDK to `createFetchHttpClient()`. Error persisted — proving the issue wasn't SDK transport.
+5. **Phase 5:** Added `.trim().replace(/^["']|["']$/g, '')` defense. Added raw `fetch(api.stripe.com)` sanity check — returned 401 (network FINE). Added `kLen=${len} kTrLen=${trimLen}` probe. User retried — error persisted.
+6. **Phase 6 — BREAKTHROUGH:** Tested user's actual key from local terminal against api.stripe.com → HTTP 200, valid. Then probed Vercel env-var length via Vercel runtime_logs `query` param — `kTrLen=107` returned 0 matches, but `pfx=sk_test` matched. CONCLUSION: stored value had right prefix but wrong byte count → contains invisible chars `.trim()` can't strip.
+7. **Resolution:** User deleted env var in Vercel UI and re-pasted from Stripe dashboard. Empty commit forced clean rebuild. `kTrLen=107` ✅, `STRIPE_OK` ✅, `POST /checkout 200` ✅.
+
+**Outstanding (non-blocking):** Wix Order sync via `POST https://www.wixapis.com/ecom/v1/orders` failed on first real checkout — payment captured, /thank-you rendered, but order didn't appear in Wix Sales. Tracked as task #12.
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 06:30 | Cleaned diagnostic logging from createCheckoutPaymentIntent | actions.ts | back to lean prod code | ~600 |
+| 06:30 | Updated bug-007 root cause + fix; cerebrum learnings for invisible-char paste corruption, Vercel cached redeploy, fetch http client, MCP log preview truncation | buglog.json, cerebrum.md | learnings captured | ~1500 |
