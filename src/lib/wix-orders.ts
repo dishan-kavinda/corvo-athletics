@@ -110,14 +110,22 @@ export async function getWixOrder(orderId: string): Promise<WixOrderSummary | nu
   if (!orderId || orderId.startsWith('stripe_')) return null;
 
   const rawAdminKey = process.env.WIX_ADMIN_API_KEY;
-  if (!rawAdminKey) return null;
+  if (!rawAdminKey) {
+    console.error('GETORDER_NO_KEY');
+    return null;
+  }
   const adminKey = rawAdminKey.trim().replace(/^["']|["']$/g, '');
   const rawSiteId = process.env.WIX_SITE_ID ?? DEFAULT_SITE_ID;
   const siteId = rawSiteId.trim().replace(/^["']|["']$/g, '');
 
+  const url = `${WIX_API_BASE}/ecom/v1/orders/${encodeURIComponent(orderId)}`;
+  console.log(
+    `GETORDER_CALL oid=${orderId.slice(0, 8)} kLen=${adminKey.length} sLen=${siteId.length} sPfx=${siteId.slice(0, 8)}`,
+  );
+
   let res: Response;
   try {
-    res = await fetch(`${WIX_API_BASE}/ecom/v1/orders/${encodeURIComponent(orderId)}`, {
+    res = await fetch(url, {
       headers: {
         Authorization: adminKey,
         'wix-site-id': siteId,
@@ -125,17 +133,31 @@ export async function getWixOrder(orderId: string): Promise<WixOrderSummary | nu
       cache: 'no-store',
     });
   } catch (err) {
-    console.error('[wix-orders] network failure:', err);
+    const msg = err instanceof Error ? `${err.name}:${err.message}` : String(err);
+    console.error(`GETORDER_NETERR ${msg.slice(0, 150)}`);
     return null;
   }
 
   if (!res.ok) {
     const text = await res.text().catch(() => '');
-    console.error(`[wix-orders] fetch ${res.status}: ${text.slice(0, 200)}`);
+    // Vercel runtime_logs preview window is ~28 chars. Split the body across
+    // queryable lines so each can be inspected via MCP query=... probes.
+    console.error(`GETORDER_S s=${res.status}`);
+    console.error(`GETORDER_B1 ${text.slice(0, 30)}`);
+    console.error(`GETORDER_B2 ${text.slice(30, 60)}`);
+    console.error(`GETORDER_B3 ${text.slice(60, 90)}`);
+    console.error(`GETORDER_B4 ${text.slice(90, 120)}`);
+    console.error(`GETORDER_B5 ${text.slice(120, 150)}`);
+    console.error(`GETORDER_B6 ${text.slice(150, 180)}`);
+    console.error(`GETORDER_B7 ${text.slice(180, 210)}`);
     return null;
   }
 
   const data = (await res.json()) as { order?: WixOrderRaw };
-  if (!data.order) return null;
+  if (!data.order) {
+    console.error('GETORDER_NO_ORDER_IN_RESPONSE');
+    return null;
+  }
+  console.log(`GETORDER_OK num=${data.order.number}`);
   return normalize(data.order);
 }
