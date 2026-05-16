@@ -6,6 +6,9 @@ import { Stagger, StaggerItem } from '@/components/motion/Stagger';
 import { MarqueeStrip } from '@/components/ui/MarqueeStrip';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { HeroSceneClient } from '@/components/3d/HeroSceneClient';
+import { NewsletterForm } from '@/components/ui/NewsletterForm';
+
+/* ── Data ────────────────────────────────────────────── */
 
 const pillars = [
   {
@@ -25,122 +28,122 @@ const pillars = [
   },
 ];
 
-const stats = [
-  { value: '10K+', label: 'Athletes' },
-  { value: '5★', label: 'Rated' },
-  { value: '3rd', label: 'Party Tested' },
-  { value: '0', label: 'Compromise' },
+const categories = [
+  {
+    label: 'Training',
+    sub: 'Performance Apparel',
+    icon: '⚡',
+    href: '/shop',
+    accent: '#7B5FFF',
+  },
+  {
+    label: 'Supplements',
+    sub: 'Elite Nutrition',
+    icon: '◈',
+    href: '/shop',
+    accent: '#C9A961',
+  },
+  {
+    label: 'Recovery',
+    sub: 'Gear & Accessories',
+    icon: '◎',
+    href: '/shop',
+    accent: '#4A9EFF',
+  },
+  {
+    label: 'Lifestyle',
+    sub: 'Athleisure Collection',
+    icon: '▲',
+    href: '/shop',
+    accent: '#7B5FFF',
+  },
 ];
+
+const stats = [
+  { value: '10K+', label: 'Athletes Worldwide' },
+  { value: '5★', label: 'Average Rating' },
+  { value: '3rd Party', label: 'Lab Verified' },
+  { value: '0', label: 'Compromises' },
+];
+
+/* ── Page ────────────────────────────────────────────── */
 
 export default function Home() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section
-        className="relative min-h-[100svh] flex items-center overflow-hidden"
-        style={{ background: 'var(--page-bg)' }}
-      >
-        {/* Ambient glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 60% at 72% 50%, rgba(201,169,97,0.07) 0%, transparent 70%)',
-          }}
-        />
+      {/* ─────────────────────────────────────────────────
+          SECTION 1 · HERO
+      ───────────────────────────────────────────────── */}
+      <section className="relative h-[100svh] min-h-[640px] flex items-center overflow-hidden">
+        {/* Solid base bg — prevents flash */}
+        <div className="absolute inset-0" style={{ background: 'var(--page-bg)' }} />
 
-        {/* Hero visual — desktop right side */}
-        <div className="absolute right-0 top-0 w-1/2 h-full pointer-events-none hidden md:flex items-center justify-center">
-          {/* Outer ambient glow */}
-          <div
-            className="absolute"
-            style={{
-              width: '78%',
-              aspectRatio: '1',
-              borderRadius: '50%',
-              background:
-                'radial-gradient(circle, rgba(201,169,97,0.14) 0%, rgba(201,169,97,0.04) 55%, transparent 75%)',
-              animation: 'pulse-glow 6s ease-in-out infinite',
-            }}
-          />
-          {/* CSS premium gold orb — studio-lit look */}
-          <div
-            className="absolute"
-            style={{
-              width: '58%',
-              aspectRatio: '1',
-              borderRadius: '50%',
-              animation: 'float 7s ease-in-out infinite',
-              background: `radial-gradient(
-                circle at 36% 30%,
-                #FFFDF2 0%,
-                #F9E07A 7%,
-                #D4AF62 22%,
-                #C9A961 36%,
-                #9A7530 58%,
-                #422008 82%,
-                #180900 100%
-              )`,
-              boxShadow: '0 0 80px rgba(201,169,97,0.25), inset 0 0 60px rgba(0,0,0,0.4)',
-            }}
-          >
-            {/* Specular highlight */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '16%',
-                left: '22%',
-                width: '24%',
-                aspectRatio: '1',
-                borderRadius: '50%',
-                background:
-                  'radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,252,210,0.4) 45%, transparent 75%)',
-                filter: 'blur(4px)',
-              }}
-            />
-            {/* Edge rim light */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: '-1px',
-                borderRadius: '50%',
-                background:
-                  'radial-gradient(circle at 68% 68%, rgba(201,169,97,0.35) 0%, transparent 35%)',
-              }}
-            />
-          </div>
-          {/* WebGL particle field orbiting the orb */}
-          <div className="absolute inset-0">
-            <HeroSceneClient />
-          </div>
-        </div>
-
-        {/* Mobile — subtle particles background */}
-        <div className="absolute inset-0 pointer-events-none md:hidden opacity-25">
+        {/* 3D canvas — full bleed */}
+        <div className="absolute inset-0 pointer-events-none">
           <HeroSceneClient />
         </div>
 
-        <Container className="relative z-10">
-          <div className="max-w-2xl lg:max-w-[54rem]">
-            <HeroReveal delay={0.08} y={12}>
-              <p className="text-gold font-display tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
-                <span className="block w-8 h-px bg-gold shrink-0" />
-                Engineered for Athletes
-              </p>
+        {/* Gradient mask — text readability */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'var(--hero-gradient)' }}
+        />
+
+        {/* Bottom fade */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, var(--page-bg), transparent)',
+          }}
+        />
+
+        {/* Hero content */}
+        <Container className="relative z-10 pt-20">
+          <div className="max-w-[640px]">
+
+            {/* Eyebrow badge */}
+            <HeroReveal delay={0.05} y={10}>
+              <div className="inline-flex items-center gap-3 mb-10">
+                <span
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ background: '#7B5FFF', boxShadow: '0 0 10px rgba(123,95,255,0.8)' }}
+                />
+                <span
+                  className="font-display text-xs tracking-[0.5em] uppercase"
+                  style={{ color: '#7B5FFF' }}
+                >
+                  Corvo Athletics
+                </span>
+                <span
+                  className="h-px w-12 shrink-0"
+                  style={{ background: 'linear-gradient(90deg, #7B5FFF, transparent)' }}
+                />
+              </div>
             </HeroReveal>
 
-            <HeroReveal delay={0.22} y={55} duration={1.05}>
+            {/* Main headline */}
+            <HeroReveal delay={0.18} y={60} duration={1.1}>
               <h1
-                className="font-display uppercase leading-[1] tracking-tight mb-8"
-                style={{ fontSize: 'clamp(4.5rem, 13vw, 10.5rem)' }}
+                className="font-display uppercase tracking-tight leading-[0.9] mb-8"
+                style={{ fontSize: 'clamp(4.2rem, 12vw, 10rem)' }}
               >
-                <span className="block">FORGE</span>
-                <span className="block">YOUR</span>
+                <span
+                  className="block"
+                  style={{ color: 'var(--page-fg)' }}
+                >
+                  BUILT
+                </span>
+                <span
+                  className="block"
+                  style={{ color: 'var(--page-fg)' }}
+                >
+                  FOR THE
+                </span>
                 <span
                   className="block"
                   style={{
                     backgroundImage:
-                      'linear-gradient(90deg, #B89653 0%, #C9A961 30%, #F0D080 55%, #C9A961 75%, #B89653 100%)',
+                      'linear-gradient(90deg, #4A35C7 0%, #7B5FFF 22%, #F0D080 52%, #7B5FFF 80%, #4A35C7 100%)',
                     backgroundSize: '300% auto',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
@@ -148,22 +151,27 @@ export default function Home() {
                     animation: 'shimmer-gold 4.5s linear infinite',
                   }}
                 >
-                  EDGE.
+                  RELENTLESS.
                 </span>
               </h1>
             </HeroReveal>
 
-            <HeroReveal delay={0.52}>
-              <p className="text-lg max-w-md mb-10 leading-relaxed" style={{ color: 'var(--muted)' }}>
-                Premium protein, supplements, and training apparel for those who don&apos;t accept
-                average.
+            {/* Sub copy */}
+            <HeroReveal delay={0.48}>
+              <p
+                className="text-base md:text-lg max-w-[440px] mb-10 leading-relaxed"
+                style={{ color: 'var(--muted)' }}
+              >
+                Elite training gear and supplements engineered for those who refuse to be average.
+                Dark discipline. Proven results.
               </p>
             </HeroReveal>
 
-            <HeroReveal delay={0.72}>
+            {/* CTAs */}
+            <HeroReveal delay={0.68}>
               <div className="flex flex-wrap gap-4 items-center">
                 <Button href="/shop" size="lg" variant="gold">
-                  Shop Now
+                  Shop Now →
                 </Button>
                 <Button href="/about" size="lg" variant="ghost">
                   Our Story
@@ -171,17 +179,25 @@ export default function Home() {
               </div>
             </HeroReveal>
 
-            <HeroReveal delay={1.05}>
-              <div className="flex items-center gap-3 mt-16" style={{ color: 'var(--muted)' }}>
-                <div className="w-px h-12 bg-gradient-to-b from-gold/60 to-transparent shrink-0" />
-                <span className="text-xs uppercase tracking-[0.3em]">Scroll to explore</span>
+            {/* Scroll indicator */}
+            <HeroReveal delay={1.1}>
+              <div className="mt-16 flex items-center gap-4" style={{ color: 'var(--muted)' }}>
+                <div
+                  className="h-px w-12"
+                  style={{
+                    background: 'linear-gradient(90deg, rgba(123,95,255,0.7), transparent)',
+                  }}
+                />
+                <span className="text-xs uppercase tracking-[0.35em]">Scroll</span>
               </div>
             </HeroReveal>
           </div>
         </Container>
       </section>
 
-      {/* ── Marquee ──────────────────────────────────── */}
+      {/* ─────────────────────────────────────────────────
+          SECTION 2 · MARQUEE
+      ───────────────────────────────────────────────── */}
       <div
         className="border-y py-5 overflow-hidden"
         style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
@@ -189,26 +205,36 @@ export default function Home() {
         <MarqueeStrip />
       </div>
 
-      {/* ── Stats ────────────────────────────────────── */}
-      <section className="py-16" style={{ background: 'var(--page-bg)' }}>
+      {/* ─────────────────────────────────────────────────
+          SECTION 3 · STATS
+      ───────────────────────────────────────────────── */}
+      <section className="py-20" style={{ background: 'var(--page-bg)' }}>
         <Container>
-          <Stagger staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {stats.map((s) => (
+          <Stagger staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-px">
+            {stats.map((s, i) => (
               <StaggerItem key={s.label}>
                 <div
-                  className="text-center py-10 px-4 rounded-xl"
+                  className="py-10 px-6 text-center relative"
                   style={{
                     background: 'var(--surface)',
-                    border: '1px solid var(--border)',
-                    boxShadow: 'var(--card-shadow)',
+                    ...(i < stats.length - 1
+                      ? {}
+                      : {}),
                   }}
                 >
+                  {/* Side border accent */}
+                  {i > 0 && (
+                    <div
+                      className="absolute left-0 top-4 bottom-4 w-px hidden md:block"
+                      style={{ background: 'var(--border)' }}
+                    />
+                  )}
                   <p
-                    className="font-display mb-2 leading-none"
+                    className="font-display leading-none mb-3"
                     style={{
-                      fontSize: 'clamp(2.5rem,5vw,4rem)',
+                      fontSize: 'clamp(2.4rem, 4.5vw, 4rem)',
                       backgroundImage:
-                        'linear-gradient(135deg, #B89653 0%, #C9A961 50%, #F0D080 100%)',
+                        'linear-gradient(135deg, #4A35C7 0%, #7B5FFF 48%, #C9A961 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
@@ -217,7 +243,7 @@ export default function Home() {
                     {s.value}
                   </p>
                   <p
-                    className="text-xs uppercase tracking-[0.25em]"
+                    className="text-xs uppercase tracking-[0.22em]"
                     style={{ color: 'var(--muted)' }}
                   >
                     {s.label}
@@ -229,37 +255,253 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── Feature Pillars ──────────────────────────── */}
+      {/* ─────────────────────────────────────────────────
+          SECTION 4 · SHOP CATEGORIES
+      ───────────────────────────────────────────────── */}
       <section
-        className="py-28 border-t"
+        className="py-24 border-t"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
         <Container>
-          <FadeIn className="text-center mb-4">
-            <h2
-              className="font-display uppercase"
-              style={{ fontSize: 'clamp(2.2rem,5vw,4rem)' }}
-            >
-              The Corvo Standard
-            </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <FadeIn>
+              <div>
+                <p
+                  className="text-xs font-display uppercase tracking-[0.45em] mb-3"
+                  style={{ color: '#7B5FFF' }}
+                >
+                  — Collections
+                </p>
+                <h2
+                  className="font-display uppercase leading-[0.92]"
+                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}
+                >
+                  Shop by Category
+                </h2>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <Button href="/shop" variant="ghost" size="sm">
+                View All →
+              </Button>
+            </FadeIn>
+          </div>
+
+          <Stagger
+            staggerDelay={0.1}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {categories.map((cat) => (
+              <StaggerItem key={cat.label}>
+                <a href={cat.href} className="group block h-full">
+                  <TiltCard intensity={6}>
+                    <div
+                      className="relative h-full min-h-[200px] md:min-h-[260px] p-6 rounded-2xl overflow-hidden flex flex-col justify-between cursor-pointer"
+                      style={{
+                        background: 'var(--surface-elevated)',
+                        border: '1px solid var(--border)',
+                      }}
+                    >
+                      {/* Hover fill glow */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{
+                          background: `radial-gradient(ellipse 90% 80% at 20% 20%, ${cat.accent}1A 0%, transparent 70%)`,
+                        }}
+                      />
+
+                      {/* Icon */}
+                      <div
+                        className="text-3xl mb-4 relative z-10"
+                        style={{ color: cat.accent }}
+                      >
+                        {cat.icon}
+                      </div>
+
+                      {/* Label */}
+                      <div className="relative z-10">
+                        <h3 className="font-display text-xl uppercase tracking-wide mb-1">
+                          {cat.label}
+                        </h3>
+                        <p className="text-xs uppercase tracking-[0.2em]" style={{ color: 'var(--muted)' }}>
+                          {cat.sub}
+                        </p>
+                      </div>
+
+                      {/* Arrow */}
+                      <div
+                        className="absolute bottom-5 right-5 text-sm transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                        style={{ color: cat.accent }}
+                      >
+                        →
+                      </div>
+
+                      {/* Bottom border shimmer */}
+                      <div
+                        className="absolute bottom-0 left-0 right-0 h-px scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                        style={{
+                          background: `linear-gradient(90deg, ${cat.accent}, transparent)`,
+                        }}
+                      />
+                    </div>
+                  </TiltCard>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </Container>
+      </section>
+
+      {/* ─────────────────────────────────────────────────
+          SECTION 5 · MANIFESTO
+      ───────────────────────────────────────────────── */}
+      <section
+        className="relative py-36 md:py-52 overflow-hidden"
+        style={{ background: 'var(--page-bg)' }}
+      >
+        {/* Background watermark */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
+          aria-hidden
+        >
+          <span
+            className="font-display uppercase text-center select-none"
+            style={{
+              fontSize: 'clamp(10rem, 28vw, 26rem)',
+              color: 'var(--page-fg)',
+              opacity: 0.025,
+              letterSpacing: '-0.02em',
+              lineHeight: 1,
+            }}
+          >
+            CORVO
+          </span>
+        </div>
+
+        {/* Violet glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(123,95,255,0.06) 0%, transparent 70%)',
+          }}
+        />
+
+        <Container className="relative">
+          <FadeIn>
+            <blockquote className="text-center max-w-4xl mx-auto">
+              <p
+                className="font-display uppercase leading-[1.0] mb-8"
+                style={{ fontSize: 'clamp(1.9rem, 5.5vw, 5rem)' }}
+              >
+                <span style={{ color: 'var(--page-fg)' }}>&ldquo;WE DON&apos;T BUILD GEAR </span>
+                <span
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, #4A35C7 0%, #7B5FFF 50%, #4A9EFF 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  FOR THE CASUAL.
+                </span>
+                <br />
+                <span style={{ color: 'var(--page-fg)' }}>WE FORGE TOOLS </span>
+                <span
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, #B89653 0%, #C9A961 40%, #F0D080 65%, #C9A961 100%)',
+                    backgroundSize: '200% auto',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    animation: 'shimmer-gold 3s linear infinite',
+                  }}
+                >
+                  FOR THE OBSESSED.&rdquo;
+                </span>
+              </p>
+
+              <footer
+                className="flex items-center justify-center gap-4"
+                style={{ color: 'var(--muted)' }}
+              >
+                <span
+                  className="block h-px w-8"
+                  style={{ background: 'linear-gradient(90deg, transparent, #7B5FFF)' }}
+                />
+                <cite
+                  className="text-xs uppercase tracking-[0.4em] not-italic"
+                  style={{ color: '#7B5FFF' }}
+                >
+                  The Corvo Standard
+                </cite>
+                <span
+                  className="block h-px w-8"
+                  style={{ background: 'linear-gradient(90deg, #7B5FFF, transparent)' }}
+                />
+              </footer>
+            </blockquote>
           </FadeIn>
-          <FadeIn delay={0.1} className="text-center mb-16">
-            <p className="max-w-sm mx-auto leading-relaxed" style={{ color: 'var(--muted)' }}>
-              Every product meets our uncompromising benchmark. Nothing ships until it exceeds
-              expectations.
-            </p>
+        </Container>
+      </section>
+
+      {/* ─────────────────────────────────────────────────
+          SECTION 6 · REVERSE MARQUEE
+      ───────────────────────────────────────────────── */}
+      <div
+        className="border-y py-5 overflow-hidden"
+        style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}
+      >
+        <MarqueeStrip reverse />
+      </div>
+
+      {/* ─────────────────────────────────────────────────
+          SECTION 7 · THE CORVO STANDARD (Pillars)
+      ───────────────────────────────────────────────── */}
+      <section
+        className="py-28"
+        style={{ background: 'var(--surface)' }}
+      >
+        <Container>
+          {/* Header */}
+          <FadeIn className="mb-20">
+            <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-10">
+              <div>
+                <p
+                  className="text-xs font-display uppercase tracking-[0.45em] mb-3"
+                  style={{ color: '#7B5FFF' }}
+                >
+                  — Why Corvo
+                </p>
+                <h2
+                  className="font-display uppercase leading-[0.92]"
+                  style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}
+                >
+                  The Corvo Standard
+                </h2>
+              </div>
+              <p
+                className="max-w-xs leading-relaxed text-sm md:pb-1"
+                style={{ color: 'var(--muted)' }}
+              >
+                Every product meets our uncompromising benchmark. Nothing ships until it
+                exceeds expectations.
+              </p>
+            </div>
           </FadeIn>
 
+          {/* Pillar cards */}
           <Stagger staggerDelay={0.14} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {pillars.map((p) => (
               <StaggerItem key={p.num}>
                 <TiltCard intensity={7}>
                   <div
-                    className="h-full p-8 rounded-xl relative overflow-hidden group cursor-default"
+                    className="h-full p-8 rounded-2xl relative overflow-hidden group cursor-default"
                     style={{
                       background: 'var(--surface-elevated)',
                       border: '1px solid var(--border)',
-                      boxShadow: 'var(--card-shadow)',
                     }}
                   >
                     {/* Hover glow */}
@@ -267,28 +509,40 @@ export default function Home() {
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                       style={{
                         background:
-                          'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,169,97,0.1) 0%, transparent 70%)',
+                          'radial-gradient(ellipse 100% 60% at 0% 0%, rgba(123,95,255,0.1) 0%, transparent 70%)',
                       }}
                     />
-                    {/* Gold rule */}
-                    <div className="w-8 h-px bg-gold mb-8" />
-                    {/* Number */}
-                    <p
-                      className="font-display leading-none mb-5 select-none"
-                      style={{ fontSize: '4.5rem', color: 'rgba(201,169,97,0.15)' }}
-                    >
-                      {p.num}
-                    </p>
-                    <h3 className="font-display text-lg uppercase tracking-wider mb-4">{p.title}</h3>
+
+                    {/* Number + line */}
+                    <div className="flex items-center gap-4 mb-8">
+                      <span
+                        className="font-display text-5xl leading-none select-none"
+                        style={{ color: 'rgba(123,95,255,0.18)' }}
+                      >
+                        {p.num}
+                      </span>
+                      <div
+                        className="h-px flex-1"
+                        style={{
+                          background:
+                            'linear-gradient(90deg, rgba(123,95,255,0.5), transparent)',
+                        }}
+                      />
+                    </div>
+
+                    <h3 className="font-display text-xl uppercase tracking-wider mb-4">
+                      {p.title}
+                    </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
                       {p.desc}
                     </p>
-                    {/* Bottom shimmer line */}
+
+                    {/* Bottom shimmer */}
                     <div
-                      className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                      className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{
                         background:
-                          'linear-gradient(90deg, transparent, rgba(201,169,97,0.5), transparent)',
+                          'linear-gradient(90deg, transparent, rgba(123,95,255,0.5), rgba(201,169,97,0.35), transparent)',
                       }}
                     />
                   </div>
@@ -299,57 +553,128 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── Reverse Marquee ──────────────────────────── */}
-      <div
-        className="border-y py-5 overflow-hidden"
-        style={{ borderColor: 'var(--border)', background: 'var(--page-bg)' }}
-      >
-        <MarqueeStrip reverse />
-      </div>
-
-      {/* ── CTA ──────────────────────────────────────── */}
+      {/* ─────────────────────────────────────────────────
+          SECTION 8 · NEWSLETTER
+      ───────────────────────────────────────────────── */}
       <section
-        className="relative py-36 overflow-hidden"
+        className="relative py-32 overflow-hidden border-t"
+        style={{ background: 'var(--page-bg)', borderColor: 'var(--border)' }}
+      >
+        {/* Ambient glow */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          aria-hidden
+        >
+          <div
+            style={{
+              width: '700px',
+              height: '500px',
+              background:
+                'radial-gradient(ellipse, rgba(123,95,255,0.1) 0%, transparent 70%)',
+            }}
+          />
+        </div>
+
+        <Container className="relative">
+          <FadeIn className="text-center">
+            <p
+              className="text-xs font-display uppercase tracking-[0.45em] mb-5"
+              style={{ color: '#7B5FFF' }}
+            >
+              · Inner Circle ·
+            </p>
+
+            <h2
+              className="font-display uppercase leading-[0.9] mb-6"
+              style={{ fontSize: 'clamp(2.8rem, 8vw, 7rem)' }}
+            >
+              ENTER THE
+              <br />
+              <span
+                style={{
+                  backgroundImage:
+                    'linear-gradient(90deg, #4A35C7 0%, #7B5FFF 25%, #C9A961 55%, #7B5FFF 80%, #4A35C7 100%)',
+                  backgroundSize: '300% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'shimmer-gold 4s linear infinite',
+                }}
+              >
+                DARKNESS.
+              </span>
+            </h2>
+
+            <p
+              className="max-w-md mx-auto mb-10 leading-relaxed"
+              style={{ color: 'var(--muted)' }}
+            >
+              First access to exclusive drops, athlete programs, and Corvo updates. No spam.
+              Just signal.
+            </p>
+
+            <NewsletterForm />
+          </FadeIn>
+        </Container>
+      </section>
+
+      {/* ─────────────────────────────────────────────────
+          SECTION 9 · FINAL CTA
+      ───────────────────────────────────────────────── */}
+      <section
+        className="relative py-40 overflow-hidden"
         style={{ background: 'var(--surface)' }}
       >
-        {/* Decorative orbs */}
+        {/* Decorative ambient blobs */}
         <div
-          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(201,169,97,0.06) 0%, transparent 70%)',
-            transform: 'translate(-50%, -40%)',
+            background:
+              'radial-gradient(circle, rgba(123,95,255,0.07) 0%, transparent 70%)',
             animation: 'pulse-glow 5s ease-in-out infinite',
           }}
         />
         <div
-          className="absolute bottom-0 right-1/4 w-[350px] h-[350px] rounded-full pointer-events-none"
+          className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(201,169,97,0.05) 0%, transparent 70%)',
-            transform: 'translate(40%, 40%)',
-            animation: 'pulse-glow 6s ease-in-out infinite 1s',
+            background:
+              'radial-gradient(circle, rgba(201,169,97,0.05) 0%, transparent 70%)',
+            animation: 'pulse-glow 7s ease-in-out infinite 1.5s',
           }}
         />
 
         <Container className="relative text-center">
           <FadeIn>
-            <p className="text-gold font-display tracking-[0.45em] uppercase text-xs mb-6 flex items-center justify-center gap-3">
-              <span className="block w-6 h-px bg-gold" />
-              Ready to Elevate?
-              <span className="block w-6 h-px bg-gold" />
-            </p>
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span
+                className="h-px w-8"
+                style={{ background: 'linear-gradient(90deg, transparent, #C9A961)' }}
+              />
+              <p
+                className="font-display text-xs tracking-[0.5em] uppercase"
+                style={{ color: '#C9A961' }}
+              >
+                Corvo Elite
+              </p>
+              <span
+                className="h-px w-8"
+                style={{ background: 'linear-gradient(90deg, #C9A961, transparent)' }}
+              />
+            </div>
           </FadeIn>
 
           <FadeIn delay={0.12}>
             <h2
-              className="font-display uppercase leading-[0.88] tracking-tight mb-10"
-              style={{ fontSize: 'clamp(3rem, 9vw, 7.5rem)' }}
+              className="font-display uppercase leading-[0.88] tracking-tight mb-12"
+              style={{ fontSize: 'clamp(3rem, 9vw, 8rem)' }}
             >
-              UNLOCK YOUR
+              CLAIM
               <br />
+              YOUR{' '}
               <span
                 style={{
                   backgroundImage:
-                    'linear-gradient(90deg, #B89653 0%, #C9A961 25%, #F0D080 50%, #C9A961 75%, #B89653 100%)',
+                    'linear-gradient(90deg, #4A35C7 0%, #7B5FFF 25%, #C9A961 55%, #7B5FFF 80%, #4A35C7 100%)',
                   backgroundSize: '300% auto',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -357,14 +682,14 @@ export default function Home() {
                   animation: 'shimmer-gold 3.5s linear infinite',
                 }}
               >
-                POTENTIAL.
+                EDGE.
               </span>
             </h2>
           </FadeIn>
 
           <FadeIn delay={0.26}>
             <Button href="/shop" size="lg" variant="gold">
-              Shop the Collection
+              Shop the Collection →
             </Button>
           </FadeIn>
         </Container>
