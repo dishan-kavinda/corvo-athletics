@@ -193,6 +193,20 @@ async function createWixOrder(payload: {
         },
         itemType: { preset: 'PHYSICAL' },
         paymentOption: 'FULL_PAYMENT_ONLINE',
+        // Required by Wix: each line must have taxInfo or taxDetails.
+        // v1 = zero tax. Line is taxable, rate is 0.
+        taxInfo: {
+          taxableAmount: {
+            amount: l.lineTotal.toFixed(2),
+            formattedAmount: fmtMoney(l.lineTotal, payload.currency),
+          },
+          taxAmount: {
+            amount: '0.00',
+            formattedAmount: fmtMoney(0, payload.currency),
+          },
+          taxRate: '0',
+          taxIncludedInPrice: false,
+        },
       })),
       buyerInfo: {
         email: payload.shipping.email,
