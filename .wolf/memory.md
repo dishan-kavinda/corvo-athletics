@@ -144,3 +144,41 @@ End-to-end checkout now fully working: Stripe captures payment → server action
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 | 06:54 | Resolved Wix order sync end-to-end (commits 8fcde03, 780a4b8, bdf5269, c73dcb1) | src/app/checkout/actions.ts | order #10002+ now landing in Wix Sales | ~2000 |
+| 18:58 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
+| 19:00 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
+| 19:04 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
+| 19:06 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
+| 19:24 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
+| 19:27 | Created src/lib/wix-orders.ts | — | ~1158 |
+| 19:27 | Created src/app/thank-you/page.tsx | — | ~1601 |
+| 19:28 | Session end: 12 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11006 tok |
+| 19:30 | Session end: 12 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11006 tok |
+| 19:36 | Edited src/lib/wix-orders.ts | modified getWixOrder() | ~570 |
+| 19:37 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
+| 19:38 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
+| 19:40 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
+| 19:45 | Edited src/app/checkout/actions.ts | expanded (+23 lines) | ~464 |
+| 19:45 | Created src/lib/wix-orders.ts | — | ~1343 |
+| 19:46 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
+| 19:47 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
+| 19:48 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
+| 19:50 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
+| 19:55 | Edited src/app/checkout/actions.ts | 6→8 lines | ~126 |
+| 19:57 | Session end: 16 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14475 tok |
+
+## 2026-05-16 (later) — /thank-you order details COMPLETE ✅
+
+Real order data now renders on `/thank-you` end-to-end. Required four sequential fixes:
+
+1. **Schema mismatch — `shippingInfo.shipmentDetails` is silently dropped on CREATE.** Replaced with `recipientInfo` + `shippingInfo.logistics.shippingDestination` (both — Wix accepts and persists both).
+2. **Transient Wix 400** on the initial GET — cleared on subsequent visits (likely Vercel cached the failing server-component render briefly). `cache: no-store` + `force-dynamic` on the page is the defense.
+3. **Verbose diagnostic** (`GETORDER_B1..B7` chunks) added then removed once root cause confirmed.
+4. **`id` vs `_id` mismatch** — Wix eCom Orders v1 returns `id` (Wix Stores Products uses `_id`). Our POST response parser was reading `_id`, getting undefined, falling back to synthetic `stripe_<pi_id>` — which `/thank-you` correctly recognised as not-a-real-order and rendered the generic page. Fixed by accepting either field defensively.
+
+Final commits in sequence: 7aabc67 → 0988b4a → b8372c7 → d528c67.
+
+Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street Auckland) and #10006 (THISAS GAMAGE, 15 Tay Street Auckland) — both render full SHIPPING TO blocks.
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 19:55 | /thank-you order details + address block fully working end-to-end | actions.ts, wix-orders.ts, thank-you/page.tsx | feature shipped, learnings logged in cerebrum bug-014 + bug-017 | ~3000 |
