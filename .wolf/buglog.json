@@ -192,6 +192,50 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-16T06:29:41.307Z"
+    },
+    {
+      "id": "bug-012",
+      "timestamp": "2026-05-16T06:36:08.892Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "15 lines replaced/restructured",
+      "fix": "Rewrote 91→158 lines (15 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:36:08.892Z"
+    },
+    {
+      "id": "bug-013",
+      "timestamp": "2026-05-16T06:40:54.556Z",
+      "error_message": "Wrong condition in logic",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "Condition was: if (!adminKey)",
+      "fix": "Changed to: if (!rawAdminKey)",
+      "tags": [
+        "auto-detected",
+        "logic-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:40:54.556Z"
+    },
+    {
+      "id": "bug-014",
+      "timestamp": "2026-05-16T06:27:00Z",
+      "error_message": "Wix order sync silently failed after Stripe payment captured. /thank-you rendered with synthetic order ID; Wix Sales->Orders showed nothing. Chain: (1) WIX_ORDER_FAIL Headers.appe... (invisible-char corruption in WIX_ADMIN_API_KEY paste), (2) after key fix: HTTP 400 'Validation failed: order.lineItem.taxInfo | order.lineItem.taxDetails -- Either ... must be defined.'",
+      "file": "src/app/checkout/actions.ts (createWixOrder)",
+      "root_cause": "Three layered issues. (1) WIX_ADMIN_API_KEY in Vercel UI contained invisible chars (zero-width space / NBSP / soft hyphen) -- same paste-corruption pattern as STRIPE_SECRET_KEY earlier. undici threw TypeError: Headers.append: Invalid header value before the request left the function. (2) Initial Wix payload was minimal -- missing top-level order.currency, per-line productName.original, price + lineItemPrice with amount/formattedAmount, itemType.preset, paymentOption, and a complete priceSummary (only had total). (3) The subtle one: each lineItem requires taxInfo (or taxDetails) EVEN WHEN TAX IS ZERO -- without it, Wix returns HTTP 400 validation error.",
+      "fix": "Three layers. (a) trim()+dequote defense applied to WIX_ADMIN_API_KEY + WIX_SITE_ID in createWixOrder (same shape as src/lib/stripe.ts). Best ultimate fix: user generated a fresh API key in Wix dashboard (manage.wix.com -> Settings -> Headless Settings -> API Keys -> grant Wix Stores: Manage Orders + Read Products), copied via Wix's copy button, re-pasted in Vercel. (b) Enriched payload: re-fetch products server-side to populate authoritative name/price for each line; build all required fields with .toFixed(2) string amounts and Intl.NumberFormat('en-NZ') formattedAmount. (c) Each lineItem now includes taxInfo: { taxableAmount: <lineTotal>, taxAmount: '0.00', taxRate: '0', taxIncludedInPrice: false }. Diagnostic pattern that saved cycles: replayed production payload against Wix Orders API via local curl -- got the FULL validation error in one shot instead of waiting for next deploy cycle. Verified end-to-end: real order showed up in Wix Sales -> Orders at 06:54 UTC.",
+      "tags": ["wix", "ecom", "orders-api", "validation", "taxInfo", "schema", "env-vars", "invisible-chars", "paste-corruption", "diagnostic-pattern"],
+      "related_bugs": ["bug-007"],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T06:54:00Z"
     }
   ]
 }

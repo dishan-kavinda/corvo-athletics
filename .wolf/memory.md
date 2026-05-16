@@ -114,3 +114,33 @@ Multi-hour debug arc concluded. End-to-end Stripe checkout now working on produc
 |------|--------|---------|---------|--------|
 | 06:30 | Cleaned diagnostic logging from createCheckoutPaymentIntent | actions.ts | back to lean prod code | ~600 |
 | 06:30 | Updated bug-007 root cause + fix; cerebrum learnings for invisible-char paste corruption, Vercel cached redeploy, fetch http client, MCP log preview truncation | buglog.json, cerebrum.md | learnings captured | ~1500 |
+| 18:32 | Session end: 6 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~6580 tok |
+| 18:33 | Session end: 6 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~6580 tok |
+| 18:36 | Edited src/app/checkout/actions.ts | modified completeCheckoutOrder() | ~1565 |
+| 18:36 | Session end: 7 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7550 tok |
+| 18:39 | Session end: 7 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7550 tok |
+| 18:40 | Edited src/app/checkout/actions.ts | modified if() | ~189 |
+| 18:41 | Session end: 8 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7739 tok |
+| 18:42 | Session end: 8 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7739 tok |
+| 18:43 | Session end: 8 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7739 tok |
+| 18:46 | Session end: 8 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7739 tok |
+| 18:46 | Session end: 8 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~7739 tok |
+| 18:51 | Edited src/app/checkout/actions.ts | expanded (+14 lines) | ~348 |
+| 18:53 | Session end: 9 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8087 tok |
+| 18:53 | Session end: 9 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8087 tok |
+| 18:55 | Session end: 9 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8087 tok |
+| 18:55 | Edited src/app/checkout/actions.ts | modified if() | ~160 |
+
+## 2026-05-16 — Wix order sync RESOLVED ✅
+
+End-to-end checkout now fully working: Stripe captures payment → server action creates real Wix order via Admin API → order appears in Wix Sales → Orders with `paymentStatus: PAID`. First synced order at 06:54 UTC.
+
+**Two-layer fix:**
+1. **Fresh Wix Admin API Key** — user generated a new key in Wix dashboard, replacing the paste-corrupted one (invisible chars rejected by undici with `Headers.append: Invalid header value`). Same defensive `.trim()+dequote` now applied to `WIX_ADMIN_API_KEY` and `WIX_SITE_ID` in code.
+2. **Comprehensive Wix Orders v1 payload** — including the previously-missing `taxInfo` per line item (required even when tax is zero), full `priceSummary` (subtotal/shipping/tax/discount/total), `productName.original`, per-line `price`+`lineItemPrice` with both `amount` and `formattedAmount`, `itemType.preset`, `paymentOption`.
+
+**Diagnostic pattern win:** replayed the exact production payload against the Wix Orders API via local curl using the new admin key. Got the FULL validation error (`taxInfo` missing) in one shot instead of waiting for another user retest. After adding taxInfo, the same probe returned HTTP 200 + a real order (#10001). Pushed the fix with high confidence — production retest succeeded first try.
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 06:54 | Resolved Wix order sync end-to-end (commits 8fcde03, 780a4b8, bdf5269, c73dcb1) | src/app/checkout/actions.ts | order #10002+ now landing in Wix Sales | ~2000 |
