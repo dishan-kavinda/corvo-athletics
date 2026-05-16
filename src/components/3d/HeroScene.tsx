@@ -178,9 +178,9 @@ export function HeroScene() {
 
       <EffectComposer>
         <Bloom
-          intensity={1.3}
-          luminanceThreshold={0.15}
-          luminanceSmoothing={0.90}
+          intensity={8}
+          luminanceThreshold={0.2}
+          luminanceSmoothing={0.5}
           mipmapBlur
           radius={0.72}
         />
