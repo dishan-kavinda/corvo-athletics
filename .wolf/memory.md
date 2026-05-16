@@ -236,3 +236,70 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
+
+## Session: 2026-05-16 21:28
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 21:37 | Created src/components/3d/HeroScene.tsx | — | ~612 |
+| 21:37 | Edited src/app/globals.css | CSS: --color-raven, --color-raven-deep | ~35 |
+| 21:38 | Edited src/app/globals.css | 13→13 lines | ~100 |
+| 21:38 | Edited src/app/globals.css | CSS: opacity, opacity | ~66 |
+| 21:39 | Created src/app/page.tsx | — | ~5342 |
+| 21:39 | Edited src/components/ui/MarqueeStrip.tsx | 4→4 lines | ~32 |
+| 21:39 | Edited src/components/ui/MarqueeStrip.tsx | CSS: 4 | ~144 |
+| 21:40 | Raven redesign: raven eye orb (violet iridescent), feather SVG wing lines, fixed mobile visibility, updated dark mode to midnight blue-black, violet accent (#7B5FFF) added throughout | globals.css, HeroScene.tsx, page.tsx, MarqueeStrip.tsx | complete | ~6500 |
+| 21:45 | Session end: 7 writes across 4 files (HeroScene.tsx, globals.css, page.tsx, MarqueeStrip.tsx) | 4 reads | ~6331 tok |
+| 23:19 | Created src/components/3d/HeroScene.tsx | — | ~2481 |
+| 23:20 | Created src/components/ui/NewsletterForm.tsx | — | ~670 |
+| 23:20 | Created src/app/globals.css | — | ~1074 |
+| 23:21 | Created src/app/page.tsx | — | ~7204 |
+| 22:15 | Full homepage redesign from scratch: 9-section layout, 3D raven wing (ShapeGeometry + MeshPhysicalMaterial + sheen), @react-three/drei installed, newsletter section, category tiles, manifesto, new design tokens | globals.css, HeroScene.tsx, page.tsx, MarqueeStrip.tsx, NewsletterForm.tsx (new) | build pass | ~18000 |
+| 23:26 | Session end: 11 writes across 5 files (HeroScene.tsx, globals.css, page.tsx, MarqueeStrip.tsx, NewsletterForm.tsx) | 5 reads | ~17760 tok |
+
+## Session: 2026-05-16 23:28
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 23:45 | Created src/app/globals.css | — | ~1584 |
+| 23:45 | Created src/app/layout.tsx | — | ~965 |
+| 23:45 | Created src/components/ui/Button.tsx | — | ~517 |
+| 23:46 | Created src/components/layout/Header.tsx | — | ~1176 |
+| 23:46 | Created src/components/layout/Footer.tsx | — | ~1433 |
+| 23:46 | Created src/components/layout/MobileNav.tsx | — | ~1763 |
+| 23:47 | Created src/components/ui/ProductCard.tsx | — | ~1153 |
+| 23:47 | Created src/components/3d/HeroScene.tsx | — | ~2333 |
+| 23:48 | Created src/components/ui/MarqueeStrip.tsx | — | ~453 |
+| 23:49 | Created src/app/page.tsx | — | ~8749 |
+| 23:50 | Created src/app/shop/page.tsx | — | ~2005 |
+| 23:51 | Created src/app/about/page.tsx | — | ~3123 |
+| 23:51 | Created src/app/shop/[slug]/page.tsx | — | ~3372 |
+| 23:52 | Created src/app/thank-you/page.tsx | — | ~3057 |
+| 23:52 | Edited src/components/cart/CartIcon.tsx | modified CartIcon() | ~484 |
+| 23:52 | Edited src/components/cart/CartDrawer.tsx | expanded (+12 lines) | ~280 |
+| 23:52 | Edited src/components/cart/CartDrawer.tsx | 3→3 lines | ~45 |
+| 23:53 | Edited src/components/cart/CartDrawer.tsx | expanded (+11 lines) | ~216 |
+| 23:53 | Edited src/components/cart/CartDrawer.tsx | CSS: borderTop | ~34 |
+| 23:53 | Edited src/components/cart/AddToCartButton.tsx | 11→11 lines | ~67 |
+| 23:53 | Edited src/app/account/page.tsx | expanded (+12 lines) | ~236 |
+| 23:54 | Created src/components/ui/NewsletterForm.tsx | — | ~1187 |
+
+
+## 2026-05-16 — Complete frontend rebuild: "Phantom Blade" design system
+
+| Time  | Description | Files | Outcome | ~tokens |
+|-------|-------------|-------|---------|---------|
+| 14:00 | Full UI rebuild requested — new brand direction, all pages | — | Started | 200 |
+| 14:05 | New design tokens (crimson+teal replaces violet+gold) | globals.css | ✓ | 800 |
+| 14:08 | Added Rajdhani font, updated layout | layout.tsx | ✓ | 150 |
+| 14:10 | New Button variants (primary=crimson, outline, ghost, gold kept) | Button.tsx | ✓ | 200 |
+| 14:12 | New Header (client, scroll-transparent), Footer (always dark), MobileNav | layout/\* | ✓ | 1200 |
+| 14:18 | New HeroScene (crimson eye + teal sheen), MarqueeStrip, ProductCard | components/\* | ✓ | 1400 |
+| 14:22 | Complete homepage rewrite: 9 new sections, red ticker, RavenMark SVG | page.tsx | ✓ | 2200 |
+| 14:28 | Shop page: new hero + product grid + editorial style | shop/page.tsx | ✓ | 800 |
+| 14:30 | About page: dark hero, numbered pillars, manifesto | about/page.tsx | ✓ | 900 |
+| 14:32 | Product detail: sticky image panel, breadcrumb, trust row | shop/[slug]/page.tsx | ✓ | 1000 |
+| 14:34 | Thank-you page: check mark icon, crimson totals | thank-you/page.tsx | ✓ | 700 |
+| 14:36 | CartIcon: bag SVG + crimson badge, CartDrawer: crimson accents | cart/\* | ✓ | 400 |
+| 14:38 | NewsletterForm: crimson form, removed violet | NewsletterForm.tsx | ✓ | 300 |
+| 14:40 | pnpm build — PASS, TypeScript PASS, all 9 routes generated | — | ✓ success | 100 |

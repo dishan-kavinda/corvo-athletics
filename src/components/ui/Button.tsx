@@ -3,10 +3,14 @@ import { cn } from '@/lib/cn';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 const variants = {
-  primary: 'bg-bone text-ink hover:bg-bone/90',
+  primary:
+    'bg-blade text-pure hover:bg-blade-deep shadow-[0_0_0_0_rgba(216,24,41,0)] hover:shadow-[0_0_36px_rgba(216,24,41,0.5)] active:scale-[0.98]',
+  outline:
+    'border border-current hover:bg-blade hover:text-pure hover:border-blade transition-colors duration-300',
   ghost:
-    'border text-current hover:border-gold/60 hover:bg-gold/5 transition-colors',
-  gold: 'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden shadow-[0_0_0_0_rgba(201,169,97,0)] hover:shadow-[0_0_28px_rgba(201,169,97,0.35)]',
+    'relative hover:text-blade transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-[1.5px] after:w-0 after:bg-blade after:transition-all after:duration-300 hover:after:w-full',
+  gold:
+    'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden shadow-[0_0_0_0_rgba(201,169,97,0)] hover:shadow-[0_0_28px_rgba(201,169,97,0.4)]',
 } as const;
 
 const sizes = {
@@ -35,7 +39,6 @@ export function Button({
     'inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:hover:scale-100 disabled:cursor-not-allowed',
     variants[variant],
     sizes[size],
-    variant === 'ghost' && 'border-current/20',
     className,
   );
 

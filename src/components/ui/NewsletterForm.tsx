@@ -11,54 +11,107 @@ export function NewsletterForm() {
     e.preventDefault();
     if (!email) return;
     setStatus('loading');
-    // Simulate API call — replace with real endpoint later
     await new Promise((r) => setTimeout(r, 900));
     setStatus('done');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+    <form onSubmit={handleSubmit}>
       <AnimatePresence mode="wait">
         {status === 'done' ? (
-          <motion.p
+          <motion.div
             key="done"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm tracking-[0.2em] uppercase w-full text-center py-4"
-            style={{ color: '#7B5FFF' }}
+            className="py-4"
           >
-            ✓ You&apos;re in the inner circle.
-          </motion.p>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="block w-4 h-[1.5px]" style={{ background: '#D81829' }} />
+              <p
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  letterSpacing: '0.38em',
+                  textTransform: 'uppercase',
+                  color: '#D81829',
+                }}
+              >
+                You&apos;re in.
+              </p>
+            </div>
+            <p style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
+              Welcome to the inner circle. First drops incoming.
+            </p>
+          </motion.div>
         ) : (
-          <motion.div key="form" className="flex flex-col sm:flex-row gap-3 w-full">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              required
-              className="flex-1 px-5 py-4 text-sm outline-none rounded-xl"
-              style={{
-                background: 'rgba(123,95,255,0.06)',
-                border: '1px solid rgba(123,95,255,0.22)',
-                color: 'var(--page-fg)',
-                caretColor: '#7B5FFF',
-              }}
-            />
+          <motion.div key="form" className="flex flex-col gap-3">
+            <div style={{ position: 'relative' }}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                required
+                style={{
+                  width: '100%',
+                  padding: '1rem 1.25rem',
+                  fontSize: '0.875rem',
+                  outline: 'none',
+                  background: 'var(--surface-elevated)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--page-fg)',
+                  caretColor: '#D81829',
+                  transition: 'border-color 0.2s ease',
+                }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#D81829')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
+              />
+            </div>
+
             <motion.button
               type="submit"
               disabled={status === 'loading'}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="px-8 py-4 rounded-xl text-xs font-display uppercase tracking-[0.25em] shrink-0"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               style={{
-                background: 'linear-gradient(135deg, #4A35C7 0%, #7B5FFF 100%)',
-                color: '#FAFAFA',
+                padding: '1rem 2rem',
+                fontFamily: 'var(--font-anton)',
+                fontSize: '0.875rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                background: '#D81829',
+                color: '#FFFFFF',
+                border: 'none',
+                cursor: 'pointer',
                 opacity: status === 'loading' ? 0.7 : 1,
+                transition: 'background 0.2s ease, box-shadow 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#A91321';
+                e.currentTarget.style.boxShadow = '0 0 28px rgba(216,24,41,0.45)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#D81829';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              {status === 'loading' ? '...' : 'Join'}
+              {status === 'loading' ? 'Joining…' : 'Join the Circle →'}
             </motion.button>
+
+            <p
+              style={{
+                fontFamily: 'var(--font-rajdhani)',
+                fontSize: '10px',
+                fontWeight: 600,
+                letterSpacing: '0.28em',
+                textTransform: 'uppercase',
+                color: 'var(--muted)',
+                marginTop: '0.25rem',
+              }}
+            >
+              No spam. Just signal.
+            </p>
           </motion.div>
         )}
       </AnimatePresence>

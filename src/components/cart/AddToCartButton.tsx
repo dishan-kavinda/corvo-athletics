@@ -25,12 +25,12 @@ export function AddToCartButton({ productId, variantId }: AddToCartButtonProps) 
   return (
     <Button
       onClick={handle}
-      variant="gold"
+      variant="primary"
       size="lg"
       disabled={loading}
       className="w-full sm:w-auto sm:min-w-[16rem]"
     >
-      {loading ? 'Adding…' : 'Add to Cart'}
+      {loading ? 'Adding…' : 'Add to Cart →'}
     </Button>
   );
 }

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
@@ -66,85 +65,269 @@ export default async function ProductDetailPage({ params }: PageProps) {
   };
 
   return (
-    <Section>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
-          <FadeIn className="space-y-4" duration={0.7}>
-            <div className="relative aspect-square bg-onyx overflow-hidden">
-              {mainImage && (
-                <Image
-                  src={mainImage}
-                  alt={product.name ?? ''}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
+
+      {/* ── Breadcrumb ───────────────────────────────── */}
+      <div
+        style={{
+          background: 'var(--page-bg)',
+          borderBottom: '1px solid var(--border)',
+        }}
+      >
+        <Container className="py-4">
+          <div className="flex items-center gap-2">
+            {['Home', 'Shop', product.name ?? 'Product'].map((crumb, i, arr) => (
+              <div key={crumb} className="flex items-center gap-2">
+                {i < arr.length - 1 ? (
+                  <a
+                    href={i === 0 ? '/' : '/shop'}
+                    style={{
+                      fontFamily: 'var(--font-rajdhani)',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      letterSpacing: '0.28em',
+                      textTransform: 'uppercase',
+                      color: 'var(--muted)',
+                    }}
+                    className="hover:text-blade transition-colors"
+                  >
+                    {crumb}
+                  </a>
+                ) : (
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-rajdhani)',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      letterSpacing: '0.28em',
+                      textTransform: 'uppercase',
+                      color: 'var(--page-fg)',
+                    }}
+                  >
+                    {crumb}
+                  </span>
+                )}
+                {i < arr.length - 1 && (
+                  <span style={{ color: 'var(--muted)', fontSize: '10px' }}>›</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* ── Product layout ───────────────────────────── */}
+      <section style={{ background: 'var(--page-bg)' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: '80vh' }}>
+
+          {/* ── Image panel ────────────────────────────── */}
+          <FadeIn duration={0.7} className="relative">
+            {/* Main image */}
+            <div
+              className="sticky top-[72px]"
+              style={{
+                background: 'var(--surface)',
+                borderRight: '1px solid var(--border)',
+              }}
+            >
+              <div
+                className="relative"
+                style={{ aspectRatio: '1 / 1', overflow: 'hidden' }}
+              >
+                {mainImage ? (
+                  <Image
+                    src={mainImage}
+                    alt={product.name ?? ''}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ background: 'var(--surface-elevated)' }}
+                  >
+                    <span
+                      className="font-display uppercase"
+                      style={{ fontSize: '5rem', color: 'var(--border)', opacity: 0.3 }}
+                    >
+                      C
+                    </span>
+                  </div>
+                )}
+                {/* Red left accent */}
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-[3px]"
+                  style={{ background: '#D81829' }}
                 />
+              </div>
+
+              {/* Gallery thumbnails */}
+              {gallery.length > 1 && (
+                <div
+                  className="flex gap-[1px]"
+                  style={{ background: 'var(--border)' }}
+                >
+                  {gallery.slice(0, 4).map((item, i) => (
+                    <div
+                      key={item._id ?? i}
+                      className="relative flex-1"
+                      style={{
+                        aspectRatio: '1 / 1',
+                        overflow: 'hidden',
+                        background: 'var(--surface-elevated)',
+                      }}
+                    >
+                      {item.image?.url && (
+                        <Image
+                          src={item.image.url}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="120px"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
-            {gallery.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
-                {gallery.slice(0, 4).map((item, i) => (
-                  <div
-                    key={item._id ?? i}
-                    className="relative aspect-square bg-onyx overflow-hidden border border-graphite"
-                  >
-                    {item.image?.url && (
-                      <Image
-                        src={item.image.url}
-                        alt=""
-                        fill
-                        className="object-cover"
-                        sizes="120px"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
           </FadeIn>
-          <div>
-            <HeroReveal delay={0.1} y={20}>
-              <p className="text-gold font-display tracking-[0.3em] uppercase text-xs mb-3">
+
+          {/* ── Info panel ─────────────────────────────── */}
+          <div className="px-8 md:px-12 lg:px-14 py-12">
+
+            <HeroReveal delay={0.08} y={15}>
+              <p
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.52em',
+                  textTransform: 'uppercase',
+                  color: '#D81829',
+                  marginBottom: '1rem',
+                }}
+              >
                 Corvo Athletics
               </p>
             </HeroReveal>
+
             <HeroReveal delay={0.2} y={30}>
-              <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-tight mb-6">
+              <h1
+                className="font-display uppercase leading-[0.92] mb-6"
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.01em' }}
+              >
                 {product.name}
               </h1>
             </HeroReveal>
+
             <HeroReveal delay={0.35}>
-              <p className="text-gold font-display text-3xl mb-8">
-                {product.priceData?.formatted?.price}
-              </p>
-              <div className="border-t border-graphite my-8" />
+              <div className="flex items-center gap-4 mb-8">
+                <p
+                  className="font-display"
+                  style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: '#D81829' }}
+                >
+                  {product.priceData?.formatted?.price}
+                </p>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    letterSpacing: '0.32em',
+                    textTransform: 'uppercase',
+                    color: product.stock?.inStock ? '#00BDAC' : '#838DAA',
+                    padding: '0.25rem 0.6rem',
+                    border: `1px solid ${product.stock?.inStock ? '#00BDAC' : '#838DAA'}`,
+                  }}
+                >
+                  {product.stock?.inStock ? 'In Stock' : 'Out of Stock'}
+                </span>
+              </div>
+
+              <div style={{ height: '1px', background: 'var(--border)', marginBottom: '2rem' }} />
             </HeroReveal>
+
             {product.description && (
               <HeroReveal delay={0.5}>
                 <div
-                  className="text-ash text-sm leading-relaxed mb-10 max-w-prose"
+                  className="text-sm leading-relaxed mb-10 max-w-prose"
+                  style={{ color: 'var(--muted)' }}
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
               </HeroReveal>
             )}
+
             <HeroReveal delay={0.65}>
               {product._id && (
-                <AddToCartButton productId={product._id} variantId={defaultVariantId} />
+                <div className="mb-10">
+                  <AddToCartButton productId={product._id} variantId={defaultVariantId} />
+                </div>
               )}
-              <div className="mt-10 pt-8 border-t border-graphite space-y-3 text-xs text-ash uppercase tracking-wider">
-                <p>Free Shipping on Orders Over $100</p>
-                <p>30-Day Returns</p>
-                <p>Lab-Tested & Verified</p>
+
+              {/* Trust row */}
+              <div
+                className="pt-8"
+                style={{ borderTop: '1px solid var(--border)' }}
+              >
+                <div className="space-y-4">
+                  {[
+                    { icon: '→', label: 'Free Shipping on Orders Over $100' },
+                    { icon: '→', label: '30-Day Returns' },
+                    { icon: '→', label: 'Lab-Tested & Independently Verified' },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-3">
+                      <span style={{ color: '#D81829', fontWeight: 700, fontSize: '14px' }}>
+                        {item.icon}
+                      </span>
+                      <p
+                        style={{
+                          fontFamily: 'var(--font-rajdhani)',
+                          fontSize: '12px',
+                          fontWeight: 600,
+                          letterSpacing: '0.22em',
+                          textTransform: 'uppercase',
+                          color: 'var(--muted)',
+                        }}
+                      >
+                        {item.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </HeroReveal>
           </div>
         </div>
-      </Container>
-    </Section>
+      </section>
+
+      {/* ── Related CTA ──────────────────────────────── */}
+      <div
+        className="py-12 text-center border-t"
+        style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
+      >
+        <a
+          href="/shop"
+          style={{
+            fontFamily: 'var(--font-rajdhani)',
+            fontSize: '12px',
+            fontWeight: 700,
+            letterSpacing: '0.32em',
+            textTransform: 'uppercase',
+            color: '#D81829',
+            textDecoration: 'underline',
+            textUnderlineOffset: '4px',
+          }}
+        >
+          ← Back to All Products
+        </a>
+      </div>
+    </>
   );
 }

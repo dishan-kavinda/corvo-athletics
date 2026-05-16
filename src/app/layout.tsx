@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Anton, Inter } from 'next/font/google';
+import { Anton, Inter, Rajdhani } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -10,6 +10,13 @@ import { ThemeProvider } from '@/providers/ThemeProvider';
 const anton = Anton({
   weight: '400',
   variable: '--font-anton',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const rajdhani = Rajdhani({
+  weight: ['500', '600', '700'],
+  variable: '--font-rajdhani',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -82,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${inter.variable} h-full antialiased`}
+      className={`${anton.variable} ${rajdhani.variable} ${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

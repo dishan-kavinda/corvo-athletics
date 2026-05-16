@@ -1,40 +1,65 @@
 'use client';
 
 const WORDS = [
-  'CORVO', 'RAVEN', 'RELENTLESS', 'DARK ELITE',
-  'FORGE', 'PRECISION', 'POWER', 'ASCEND',
+  'CORVO',
+  '✦',
+  'HUNT WITHOUT MERCY',
+  '✦',
+  'TRAIN HARDER',
+  '✦',
+  'RECOVER SMARTER',
+  '✦',
+  'BORN IN THE DARK',
+  '✦',
+  'NO COMPROMISE',
+  '✦',
+  'THE RAVEN STANDARD',
+  '✦',
+  'PREMIUM PERFORMANCE',
+  '✦',
 ];
 
 interface MarqueeStripProps {
   reverse?: boolean;
+  light?: boolean;
   className?: string;
 }
 
-export function MarqueeStrip({ reverse = false, className = '' }: MarqueeStripProps) {
-  const repeated = [...WORDS, ...WORDS, ...WORDS, ...WORDS];
+export function MarqueeStrip({ reverse = false, light = false, className = '' }: MarqueeStripProps) {
+  const doubled = [...WORDS, ...WORDS];
 
   return (
     <div className={`overflow-hidden select-none ${className}`}>
       <div
         style={{
           display: 'flex',
+          alignItems: 'center',
           whiteSpace: 'nowrap',
           width: 'max-content',
+          gap: '2rem',
           animation: `${reverse ? 'marquee-reverse' : 'marquee'} 28s linear infinite`,
         }}
       >
-        {repeated.map((word, i) => (
-          <span key={i} className="inline-flex items-center gap-6 px-3">
-            <span
-              className="font-display text-xs tracking-[0.35em]"
-              style={{
-                color: i % 3 === 0 ? '#7B5FFF' : i % 3 === 1 ? '#C9A961' : 'var(--muted)',
-                opacity: i % 3 === 2 ? 0.4 : 1,
-              }}
-            >
-              {word}
-            </span>
-            <span style={{ color: i % 2 === 0 ? '#7B5FFF' : '#C9A961', opacity: 0.3 }}>·</span>
+        {doubled.map((word, i) => (
+          <span
+            key={i}
+            style={{
+              fontFamily: word === '✦' ? 'inherit' : 'var(--font-rajdhani)',
+              fontSize: word === '✦' ? '10px' : '11px',
+              fontWeight: 700,
+              letterSpacing: word === '✦' ? '0' : '0.42em',
+              textTransform: 'uppercase',
+              color: light
+                ? word === '✦'
+                  ? 'rgba(255,255,255,0.4)'
+                  : 'rgba(255,255,255,0.82)'
+                : word === '✦'
+                ? '#D81829'
+                : 'var(--muted)',
+              flexShrink: 0,
+            }}
+          >
+            {word}
           </span>
         ))}
       </div>

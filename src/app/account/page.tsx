@@ -13,16 +13,28 @@ export default function AccountPage() {
     <Section className="min-h-[60vh] flex items-center">
       <Container>
         <div className="max-w-md mx-auto text-center">
-          <p className="text-gold font-display tracking-[0.4em] uppercase text-xs mb-6">Account</p>
+          <p
+            style={{
+              fontFamily: 'var(--font-rajdhani)',
+              fontSize: '11px',
+              fontWeight: 700,
+              letterSpacing: '0.52em',
+              textTransform: 'uppercase',
+              color: '#D81829',
+              marginBottom: '1.25rem',
+            }}
+          >
+            Account
+          </p>
           <h1 className="font-display text-4xl md:text-5xl uppercase tracking-tight mb-6">
             Sign In
           </h1>
-          <p className="text-ash mb-10">
+          <p className="text-sm leading-relaxed mb-10" style={{ color: 'var(--muted)' }}>
             Member accounts are coming soon. For now, your cart and orders are tied to this browser
             session.
           </p>
-          <Button href="/shop" variant="gold" size="lg">
-            Continue Shopping
+          <Button href="/shop" variant="primary" size="lg">
+            Continue Shopping →
           </Button>
         </div>
       </Container>

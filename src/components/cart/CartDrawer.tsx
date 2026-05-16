@@ -75,16 +75,28 @@ export function CartDrawer() {
         }}
         aria-hidden={!isOpen}
       >
-        <header className="flex items-center justify-between px-6 py-5 border-b border-graphite">
-          <h2 className="font-display text-2xl uppercase tracking-[0.2em]">Cart</h2>
+        <header
+          className="flex items-center justify-between px-6 py-5"
+          style={{ borderBottom: '1px solid #1B2038' }}
+        >
+          <div className="flex items-center gap-3">
+            <span className="block w-4 h-[1.5px]" style={{ background: '#D81829' }} />
+            <h2
+              className="font-display uppercase"
+              style={{ fontSize: '1.1rem', letterSpacing: '0.28em' }}
+            >
+              Cart
+            </h2>
+          </div>
           <button
             type="button"
             onClick={close}
-            className="text-ash hover:text-bone transition-colors cursor-pointer"
+            className="cursor-pointer transition-colors duration-200 hover:text-blade"
+            style={{ color: '#47516B' }}
             aria-label="Close cart"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </button>
         </header>
@@ -137,7 +149,7 @@ export function CartDrawer() {
                       <p className="text-sm font-medium truncate uppercase tracking-wider">
                         {item.productName?.original}
                       </p>
-                      <p className="text-gold text-sm mt-1 font-display">
+                      <p className="text-blade text-sm mt-1 font-display">
                         {item.price?.formattedAmount}
                       </p>
                       <div className="flex items-center gap-2 mt-3">
@@ -182,14 +194,25 @@ export function CartDrawer() {
         </div>
 
         {lineItems.length > 0 && (
-          <footer className="px-6 py-6 border-t border-graphite">
+          <footer className="px-6 py-6" style={{ borderTop: '1px solid #1B2038' }}>
             <div className="flex justify-between items-baseline mb-5">
-              <span className="text-sm uppercase tracking-widest">Subtotal</span>
-              <span className="font-display text-2xl text-gold">{subtotal}</span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.38em',
+                  textTransform: 'uppercase',
+                  color: '#838DAA',
+                }}
+              >
+                Subtotal
+              </span>
+              <span className="font-display text-2xl" style={{ color: '#D81829' }}>{subtotal}</span>
             </div>
             <Button
               onClick={checkout}
-              variant="gold"
+              variant="primary"
               size="lg"
               className="w-full"
               disabled={loading}
