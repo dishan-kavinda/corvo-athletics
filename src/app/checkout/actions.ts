@@ -104,34 +104,131 @@ export async function completeCheckoutOrder(
     throw new Error(`Payment not completed (status: ${intent.status})`);
   }
 
-  const orderPayload = {
-    paymentIntentId: input.paymentIntentId,
-    lines: input.lines,
-    shipping: input.shipping,
-    amount: intent.amount,
-    currency: intent.currency,
-  };
+  // Re-fetch products server-side so we can populate Wix's required line-item
+  // fields (productName.original, price, lineItemPrice) authoritatively.
+  const productsRes = await wixClient.products.queryProducts().find();
+  const productsById = new Map(productsRes.items.map((p) => [p._id ?? '', p]));
 
-  const orderId = await createWixOrder(orderPayload).catch((err: unknown) => {
-    console.error('[checkout] Wix order creation failed (payment captured):', err);
+  const enrichedLines = input.lines.map((l) => {
+    const p = productsById.get(l.productId);
+    const unit = p?.priceData?.discountedPrice ?? p?.priceData?.price ?? 0;
+    return {
+      ...l,
+      productName: p?.name ?? 'Product',
+      unitPrice: unit,
+      lineTotal: unit * l.quantity,
+    };
+  });
+  const subtotal = enrichedLines.reduce((sum, l) => sum + l.lineTotal, 0);
+  const shippingCost = 0; // v1: free shipping
+  const total = subtotal + shippingCost;
+  const currencyUpper = (intent.currency ?? 'nzd').toUpperCase();
+
+  const orderId = await createWixOrder({
+    paymentIntentId: input.paymentIntentId,
+    enrichedLines,
+    shipping: input.shipping,
+    subtotal,
+    shippingCost,
+    total,
+    currency: currencyUpper,
+  }).catch((err: unknown) => {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(`WIX_ORDER_FAIL ${msg.slice(0, 200)}`);
     return `stripe_${input.paymentIntentId}`;
   });
 
   return { orderId };
 }
 
+interface EnrichedLine extends CartLineItemIn {
+  productName: string;
+  unitPrice: number;
+  lineTotal: number;
+}
+
+function fmtMoney(amount: number, currency: string): string {
+  return new Intl.NumberFormat('en-NZ', { style: 'currency', currency }).format(amount);
+}
+
 async function createWixOrder(payload: {
   paymentIntentId: string;
-  lines: CartLineItemIn[];
+  enrichedLines: EnrichedLine[];
   shipping: ShippingAddress;
-  amount: number;
+  subtotal: number;
+  shippingCost: number;
+  total: number;
   currency: string;
 }): Promise<string> {
   const adminKey = process.env.WIX_ADMIN_API_KEY;
   const siteId = process.env.WIX_SITE_ID ?? '7f2bc2ac-a03f-4f5c-8c37-7835ab0b0a29';
   if (!adminKey) {
-    throw new Error('WIX_ADMIN_API_KEY not set — order will not sync to Wix');
+    throw new Error('WIX_ADMIN_API_KEY not set');
   }
+
+  const body = {
+    order: {
+      currency: payload.currency,
+      lineItems: payload.enrichedLines.map((l) => ({
+        productName: { original: l.productName },
+        catalogReference: {
+          appId: '215238eb-22a5-4c36-9e7b-e7c08025e04e',
+          catalogItemId: l.productId,
+          ...(l.variantId ? { options: { variantId: l.variantId } } : {}),
+        },
+        quantity: l.quantity,
+        price: {
+          amount: l.unitPrice.toFixed(2),
+          formattedAmount: fmtMoney(l.unitPrice, payload.currency),
+        },
+        lineItemPrice: {
+          amount: l.lineTotal.toFixed(2),
+          formattedAmount: fmtMoney(l.lineTotal, payload.currency),
+        },
+        itemType: { preset: 'PHYSICAL' },
+        paymentOption: 'FULL_PAYMENT_ONLINE',
+      })),
+      buyerInfo: {
+        email: payload.shipping.email,
+      },
+      shippingInfo: {
+        shipmentDetails: {
+          address: {
+            addressLine: payload.shipping.addressLine1,
+            addressLine2: payload.shipping.addressLine2,
+            city: payload.shipping.city,
+            postalCode: payload.shipping.postalCode,
+            country: payload.shipping.country,
+            subdivision: payload.shipping.state,
+          },
+          contactDetails: {
+            firstName: payload.shipping.firstName,
+            lastName: payload.shipping.lastName,
+            phone: payload.shipping.phone,
+          },
+        },
+      },
+      paymentStatus: 'PAID',
+      status: 'APPROVED',
+      priceSummary: {
+        subtotal: {
+          amount: payload.subtotal.toFixed(2),
+          formattedAmount: fmtMoney(payload.subtotal, payload.currency),
+        },
+        shipping: {
+          amount: payload.shippingCost.toFixed(2),
+          formattedAmount: fmtMoney(payload.shippingCost, payload.currency),
+        },
+        tax: { amount: '0.00', formattedAmount: fmtMoney(0, payload.currency) },
+        discount: { amount: '0.00', formattedAmount: fmtMoney(0, payload.currency) },
+        total: {
+          amount: payload.total.toFixed(2),
+          formattedAmount: fmtMoney(payload.total, payload.currency),
+        },
+      },
+      channelInfo: { type: 'WEB', externalOrderId: payload.paymentIntentId },
+    },
+  };
 
   const res = await fetch('https://www.wixapis.com/ecom/v1/orders', {
     method: 'POST',
@@ -140,50 +237,20 @@ async function createWixOrder(payload: {
       'wix-site-id': siteId,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      order: {
-        lineItems: payload.lines.map((l) => ({
-          catalogReference: {
-            appId: '215238eb-22a5-4c36-9e7b-e7c08025e04e',
-            catalogItemId: l.productId,
-            ...(l.variantId ? { options: { variantId: l.variantId } } : {}),
-          },
-          quantity: l.quantity,
-        })),
-        buyerInfo: {
-          email: payload.shipping.email,
-        },
-        shippingInfo: {
-          shipmentDetails: {
-            address: {
-              addressLine: payload.shipping.addressLine1,
-              addressLine2: payload.shipping.addressLine2,
-              city: payload.shipping.city,
-              postalCode: payload.shipping.postalCode,
-              country: payload.shipping.country,
-              subdivision: payload.shipping.state,
-            },
-            contactDetails: {
-              firstName: payload.shipping.firstName,
-              lastName: payload.shipping.lastName,
-              phone: payload.shipping.phone,
-            },
-          },
-        },
-        paymentStatus: 'PAID',
-        status: 'APPROVED',
-        priceSummary: {
-          total: { amount: String(payload.amount / 100), formattedAmount: '' },
-        },
-        channelInfo: { type: 'WEB' },
-      },
-    }),
+    body: JSON.stringify(body),
   });
 
   if (!res.ok) {
     const text = await res.text();
+    // Queryable error logs — split so Vercel runtime_logs preview window
+    // (~28 chars) shows the critical status + first chars of the body.
+    console.error(`WIX_E s=${res.status} top=${text.slice(0, 60)}`);
+    console.error(`WIX_E_BODY ${text.slice(0, 400)}`);
     throw new Error(`Wix Order create failed (${res.status}): ${text.slice(0, 300)}`);
   }
   const data = (await res.json()) as { order?: { _id?: string; number?: string } };
-  return data.order?._id ?? `stripe_${payload.paymentIntentId}`;
+  const orderId = data.order?._id;
+  const orderNum = data.order?.number;
+  console.log(`WIX_OK id=${orderId} num=${orderNum}`);
+  return orderId ?? `stripe_${payload.paymentIntentId}`;
 }
