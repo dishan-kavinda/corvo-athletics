@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-16T11:54:44.153Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-16T12:29:24.286Z
 > Files: 19 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
@@ -40,7 +40,7 @@
 
 ## src/components/3d/
 
-- `HeroScene.tsx` — createWingShape (~2333 tok)
+- `HeroScene.tsx` — dodecVerts (~1893 tok)
 
 ## src/components/cart/
 

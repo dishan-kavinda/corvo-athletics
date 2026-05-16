@@ -303,3 +303,23 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 14:36 | CartIcon: bag SVG + crimson badge, CartDrawer: crimson accents | cart/\* | ✓ | 400 |
 | 14:38 | NewsletterForm: crimson form, removed violet | NewsletterForm.tsx | ✓ | 300 |
 | 14:40 | pnpm build — PASS, TypeScript PASS, all 9 routes generated | — | ✓ success | 100 |
+| 23:57 | Session end: 22 writes across 14 files (globals.css, layout.tsx, Button.tsx, Header.tsx, Footer.tsx) | 24 reads | ~46027 tok |
+| 23:58 | Session end: 22 writes across 14 files (globals.css, layout.tsx, Button.tsx, Header.tsx, Footer.tsx) | 24 reads | ~46027 tok |
+| 00:00 | Session end: 22 writes across 14 files (globals.css, layout.tsx, Button.tsx, Header.tsx, Footer.tsx) | 24 reads | ~46027 tok |
+| 00:03 | Created src/components/3d/HeroScene.tsx | — | ~1031 |
+
+## Session: 2026-05-16 00:06
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 00:09 | Created src/components/3d/HeroScene.tsx | — | ~1672 |
+| 00:10 | Session end: 1 writes across 1 files (HeroScene.tsx) | 0 reads | ~1672 tok |
+| 00:13 | Edited src/components/3d/HeroScene.tsx | modified SunCore() | ~565 |
+| 00:13 | Edited src/components/3d/HeroScene.tsx | reduced (-26 lines) | ~224 |
+| 00:13 | Edited src/components/3d/HeroScene.tsx | 8→6 lines | ~130 |
+| 00:13 | Edited src/components/3d/HeroScene.tsx | 9→10 lines | ~88 |
+| 00:14 | Session end: 5 writes across 1 files (HeroScene.tsx) | 0 reads | ~2679 tok |
+| 00:17 | Created src/components/3d/HeroScene.tsx | — | ~1618 |
+| 00:18 | Session end: 6 writes across 1 files (HeroScene.tsx) | 1 reads | ~5803 tok |
+| 00:26 | Created src/components/3d/HeroScene.tsx | — | ~2105 |
+| 00:29 | Created src/components/3d/HeroScene.tsx | — | ~1893 |

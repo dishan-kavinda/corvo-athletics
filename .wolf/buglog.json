@@ -478,6 +478,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-16T11:53:35.298Z"
+    },
+    {
+      "id": "bug-029",
+      "timestamp": "2026-05-16T12:13:12.257Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "17 lines replaced/restructured",
+      "fix": "Rewrote 52→26 lines (17 removed) | Also: intensity={2.2}; luminanceThreshold={0.05}",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-16T12:13:27.198Z"
     }
   ]
 }
