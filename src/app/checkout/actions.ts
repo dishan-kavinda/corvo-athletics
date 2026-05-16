@@ -69,7 +69,18 @@ export async function createCheckoutPaymentIntent(
     const currency = (productsRes.items[0]?.priceData?.currency ?? 'NZD').toLowerCase();
     console.log('[checkout] cart priced', { totalCents, currency });
 
-    console.log(`STRIPE_CALL amount=${totalCents} ccy=${currency} keyPrefix=${(process.env.STRIPE_SECRET_KEY ?? '').slice(0, 7)}`);
+    const rawKey = process.env.STRIPE_SECRET_KEY ?? '';
+    const trimKey = rawKey.trim();
+    console.log(`STRIPE_CALL amt=${totalCents} ccy=${currency} kLen=${rawKey.length} kTrLen=${trimKey.length} pfx=${trimKey.slice(0, 7)}`);
+
+    // sanity-check: can the function reach api.stripe.com at all?
+    try {
+      const sanityRes = await fetch('https://api.stripe.com/v1/charges', { method: 'GET' });
+      console.log(`STRIPE_SANITY status=${sanityRes.status}`); // 401 means network is fine
+    } catch (sanityErr: unknown) {
+      const msg = sanityErr instanceof Error ? `${sanityErr.name}:${sanityErr.message}` : String(sanityErr);
+      console.error(`STRIPE_SANITY_FAIL ${msg.slice(0, 150)}`);
+    }
 
     let intent;
     try {
@@ -86,8 +97,12 @@ export async function createCheckoutPaymentIntent(
         },
       });
     } catch (stripeErr: unknown) {
-      const e = stripeErr as { type?: string; code?: string; statusCode?: number; message?: string; raw?: { message?: string } };
-      console.error(`STRIPE_ERR ${e.type ?? '?'} ${e.code ?? '?'} ${e.statusCode ?? '?'}: ${(e.message ?? e.raw?.message ?? String(stripeErr)).slice(0, 200)}`);
+      const e = stripeErr as { type?: string; code?: string; statusCode?: number; message?: string; cause?: { name?: string; message?: string; code?: string }; raw?: { message?: string } };
+      console.error(`STRIPE_ERR_T ${e.type ?? '?'}`);
+      console.error(`STRIPE_ERR_M ${(e.message ?? '').slice(0, 200)}`);
+      console.error(`STRIPE_ERR_CN ${e.cause?.name ?? '-'}`);
+      console.error(`STRIPE_ERR_CM ${(e.cause?.message ?? '').slice(0, 200)}`);
+      console.error(`STRIPE_ERR_CC ${e.cause?.code ?? '-'}`);
       throw stripeErr;
     }
     console.log(`STRIPE_OK pi=${intent.id} status=${intent.status}`);
