@@ -8,4 +8,5 @@ if (!secretKey) {
 export const stripe = new Stripe(secretKey, {
   apiVersion: '2026-04-22.dahlia',
   typescript: true,
+  httpClient: Stripe.createFetchHttpClient(),
 });
