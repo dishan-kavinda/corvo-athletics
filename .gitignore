@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local claude / openwolf
+.claude/settings.local.json
+.wolf/designqc-captures/
+.wolf/hooks/_session.json
+.wolf/token-ledger.json
+graphify-out/
