@@ -160,11 +160,17 @@ async function createWixOrder(payload: {
   total: number;
   currency: string;
 }): Promise<string> {
-  const adminKey = process.env.WIX_ADMIN_API_KEY;
-  const siteId = process.env.WIX_SITE_ID ?? '7f2bc2ac-a03f-4f5c-8c37-7835ab0b0a29';
-  if (!adminKey) {
+  const rawAdminKey = process.env.WIX_ADMIN_API_KEY;
+  if (!rawAdminKey) {
     throw new Error('WIX_ADMIN_API_KEY not set');
   }
+  // Same defense as src/lib/stripe.ts — strip whitespace + surrounding quotes.
+  // Vercel UI paste can introduce invisible chars (zero-width space, NBSP)
+  // that undici rejects as invalid header content.
+  const adminKey = rawAdminKey.trim().replace(/^["']|["']$/g, '');
+  const rawSiteId = process.env.WIX_SITE_ID ?? '7f2bc2ac-a03f-4f5c-8c37-7835ab0b0a29';
+  const siteId = rawSiteId.trim().replace(/^["']|["']$/g, '');
+  console.log(`WIX_KEY_LEN raw=${rawAdminKey.length} trimmed=${adminKey.length} sidLen=${siteId.length}`);
 
   const body = {
     order: {
