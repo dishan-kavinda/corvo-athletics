@@ -6,8 +6,8 @@ import { Stagger, StaggerItem } from '@/components/motion/Stagger';
 export const metadata = {
   title: 'About',
   description:
-    'Corvo Athletics is a luxury sports brand built for serious athletes. Premium gym apparel, athleisure, and lab-tested supplements — no compromise.',
-  keywords: ['Corvo Athletics', 'luxury gym brand', 'premium athleisure', 'sports brand story'],
+    'Corvo Athletic is a luxury sports brand built for serious athletes. Premium gym apparel, athleisure, and lab-tested supplements — no compromise.',
+  keywords: ['Corvo Athletic', 'luxury gym brand', 'premium athleisure', 'sports brand story'],
   alternates: { canonical: '/about' },
 };
 
@@ -113,7 +113,7 @@ export default function AboutPage() {
                 className="text-base md:text-lg leading-relaxed mb-5"
                 style={{ color: '#838DAA' }}
               >
-                Corvo Athletics was built for one reason: the gear and fuel athletes deserved
+                Corvo Athletic was built for one reason: the gear and fuel athletes deserved
                 didn&apos;t exist. Cheap supplements, generic apparel, hollow promises — we were
                 done with it.
               </p>

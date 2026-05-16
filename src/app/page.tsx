@@ -172,7 +172,7 @@ export default function Home() {
                     color: '#D81829',
                   }}
                 >
-                  Corvo Athletics
+                  Corvo Athletic
                 </span>
               </div>
             </HeroReveal>
@@ -538,7 +538,7 @@ export default function Home() {
                     color: '#47516B',
                   }}
                 >
-                  — Corvo Athletics, Est. New Zealand
+                  — Corvo Athletic, Est. New Zealand
                 </p>
               </footer>
             </blockquote>

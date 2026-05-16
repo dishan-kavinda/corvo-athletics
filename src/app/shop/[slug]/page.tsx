@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps) {
   const imageUrl = product.media?.mainMedia?.image?.url;
   return {
     title: product.name ?? 'Product',
-    description: cleanDesc || `${product.name} — premium gym & athleisure from Corvo Athletics.`,
+    description: cleanDesc || `${product.name} — premium gym & athleisure from Corvo Athletic.`,
     alternates: { canonical: `/shop/${slug}` },
     openGraph: {
       title: product.name ?? 'Product',
@@ -51,7 +51,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     name: product.name,
     description: (product.description ?? '').replace(/<[^>]+>/g, '').slice(0, 500),
     image: mainImage ? [mainImage] : [],
-    brand: { '@type': 'Brand', name: 'Corvo Athletics' },
+    brand: { '@type': 'Brand', name: 'Corvo Athletic' },
     sku: product._id,
     offers: {
       '@type': 'Offer',
@@ -214,7 +214,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   marginBottom: '1rem',
                 }}
               >
-                Corvo Athletics
+                Corvo Athletic
               </p>
             </HeroReveal>
 

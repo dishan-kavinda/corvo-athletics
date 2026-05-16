@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Shop All',
   description:
-    'Shop premium gym apparel, luxury athleisure, sports gear, and supplements from Corvo Athletics. Engineered for athletes who refuse average.',
+    'Shop premium gym apparel, luxury athleisure, sports gear, and supplements from Corvo Athletic. Engineered for athletes who refuse average.',
   keywords: ['gym apparel', 'athleisure', 'luxury sportswear', 'sports gear', 'supplements'],
   alternates: { canonical: '/shop' },
 };
@@ -62,7 +62,7 @@ export default async function ShopPage() {
                 marginBottom: '1rem',
               }}
             >
-              ── Corvo Athletics
+              ── Corvo Athletic
             </p>
           </HeroReveal>
 
@@ -205,7 +205,7 @@ export default async function ShopPage() {
             textUnderlineOffset: '4px',
           }}
         >
-          About Corvo Athletics →
+          About Corvo Athletic →
         </a>
       </section>
     </>

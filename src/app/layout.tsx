@@ -32,13 +32,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.corvoathletic.c
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
-    template: '%s — Corvo Athletics',
+    default: 'Corvo Athletic — Premium Gym, Athleisure & Sports Apparel',
+    template: '%s — Corvo Athletic',
   },
   description:
-    "Corvo Athletics. Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
+    "Corvo Athletic. Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
   keywords: [
-    'Corvo Athletics',
+    'Corvo Athletic',
     'Corvo Athletic',
     'gym',
     'athleisure',
@@ -50,23 +50,23 @@ export const metadata: Metadata = {
     'luxury sportswear',
     'athletic wear',
   ],
-  applicationName: 'Corvo Athletics',
-  authors: [{ name: 'Corvo Athletics' }],
-  creator: 'Corvo Athletics',
-  publisher: 'Corvo Athletics',
+  applicationName: 'Corvo Athletic',
+  authors: [{ name: 'Corvo Athletic' }],
+  creator: 'Corvo Athletic',
+  publisher: 'Corvo Athletic',
   alternates: { canonical: siteUrl },
   openGraph: {
     type: 'website',
     locale: 'en_NZ',
     url: siteUrl,
-    siteName: 'Corvo Athletics',
-    title: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
+    siteName: 'Corvo Athletic',
+    title: 'Corvo Athletic — Premium Gym, Athleisure & Sports Apparel',
     description:
       "Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Corvo Athletics — Premium Gym, Athleisure & Sports Apparel',
+    title: 'Corvo Athletic — Premium Gym, Athleisure & Sports Apparel',
     description:
       "Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
   },
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Corvo Athletics',
+  name: 'Corvo Athletic',
   alternateName: 'Corvo Athletic',
   url: siteUrl,
   description:

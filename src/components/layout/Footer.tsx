@@ -49,7 +49,7 @@ export function Footer() {
                   letterSpacing: '-0.01em',
                 }}
               >
-                ATHLETICS
+                ATHLETIC
               </p>
             </div>
             <div className="max-w-xs">
@@ -138,11 +138,11 @@ export function Footer() {
                 fontWeight: 700,
               }}
             >
-              Corvo Athletics
+              Corvo Athletic
             </span>
           </div>
           <p style={{ fontSize: '11px', color: '#2E3450' }}>
-            &copy; {new Date().getFullYear()} Corvo Athletics. Built for those who don&apos;t quit.
+            &copy; {new Date().getFullYear()} Corvo Athletic. Built for those who don&apos;t quit.
           </p>
         </div>
       </div>

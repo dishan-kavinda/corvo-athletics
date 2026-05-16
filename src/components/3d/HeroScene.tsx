@@ -68,16 +68,15 @@ function PowerCore() {
           varying vec3 vNormal;
           varying vec3 vViewPos;
           void main() {
-            float NdotV = clamp(dot(normalize(vNormal), normalize(vViewPos)), 0.0, 1.0);
-            float pulse = 1.0 + sin(uTime * 1.3) * 0.055;
-            float core  = pow(NdotV, 1.5) * pulse;
-            vec3 edgeCol = vec3(0.18, 0.0,  0.01);
-            vec3 midCol  = vec3(0.86, 0.04, 0.08);
-            vec3 hotCol  = vec3(1.00, 0.82, 0.58);
-            vec3 col = mix(edgeCol, midCol, smoothstep(0.0,  0.42, NdotV));
-                 col = mix(col,     hotCol, smoothstep(0.60, 1.0,  NdotV));
-            col *= (0.28 + core * 2.6);
-            gl_FragColor = vec4(col, 1.0);
+            float NdotV  = clamp(dot(normalize(vNormal), normalize(vViewPos)), 0.0, 1.0);
+            float pulse  = 1.0 + sin(uTime * 1.3) * 0.055;
+            float bright = pow(NdotV, 1.4) * pulse;
+
+            /* Fixed crimson hue — only brightness varies, hue never shifts */
+            vec3 crimson = vec3(0.847, 0.0, 0.035);   /* linear #D81829, B only */
+            float scale  = mix(0.10, 7.5, bright);
+
+            gl_FragColor = vec4(crimson * scale, 1.0);
           }
         `,
       }),
@@ -159,8 +158,8 @@ function DodecCage() {
       <Sparkles count={35} size={0.7} scale={[9, 7, 5]} speed={0.16} color="#CC0000" opacity={0.28} />
       <Sparkles count={14} size={0.5} scale={[6, 4, 4]} speed={0.10} color="#00BDAC" opacity={0.18} />
 
-      <pointLight position={[0, 0, 0]} color="#CC0000" intensity={14} distance={7}  />
-      <pointLight position={[0, 0, 0]} color="#880000" intensity={6}  distance={14} />
+      <pointLight position={[0, 0, 0]} color="#CC0000" intensity={28} distance={9}  />
+      <pointLight position={[0, 0, 0]} color="#880000" intensity={12} distance={18} />
     </>
   );
 }
@@ -178,11 +177,11 @@ export function HeroScene() {
 
       <EffectComposer>
         <Bloom
-          intensity={8}
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.5}
+          intensity={2.0}
+          luminanceThreshold={0.18}
+          luminanceSmoothing={0.88}
           mipmapBlur
-          radius={0.72}
+          radius={0.75}
         />
       </EffectComposer>
     </Canvas>

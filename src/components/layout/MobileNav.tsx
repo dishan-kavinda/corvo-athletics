@@ -161,7 +161,7 @@ export function MobileNav() {
                 fontWeight: 700,
               }}
             >
-              Corvo Athletics
+              Corvo Athletic
             </span>
           </div>
           <p style={{ fontSize: '11px', color: '#2E3450' }}>
