@@ -210,20 +210,43 @@ async function createWixOrder(payload: {
       buyerInfo: {
         email: payload.shipping.email,
       },
+      // Wix Orders v1 IGNORES shippingInfo.shipmentDetails on create — the
+      // address must live in recipientInfo (top-level) and/or
+      // shippingInfo.logistics.shippingDestination. We send both so the
+      // address is queryable from either path. Verified via direct API
+      // probe — see .wolf/cerebrum.md for the schema gotcha.
+      recipientInfo: {
+        address: {
+          addressLine: payload.shipping.addressLine1,
+          addressLine2: payload.shipping.addressLine2,
+          city: payload.shipping.city,
+          postalCode: payload.shipping.postalCode,
+          country: payload.shipping.country,
+          subdivision: payload.shipping.state,
+        },
+        contactDetails: {
+          firstName: payload.shipping.firstName,
+          lastName: payload.shipping.lastName,
+          phone: payload.shipping.phone,
+        },
+      },
       shippingInfo: {
-        shipmentDetails: {
-          address: {
-            addressLine: payload.shipping.addressLine1,
-            addressLine2: payload.shipping.addressLine2,
-            city: payload.shipping.city,
-            postalCode: payload.shipping.postalCode,
-            country: payload.shipping.country,
-            subdivision: payload.shipping.state,
-          },
-          contactDetails: {
-            firstName: payload.shipping.firstName,
-            lastName: payload.shipping.lastName,
-            phone: payload.shipping.phone,
+        title: 'Standard',
+        logistics: {
+          shippingDestination: {
+            address: {
+              addressLine: payload.shipping.addressLine1,
+              addressLine2: payload.shipping.addressLine2,
+              city: payload.shipping.city,
+              postalCode: payload.shipping.postalCode,
+              country: payload.shipping.country,
+              subdivision: payload.shipping.state,
+            },
+            contactDetails: {
+              firstName: payload.shipping.firstName,
+              lastName: payload.shipping.lastName,
+              phone: payload.shipping.phone,
+            },
           },
         },
       },

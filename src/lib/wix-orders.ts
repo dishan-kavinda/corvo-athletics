@@ -31,6 +31,23 @@ interface WixMoney {
   amount?: string;
   formattedAmount?: string;
 }
+interface WixAddress {
+  addressLine?: string;
+  addressLine2?: string;
+  city?: string;
+  postalCode?: string;
+  country?: string;
+  subdivision?: string;
+}
+interface WixContact {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+}
+interface WixDestination {
+  address?: WixAddress;
+  contactDetails?: WixContact;
+}
 interface WixOrderRaw {
   id?: string;
   number?: string;
@@ -49,18 +66,13 @@ interface WixOrderRaw {
     total?: WixMoney;
     totalPrice?: WixMoney;
   };
+  // Wix stores the shipping address on either of these paths depending on
+  // how the order was created. recipientInfo is the modern path; the older
+  // shippingInfo.logistics.shippingDestination is a fallback.
+  recipientInfo?: WixDestination;
   shippingInfo?: {
-    shipmentDetails?: {
-      address?: {
-        addressLine?: string;
-        addressLine2?: string;
-        city?: string;
-        postalCode?: string;
-        country?: string;
-        subdivision?: string;
-      };
-      contactDetails?: { firstName?: string; lastName?: string };
-    };
+    title?: string;
+    logistics?: { shippingDestination?: WixDestination };
   };
 }
 
@@ -70,12 +82,19 @@ function fmtFallback(m: WixMoney | undefined, currency: string): string {
   return '—';
 }
 
+function extractDestination(order: WixOrderRaw): WixDestination | null {
+  if (order.recipientInfo?.address) return order.recipientInfo;
+  const fromLogistics = order.shippingInfo?.logistics?.shippingDestination;
+  if (fromLogistics?.address) return fromLogistics;
+  return null;
+}
+
 function normalize(order: WixOrderRaw): WixOrderSummary {
   const currency = order.currency ?? 'NZD';
   const ps = order.priceSummary;
-  const ship = order.shippingInfo?.shipmentDetails;
-  const addr = ship?.address;
-  const contact = ship?.contactDetails;
+  const dest = extractDestination(order);
+  const addr = dest?.address;
+  const contact = dest?.contactDetails;
 
   return {
     orderId: order.id ?? '',
@@ -94,7 +113,8 @@ function normalize(order: WixOrderRaw): WixOrderSummary {
     currency,
     shippingAddress: addr
       ? {
-          fullName: `${contact?.firstName ?? ''} ${contact?.lastName ?? ''}`.trim() || 'Customer',
+          fullName:
+            `${contact?.firstName ?? ''} ${contact?.lastName ?? ''}`.trim() || 'Customer',
           addressLine1: addr.addressLine ?? '',
           addressLine2: addr.addressLine2 || undefined,
           city: addr.city ?? '',
@@ -110,22 +130,14 @@ export async function getWixOrder(orderId: string): Promise<WixOrderSummary | nu
   if (!orderId || orderId.startsWith('stripe_')) return null;
 
   const rawAdminKey = process.env.WIX_ADMIN_API_KEY;
-  if (!rawAdminKey) {
-    console.error('GETORDER_NO_KEY');
-    return null;
-  }
+  if (!rawAdminKey) return null;
   const adminKey = rawAdminKey.trim().replace(/^["']|["']$/g, '');
   const rawSiteId = process.env.WIX_SITE_ID ?? DEFAULT_SITE_ID;
   const siteId = rawSiteId.trim().replace(/^["']|["']$/g, '');
 
-  const url = `${WIX_API_BASE}/ecom/v1/orders/${encodeURIComponent(orderId)}`;
-  console.log(
-    `GETORDER_CALL oid=${orderId.slice(0, 8)} kLen=${adminKey.length} sLen=${siteId.length} sPfx=${siteId.slice(0, 8)}`,
-  );
-
   let res: Response;
   try {
-    res = await fetch(url, {
+    res = await fetch(`${WIX_API_BASE}/ecom/v1/orders/${encodeURIComponent(orderId)}`, {
       headers: {
         Authorization: adminKey,
         'wix-site-id': siteId,
@@ -133,31 +145,17 @@ export async function getWixOrder(orderId: string): Promise<WixOrderSummary | nu
       cache: 'no-store',
     });
   } catch (err) {
-    const msg = err instanceof Error ? `${err.name}:${err.message}` : String(err);
-    console.error(`GETORDER_NETERR ${msg.slice(0, 150)}`);
+    console.error('[wix-orders] network failure:', err);
     return null;
   }
 
   if (!res.ok) {
     const text = await res.text().catch(() => '');
-    // Vercel runtime_logs preview window is ~28 chars. Split the body across
-    // queryable lines so each can be inspected via MCP query=... probes.
-    console.error(`GETORDER_S s=${res.status}`);
-    console.error(`GETORDER_B1 ${text.slice(0, 30)}`);
-    console.error(`GETORDER_B2 ${text.slice(30, 60)}`);
-    console.error(`GETORDER_B3 ${text.slice(60, 90)}`);
-    console.error(`GETORDER_B4 ${text.slice(90, 120)}`);
-    console.error(`GETORDER_B5 ${text.slice(120, 150)}`);
-    console.error(`GETORDER_B6 ${text.slice(150, 180)}`);
-    console.error(`GETORDER_B7 ${text.slice(180, 210)}`);
+    console.error(`[wix-orders] fetch ${res.status}: ${text.slice(0, 300)}`);
     return null;
   }
 
   const data = (await res.json()) as { order?: WixOrderRaw };
-  if (!data.order) {
-    console.error('GETORDER_NO_ORDER_IN_RESPONSE');
-    return null;
-  }
-  console.log(`GETORDER_OK num=${data.order.number}`);
+  if (!data.order) return null;
   return normalize(data.order);
 }
