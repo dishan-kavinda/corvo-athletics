@@ -39,9 +39,9 @@
     {
       "id": "bug-003",
       "timestamp": "2026-05-13T15:00:00Z",
-      "error_message": "Cart add silently succeeds (200 OK) but lineItems=0 \u2014 cart stays empty.",
+      "error_message": "Cart add silently succeeds (200 OK) but lineItems=0 — cart stays empty.",
       "file": "src/components/cart/CartProvider.tsx",
-      "root_cause": "Used wrong WIX_STORES_APP_ID constant `1380b703-ce81-ff05-f115-39571d94dfcd` (outdated). Wix silently ignores requests with unknown appIds \u2014 no error thrown.",
+      "root_cause": "Used wrong WIX_STORES_APP_ID constant `1380b703-ce81-ff05-f115-39571d94dfcd` (outdated). Wix silently ignores requests with unknown appIds — no error thrown.",
       "fix": "Use correct app ID `215238eb-22a5-4c36-9e7b-e7c08025e04e` (confirmed from CatalogReference JSDoc in @wix/auto_sdk_ecom_current-cart types). Also for products with manageVariants: include `options.variantId` in catalogReference (not options.options name/value map).",
       "tags": [
         "wix",
@@ -56,7 +56,7 @@
     {
       "id": "bug-004",
       "timestamp": "2026-05-13T16:00:00Z",
-      "error_message": "Mobile nav and cart drawer panels appear transparent on phone \u2014 menu items visible but no panel background.",
+      "error_message": "Mobile nav and cart drawer panels appear transparent on phone — menu items visible but no panel background.",
       "file": "src/components/layout/MobileNav.tsx, src/components/cart/CartDrawer.tsx",
       "root_cause": "Both panels rendered inside <Header> which has position:sticky + z-index:30 creating a stacking context. Even with z-index:60+ on the aside, page content paints over because z-index only competes within the same stacking context. Tailwind class `bg-onyx` was being correctly applied but visually trapped.",
       "fix": "Use `createPortal(panel, document.body)` to render panels at document root, escaping all parent stacking contexts. Also moved critical styles inline (backgroundColor, position, z-index, borders) to avoid CSS load order issues.",
@@ -75,10 +75,10 @@
     {
       "id": "bug-005",
       "timestamp": "2026-05-14T08:00:00Z",
-      "error_message": "Wix-hosted checkout redirect to https://www.corvoathletic.com/_api/iam/... \u2192 'site can't be reached'.",
+      "error_message": "Wix-hosted checkout redirect to https://www.corvoathletic.com/_api/iam/... → 'site can't be reached'.",
       "file": "(architecture)",
-      "root_cause": "After DNS swap (www\u2192Vercel, root\u2192Wix), Wix's checkout flow generates URLs at the site's primary domain (corvoathletic.com root), which auto 301-redirects to www. www now serves Vercel which doesn't have Wix's /_api or /__ecom paths.",
-      "fix": "Architectural pivot to Option B (Stripe custom checkout). Wix-hosted checkout fundamentally incompatible with the www\u2192Vercel setup we want. Built /checkout page with Stripe PaymentElement, server actions for PaymentIntent + Wix Order creation.",
+      "root_cause": "After DNS swap (www→Vercel, root→Wix), Wix's checkout flow generates URLs at the site's primary domain (corvoathletic.com root), which auto 301-redirects to www. www now serves Vercel which doesn't have Wix's /_api or /__ecom paths.",
+      "fix": "Architectural pivot to Option B (Stripe custom checkout). Wix-hosted checkout fundamentally incompatible with the www→Vercel setup we want. Built /checkout page with Stripe PaymentElement, server actions for PaymentIntent + Wix Order creation.",
       "tags": [
         "wix",
         "dns",
@@ -110,10 +110,10 @@
     {
       "id": "bug-007",
       "timestamp": "2026-05-14T22:00:00Z",
-      "error_message": "Couldn't start checkout \u2014 'An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details.' Underlying: StripeConnectionError thrown by stripe.paymentIntents.create on every checkout attempt.",
+      "error_message": "Couldn't start checkout — 'An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details.' Underlying: StripeConnectionError thrown by stripe.paymentIntents.create on every checkout attempt.",
       "file": "src/lib/stripe.ts + src/app/checkout/actions.ts + (Vercel env var paste)",
-      "root_cause": "Chain of THREE separate issues under one opaque error: (1) Vercel 'Redeploy' reuses the cached build artifact \u2014 newly-added env vars never reached the function bundle. (2) Even after clean rebuild, Stripe SDK kept throwing StripeConnectionError \u2014 Next.js production server-action boundary masked it as 'An error occurred with...'. (3) ROOT CAUSE: the value stored in Vercel's STRIPE_SECRET_KEY had a different byte-length than the clean key (107 chars for sk_test_*). Paste from clipboard introduced invisible characters (zero-width space U+200B / non-breaking space U+00A0 / soft hyphen U+00AD). undici (Node 24 fetch impl) rejects HTTP headers containing such chars and Stripe SDK wraps the resulting TypeError as ConnectionError WITHOUT an HTTP response \u2014 indistinguishable from genuine network failure. .trim() does NOT strip these characters.",
-      "fix": "Three layers: (a) ALWAYS force a clean rebuild via `git commit --allow-empty -m '...'` after changing env vars \u2014 Vercel's 'Redeploy' button reuses the cached build. (b) src/lib/stripe.ts: defensively `rawKey.trim().replace(/^[\"']|[\"']$/g, '')` AND `httpClient: Stripe.createFetchHttpClient()` (Stripe's recommendation for serverless / Node 24). (c) Delete the corrupted env var in Vercel UI, re-paste from a fresh copy in Stripe dashboard. Verification recipe: log `kLen=${rawKey.length} kTrLen=${trimKey.length}` \u2014 clean sk_test_ is exactly 107 chars; ALSO run a sanity `fetch('https://api.stripe.com/v1/charges')` from the same function to rule out genuine network issues (expect 401 = reachable). Resolved 2026-05-16; first successful PaymentIntent created at 06:26 UTC.",
+      "root_cause": "Chain of THREE separate issues under one opaque error: (1) Vercel 'Redeploy' reuses the cached build artifact — newly-added env vars never reached the function bundle. (2) Even after clean rebuild, Stripe SDK kept throwing StripeConnectionError — Next.js production server-action boundary masked it as 'An error occurred with...'. (3) ROOT CAUSE: the value stored in Vercel's STRIPE_SECRET_KEY had a different byte-length than the clean key (107 chars for sk_test_*). Paste from clipboard introduced invisible characters (zero-width space U+200B / non-breaking space U+00A0 / soft hyphen U+00AD). undici (Node 24 fetch impl) rejects HTTP headers containing such chars and Stripe SDK wraps the resulting TypeError as ConnectionError WITHOUT an HTTP response — indistinguishable from genuine network failure. .trim() does NOT strip these characters.",
+      "fix": "Three layers: (a) ALWAYS force a clean rebuild via `git commit --allow-empty -m '...'` after changing env vars — Vercel's 'Redeploy' button reuses the cached build. (b) src/lib/stripe.ts: defensively `rawKey.trim().replace(/^[\"']|[\"']$/g, '')` AND `httpClient: Stripe.createFetchHttpClient()` (Stripe's recommendation for serverless / Node 24). (c) Delete the corrupted env var in Vercel UI, re-paste from a fresh copy in Stripe dashboard. Verification recipe: log `kLen=${rawKey.length} kTrLen=${trimKey.length}` — clean sk_test_ is exactly 107 chars; ALSO run a sanity `fetch('https://api.stripe.com/v1/charges')` from the same function to rule out genuine network issues (expect 401 = reachable). Resolved 2026-05-16; first successful PaymentIntent created at 06:26 UTC.",
       "tags": [
         "vercel",
         "env-vars",
@@ -134,7 +134,7 @@
       "timestamp": "2026-05-14T10:36:27.508Z",
       "error_message": "Missing error handling in function",
       "file": "src/app/checkout/actions.ts",
-      "root_cause": "Code path had no error handling \u2014 exceptions would propagate uncaught",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
       "fix": "Added try/catch block",
       "tags": [
         "auto-detected",
@@ -167,7 +167,7 @@
       "error_message": "Significant refactor of ",
       "file": "src/app/checkout/actions.ts",
       "root_cause": "3 lines replaced/restructured",
-      "fix": "Rewrote 21\u219236 lines (3 removed)",
+      "fix": "Rewrote 21→36 lines (3 removed)",
       "tags": [
         "auto-detected",
         "refactor",
@@ -183,7 +183,7 @@
       "error_message": "Significant refactor of ",
       "file": "src/app/checkout/actions.ts",
       "root_cause": "34 lines replaced/restructured",
-      "fix": "Rewrote 92\u219252 lines (34 removed)",
+      "fix": "Rewrote 92→52 lines (34 removed)",
       "tags": [
         "auto-detected",
         "refactor",
@@ -199,7 +199,7 @@
       "error_message": "Significant refactor of ",
       "file": "src/app/checkout/actions.ts",
       "root_cause": "15 lines replaced/restructured",
-      "fix": "Rewrote 91\u2192158 lines (15 removed)",
+      "fix": "Rewrote 91→158 lines (15 removed)",
       "tags": [
         "auto-detected",
         "refactor",
@@ -252,11 +252,75 @@
     },
     {
       "id": "bug-015",
+      "timestamp": "2026-05-16T07:50:33.949Z",
+      "error_message": "Wrong reference: HeroScene should be HeroSceneClient",
+      "file": "src/app/page.tsx",
+      "root_cause": "Used \"HeroScene\" instead of \"HeroSceneClient\"",
+      "fix": "Changed HeroScene → HeroSceneClient",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T07:50:33.949Z"
+    },
+    {
+      "id": "bug-016",
+      "timestamp": "2026-05-16T07:59:15.710Z",
+      "error_message": "CSS fix: md",
+      "file": "src/app/page.tsx",
+      "root_cause": "md: hidden opacity-25\"> → hidden opacity-20\">",
+      "fix": "Changed md: hidden opacity-25\"> → hidden opacity-20\">",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-16T07:59:25.039Z"
+    },
+    {
+      "id": "bug-017",
+      "timestamp": "2026-05-16T07:59:19.580Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/page.tsx",
+      "root_cause": "Had \"font-display uppercase leading-[0.84] tracking-ti",
+      "fix": "Changed to \"font-display uppercase leading-[1] tracking-tight",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T07:59:19.580Z"
+    },
+    {
+      "id": "bug-018",
+      "timestamp": "2026-05-16T08:02:54.741Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/page.tsx",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 24→70 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-16T08:02:54.741Z"
+    },
+    {
+      "id": "bug-019",
       "timestamp": "2026-05-16T07:36:18.542Z",
       "error_message": "Significant refactor of ",
       "file": "src/lib/wix-orders.ts",
       "root_cause": "5 lines replaced/restructured",
-      "fix": "Rewrote 33\u219255 lines (5 removed)",
+      "fix": "Rewrote 33→55 lines (5 removed)",
       "tags": [
         "auto-detected",
         "refactor",
@@ -267,12 +331,12 @@
       "last_seen": "2026-05-16T07:36:18.542Z"
     },
     {
-      "id": "bug-016",
+      "id": "bug-020",
       "timestamp": "2026-05-16T07:55:18.710Z",
       "error_message": "Significant refactor of ",
       "file": "src/app/checkout/actions.ts",
       "root_cause": "2 lines replaced/restructured",
-      "fix": "Rewrote 6\u21928 lines (2 removed)",
+      "fix": "Rewrote 6→8 lines (2 removed)",
       "tags": [
         "auto-detected",
         "refactor",
@@ -283,12 +347,12 @@
       "last_seen": "2026-05-16T07:55:18.710Z"
     },
     {
-      "id": "bug-017",
+      "id": "bug-021",
       "timestamp": "2026-05-16T07:50:00Z",
-      "error_message": "Real /thank-you rendered generic 'Train Harder' fallback for every successful checkout. Log showed WIX_OK id=undefined num=10005 / num=10006. Customer redirected to /thank-you?orderId=stripe_<pi_id> which page correctly treats as synthetic fallback.",
+      "error_message": "Real /thank-you rendered generic fallback for every successful checkout. Wix order id was always undefined.",
       "file": "src/app/checkout/actions.ts (createWixOrder POST response parsing)",
-      "root_cause": "Wix eCom Orders v1 returns the order identifier as `id` in the POST /ecom/v1/orders response, NOT `_id`. We read `_id` (which is the convention for Wix Stores Products and most other Wix Headless APIs). So `data.order?._id` was always undefined, the function returned the stripe_<pi_id> fallback, and /thank-you correctly identified that as a non-Wix synthetic ID and skipped the order fetch.",
-      "fix": "Use `data.order?.id ?? data.order?._id` defensively. Verified by subsequent checkout - order #10006 redirected with real Wix UUID bcb0e765-67b8-43c8-b890-f9e7f80d0792 and /thank-you rendered full details + SHIPPING TO block.",
+      "root_cause": "Wix eCom Orders v1 returns order identifier as `id`, NOT `_id`. Code read `_id` which was always undefined, causing synthetic fallback ID.",
+      "fix": "Use `data.order?.id ?? data.order?._id` defensively. Order #10006 verified with real Wix UUID.",
       "tags": [
         "wix",
         "ecom",

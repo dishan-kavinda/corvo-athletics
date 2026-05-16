@@ -145,26 +145,12 @@ End-to-end checkout now fully working: Stripe captures payment → server action
 |------|--------|---------|---------|--------|
 | 06:54 | Resolved Wix order sync end-to-end (commits 8fcde03, 780a4b8, bdf5269, c73dcb1) | src/app/checkout/actions.ts | order #10002+ now landing in Wix Sales | ~2000 |
 | 18:58 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
-| 19:00 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
-| 19:04 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
-| 19:06 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
-| 19:24 | Session end: 10 writes across 2 files (actions.ts, stripe.ts) | 10 reads | ~8247 tok |
 | 19:27 | Created src/lib/wix-orders.ts | — | ~1158 |
 | 19:27 | Created src/app/thank-you/page.tsx | — | ~1601 |
-| 19:28 | Session end: 12 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11006 tok |
-| 19:30 | Session end: 12 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11006 tok |
 | 19:36 | Edited src/lib/wix-orders.ts | modified getWixOrder() | ~570 |
-| 19:37 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
-| 19:38 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
-| 19:40 | Session end: 13 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~11576 tok |
 | 19:45 | Edited src/app/checkout/actions.ts | expanded (+23 lines) | ~464 |
 | 19:45 | Created src/lib/wix-orders.ts | — | ~1343 |
-| 19:46 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
-| 19:47 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
-| 19:48 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
-| 19:50 | Session end: 15 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14349 tok |
 | 19:55 | Edited src/app/checkout/actions.ts | 6→8 lines | ~126 |
-| 19:57 | Session end: 16 writes across 4 files (actions.ts, stripe.ts, wix-orders.ts, page.tsx) | 10 reads | ~14475 tok |
 
 ## 2026-05-16 (later) — /thank-you order details COMPLETE ✅
 
@@ -182,3 +168,71 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 | 19:55 | /thank-you order details + address block fully working end-to-end | actions.ts, wix-orders.ts, thank-you/page.tsx | feature shipped, learnings logged in cerebrum bug-014 + bug-017 | ~3000 |
+| 19:37 | designqc: captured 6 screenshots (154KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 19:44 | Created src/app/globals.css | — | ~536 |
+| 19:44 | Created src/providers/ThemeProvider.tsx | — | ~97 |
+| 19:44 | Created src/components/ui/ThemeToggle.tsx | — | ~375 |
+| 19:44 | Created src/components/ui/MarqueeStrip.tsx | — | ~329 |
+| 19:44 | Created src/components/ui/TiltCard.tsx | — | ~366 |
+| 19:45 | Edited tsconfig.json | 4→5 lines | ~30 |
+| 19:45 | Created src/components/3d/HeroScene.tsx | — | ~753 |
+| 19:45 | Created src/app/layout.tsx | — | ~917 |
+| 19:45 | Created src/components/layout/Header.tsx | — | ~576 |
+| 19:45 | Created src/components/ui/Button.tsx | — | ~428 |
+| 19:45 | Created src/components/ui/ProductCard.tsx | — | ~512 |
+| 19:46 | Created src/app/page.tsx | — | ~3425 |
+| 19:50 | designqc: captured 6 screenshots (220KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 19:50 | Created src/components/3d/HeroSceneClient.tsx | — | ~77 |
+| 19:50 | Edited src/app/page.tsx | 13→8 lines | ~134 |
+| 19:50 | Edited src/app/page.tsx | inline fix | ~6 |
+| 19:51 | designqc: captured 6 screenshots (251KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+
+## 2026-05-16 — UI overhaul: 3D + light mode + luxury redesign
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| session | Installed three@0.184, @react-three/fiber@9.6.1, next-themes@0.4.6, @types/three | package.json | ok |
+| session | Added CSS theme vars (--page-bg, --surface, --border, --muted) + @keyframes for marquee/shimmer/float | globals.css | dark+light mode foundation |
+| session | Created ThemeProvider wrapping next-themes with defaultTheme=dark | src/providers/ThemeProvider.tsx | light/dark toggle |
+| session | Created HeroScene (R3F): rotating icosahedron wireframe + particle field, mouse parallax | src/components/3d/HeroScene.tsx | WebGL 3D hero |
+| session | Created HeroSceneClient (client wrapper for ssr:false dynamic import) | src/components/3d/HeroSceneClient.tsx | fixes ssr:false in Server Component error |
+| session | Created ThemeToggle (sun/moon SVG, next-themes useTheme) | src/components/ui/ThemeToggle.tsx | theme switcher |
+| session | Created MarqueeStrip (CSS animation, alternating gold/muted text) | src/components/ui/MarqueeStrip.tsx | scrolling brand words |
+| session | Created TiltCard (Framer Motion useMotionValue + useSpring for 3D perspective tilt) | src/components/ui/TiltCard.tsx | 3D card hover effect |
+| session | Redesigned homepage: hero + marquee + stats + pillar cards + reverse marquee + CTA | src/app/page.tsx | complete overhaul |
+| session | Updated Header: uses CSS vars for theme-aware bg, added ThemeToggle | src/components/layout/Header.tsx | light/dark aware |
+| session | Updated ProductCard: TiltCard wrapper + rounded-lg + CSS var border/bg | src/components/ui/ProductCard.tsx | 3D tilt on hover |
+| session | Updated Button: gold variant gets glow shadow on hover | src/components/ui/Button.tsx | premium feel |
+| session | Added @types/three to tsconfig.json compilerOptions.types | tsconfig.json | R3F TypeScript support |
+| 19:52 | Session end: 15 writes across 13 files (globals.css, ThemeProvider.tsx, ThemeToggle.tsx, MarqueeStrip.tsx, TiltCard.tsx) | 9 reads | ~8561 tok |
+| 19:58 | Created src/components/3d/HeroScene.tsx | — | ~731 |
+| 19:59 | Created src/app/globals.css | — | ~762 |
+| 19:59 | Edited src/app/page.tsx | expanded (+15 lines) | ~263 |
+| 19:59 | Edited src/app/page.tsx | "font-display uppercase le" → "font-display uppercase le" | ~19 |
+| 19:59 | Edited src/app/page.tsx | CSS: border, boxShadow | ~88 |
+| 19:59 | Edited src/app/page.tsx | CSS: border, boxShadow | ~93 |
+| 19:59 | designqc: captured 6 screenshots (181KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 20:00 | Edited src/components/3d/HeroScene.tsx | 12→12 lines | ~77 |
+| 20:00 | Edited src/components/3d/HeroScene.tsx | 7→7 lines | ~121 |
+| 20:01 | designqc: captured 6 screenshots (183KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 20:02 | Created src/components/3d/HeroScene.tsx | — | ~419 |
+| 20:02 | Edited src/app/page.tsx | expanded (+46 lines) | ~712 |
+| 20:03 | designqc: captured 6 screenshots (184KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+
+## 2026-05-16 — Design iteration: orb + lighting polish
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| session | Replaced Three.js wireframe icosahedron with CSS gradient gold orb (studio-lit look via radial-gradient, specular highlight div, rim light div) | page.tsx, HeroScene.tsx | premium sphere, no cheap cage |
+| session | HeroScene now particles-only (removed GoldenSphere mesh — Three.js MeshPhong without env maps produces muddy brown, not gold) | HeroScene.tsx | clean separation |
+| session | Fixed hero h1 leading: 0.84 → 1 (more breathing room between FORGE/YOUR/EDGE) | page.tsx | premium spacing |
+| session | Improved light mode: --page-bg #FAF7F2 (warm ivory), --card-shadow for cards, --muted warmer, film grain noise overlay | globals.css | dramatic light/dark contrast |
+| 20:04 | Session end: 25 writes across 13 files (globals.css, ThemeProvider.tsx, ThemeToggle.tsx, MarqueeStrip.tsx, TiltCard.tsx) | 10 reads | ~15992 tok |
+| 20:06 | Edited .gitignore | expanded (+6 lines) | ~46 |
+| 20:06 | Session end: 26 writes across 14 files (globals.css, ThemeProvider.tsx, ThemeToggle.tsx, MarqueeStrip.tsx, TiltCard.tsx) | 11 reads | ~16041 tok |
+| 20:07 | Edited .gitignore | 5→6 lines | ~38 |
+
+## Session: 2026-05-16 20:11
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
