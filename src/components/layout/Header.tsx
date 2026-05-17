@@ -8,8 +8,8 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 const navItems = [
   { label: 'Shop All', href: '/shop' },
-  { label: 'Training', href: '/shop/apparel' },
-  { label: 'Supplements', href: '/shop/supplements' },
+  { label: 'Training', href: '/shop' },
+  { label: 'Supplements', href: '/shop' },
   { label: 'About', href: '/about' },
 ];
 

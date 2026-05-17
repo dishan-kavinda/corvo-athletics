@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
+import { MarqueeStrip } from '@/components/ui/MarqueeStrip';
 
 export const metadata = {
   title: 'About',
@@ -133,33 +134,7 @@ export default function AboutPage() {
         className="overflow-hidden py-[0.9rem]"
         style={{ background: '#D81829' }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '3rem',
-            whiteSpace: 'nowrap',
-            animation: 'marquee 24s linear infinite',
-            width: 'max-content',
-          }}
-        >
-          {Array.from({ length: 12 }, (_, i) => (
-            <span
-              key={i}
-              style={{
-                fontFamily: 'var(--font-rajdhani)',
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.42em',
-                textTransform: 'uppercase',
-                color: i % 2 === 0 ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.35)',
-                flexShrink: 0,
-              }}
-            >
-              {i % 2 === 0 ? 'NO COMPROMISE' : '✦'}
-            </span>
-          ))}
-        </div>
+        <MarqueeStrip light />
       </div>
 
       {/* ── Pillars ──────────────────────────────────── */}

@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-17T00:28:12.000Z
-> Files: 21 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-17T01:02:03.949Z
+> Files: 26 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -16,12 +16,12 @@
 ## src/app/
 
 - `globals.css` — Styles: 19 rules, 52 vars (~1584 tok)
-- `layout.tsx` — anton (~965 tok)
-- `page.tsx` — categories (~8749 tok)
+- `layout.tsx` — anton (~955 tok)
+- `page.tsx` — categories (~8734 tok)
 
 ## src/app/about/
 
-- `page.tsx` — metadata (~3123 tok)
+- `page.tsx` — metadata (~2910 tok)
 
 ## src/app/account/
 
@@ -29,7 +29,20 @@
 
 ## src/app/checkout/
 
-- `CheckoutForm.tsx` — initialShipping — renders form (~4706 tok)
+- `actions.ts` — Exports CreatePaymentIntentResult, createCheckoutPaymentIntent, CompleteOrderInput, CompleteOrderRes (~3020 tok)
+- `CheckoutForm.tsx` — initialShipping — renders form (~4831 tok)
+
+## src/app/contact/
+
+- `page.tsx` — ContactPage (~32 tok)
+
+## src/app/returns/
+
+- `page.tsx` — ReturnsPage (~32 tok)
+
+## src/app/shipping/
+
+- `page.tsx` — ShippingPage (~32 tok)
 
 ## src/app/shop/
 
@@ -52,12 +65,13 @@
 - `AddToCartButton.tsx` — AddToCartButton (~236 tok)
 - `CartDrawer.tsx` — CartDrawer (~2575 tok)
 - `CartIcon.tsx` — CartIcon (~500 tok)
+- `CartProvider.tsx` — WIX_STORES_APP_ID (~1631 tok)
 
 ## src/components/layout/
 
 - `Footer.tsx` — footerLinks (~1433 tok)
-- `Header.tsx` — navItems (~1480 tok)
-- `MobileNav.tsx` — navItems (~1763 tok)
+- `Header.tsx` — navItems (~1225 tok)
+- `MobileNav.tsx` — navItems (~1757 tok)
 
 ## src/components/motion/
 

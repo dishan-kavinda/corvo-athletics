@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     "Corvo Athletic. Luxury gym apparel, premium athleisure, and lab-tested supplements. Engineered for athletes who don't accept average.",
   keywords: [
     'Corvo Athletic',
-    'Corvo Athletic',
     'gym',
     'athleisure',
     'luxury',

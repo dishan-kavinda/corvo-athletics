@@ -6,8 +6,8 @@ import { createPortal } from 'react-dom';
 
 const navItems = [
   { label: 'Shop All', href: '/shop', num: '01' },
-  { label: 'Training', href: '/shop/apparel', num: '02' },
-  { label: 'Supplements', href: '/shop/supplements', num: '03' },
+  { label: 'Training', href: '/shop', num: '02' },
+  { label: 'Supplements', href: '/shop', num: '03' },
   { label: 'About', href: '/about', num: '04' },
   { label: 'Account', href: '/account', num: '05' },
 ];

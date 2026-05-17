@@ -34,7 +34,6 @@ const SHIPPING_FLAT_NZD = 0; // free shipping for v1; refine via Wix shipping AP
 
 export async function createCheckoutPaymentIntent(
   lines: CartLineItemIn[],
-  email: string,
 ): Promise<CreatePaymentIntentResult> {
   if (!lines.length) throw new Error('Cart is empty');
 
@@ -59,10 +58,12 @@ export async function createCheckoutPaymentIntent(
   const totalCents = subtotalCents + Math.round(SHIPPING_FLAT_NZD * 100);
   const currency = (productsRes.items[0]?.priceData?.currency ?? 'NZD').toLowerCase();
 
+  // receipt_email is intentionally omitted — Stripe uses billing_details.email
+  // (provided in confirmPayment) for automatic receipts, so we never send
+  // a receipt to the wrong address before the user fills in the form.
   const intent = await stripe.paymentIntents.create({
     amount: totalCents,
     currency,
-    receipt_email: email,
     automatic_payment_methods: { enabled: true },
     metadata: {
       cart_line_count: String(lines.length),

@@ -127,6 +127,7 @@ function CheckoutInner({
   const stripe     = useStripe();
   const elements   = useElements();
   const router     = useRouter();
+  const { clearCart } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [err, setErr]               = useState<string | null>(null);
 
@@ -180,6 +181,7 @@ function CheckoutInner({
             state:        shipping.state || undefined,
           },
         });
+        await clearCart();
         router.push(`/thank-you?orderId=${encodeURIComponent(result.orderId)}`);
       }
     } catch (e: unknown) {
@@ -262,7 +264,7 @@ function CheckoutInner({
 }
 
 export function CheckoutForm() {
-  const { cart, itemCount } = useCart();
+  const { cart, itemCount, cartLoading } = useCart();
   const [intent, setIntent]       = useState<CreatePaymentIntentResult | null>(null);
   const [shipping, setShipping]   = useState<ShippingForm>(initialShipping);
   const [initError, setInitError] = useState<string | null>(null);
@@ -283,11 +285,25 @@ export function CheckoutForm() {
 
   useEffect(() => {
     if (!cartLines.length || intent) return;
-    const guestEmail = shipping.email || 'guest@example.com';
-    createCheckoutPaymentIntent(cartLines, guestEmail)
+    createCheckoutPaymentIntent(cartLines)
       .then(setIntent)
       .catch((e: unknown) => setInitError(e instanceof Error ? e.message : String(e)));
-  }, [cartLines, intent, shipping.email]);
+  }, [cartLines, intent]);
+
+  /* ── Cart still loading from server ── */
+  if (cartLoading) {
+    return (
+      <Section className="min-h-[60vh] flex items-center">
+        <Container>
+          <div className="text-center">
+            <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: 'var(--muted)' }}>
+              Loading…
+            </p>
+          </div>
+        </Container>
+      </Section>
+    );
+  }
 
   /* ── Empty cart ── */
   if (itemCount === 0) {
@@ -347,7 +363,7 @@ export function CheckoutForm() {
       theme: 'night',
       variables: {
         colorPrimary:    '#D81829',
-        colorBackground: 'var(--surface-elevated, #131825)',
+        colorBackground: '#131825',
         colorText:       '#E8ECF4',
         colorDanger:     '#FF6070',
         fontFamily:      'var(--font-rajdhani), sans-serif',

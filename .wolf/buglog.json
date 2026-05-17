@@ -574,6 +574,86 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-16T16:15:25.746Z"
+    },
+    {
+      "id": "bug-035",
+      "timestamp": "2026-05-17T01:00:20.065Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/components/cart/CartProvider.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-17T01:00:20.065Z"
+    },
+    {
+      "id": "bug-036",
+      "timestamp": "2026-05-17T01:00:59.152Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/checkout/CheckoutForm.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 30→44 lines (4 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-17T01:00:59.152Z"
+    },
+    {
+      "id": "bug-037",
+      "timestamp": "2026-05-17T01:01:14.443Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/checkout/CheckoutForm.tsx",
+      "root_cause": "Had 'var(--surface-elevated, #131825)'",
+      "fix": "Changed to '#131825'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-17T01:01:14.443Z"
+    },
+    {
+      "id": "bug-038",
+      "timestamp": "2026-05-17T01:01:38.782Z",
+      "error_message": "CSS fix: label",
+      "file": "src/app/page.tsx",
+      "root_cause": "label: 'Lifestyle', sub: 'Athleisure Collection', href: '/shop',            shade: 'rgba(0,189,172,0.04)' → 'Lifestyle', sub: 'Athleisure Collection', href: '/shop', shade: 'rgba(0,189,172,0.04)'",
+      "fix": "Changed label: 'Lifestyle', sub: 'Athleisure Collection', href: '/shop',            shade: 'rgba(0,189,172,0.04)' → 'Lifestyle', sub: 'Athleisure Collection', href: '/shop', shade: 'rgba(0,189,172,0.04)'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-17T01:01:38.782Z"
+    },
+    {
+      "id": "bug-039",
+      "timestamp": "2026-05-17T01:01:53.578Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/about/page.tsx",
+      "root_cause": "23 lines replaced/restructured",
+      "fix": "Rewrote 33→7 lines (23 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-17T01:01:53.578Z"
     }
   ]
 }

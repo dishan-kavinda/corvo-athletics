@@ -9,10 +9,10 @@ import { NewsletterForm } from '@/components/ui/NewsletterForm';
 /* ── Data ─────────────────────────────────────────── */
 
 const categories = [
-  { label: 'Training', sub: 'Performance Apparel', href: '/shop/apparel',      shade: 'rgba(216,24,41,0.06)' },
-  { label: 'Supplements', sub: 'Elite Nutrition',    href: '/shop/supplements', shade: 'rgba(0,189,172,0.05)' },
-  { label: 'Recovery', sub: 'Gear & Accessories',    href: '/shop',             shade: 'rgba(216,24,41,0.04)' },
-  { label: 'Lifestyle', sub: 'Athleisure Collection', href: '/shop',            shade: 'rgba(0,189,172,0.04)' },
+  { label: 'Training', sub: 'Performance Apparel', href: '/shop', shade: 'rgba(216,24,41,0.06)' },
+  { label: 'Supplements', sub: 'Elite Nutrition',  href: '/shop', shade: 'rgba(0,189,172,0.05)' },
+  { label: 'Recovery', sub: 'Gear & Accessories',  href: '/shop', shade: 'rgba(216,24,41,0.04)' },
+  { label: 'Lifestyle', sub: 'Athleisure Collection', href: '/shop', shade: 'rgba(0,189,172,0.04)' },
 ];
 
 const standards = [

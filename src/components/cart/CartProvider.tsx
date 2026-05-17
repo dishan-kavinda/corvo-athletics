@@ -27,6 +27,7 @@ type Cart = Awaited<ReturnType<typeof browserClient.currentCart.getCurrentCart>>
 interface CartContextValue {
   cart: Cart;
   itemCount: number;
+  cartLoading: boolean;
   isOpen: boolean;
   loading: boolean;
   error: string | null;
@@ -37,6 +38,7 @@ interface CartContextValue {
   addToCart: (catalogItemId: string, quantity?: number, variantId?: string) => Promise<void>;
   removeFromCart: (lineItemId: string) => Promise<void>;
   updateQuantity: (lineItemId: string, quantity: number) => Promise<void>;
+  clearCart: () => Promise<void>;
   checkout: () => Promise<void>;
 }
 
@@ -44,6 +46,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart>(null);
+  const [cartLoading, setCartLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,6 +58,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setCart(c);
     } catch {
       setCart(null);
+    } finally {
+      setCartLoading(false);
     }
   }, []);
 
@@ -104,9 +109,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const removeFromCart = useCallback(
     async (lineItemId: string) => {
       setLoading(true);
+      setError(null);
       try {
         await browserClient.currentCart.removeLineItemsFromCurrentCart([lineItemId]);
         await refresh();
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Could not remove item. Try again.');
       } finally {
         setLoading(false);
       }
@@ -121,17 +129,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return;
       }
       setLoading(true);
+      setError(null);
       try {
         await browserClient.currentCart.updateCurrentCartLineItemQuantity([
           { _id: lineItemId, quantity },
         ]);
         await refresh();
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Could not update quantity. Try again.');
       } finally {
         setLoading(false);
       }
     },
     [refresh, removeFromCart],
   );
+
+  const clearCart = useCallback(async () => {
+    try {
+      await browserClient.currentCart.deleteCurrentCart();
+    } catch {
+      // swallow — cart is done regardless
+    } finally {
+      setCart(null);
+    }
+  }, []);
 
   const checkout = useCallback(async () => {
     setIsOpen(false);
@@ -146,6 +167,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => ({
       cart,
       itemCount,
+      cartLoading,
       isOpen,
       loading,
       error,
@@ -156,9 +178,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       addToCart,
       removeFromCart,
       updateQuantity,
+      clearCart,
       checkout,
     }),
-    [cart, itemCount, isOpen, loading, error, addToCart, removeFromCart, updateQuantity, checkout],
+    [cart, itemCount, cartLoading, isOpen, loading, error, addToCart, removeFromCart, updateQuantity, clearCart, checkout],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
