@@ -1,0 +1,223 @@
+================================================================================
+  CORVO ATHLETIC — DROPSHIP PRODUCT RESEARCH
+  Exchange rate used: 1 USD ≈ 1.71 NZD (May 2026)
+================================================================================
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SECTION 1 — PRINT-ON-DEMAND APPAREL (Logo/Brand Printed, No Inventory)
+════════════════════════════════════════════════════════════════════════════════
+
+── 1A. PRINTFUL ──────────────────────────────────────────────────────────────
+URL: https://www.printful.com
+Ships to NZ from AU hub (Sydney) or US. NZ transit: 5–20 business days.
+NZ GST (15%) collected automatically. Shipping ~$7.19 first item.
+
+Product                        Base Cost (USD)   Sell (NZD)   Margin   Print Type
+─────────────────────────────────────────────────────────────────────────────────
+Bella+Canvas 3001C Gym Tee     $11.50            $69          ~54%     DTG front/back
+Gildan 18500 Hoodie            $24.95            $119         ~54%     DTG
+Bella+Canvas 3719 Hoodie       $38.00            $159         ~52%     DTG
+AOP Gym Shorts                 $28.00            $119         ~50%     Full sublimation
+AOP Compression Leggings       $19–22            $99          ~53%     All-over print
+Men's/Women's Tank Top         $11.00            $59          ~47%     DTG
+AOP Gym Bag (duffel)           $45.75            $179         ~49%     Full sublimation
+
+Notes:
+- Free plan works fine to start
+- Growth plan ($24.99/mo) gives ~30% product discounts — pays off at 10+ orders/month
+- Printful URL: https://www.printful.com/custom/bags/duffle-bags/all-over-print-gym-bag
+
+── 1B. PRINTIFY ──────────────────────────────────────────────────────────────
+URL: https://www.printify.com
+900+ products. Free plan; Premium at $29/mo saves 20% on all products.
+Choose AU/NZ-closest print node for 5–10 day NZ delivery.
+
+Product                        Base (Free USD)   Base (Prem USD)   Sell (NZD)   Margin (Prem)
+──────────────────────────────────────────────────────────────────────────────────────────────
+Bella+Canvas 3001 Gym Tee      $12.00            $9.60             $69          ~70%
+Hoodie (various)               $25–30            $20–24            $119         ~55%+
+AOP Men's Sports Shorts        $19–22            $15–18            $99          ~59%
+AOP Leggings                   $21.49            $17.20            $89          ~67%
+Tank Top (various)             $8.76             $7.00             $59          ~80%
+Generic Brand Duffel Bag       $39.66            $31.73            $149         ~64%
+
+Duffel Bag link: https://printify.com/app/products/372/generic-brand/duffel-bag
+Notes: Premium ($29/mo) pays off after just ~6 orders/month.
+
+── 1C. SPOD ──────────────────────────────────────────────────────────────────
+URL: https://www.spod.com
+95% of orders fulfilled within 48 hours. Ships from US/EU — NZ transit 10–18 days.
+
+Product              Base Cost (USD)   Sell (NZD)   Margin
+─────────────────────────────────────────────────────────
+Performance Tee      $12.12            $59          ~65%
+Hoodie               $17–20            $99          ~63%+
+Joggers              $19.99            $89          ~62%
+Tank                 $11.08            $49          ~61%
+
+── 1D. AS COLOUR NZ (Wholesale Blanks + Local Screen Printer) ───────────────
+URL: https://www.ascolour.co.nz
+NZ-owned premium blanks. Buy wholesale, decorate locally. NOT dropship — needs stock.
+Best quality/margin for core Corvo signature pieces.
+
+Product                     Wholesale (NZD)   + Print Cost   Sell (NZD)   Margin
+──────────────────────────────────────────────────────────────────────────────────
+Staple Tee (5001)           $18–22            $10–13         $79          ~56%
+Supply Hood (5101)          $45–55            $15–20         $149         ~53%
+Staple Active Tee (5001A)   $22–28            $13–14         $89          ~53%
+
+Local decorators: Stitch & Print NZ (https://www.stitchandprint.co.nz)
+MOQ for screen printing: typically 12–24 units per design.
+Apply for wholesale account at: https://www.ascolour.co.nz/nz/wholesale
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SECTION 2 — CUSTOM GYM ACCESSORIES
+════════════════════════════════════════════════════════════════════════════════
+
+Product                          Supplier                          Unit Cost (NZD)   Sell (NZD)   Margin   Shipping to NZ   MOQ
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+AOP Gym Bag (full sublimation)   Printful                          ~$91 landed       $179         ~49%     5–20 days        1 (POD)
+Duffel Bag (branded)             Printify                          ~$85–89 landed    $159         ~55%     5–10 days        1 (POD)
+Custom Logo Shaker 700ml         Mercha AU / FastPromo NZ          $8–14             $49          ~71–84%  1–5 days         50–100
+Custom Microfibre Gym Towel      Cubic Promote AU / Soak AU        $9–13             $39          ~67–77%  3–7 days         50
+Laser-Engraved Stainless Bottle  4customize.com / Alibaba          $14–31 (USD8–18)  $79–89       ~60–75%  Air 10–14 days   50
+
+Supplier URLs:
+- Mercha AU: https://www.mercha.com.au
+- FastPromo NZ: https://www.fastpromotionalproducts.co.nz
+- Cubic Promote AU: https://www.cubicpromote.com.au
+- Soak AU: https://soakaus.com/pages/custom
+- 4Customize: https://www.4customize.com
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SECTION 3 — GYM EQUIPMENT (Wholesale / Alibaba Private Label)
+  NOTE: Requires upfront stock investment. Sample first (1–5 units).
+════════════════════════════════════════════════════════════════════════════════
+
+Product                         MOQ    Unit Cost (USD)   Unit Cost (NZD)   Sell (NZD)   Margin    Shipping      Logo
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Resistance Band Set (5-pack)    50–100  $2.50–5.00       $4.30–8.55        $49          ~83–91%   Air 10–14d    Heat transfer/silkscreen
+Cotton Lifting Straps           50 pair $2.00–4.00       $3.42–6.84        $39          ~82–91%   Air/Sea       Woven label
+Neoprene Wrist Wraps (pair)     50 pair $3.00–6.00       $5.13–10.26       $49          ~79–90%   Air 10–14d    Embroidery/heat transfer
+Neoprene Knee Sleeves (pair)    50–100  $10.00–15.00     $17.10–25.65      $89          ~71–81%   Air 10–14d    Custom label/silkscreen
+7mm Powerlifting Belt           50      $15.00–25.00     $25.65–42.75      $119–149     ~71–79%   Air from CN   Emboss/laser
+Cloth Wrist Wraps 18"           50–100  $1.99–4.00       $3.40–6.84        $39          ~83–91%   Air 10–14d    Custom
+
+KEY ALIBABA SUPPLIERS TO CONTACT FOR QUOTES:
+- Keepu Fitness (full gym accessory OEM): https://www.keepufitness.com
+- Reedot Sports (knee sleeves/neoprene): https://reedotsports.com
+- Zechen Fitness (powerlifting belts): https://www.zechenfitness.com
+- Alibaba resistance bands: https://www.alibaba.com/showroom/resistance-bands-wholesale.html
+- Alibaba knee sleeves: https://www.alibaba.com/product-detail/Low-MOQ-Custom-Logo-Powerlifting-Knee_62409024511.html
+
+PROCESS: Request a sample (1–5 units at $15–50/unit, usually deducted from bulk order).
+Budget ~$500–2,000 NZD per product line for initial stock at MOQ 50–100 units.
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SECTION 4 — SUPPLEMENTS (White-Label / Private Label)
+════════════════════════════════════════════════════════════════════════════════
+
+── 4A. SUPLIFUL (No-MOQ Private Label Dropship — Best for Launch) ────────────
+URL: https://supliful.com
+POD for supplements. Your Corvo label, their formula, ships direct to customer.
+Plans from $29/month. Ships from US — NZ transit 10–18 business days.
+
+Product                    Cost/Unit (USD)   Sell (NZD)   Margin
+─────────────────────────────────────────────────────────────────
+Whey Protein Isolate 1kg   $18–22            $89–99       ~62–69%
+Pre-Workout 300g           $15–20            $69–79       ~57–65%
+BCAA Powder                $12–16            $59–69       ~63–72%
+
+ZERO inventory risk. Upload your Corvo label design. They print, pack, ship.
+
+── 4B. BULK POWDERS NZ (White Label, NZ-Based — Best for Scale) ──────────────
+URL: https://www.bulkpowders.co.nz/wholesale-white-label
+Contact: support@bulkpowders.co.nz
+NZ-owned. You buy bulk, they label with Corvo branding. Domestic shipping 1–3 days.
+Hold stock required. MOQ: contact for pricing sheet (~5–20kg per product).
+
+Product                 Cost (NZD wholesale)   Sell (NZD)   Margin
+───────────────────────────────────────────────────────────────────
+Whey Concentrate 1kg    $25–35/unit            $79–89       ~56–65%
+Pre-Workout 300g        $20–30/unit            $69–79       ~57–65%
+
+── 4C. NUTRIZONE NZ (Custom Formula Contract Manufacturing — Long Term) ──────
+URL: https://nutrizone.co.nz
+Full custom formula manufacturing. 2025 Supplier of the Year (NZ).
+Use once brand is established. MOQ 500–2,000 units per SKU.
+Request a quote for your own Corvo pre-workout formula.
+
+
+════════════════════════════════════════════════════════════════════════════════
+  SECTION 5 — PERSONALISABLE / CUSTOMISABLE PRODUCTS (Buyers Customise Theirs)
+════════════════════════════════════════════════════════════════════════════════
+
+Product                                  Supplier                       Cost (NZD)   Sell (NZD)   Margin   Shipping   Customisation
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Laser-Engraved Stainless Bottle (name)   4customize.com / Alibaba       $14–31       $89–99       ~69–79%  10–14d     Customer's name/message laser engraved
+Custom-Patch Gym Bag (initials)          Contrado.com                   $94–120      $159–179     ~50–55%  7–14d      Embroidered custom patch with initials
+Personalised Gym Towel (embroidered)     FastPromo NZ / Cubic AU        $15–25       $59–69       ~64–75%  1–7d       Initials embroidered on towel
+Custom Shaker + Name Engraving           FastPromo NZ                   $18–25       $69          ~64–74%  1–5d       Laser engraving on shaker
+Engraved Lifting Belt (name on belt)     Alibaba + local NZ engraver    $25–40       $159         ~75–84%  —          Customer name laser engraved after purchase
+
+Contrado custom holdalls: https://www.contrado.com/custom-holdalls
+Personalised gym towels (Etsy reference): https://www.etsy.com/listing/1526239795/
+
+
+════════════════════════════════════════════════════════════════════════════════
+  TOP 8 RECOMMENDED PRODUCTS TO LAUNCH WITH
+════════════════════════════════════════════════════════════════════════════════
+
+Rank   Product                              Supplier                 Why                                          Margin
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 1     Gym Tee (Bella+Canvas, Corvo logo)   Printify Premium         No inventory, highest margin, fast AU node   ~70%
+ 2     Premium Hoodie (Corvo branded)       Printify / Printful      Hero product, high price point, no stock     ~54–55%
+ 3     Resistance Band Set (branded)        Alibaba (50 unit MOQ)    Tiny cost, huge margin, gift-friendly        ~85–90%
+ 4     Whey Protein (white label)           Supliful → Bulk Pwds NZ  Zero-risk POD launch, pivot to NZ at scale   ~62–69%
+ 5     AOP Gym Shorts                       Printful / Printify      POD, bold Corvo aesthetic on dark fabric     ~50–55%
+ 6     Laser-Engraved Water Bottle          4customize.com (50 MOQ)  Premium feel, personalisation option         ~70–75%
+ 7     Neoprene Knee Sleeves                Reedot Sports / Alibaba  Gym-specific, premium brand, good margins    ~71–81%
+ 8     Personalised Gym Towel               FastPromo NZ / Cubic AU  Local AU/NZ supply, fast ship                ~64–75%
+
+
+════════════════════════════════════════════════════════════════════════════════
+  QUICK SUPPLIER REFERENCE
+════════════════════════════════════════════════════════════════════════════════
+
+Printful (POD apparel):              https://www.printful.com
+Printify (POD apparel):              https://www.printify.com
+SPOD (POD, fast production):         https://www.spod.com
+AS Colour NZ (wholesale blanks):     https://www.ascolour.co.nz
+Contrado (POD custom bags):          https://www.contrado.com/custom-holdalls
+Supliful (supplement POD):           https://supliful.com
+Bulk Powders NZ (white label supps): https://www.bulkpowders.co.nz/wholesale-white-label
+Nutrizone NZ (contract mfg):        https://nutrizone.co.nz
+Keepu Fitness (gym OEM):             https://www.keepufitness.com
+Reedot Sports (knee sleeves):        https://reedotsports.com
+Zechen Fitness (lifting belts):      https://www.zechenfitness.com
+4Customize (engraved bottles):       https://www.4customize.com
+FastPromo Products NZ:               https://www.fastpromotionalproducts.co.nz
+Cubic Promote AU (accessories):      https://www.cubicpromote.com.au
+Mercha AU (accessories):             https://www.mercha.com.au
+Alibaba resistance bands:            https://www.alibaba.com/showroom/resistance-bands-wholesale.html
+Alibaba knee sleeves:                https://www.alibaba.com/product-detail/Low-MOQ-Custom-Logo-Powerlifting-Knee_62409024511.html
+Stitch & Print NZ (decorator):       https://www.stitchandprint.co.nz
+
+
+================================================================================
+  NOTES
+================================================================================
+
+- All margins are estimates before platform fees (Shopify/Wix), ads, or returns.
+  Actual take-home will be ~5–15% lower after fees.
+- For Alibaba suppliers: always request samples before committing to MOQ.
+  Budget $50–150 NZD for samples per product line.
+- Printify Premium ($29/mo) + Supliful ($29/mo) = $58 USD/month total overhead
+  for a zero-inventory launch. Cover this with just 2–3 hoodie sales.
+- NZD prices above include GST (15%) already built into the sell price.
+- Shipping times quoted are business days and may vary by NZ peak season.
+================================================================================

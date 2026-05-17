@@ -1,10 +1,11 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-16T12:29:24.286Z
-> Files: 19 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-17T00:28:12.000Z
+> Files: 21 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
+- `PRODUCT-RESEARCH.txt` (~3613 tok)
 
 ## .claude/
 
@@ -26,6 +27,10 @@
 
 - `page.tsx` — metadata (~399 tok)
 
+## src/app/checkout/
+
+- `CheckoutForm.tsx` — initialShipping — renders form (~4706 tok)
+
 ## src/app/shop/
 
 - `page.tsx` — dynamic (~2005 tok)
@@ -40,7 +45,7 @@
 
 ## src/components/3d/
 
-- `HeroScene.tsx` — dodecVerts (~1893 tok)
+- `HeroScene.tsx` — dodecVerts (~1860 tok)
 
 ## src/components/cart/
 
@@ -51,7 +56,7 @@
 ## src/components/layout/
 
 - `Footer.tsx` — footerLinks (~1433 tok)
-- `Header.tsx` — navItems (~1176 tok)
+- `Header.tsx` — navItems (~1480 tok)
 - `MobileNav.tsx` — navItems (~1763 tok)
 
 ## src/components/motion/

@@ -3,6 +3,8 @@
 > Chronological action log. Hooks and AI append to this file automatically.
 > Old sessions are consolidated by the daemon weekly.
 
+| 14:00 | Dropshipping product research — 5 categories, 20+ products, suppliers, costs, margins for Corvo Athletic NZ | research only | complete | ~8000 |
+
 ## Session origin
 
 This OpenWolf project was initialized 2026-05-13. The full multi-day session log lives at `~/.wolf/memory.md` (home-level OpenWolf installed first, before project-level). Highlights consolidated below for context.
@@ -323,3 +325,29 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 00:18 | Session end: 6 writes across 1 files (HeroScene.tsx) | 1 reads | ~5803 tok |
 | 00:26 | Created src/components/3d/HeroScene.tsx | — | ~2105 |
 | 00:29 | Created src/components/3d/HeroScene.tsx | — | ~1893 |
+| 02:14 | Session end: 8 writes across 1 files (HeroScene.tsx) | 1 reads | ~9801 tok |
+| 02:16 | Edited src/components/3d/HeroScene.tsx | 6→6 lines | ~99 |
+| 02:19 | Edited src/components/3d/HeroScene.tsx | modified main() | ~145 |
+| 02:19 | Edited src/components/3d/HeroScene.tsx | 7→7 lines | ~48 |
+| 02:22 | Edited src/components/3d/HeroScene.tsx | 3→3 lines | ~61 |
+| 02:22 | Edited src/components/3d/HeroScene.tsx | 2→2 lines | ~50 |
+| 02:25 | Edited src/components/layout/Header.tsx | CSS: marginRight, marginRight | ~224 |
+| 02:25 | Edited src/components/3d/HeroScene.tsx | inline fix | ~15 |
+| 02:25 | Edited src/components/3d/HeroScene.tsx | 2→2 lines | ~50 |
+| 02:26 | Created src/app/checkout/CheckoutForm.tsx | — | ~4706 |
+| 02:27 | Session end: 17 writes across 3 files (HeroScene.tsx, Header.tsx, CheckoutForm.tsx) | 4 reads | ~16761 tok |
+| 02:29 | Edited src/components/layout/Header.tsx | 21→26 lines | ~282 |
+| 04:04 | Edited src/components/layout/Header.tsx | 26→27 lines | ~264 |
+| 04:11 | Edited src/components/layout/Header.tsx | 5→5 lines | ~73 |
+| 04:11 | Edited src/components/layout/Header.tsx | added 1 condition(s) | ~233 |
+| 04:12 | Edited src/components/layout/Header.tsx | added nullish coalescing | ~284 |
+| 04:15 | Edited src/components/layout/Header.tsx | 10→14 lines | ~134 |
+| 04:15 | Edited src/components/layout/Header.tsx | CSS: justifyContent | ~325 |
+| 11:52 | Session end: 24 writes across 3 files (HeroScene.tsx, Header.tsx, CheckoutForm.tsx) | 4 reads | ~18581 tok |
+| 12:28 | Created PRODUCT-RESEARCH.txt | — | ~3854 |
+| 12:28 | Session end: 25 writes across 4 files (HeroScene.tsx, Header.tsx, CheckoutForm.tsx, PRODUCT-RESEARCH.txt) | 4 reads | ~22710 tok |
+
+## Session: 2026-05-17 12:34
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
