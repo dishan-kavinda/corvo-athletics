@@ -7,7 +7,7 @@ import { MarqueeStrip } from '@/components/ui/MarqueeStrip';
 export const metadata = {
   title: 'About',
   description:
-    'Corvo Athletic is a luxury sports brand built for serious athletes. Premium gym apparel, athleisure, and lab-tested supplements — no compromise.',
+    'Corvo Athletic is a luxury sports brand built for serious athletes. Premium gym apparel, athleisure, and lab-tested supplements. No compromise.',
   keywords: ['Corvo Athletic', 'luxury gym brand', 'premium athleisure', 'sports brand story'],
   alternates: { canonical: '/about' },
 };
@@ -21,7 +21,7 @@ const pillars = [
   {
     num: '02',
     title: 'Built by Athletes.',
-    body: "Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage — it doesn't carry our name.",
+    body: "Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage, it doesn't carry our name.",
   },
   {
     num: '03',
@@ -115,7 +115,7 @@ export default function AboutPage() {
                 style={{ color: '#838DAA' }}
               >
                 Corvo Athletic was built for one reason: the gear and fuel athletes deserved
-                didn&apos;t exist. Cheap supplements, generic apparel, hollow promises — we were
+                didn&apos;t exist. Cheap supplements, generic apparel, hollow promises. We were
                 done with it.
               </p>
               <p

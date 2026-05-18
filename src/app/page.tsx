@@ -24,12 +24,12 @@ const standards = [
   {
     num: '02',
     title: 'Athlete Built',
-    desc: 'Designed alongside strength coaches and competitive athletes. Real-world performance validated by those who live it.',
+    desc: 'Designed with strength coaches and competitive athletes. Tested in the gym, not just on paper.',
   },
   {
     num: '03',
     title: 'No Compromise',
-    desc: 'Premium ingredients, premium materials, premium execution. Luxury means zero cutting corners — ever.',
+    desc: 'Premium ingredients, premium materials, premium execution. Luxury means you never cut corners.',
   },
 ];
 

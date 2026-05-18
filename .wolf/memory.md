@@ -3,6 +3,19 @@
 > Chronological action log. Hooks and AI append to this file automatically.
 > Old sessions are consolidated by the daemon weekly.
 
+## Session — 2026-05-17
+
+| Time  | Action | Files | Outcome | ~tokens |
+|-------|--------|-------|---------|---------|
+| session | Committed product research + wolf logs from prior session | PRODUCT-RESEARCH.txt, .wolf/* | pushed b2a59b1→5dde17d | ~200 |
+| session | Full codebase audit — 9 bugs/issues identified and fixed | 11 files modified, 3 created | pushed b2a59b1 | ~18k |
+| session | Bugs: Stripe CSS var in appearance, guest@example.com receipt_email, cart not cleared post-checkout, silent removeFromCart/updateQuantity errors, empty-cart flash on checkout load | CartProvider.tsx, CheckoutForm.tsx, actions.ts | all fixed | — |
+| session | Dead links: /shop/apparel, /shop/supplements (Header, MobileNav, homepage), /contact, /shipping, /returns (Footer) | all nav files + 3 new redirect pages | no more 404s | — |
+| session | About page marquee replaced inline animation with MarqueeStrip | about/page.tsx | seamless loop | — |
+| session | Duplicate keyword removed from layout.tsx metadata | layout.tsx | SEO cleanup | — |
+| session | Generated Gemini logo generation prompt for Corvo Athletic brand | — | delivered in chat | ~300 |
+| session | Verified OpenWolf fully installed: config.json enabled, all hooks wired in .claude/settings.json | .wolf/, .claude/ | confirmed | ~500 |
+
 | 14:00 | Dropshipping product research — 5 categories, 20+ products, suppliers, costs, margins for Corvo Athletic NZ | research only | complete | ~8000 |
 
 ## Session origin
@@ -369,3 +382,32 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 13:02 | Created src/app/contact/page.tsx | — | ~32 |
 | 13:02 | Created src/app/shipping/page.tsx | — | ~32 |
 | 13:02 | Created src/app/returns/page.tsx | — | ~32 |
+| 13:03 | Session end: 18 writes across 7 files (actions.ts, CartProvider.tsx, CheckoutForm.tsx, Header.tsx, MobileNav.tsx) | 33 reads | ~38538 tok |
+| 13:13 | Session end: 18 writes across 7 files (actions.ts, CartProvider.tsx, CheckoutForm.tsx, Header.tsx, MobileNav.tsx) | 33 reads | ~38538 tok |
+| 13:37 | Session end: 18 writes across 7 files (actions.ts, CartProvider.tsx, CheckoutForm.tsx, Header.tsx, MobileNav.tsx) | 34 reads | ~38538 tok |
+
+## Session: 2026-05-18 23:43
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 23:52 | Edited src/app/page.tsx | "Designed alongside streng" → "Designed with strength co" | ~31 |
+| 23:52 | Edited src/app/page.tsx | "Premium ingredients, prem" → "Premium ingredients, prem" | ~31 |
+| 23:52 | Edited src/app/about/page.tsx | 2→2 lines | ~48 |
+| 23:52 | Edited src/app/about/page.tsx | inline fix | ~54 |
+| 23:52 | Edited src/app/about/page.tsx | 3→3 lines | ~63 |
+| 23:53 | Removed AI-sounding em dashes from prose copy, rephrased stiff sentences | src/app/page.tsx, src/app/about/page.tsx | 4 edits | ~200 |
+| 23:53 | Session end: 5 writes across 1 files (page.tsx) | 8 reads | ~24416 tok |
+| 23:55 | Session end: 5 writes across 1 files (page.tsx) | 10 reads | ~24815 tok |
+| 01:10 | Created src/lib/wix-member-client.ts | — | ~190 |
+| 01:11 | Created src/app/account/login/route.ts | — | ~202 |
+| 01:11 | Created src/app/account/callback/route.ts | — | ~513 |
+| 01:11 | Created src/app/account/logout/route.ts | — | ~78 |
+| 01:11 | Created src/app/account/page.tsx | — | ~1822 |
+| 01:11 | Created src/app/account/dashboard/page.tsx | — | ~1765 |
+| 01:12 | Built Wix OAuth account auth: login/callback/logout routes, /account page rewrite, /account/dashboard | src/lib/wix-member-client.ts, src/app/account/* | 6 files created/updated | ~800 |
+| 01:12 | Session end: 11 writes across 3 files (page.tsx, wix-member-client.ts, route.ts) | 20 reads | ~32758 tok |
+| 01:21 | Edited src/app/account/callback/route.ts | 3→1 lines | ~20 |
+| 01:21 | Edited src/app/account/dashboard/page.tsx | inline fix | ~16 |
+| 01:23 | Session end: 13 writes across 3 files (page.tsx, wix-member-client.ts, route.ts) | 20 reads | ~32794 tok |
+| 01:27 | designqc: captured 0 screenshots (0KB, ~0 tok) | C:/Program Files/Git/account | ready for eval | ~0 |
+| 01:27 | designqc: captured 6 screenshots (144KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |

@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-17T01:02:03.949Z
-> Files: 26 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-18T13:21:24.002Z
+> Files: 31 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -17,15 +17,31 @@
 
 - `globals.css` — Styles: 19 rules, 52 vars (~1584 tok)
 - `layout.tsx` — anton (~955 tok)
-- `page.tsx` — categories (~8734 tok)
+- `page.tsx` — categories (~8726 tok)
 
 ## src/app/about/
 
-- `page.tsx` — metadata (~2910 tok)
+- `page.tsx` — metadata (~2909 tok)
 
 ## src/app/account/
 
-- `page.tsx` — metadata (~399 tok)
+- `page.tsx` — Sign In / Create Account page. Checks wix_member_tokens cookie; redirects to /account/dashboard if already logged in (~700 tok)
+
+## src/app/account/callback/
+
+- `route.ts` — Next.js API route: GET (~500 tok)
+
+## src/app/account/dashboard/
+
+- `page.tsx` — metadata (~1755 tok)
+
+## src/app/account/login/
+
+- `route.ts` — GET: Initiates Wix OAuth. Generates PKCE oauthData, stores in cookie (10min), redirects to Wix auth URL (~200 tok)
+
+## src/app/account/logout/
+
+- `route.ts` — GET: Clears wix_member_tokens and wix_member_name cookies, redirects to / (~60 tok)
 
 ## src/app/checkout/
 
@@ -85,6 +101,7 @@
 
 ## src/lib/
 
+- `wix-member-client.ts` — Exports WixTokens, WixOAuthData, createServerMemberClient (~190 tok)
 
 ## src/providers/
 

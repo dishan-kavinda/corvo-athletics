@@ -654,6 +654,55 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-17T01:01:53.578Z"
+    },
+    {
+      "id": "bug-040",
+      "timestamp": "2026-05-18T11:52:15.391Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/page.tsx",
+      "root_cause": "Had 'Designed alongside strength coaches and competiti",
+      "fix": "Changed to 'Designed with strength coaches and competitive at",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-18T11:52:22.229Z"
+    },
+    {
+      "id": "bug-041",
+      "timestamp": "2026-05-18T11:52:26.511Z",
+      "error_message": "CSS fix: body",
+      "file": "src/app/about/page.tsx",
+      "root_cause": "body: \"Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage — it doesn't carry our name.\", → \"Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage, it doesn't carry our name.\",",
+      "fix": "Changed body: \"Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage — it doesn't carry our name.\", → \"Our formulas and apparel are designed with strength coaches and competitive athletes. If it doesn't hold up in the gym, on the track, or in the cage, it doesn't carry our name.\",",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T11:52:26.511Z"
+    },
+    {
+      "id": "bug-042",
+      "timestamp": "2026-05-18T13:22:57.296Z",
+      "error_message": "Type error: Type string[] is not assignable to type SetWithLiterals[] in getCurrentMember call",
+      "file": "src/app/account/callback/route.ts, src/app/account/dashboard/page.tsx",
+      "root_cause": "SetWithLiterals is a union of Set enum | PUBLIC | EXTENDED | FULL — casting to string[] is too broad; TypeScript rejects it",
+      "fix": "Removed fieldsets parameter entirely; default PUBLIC fieldset returns loginEmail and profile.nickname which is sufficient for dashboard",
+      "tags": [
+        "typescript",
+        "wix",
+        "members",
+        "build"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T13:22:57.297Z"
     }
   ]
 }
