@@ -29,11 +29,11 @@ export function ProductCard({ slug, name, price, image, imageAlt, className }: P
           position: 'relative',
           background: 'var(--surface)',
           border: '1px solid var(--border)',
-          borderLeft: hovered ? '2px solid #D81829' : '2px solid transparent',
+          borderLeft: hovered ? '2px solid var(--accent)' : '2px solid transparent',
           transition: 'border-color 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease',
           transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
           boxShadow: hovered
-            ? '0 16px 40px rgba(0,0,0,0.18), -2px 0 0 #D81829'
+            ? '0 16px 40px rgba(0,0,0,0.18), -2px 0 0 var(--accent)'
             : '0 2px 12px rgba(0,0,0,0.06)',
         }}
       >
@@ -112,7 +112,7 @@ export function ProductCard({ slug, name, price, image, imageAlt, className }: P
           </h3>
           <p
             className="font-display shrink-0 text-base"
-            style={{ color: '#D81829' }}
+            style={{ color: 'var(--accent)' }}
           >
             {price}
           </p>
@@ -126,7 +126,7 @@ export function ProductCard({ slug, name, price, image, imageAlt, className }: P
             left: 0,
             right: 0,
             height: '1.5px',
-            background: 'linear-gradient(90deg, #D81829, transparent)',
+            background: 'linear-gradient(90deg, var(--accent), transparent)',
             transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
             transformOrigin: 'left',
             transition: 'transform 0.4s ease',

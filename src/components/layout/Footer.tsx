@@ -22,9 +22,9 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer style={{ background: '#07090F', borderTop: '1px solid #1B2038' }}>
+    <footer style={{ background: 'var(--footer-bg)', borderTop: '1px solid var(--footer-border)' }}>
       {/* ── Wordmark hero ─────────────────────────────── */}
-      <div style={{ borderBottom: '1px solid #1B2038' }}>
+      <div style={{ borderBottom: '1px solid var(--footer-border)' }}>
         <div
           className="mx-auto px-6 md:px-10 lg:px-14 py-16"
           style={{ maxWidth: '1440px' }}
@@ -35,7 +35,7 @@ export function Footer() {
                 className="font-display uppercase leading-[0.88]"
                 style={{
                   fontSize: 'clamp(3.5rem, 9vw, 8rem)',
-                  color: '#CDD4EA',
+                  color: 'var(--footer-fg)',
                   letterSpacing: '-0.01em',
                 }}
               >
@@ -45,7 +45,7 @@ export function Footer() {
                 className="font-display uppercase leading-[0.88]"
                 style={{
                   fontSize: 'clamp(3.5rem, 9vw, 8rem)',
-                  color: '#D81829',
+                  color: 'var(--footer-accent)',
                   letterSpacing: '-0.01em',
                 }}
               >
@@ -53,14 +53,14 @@ export function Footer() {
               </p>
             </div>
             <div className="max-w-xs">
-              <p style={{ color: '#47516B', lineHeight: '1.7', fontSize: '0.875rem' }}>
+              <p style={{ color: 'var(--footer-muted)', lineHeight: '1.7', fontSize: '0.875rem' }}>
                 Elite training gear and supplements engineered for those who refuse to be average.
                 Dark discipline. Proven performance.
               </p>
               <div className="flex items-center gap-3 mt-6">
                 <span
                   className="inline-block w-1.5 h-1.5 rounded-full"
-                  style={{ background: '#D81829' }}
+                  style={{ background: 'var(--footer-accent)' }}
                 />
                 <span
                   style={{
@@ -68,7 +68,7 @@ export function Footer() {
                     fontSize: '10px',
                     letterSpacing: '0.42em',
                     textTransform: 'uppercase',
-                    color: '#47516B',
+                    color: 'var(--footer-muted)',
                     fontWeight: 700,
                   }}
                 >
@@ -95,7 +95,7 @@ export function Footer() {
                   fontWeight: 700,
                   letterSpacing: '0.38em',
                   textTransform: 'uppercase',
-                  color: '#D81829',
+                  color: 'var(--footer-accent)',
                   marginBottom: '1.25rem',
                 }}
               >
@@ -107,7 +107,7 @@ export function Footer() {
                     <Link
                       href={link.href}
                       className="text-sm transition-colors duration-200 hover:text-blade"
-                      style={{ color: '#47516B' }}
+                      style={{ color: 'var(--footer-muted)' }}
                     >
                       {link.label}
                     </Link>
@@ -121,12 +121,12 @@ export function Footer() {
         {/* ── Legal row ──────────────────────────────────── */}
         <div
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8"
-          style={{ borderTop: '1px solid #1B2038' }}
+          style={{ borderTop: '1px solid var(--footer-border)' }}
         >
           <div className="flex items-center gap-3">
             <span
               className="block w-5 h-[1.5px]"
-              style={{ background: '#D81829' }}
+              style={{ background: 'var(--footer-accent)' }}
             />
             <span
               style={{
@@ -134,14 +134,14 @@ export function Footer() {
                 fontSize: '10px',
                 letterSpacing: '0.42em',
                 textTransform: 'uppercase',
-                color: '#47516B',
+                color: 'var(--footer-muted)',
                 fontWeight: 700,
               }}
             >
               Corvo Athletic
             </span>
           </div>
-          <p style={{ fontSize: '11px', color: '#2E3450' }}>
+          <p style={{ fontSize: '11px', color: 'var(--footer-muted)' }}>
             &copy; {new Date().getFullYear()} Corvo Athletic. Built for those who don&apos;t quit.
           </p>
         </div>

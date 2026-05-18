@@ -703,6 +703,342 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-18T13:22:57.297Z"
+    },
+    {
+      "id": "bug-043",
+      "timestamp": "2026-05-18T13:52:31.702Z",
+      "error_message": "Wrong reference: Cormorant_Garant should be Playfair_Display",
+      "file": "src/app/layout.tsx",
+      "root_cause": "Used \"Cormorant_Garant\" instead of \"Playfair_Display\"",
+      "fix": "Changed Cormorant_Garant → Playfair_Display",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T13:52:31.702Z"
+    },
+    {
+      "id": "bug-044",
+      "timestamp": "2026-05-18T13:52:35.833Z",
+      "error_message": "CSS fix: weight",
+      "file": "src/app/layout.tsx",
+      "root_cause": "weight: ['300', '400', '500', '600', '700'], → ['400', '500', '600', '700', '800', '900'],",
+      "fix": "Changed weight: ['300', '400', '500', '600', '700'], → ['400', '500', '600', '700', '800', '900'],",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T13:52:35.833Z"
+    },
+    {
+      "id": "bug-045",
+      "timestamp": "2026-05-18T13:52:39.929Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/layout.tsx",
+      "root_cause": "Had `${anton.variable} ${rajdhani.variable} ${inter.va",
+      "fix": "Changed to `${anton.variable} ${rajdhani.variable} ${inter.va",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T13:52:39.929Z"
+    },
+    {
+      "id": "bug-046",
+      "timestamp": "2026-05-18T13:53:22.257Z",
+      "error_message": "Wrong reference: middleware should be proxy",
+      "file": "src/proxy.ts",
+      "root_cause": "Used \"middleware\" instead of \"proxy\"",
+      "fix": "Changed middleware → proxy",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T13:53:22.257Z"
+    },
+    {
+      "id": "bug-047",
+      "timestamp": "2026-05-18T14:11:58.311Z",
+      "error_message": "CSS fix: font-family",
+      "file": "src/app/globals.css",
+      "root_cause": "font-family: var(--font-cormorant), 'Cormorant Garant', Georgia, serif !important → var(--font-cormorant), 'Playfair Display', Georgia, serif !important",
+      "fix": "Changed font-family: var(--font-cormorant), 'Cormorant Garant', Georgia, serif !important → var(--font-cormorant), 'Playfair Display', Georgia, serif !important",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "css"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:11:58.311Z"
+    },
+    {
+      "id": "bug-048",
+      "timestamp": "2026-05-18T14:12:14.808Z",
+      "error_message": "Missing guard clause",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "No early return/throw for edge case: !groupRef.current",
+      "fix": "Added guard clause: if (!groupRef.current)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:12:14.808Z"
+    },
+    {
+      "id": "bug-049",
+      "timestamp": "2026-05-18T14:16:50.045Z",
+      "error_message": "CSS fix: borderLeft",
+      "file": "src/components/ui/ProductCard.tsx",
+      "root_cause": "borderLeft: hovered ? '2px solid #D81829' : '2px solid transparent', → hovered ? '2px solid var(--accent)' : '2px solid transparent',",
+      "fix": "Changed borderLeft: hovered ? '2px solid #D81829' : '2px solid transparent', → hovered ? '2px solid var(--accent)' : '2px solid transparent',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:16:50.045Z"
+    },
+    {
+      "id": "bug-050",
+      "timestamp": "2026-05-18T14:16:53.822Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/ProductCard.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-18T14:16:57.233Z"
+    },
+    {
+      "id": "bug-051",
+      "timestamp": "2026-05-18T14:17:14.555Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/shop/page.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 40,
+      "last_seen": "2026-05-18T14:21:48.940Z"
+    },
+    {
+      "id": "bug-052",
+      "timestamp": "2026-05-18T14:17:27.157Z",
+      "error_message": "CSS fix: color",
+      "file": "src/app/shop/page.tsx",
+      "root_cause": "color: '#D81829', → 'var(--accent)',",
+      "fix": "Changed color: '#D81829', → 'var(--accent)',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 9,
+      "last_seen": "2026-05-18T14:21:41.400Z"
+    },
+    {
+      "id": "bug-053",
+      "timestamp": "2026-05-18T14:19:46.264Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:19:46.264Z"
+    },
+    {
+      "id": "bug-054",
+      "timestamp": "2026-05-18T14:19:49.699Z",
+      "error_message": "Wrong reference: HeroSceneClient should be isLuxury",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Used \"HeroSceneClient\" instead of \"isLuxury\"",
+      "fix": "Changed HeroSceneClient → isLuxury",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:19:49.699Z"
+    },
+    {
+      "id": "bug-055",
+      "timestamp": "2026-05-18T14:28:36.900Z",
+      "error_message": "CSS fix: title, desc, value",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "title: 'No Compromise', → 'Enduring Quality',; desc: 'Premium ingredients, premium materials, premium execution. Luxury means you never cut corners.', → 'We hold a single standard: the highest. Premium ingredients, precision performance fabrics, stitching built to outlast seasons. If it does not meet our benchmark, it does not leave our hands.',; value: '0',    label: 'Compromises Made' → '0',    label: 'Exceptions Made'",
+      "fix": "Changed title: 'No Compromise', → 'Enduring Quality',; desc: 'Premium ingredients, premium materials, premium execution. Luxury means you never cut corners.', → 'We hold a single standard: the highest. Premium ingredients, precision performance fabrics, stitching built to outlast seasons. If it does not meet our benchmark, it does not leave our hands.',; value: '0',    label: 'Compromises Made' → '0',    label: 'Exceptions Made'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-18T14:30:24.609Z"
+    },
+    {
+      "id": "bug-056",
+      "timestamp": "2026-05-18T14:28:52.803Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 19→31 lines (2 removed) | Also: <h2 className=\"font-display uppercase leading-[0.9; JOIN THE<br /> | Also: fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',; color: 'var(--footer-fg)',",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-18T14:30:35.705Z"
+    },
+    {
+      "id": "bug-057",
+      "timestamp": "2026-05-18T14:29:06.133Z",
+      "error_message": "Type error",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation | Also: {(isLuxury; ? ['Artisan Craft', 'Athlete Endorsed', 'Timeless Design'] | Also: {isLuxury ? '· The Corvo House ·' : '· The Raven Standard ·' | Also: {isLuxury ? '· The Collection ·' : '· Corvo Elite ·'} | Also: {isLuxury ? '· The House of Corvo ·' : \"· See What We\\u2019v",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 5,
+      "last_seen": "2026-05-18T14:30:40.331Z"
+    },
+    {
+      "id": "bug-058",
+      "timestamp": "2026-05-18T14:29:17.390Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Had \"font-display uppercase leading-none\"",
+      "fix": "Changed to `font-display leading-none${isLuxury ? '",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:29:17.390Z"
+    },
+    {
+      "id": "bug-059",
+      "timestamp": "2026-05-18T14:30:10.038Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/about/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:30:10.038Z"
+    },
+    {
+      "id": "bug-060",
+      "timestamp": "2026-05-18T14:35:22.354Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/layout/Header.tsx",
+      "root_cause": "Had \" className=\"",
+      "fix": "Changed to \"/home\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:35:22.354Z"
+    },
+    {
+      "id": "bug-061",
+      "timestamp": "2026-05-18T14:35:27.333Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Had 'savage'",
+      "fix": "Changed to 'luxury'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:35:27.333Z"
+    },
+    {
+      "id": "bug-062",
+      "timestamp": "2026-05-18T14:39:59.354Z",
+      "error_message": "CSS fix: fontSize, letterSpacing, color",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "fontSize: 15, → 16,; letterSpacing: '0.1em', → '0.04em',; color: '#B8962C', → '#8B7355',",
+      "fix": "Changed fontSize: 15, → 16,; letterSpacing: '0.1em', → '0.04em',; color: '#B8962C', → '#8B7355',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:39:59.354Z"
+    },
+    {
+      "id": "bug-063",
+      "timestamp": "2026-05-18T14:40:05.599Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "12 lines replaced/restructured",
+      "fix": "Rewrote 26→10 lines (12 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-18T14:40:05.599Z"
     }
   ]
 }

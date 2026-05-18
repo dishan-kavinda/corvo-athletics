@@ -187,3 +187,77 @@ export function HeroScene() {
     </Canvas>
   );
 }
+
+/* ─── Luxury Form ────────────────────────────────────────
+   Two nested icosahedron wireframes — matte old-gold outer,
+   warm bone inner. No bloom, no glow, no particles.
+   Slow meditative rotation. Completely different character.
+──────────────────────────────────────────────────────────── */
+function LuxuryForm() {
+  const groupRef = useRef<THREE.Group>(null);
+  const mouse    = useRef({ x: 0, y: 0 });
+
+  const outerGeo = useMemo(() => {
+    const base  = new THREE.IcosahedronGeometry(2.2, 1);
+    const edges = new THREE.EdgesGeometry(base);
+    base.dispose();
+    return edges;
+  }, []);
+
+  const innerGeo = useMemo(() => {
+    const base  = new THREE.IcosahedronGeometry(1.1, 0);
+    const edges = new THREE.EdgesGeometry(base);
+    base.dispose();
+    return edges;
+  }, []);
+
+  const outerMat = useMemo(
+    () => new THREE.LineBasicMaterial({ color: '#B8962C', transparent: true, opacity: 0.42 }),
+    [],
+  );
+  const innerMat = useMemo(
+    () => new THREE.LineBasicMaterial({ color: '#D4C9B0', transparent: true, opacity: 0.25 }),
+    [],
+  );
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouse.current.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+      mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1);
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return;
+    const t = clock.getElapsedTime();
+    const { x, y } = mouse.current;
+    groupRef.current.rotation.y += (x * Math.PI * 0.28 - groupRef.current.rotation.y) * 0.022;
+    groupRef.current.rotation.x += (y * Math.PI * 0.14 - groupRef.current.rotation.x) * 0.022;
+    groupRef.current.rotation.z  = t * 0.018;
+  });
+
+  return (
+    <group ref={groupRef}>
+      <lineSegments geometry={outerGeo} material={outerMat} />
+      <lineSegments geometry={innerGeo} material={innerMat} />
+    </group>
+  );
+}
+
+/* No bloom, no sparkles, no point lights — matte and clean */
+export function LuxuryHeroScene() {
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 6.5], fov: 42 }}
+      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      style={{ background: 'transparent' }}
+    >
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[3, 4, 3]} intensity={0.25} />
+      <LuxuryForm />
+    </Canvas>
+  );
+}

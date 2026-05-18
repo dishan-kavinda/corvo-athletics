@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Anton, Inter, Rajdhani } from 'next/font/google';
+import { Anton, Inter, Rajdhani, Playfair_Display } from 'next/font/google';
+import { cookies, headers } from 'next/headers';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { ThemeProvider } from '@/providers/ThemeProvider';
 
 const anton = Anton({
   weight: '400',
@@ -23,6 +23,14 @@ const rajdhani = Rajdhani({
 
 const inter = Inter({
   variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -84,11 +92,20 @@ const organizationSchema = {
   sameAs: [],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const headersList = await headers();
+
+  const aesthetic = cookieStore.get('corvo_aesthetic')?.value;
+  const pathname = headersList.get('x-pathname') ?? '/';
+
+  const themeClass = aesthetic === 'luxury' ? 'luxury' : 'dark';
+  const isChooser = pathname === '/';
+
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${rajdhani.variable} ${inter.variable} h-full antialiased`}
+      className={`${anton.variable} ${rajdhani.variable} ${inter.variable} ${playfair.variable} h-full antialiased ${themeClass}`}
       suppressHydrationWarning
     >
       <head>
@@ -98,14 +115,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
-        <ThemeProvider>
-          <CartProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <CartDrawer />
-          </CartProvider>
-        </ThemeProvider>
+        <CartProvider>
+          {!isChooser && <Header />}
+          <main className="flex-1">{children}</main>
+          {!isChooser && <Footer />}
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

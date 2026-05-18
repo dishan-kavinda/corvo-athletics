@@ -84,7 +84,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <div key={crumb} className="flex items-center gap-2">
                 {i < arr.length - 1 ? (
                   <a
-                    href={i === 0 ? '/' : '/shop'}
+                    href={i === 0 ? '/home' : '/shop'}
                     style={{
                       fontFamily: 'var(--font-rajdhani)',
                       fontSize: '11px',
@@ -160,10 +160,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                 )}
-                {/* Red left accent */}
+                {/* Accent left bar */}
                 <div
                   className="absolute left-0 top-0 bottom-0 w-[3px]"
-                  style={{ background: '#D81829' }}
+                  style={{ background: 'var(--accent)' }}
                 />
               </div>
 
@@ -210,7 +210,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   fontWeight: 700,
                   letterSpacing: '0.52em',
                   textTransform: 'uppercase',
-                  color: '#D81829',
+                  color: 'var(--accent)',
                   marginBottom: '1rem',
                 }}
               >
@@ -231,7 +231,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <div className="flex items-center gap-4 mb-8">
                 <p
                   className="font-display"
-                  style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: '#D81829' }}
+                  style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: 'var(--accent)' }}
                 >
                   {product.priceData?.formatted?.price}
                 </p>
@@ -283,7 +283,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     { icon: '→', label: 'Lab-Tested & Independently Verified' },
                   ].map((item) => (
                     <div key={item.label} className="flex items-center gap-3">
-                      <span style={{ color: '#D81829', fontWeight: 700, fontSize: '14px' }}>
+                      <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '14px' }}>
                         {item.icon}
                       </span>
                       <p
@@ -320,7 +320,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             fontWeight: 700,
             letterSpacing: '0.32em',
             textTransform: 'uppercase',
-            color: '#D81829',
+            color: 'var(--accent)',
             textDecoration: 'underline',
             textUnderlineOffset: '4px',
           }}

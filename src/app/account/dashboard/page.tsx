@@ -55,7 +55,7 @@ export default async function DashboardPage() {
   return (
     <section
       className="relative min-h-[100svh] overflow-hidden"
-      style={{ background: '#07090F' }}
+      style={{ background: 'var(--page-bg)' }}
     >
       {/* Name watermark */}
       <div
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
           className="font-display uppercase select-none"
           style={{
             fontSize: 'clamp(5rem, 16vw, 14rem)',
-            color: '#CDD4EA',
+            color: 'var(--page-fg)',
             opacity: 0.025,
             lineHeight: 1,
             letterSpacing: '-0.03em',
@@ -84,7 +84,7 @@ export default async function DashboardPage() {
         style={{
           top: '14%',
           height: '1px',
-          background: 'linear-gradient(90deg, transparent, #D81829 30%, #D81829 70%, transparent)',
+          background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)',
           opacity: 0.15,
         }}
       />
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
               fontWeight: 700,
               letterSpacing: '0.52em',
               textTransform: 'uppercase',
-              color: '#D81829',
+              color: 'var(--accent)',
               marginBottom: '1.5rem',
             }}
           >
@@ -116,14 +116,14 @@ export default async function DashboardPage() {
             className="font-display uppercase leading-[0.88] mb-14"
             style={{
               fontSize: 'clamp(2.2rem, 7vw, 6.5rem)',
-              color: '#CDD4EA',
+              color: 'var(--page-fg)',
               letterSpacing: '-0.01em',
               maxWidth: '900px',
             }}
           >
             Welcome back,
             <br />
-            <span style={{ color: '#D81829' }}>{fullName.toUpperCase()}.</span>
+            <span style={{ color: 'var(--accent)' }}>{fullName.toUpperCase()}.</span>
           </h1>
         </HeroReveal>
 
@@ -142,7 +142,7 @@ export default async function DashboardPage() {
                     fontWeight: 700,
                     letterSpacing: '0.38em',
                     textTransform: 'uppercase',
-                    color: '#D81829',
+                    color: 'var(--accent)',
                     marginBottom: '0.5rem',
                   }}
                 >
@@ -154,7 +154,7 @@ export default async function DashboardPage() {
                     fontSize: '13px',
                     fontWeight: 600,
                     letterSpacing: '0.1em',
-                    color: '#838DAA',
+                    color: 'var(--muted)',
                     wordBreak: 'break-all',
                   }}
                 >
@@ -175,7 +175,7 @@ export default async function DashboardPage() {
             <a
               href="/account/logout"
               className="inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.99] cursor-pointer h-14 px-8 text-base border border-current hover:bg-blade hover:text-pure hover:border-blade"
-              style={{ color: '#CDD4EA' }}
+              style={{ color: 'var(--page-fg)' }}
             >
               Sign Out
             </a>

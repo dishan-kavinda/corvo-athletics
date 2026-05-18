@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { HeroReveal } from '@/components/motion/HeroReveal';
@@ -35,13 +36,15 @@ const pillars = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const cookieStore = await cookies();
+  const isLuxury = cookieStore.get('corvo_aesthetic')?.value === 'luxury';
   return (
     <>
       {/* ── Hero ─────────────────────────────────────── */}
       <section
         className="relative min-h-[70vh] flex items-end overflow-hidden"
-        style={{ background: '#07090F' }}
+        style={{ background: 'var(--section-dark)' }}
       >
         {/* Giant watermark */}
         <div
@@ -52,7 +55,7 @@ export default function AboutPage() {
             className="font-display uppercase select-none"
             style={{
               fontSize: 'clamp(10rem, 26vw, 22rem)',
-              color: '#CDD4EA',
+              color: 'var(--footer-fg)',
               opacity: 0.03,
               lineHeight: 1,
               letterSpacing: '-0.03em',
@@ -84,46 +87,66 @@ export default function AboutPage() {
                 fontWeight: 700,
                 letterSpacing: '0.52em',
                 textTransform: 'uppercase',
-                color: '#D81829',
+                color: 'var(--accent)',
                 marginBottom: '1.5rem',
               }}
             >
-              ── The Brand
+              {isLuxury ? '── The House' : '── The Brand'}
             </p>
           </HeroReveal>
 
           <HeroReveal delay={0.22} y={50} duration={1.0}>
             <h1
-              className="font-display uppercase leading-[0.88] mb-10"
+              className={`font-display leading-[0.88] mb-10${isLuxury ? '' : ' uppercase'}`}
               style={{
                 fontSize: 'clamp(3.5rem, 10vw, 9rem)',
-                color: '#CDD4EA',
+                color: 'var(--footer-fg)',
                 letterSpacing: '-0.01em',
                 maxWidth: '900px',
               }}
             >
-              NO
-              <br />
-              <span style={{ color: '#D81829' }}>COMPROMISE.</span>
+              {isLuxury ? (
+                <>
+                  Excellence,
+                  <br />
+                  <span style={{ color: 'var(--accent)' }}>Refined.</span>
+                </>
+              ) : (
+                <>
+                  NO
+                  <br />
+                  <span style={{ color: 'var(--accent)' }}>COMPROMISE.</span>
+                </>
+              )}
             </h1>
           </HeroReveal>
 
           <HeroReveal delay={0.55}>
             <div style={{ maxWidth: '520px' }}>
-              <p
-                className="text-base md:text-lg leading-relaxed mb-5"
-                style={{ color: '#838DAA' }}
-              >
-                Corvo Athletic was built for one reason: the gear and fuel athletes deserved
-                didn&apos;t exist. Cheap supplements, generic apparel, hollow promises. We were
-                done with it.
-              </p>
-              <p
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: '#838DAA' }}
-              >
-                Every product carries our name because we built it, tested it, and stand behind it.
-              </p>
+              {isLuxury ? (
+                <>
+                  <p className="text-base md:text-lg leading-relaxed mb-5" style={{ color: 'var(--footer-muted)' }}>
+                    Corvo Athletic was founded on a singular principle: those who commit to
+                    excellence deserve equipment crafted to the same standard. No concessions,
+                    no approximations.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--footer-muted)' }}>
+                    Every product carries our name because it was held to the Corvo standard
+                    before it ever reached you.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-base md:text-lg leading-relaxed mb-5" style={{ color: 'var(--footer-muted)' }}>
+                    Corvo Athletic was built for one reason: the gear and fuel athletes deserved
+                    didn&apos;t exist. Cheap supplements, generic apparel, hollow promises. We were
+                    done with it.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed" style={{ color: 'var(--footer-muted)' }}>
+                    Every product carries our name because we built it, tested it, and stand behind it.
+                  </p>
+                </>
+              )}
             </div>
           </HeroReveal>
         </div>
@@ -132,7 +155,7 @@ export default function AboutPage() {
       {/* ── Divider ticker ───────────────────────────── */}
       <div
         className="overflow-hidden py-[0.9rem]"
-        style={{ background: '#D81829' }}
+        style={{ background: 'var(--accent)' }}
       >
         <MarqueeStrip light />
       </div>
@@ -201,15 +224,15 @@ export default function AboutPage() {
       {/* ── Manifesto ────────────────────────────────── */}
       <section
         className="relative py-40 overflow-hidden"
-        style={{ background: '#07090F' }}
+        style={{ background: 'var(--section-dark)' }}
       >
         <div
           className="absolute top-0 left-0 right-0 h-[1px]"
-          style={{ background: 'linear-gradient(90deg, transparent, #D81829 30%, #D81829 70%, transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }}
         />
         <div
           className="absolute bottom-0 left-0 right-0 h-[1px]"
-          style={{ background: 'linear-gradient(90deg, transparent, #D81829 30%, #D81829 70%, transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }}
         />
 
         <div
@@ -217,32 +240,55 @@ export default function AboutPage() {
           style={{ maxWidth: '1440px' }}
         >
           <FadeIn>
-            <p
-              className="font-display uppercase leading-[0.9] mb-8"
-              style={{
-                fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
-                color: '#CDD4EA',
-                maxWidth: '800px',
-              }}
-            >
-              &ldquo;WE BUILD FOR THE{' '}
-              <span style={{ color: '#D81829' }}>OBSESSED.</span>
-              <br />
-              NOT THE{' '}
-              <span style={{ color: '#00BDAC' }}>CASUAL.&rdquo;</span>
-            </p>
-            <p
-              style={{
-                fontFamily: 'var(--font-rajdhani)',
-                fontSize: '12px',
-                fontWeight: 600,
-                letterSpacing: '0.38em',
-                textTransform: 'uppercase',
-                color: '#47516B',
-              }}
-            >
-              — The Corvo Standard
-            </p>
+            {isLuxury ? (
+              <>
+                <p
+                  className="font-display leading-[1.2] mb-8"
+                  style={{ fontSize: 'clamp(1.5rem, 3.8vw, 3rem)', color: 'var(--footer-fg)', maxWidth: '760px', letterSpacing: '0.01em' }}
+                >
+                  &ldquo;We build for those who understand that quality is not a luxury.
+                  <br />
+                  <span style={{ color: 'var(--accent)' }}>It is the only acceptable standard.&rdquo;</span>
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    letterSpacing: '0.38em',
+                    textTransform: 'uppercase',
+                    color: 'var(--footer-muted)',
+                  }}
+                >
+                  — The Corvo Founding Principle
+                </p>
+              </>
+            ) : (
+              <>
+                <p
+                  className="font-display uppercase leading-[0.9] mb-8"
+                  style={{ fontSize: 'clamp(2rem, 5.5vw, 4.5rem)', color: 'var(--footer-fg)', maxWidth: '800px' }}
+                >
+                  &ldquo;WE BUILD FOR THE{' '}
+                  <span style={{ color: 'var(--accent)' }}>OBSESSED.</span>
+                  <br />
+                  NOT THE{' '}
+                  <span style={{ color: 'var(--color-pulse)' }}>CASUAL.&rdquo;</span>
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    letterSpacing: '0.38em',
+                    textTransform: 'uppercase',
+                    color: 'var(--footer-muted)',
+                  }}
+                >
+                  — The Corvo Standard
+                </p>
+              </>
+            )}
           </FadeIn>
         </div>
       </section>
@@ -264,25 +310,35 @@ export default function AboutPage() {
                 fontWeight: 700,
                 letterSpacing: '0.52em',
                 textTransform: 'uppercase',
-                color: '#D81829',
+                color: 'var(--accent)',
                 marginBottom: '1.5rem',
               }}
             >
-              · See What We&apos;ve Built ·
+              {isLuxury ? '· The House of Corvo ·' : "· See What We\u2019ve Built ·"}
             </p>
             <h2
-              className="font-display uppercase leading-[0.9] mb-10"
+              className={`font-display leading-[0.9] mb-10${isLuxury ? '' : ' uppercase'}`}
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
             >
-              Train Harder.
-              <br />
-              <span style={{ color: '#D81829' }}>Recover Smarter.</span>
+              {isLuxury ? (
+                <>
+                  The Standard.
+                  <br />
+                  <span style={{ color: 'var(--accent)' }}>The Collection.</span>
+                </>
+              ) : (
+                <>
+                  Train Harder.
+                  <br />
+                  <span style={{ color: 'var(--accent)' }}>Recover Smarter.</span>
+                </>
+              )}
             </h2>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button href="/shop" variant="primary" size="lg">
                 Shop the Range →
               </Button>
-              <Button href="/" variant="ghost" size="lg">
+              <Button href="/home" variant="ghost" size="lg">
                 Back to Home
               </Button>
             </div>

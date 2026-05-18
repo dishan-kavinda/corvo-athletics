@@ -58,7 +58,7 @@ export default async function ShopPage() {
                 fontWeight: 700,
                 letterSpacing: '0.52em',
                 textTransform: 'uppercase',
-                color: '#D81829',
+                color: 'var(--accent)',
                 marginBottom: '1rem',
               }}
             >
@@ -103,8 +103,8 @@ export default async function ShopPage() {
                       textTransform: 'uppercase',
                       padding: '0.35rem 0.85rem',
                       border: '1px solid var(--border)',
-                      color: i === 0 ? '#D81829' : 'var(--muted)',
-                      borderColor: i === 0 ? '#D81829' : 'var(--border)',
+                      color: i === 0 ? 'var(--accent)' : 'var(--muted)',
+                      borderColor: i === 0 ? 'var(--accent)' : 'var(--border)',
                       cursor: 'default',
                     }}
                   >
@@ -120,7 +120,7 @@ export default async function ShopPage() {
       {/* ── Ticker ──────────────────────────────────── */}
       <div
         className="overflow-hidden py-[0.9rem]"
-        style={{ background: '#07090F', borderBottom: '1px solid #1B2038' }}
+        style={{ background: 'var(--section-dark)', borderBottom: '1px solid var(--border)' }}
       >
         <MarqueeStrip reverse />
       </div>
@@ -180,7 +180,7 @@ export default async function ShopPage() {
             fontWeight: 700,
             letterSpacing: '0.42em',
             textTransform: 'uppercase',
-            color: '#D81829',
+            color: 'var(--accent)',
             marginBottom: '1rem',
           }}
         >
@@ -200,7 +200,7 @@ export default async function ShopPage() {
             fontWeight: 700,
             letterSpacing: '0.32em',
             textTransform: 'uppercase',
-            color: '#D81829',
+            color: 'var(--accent)',
             textDecoration: 'underline',
             textUnderlineOffset: '4px',
           }}

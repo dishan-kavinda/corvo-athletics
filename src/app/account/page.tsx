@@ -23,7 +23,7 @@ export default async function AccountPage({
   return (
     <section
       className="relative min-h-[100svh] flex items-center overflow-hidden"
-      style={{ background: '#07090F' }}
+      style={{ background: 'var(--page-bg)' }}
     >
       {/* Background watermark */}
       <div
@@ -34,7 +34,7 @@ export default async function AccountPage({
           className="font-display uppercase select-none"
           style={{
             fontSize: 'clamp(7rem, 20vw, 18rem)',
-            color: '#CDD4EA',
+            color: 'var(--page-fg)',
             opacity: 0.025,
             lineHeight: 1,
             letterSpacing: '-0.03em',
@@ -67,7 +67,7 @@ export default async function AccountPage({
               fontWeight: 700,
               letterSpacing: '0.52em',
               textTransform: 'uppercase',
-              color: '#D81829',
+              color: 'var(--accent)',
               marginBottom: '1.5rem',
             }}
           >
@@ -80,7 +80,7 @@ export default async function AccountPage({
             className="font-display uppercase leading-[0.88] mb-12"
             style={{
               fontSize: 'clamp(3rem, 9vw, 8rem)',
-              color: '#CDD4EA',
+              color: 'var(--page-fg)',
               letterSpacing: '-0.01em',
               maxWidth: '700px',
             }}
@@ -125,7 +125,7 @@ export default async function AccountPage({
                   fontWeight: 700,
                   letterSpacing: '0.42em',
                   textTransform: 'uppercase',
-                  color: '#D81829',
+                  color: 'var(--accent)',
                   marginBottom: '1rem',
                 }}
               >
@@ -133,13 +133,13 @@ export default async function AccountPage({
               </p>
               <h2
                 className="font-display uppercase leading-none mb-4"
-                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#CDD4EA' }}
+                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: 'var(--page-fg)' }}
               >
                 Sign In
               </h2>
               <p
                 className="text-sm leading-relaxed mb-8"
-                style={{ color: '#47516B' }}
+                style={{ color: 'var(--muted)' }}
               >
                 Access your orders, saved preferences, and member perks.
               </p>
@@ -160,7 +160,7 @@ export default async function AccountPage({
                   fontWeight: 700,
                   letterSpacing: '0.42em',
                   textTransform: 'uppercase',
-                  color: '#D81829',
+                  color: 'var(--accent)',
                   marginBottom: '1rem',
                 }}
               >
@@ -168,13 +168,13 @@ export default async function AccountPage({
               </p>
               <h2
                 className="font-display uppercase leading-none mb-4"
-                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: '#CDD4EA' }}
+                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', color: 'var(--page-fg)' }}
               >
                 New Here?
               </h2>
               <p
                 className="text-sm leading-relaxed mb-8"
-                style={{ color: '#47516B' }}
+                style={{ color: 'var(--muted)' }}
               >
                 Create a Corvo account for early drops, order tracking, and member exclusives.
               </p>
@@ -194,7 +194,7 @@ export default async function AccountPage({
               fontWeight: 600,
               letterSpacing: '0.28em',
               textTransform: 'uppercase',
-              color: '#2E3450',
+              color: 'var(--muted)',
             }}
           >
             Secured by Wix Identity

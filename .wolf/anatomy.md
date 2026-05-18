@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-18T13:21:24.002Z
-> Files: 31 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-18T14:40:05.576Z
+> Files: 37 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -13,19 +13,23 @@
 ## .claude/rules/
 
 
+## src/
+
+- `proxy.ts` — Next.js 16 proxy (formerly middleware): injects x-pathname header; redirects `/`→`/home` if corvo_aesthetic cookie set, `/home`→`/` if not (~188 tok)
+
 ## src/app/
 
-- `globals.css` — Styles: 19 rules, 52 vars (~1584 tok)
-- `layout.tsx` — anton (~955 tok)
-- `page.tsx` — categories (~8726 tok)
+- `globals.css` — Styles: 19 rules, 81 vars (~2118 tok)
+- `layout.tsx` — anton (~1105 tok)
+- `page.tsx` — metadata (~73 tok)
 
 ## src/app/about/
 
-- `page.tsx` — metadata (~2909 tok)
+- `page.tsx` — metadata (~3712 tok)
 
 ## src/app/account/
 
-- `page.tsx` — Sign In / Create Account page. Checks wix_member_tokens cookie; redirects to /account/dashboard if already logged in (~700 tok)
+- `page.tsx` — metadata (~1841 tok)
 
 ## src/app/account/callback/
 
@@ -33,7 +37,7 @@
 
 ## src/app/account/dashboard/
 
-- `page.tsx` — metadata (~1755 tok)
+- `page.tsx` — metadata (~1773 tok)
 
 ## src/app/account/login/
 
@@ -43,6 +47,10 @@
 
 - `route.ts` — GET: Clears wix_member_tokens and wix_member_name cookies, redirects to / (~60 tok)
 
+## src/app/api/set-aesthetic/
+
+- `route.ts` — POST: validates aesthetic ('savage'|'luxury'), sets corvo_aesthetic cookie (1yr, non-httpOnly), returns {ok:true} (~173 tok)
+
 ## src/app/checkout/
 
 - `actions.ts` — Exports CreatePaymentIntentResult, createCheckoutPaymentIntent, CompleteOrderInput, CompleteOrderRes (~3020 tok)
@@ -51,6 +59,10 @@
 ## src/app/contact/
 
 - `page.tsx` — ContactPage (~32 tok)
+
+## src/app/home/
+
+- `page.tsx` — metadata (~8593 tok)
 
 ## src/app/returns/
 
@@ -62,11 +74,11 @@
 
 ## src/app/shop/
 
-- `page.tsx` — dynamic (~2005 tok)
+- `page.tsx` — dynamic (~2018 tok)
 
 ## src/app/shop/[slug]/
 
-- `page.tsx` — dynamic (~3372 tok)
+- `page.tsx` — dynamic (~3380 tok)
 
 ## src/app/thank-you/
 
@@ -74,7 +86,8 @@
 
 ## src/components/3d/
 
-- `HeroScene.tsx` — dodecVerts (~1860 tok)
+- `HeroScene.tsx` — dodecVerts (~2550 tok)
+- `LuxuryHeroSceneClient.tsx` — LuxuryHeroScene (~84 tok)
 
 ## src/components/cart/
 
@@ -85,8 +98,8 @@
 
 ## src/components/layout/
 
-- `Footer.tsx` — footerLinks (~1433 tok)
-- `Header.tsx` — navItems (~1225 tok)
+- `Footer.tsx` — footerLinks (~1480 tok)
+- `Header.tsx` — navItems (~1226 tok)
 - `MobileNav.tsx` — navItems (~1757 tok)
 
 ## src/components/motion/
@@ -97,7 +110,9 @@
 - `Button.tsx` — variants (~517 tok)
 - `MarqueeStrip.tsx` — WORDS (~453 tok)
 - `NewsletterForm.tsx` — NewsletterForm — renders form (~1187 tok)
-- `ProductCard.tsx` — ProductCard (~1153 tok)
+- `ProductCard.tsx` — ProductCard (~1160 tok)
+- `SplitChooser.tsx` — T (~1906 tok)
+- `ThemeToggle.tsx` — ThemeToggle (~241 tok)
 
 ## src/lib/
 

@@ -411,3 +411,129 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 01:23 | Session end: 13 writes across 3 files (page.tsx, wix-member-client.ts, route.ts) | 20 reads | ~32794 tok |
 | 01:27 | designqc: captured 0 screenshots (0KB, ~0 tok) | C:/Program Files/Git/account | ready for eval | ~0 |
 | 01:27 | designqc: captured 6 screenshots (144KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 01:29 | Session end: 13 writes across 3 files (page.tsx, wix-member-client.ts, route.ts) | 20 reads | ~32794 tok |
+
+## Session: 2026-05-18 01:45
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 01:49 | Created src/middleware.ts | — | ~189 |
+| 01:49 | Created src/app/api/set-aesthetic/route.ts | — | ~173 |
+| 01:49 | Created src/components/ui/SplitChooser.tsx | — | ~2214 |
+| 01:51 | Created src/app/home/page.tsx | — | ~7399 |
+| 01:51 | Edited src/app/globals.css | expanded (+32 lines) | ~306 |
+| 01:51 | Created src/app/layout.tsx | — | ~1103 |
+| 01:51 | Created src/app/page.tsx | — | ~73 |
+| 01:51 | Created src/components/ui/ThemeToggle.tsx | — | ~474 |
+| 01:52 | Edited src/app/layout.tsx | inline fix | ~22 |
+| 01:52 | Edited src/app/layout.tsx | Cormorant_Garant() → Playfair_Display() | ~57 |
+| 01:52 | Edited src/app/layout.tsx | "${anton.variable} ${rajdh" → "${anton.variable} ${rajdh" | ~38 |
+| 01:53 | Edited src/proxy.ts | inline fix | ~13 |
+| 01:55 | Session end: 12 writes across 8 files (middleware.ts, route.ts, SplitChooser.tsx, page.tsx, globals.css) | 7 reads | ~24551 tok |
+| 02:11 | Edited src/app/globals.css | expanded (+6 lines) | ~65 |
+| 02:11 | Edited src/app/globals.css | expanded (+28 lines) | ~260 |
+| 02:12 | Edited src/components/3d/HeroScene.tsx | added 1 condition(s) | ~844 |
+
+## Session: 2026-05-18 02:14
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 02:14 | Created src/components/3d/LuxuryHeroSceneClient.tsx | — | ~84 |
+| 02:16 | Created src/components/layout/Footer.tsx | — | ~1480 |
+| 02:16 | Edited src/components/ui/ProductCard.tsx | 6→6 lines | ~111 |
+| 02:16 | Edited src/components/ui/ProductCard.tsx | 3→3 lines | ~22 |
+| 02:16 | Edited src/components/ui/ProductCard.tsx | "linear-gradient(90deg, #D" → "linear-gradient(90deg, va" | ~22 |
+| 02:17 | Edited src/components/ui/SplitChooser.tsx | 54→50 lines | ~487 |
+| 02:17 | Edited src/app/shop/page.tsx | 2→2 lines | ~22 |
+| 02:17 | Edited src/app/shop/page.tsx | 2→2 lines | ~44 |
+| 02:17 | Edited src/app/shop/page.tsx | "#07090F" → "var(--section-dark)" | ~27 |
+| 02:17 | Edited src/app/shop/page.tsx | 5→5 lines | ~38 |
+| 02:17 | Edited src/app/shop/page.tsx | 3→3 lines | ~34 |
+| 02:17 | Edited src/app/about/page.tsx | 3→3 lines | ~27 |
+| 02:17 | Edited src/app/about/page.tsx | 5→5 lines | ~40 |
+| 02:17 | Edited src/app/about/page.tsx | "#D81829" → "var(--accent)" | ~21 |
+| 02:17 | Edited src/app/about/page.tsx | 3→3 lines | ~25 |
+| 02:17 | Edited src/app/about/page.tsx | 10→10 lines | ~137 |
+| 02:17 | Edited src/app/about/page.tsx | "#D81829" → "var(--accent)" | ~21 |
+| 02:17 | Edited src/app/about/page.tsx | 5→5 lines | ~44 |
+| 02:18 | Edited src/app/about/page.tsx | "#D81829" → "var(--accent)" | ~23 |
+| 02:18 | Edited src/app/about/page.tsx | 3→3 lines | ~33 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | "/" → "/home" | ~16 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | 5→5 lines | ~59 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | 5→5 lines | ~42 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | inline fix | ~27 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | "#D81829" → "var(--accent)" | ~28 |
+| 02:18 | Edited src/app/shop/[slug]/page.tsx | 3→3 lines | ~34 |
+| 02:18 | Edited src/app/account/page.tsx | 3→3 lines | ~25 |
+| 02:18 | Edited src/app/account/page.tsx | 6→6 lines | ~56 |
+| 02:18 | Edited src/app/account/page.tsx | "#D81829" → "var(--accent)" | ~10 |
+| 02:18 | Edited src/app/account/page.tsx | inline fix | ~25 |
+| 02:18 | Edited src/app/account/page.tsx | 3→3 lines | ~37 |
+| 02:18 | Edited src/app/account/page.tsx | "#47516B" → "var(--muted)" | ~14 |
+| 02:18 | Edited src/app/account/page.tsx | "#2E3450" → "var(--muted)" | ~10 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | 3→3 lines | ~24 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | 6→6 lines | ~56 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | "linear-gradient(90deg, tr" → "linear-gradient(90deg, tr" | ~32 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | "#D81829" → "var(--accent)" | ~10 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | 3→3 lines | ~38 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | "#D81829" → "var(--accent)" | ~25 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | "#838DAA" → "var(--muted)" | ~11 |
+| 02:19 | Edited src/app/account/dashboard/page.tsx | "#CDD4EA" → "var(--page-fg)" | ~14 |
+| 02:19 | Edited src/app/home/page.tsx | added 2 import(s) | ~155 |
+| 02:19 | Edited src/app/home/page.tsx | added optional chaining | ~47 |
+| 02:19 | Edited src/app/home/page.tsx | inline fix | ~20 |
+| 02:19 | Edited src/app/home/page.tsx | "linear-gradient(to bottom" → "linear-gradient(to bottom" | ~36 |
+| 02:19 | Edited src/app/home/page.tsx | inline fix | ~33 |
+| 02:20 | Edited src/app/home/page.tsx | 2→2 lines | ~122 |
+| 02:20 | Edited src/app/home/page.tsx | 2→2 lines | ~21 |
+| 02:20 | Edited src/app/home/page.tsx | inline fix | ~40 |
+| 02:20 | Edited src/app/home/page.tsx | "#D81829" → "var(--accent)" | ~22 |
+| 02:20 | Edited src/app/home/page.tsx | "#00BDAC" → "var(--color-pulse)" | ~23 |
+| 02:20 | Edited src/app/home/page.tsx | 3→3 lines | ~35 |
+| 02:21 | Edited src/app/about/page.tsx | 3→3 lines | ~40 |
+| 02:21 | Edited src/app/about/page.tsx | "#838DAA" → "var(--footer-muted)" | ~16 |
+| 02:21 | Edited src/app/about/page.tsx | 3→3 lines | ~38 |
+| 02:21 | Edited src/app/about/page.tsx | "#00BDAC" → "var(--color-pulse)" | ~24 |
+| 02:21 | Edited src/app/about/page.tsx | 4→4 lines | ~32 |
+| 02:21 | Edited src/app/about/page.tsx | 3→3 lines | ~35 |
+
+## Session — 2026-05-19
+
+| Time  | Action | Files | Outcome | ~tokens |
+|-------|--------|-------|---------|---------|
+| 14:00 | Created LuxuryHeroSceneClient dynamic import wrapper | src/components/3d/LuxuryHeroSceneClient.tsx | new file | ~50 |
+| 14:05 | Updated home/page.tsx: async, cookie-aware, conditional LuxuryHeroScene, CSS var manifesto | src/app/home/page.tsx | build pass | ~200 |
+| 14:10 | Replaced all hardcoded colors with CSS vars across all pages and components | Footer, ProductCard, SplitChooser, shop, about, shop/[slug], account, dashboard | build pass 17 routes | ~600 |
+| 02:23 | Session end: 58 writes across 5 files (LuxuryHeroSceneClient.tsx, Footer.tsx, ProductCard.tsx, SplitChooser.tsx, page.tsx) | 10 reads | ~28162 tok |
+| 02:28 | Edited src/app/home/page.tsx | CSS: standard | ~483 |
+| 02:28 | Edited src/app/home/page.tsx | CSS: standardsLuxury, statsLuxury | ~82 |
+| 02:28 | Edited src/app/home/page.tsx | expanded (+12 lines) | ~452 |
+| 02:29 | Edited src/app/home/page.tsx | expanded (+12 lines) | ~270 |
+| 02:29 | Edited src/app/home/page.tsx | 2→3 lines | ~107 |
+| 02:29 | Edited src/app/home/page.tsx | 1→4 lines | ~59 |
+| 02:29 | Edited src/app/home/page.tsx | 3→3 lines | ~77 |
+| 02:29 | Edited src/app/home/page.tsx | inline fix | ~22 |
+| 02:29 | Edited src/app/home/page.tsx | expanded (+11 lines) | ~449 |
+| 02:29 | Edited src/app/home/page.tsx | 8→12 lines | ~260 |
+| 02:29 | Edited src/app/home/page.tsx | inline fix | ~20 |
+| 02:30 | Edited src/app/home/page.tsx | 19→21 lines | ~279 |
+| 02:30 | Edited src/app/about/page.tsx | added 1 import(s) | ~95 |
+| 02:30 | Edited src/app/about/page.tsx | added optional chaining | ~45 |
+| 02:30 | Edited src/app/about/page.tsx | CSS: principle | ~707 |
+| 02:30 | Edited src/app/about/page.tsx | expanded (+23 lines) | ~563 |
+| 02:30 | Edited src/app/about/page.tsx | inline fix | ~25 |
+| 02:30 | Edited src/app/about/page.tsx | expanded (+10 lines) | ~179 |
+| 02:31 | Session end: 76 writes across 5 files (LuxuryHeroSceneClient.tsx, Footer.tsx, ProductCard.tsx, SplitChooser.tsx, page.tsx) | 10 reads | ~32446 tok |
+| 02:35 | Created src/components/ui/ThemeToggle.tsx | — | ~241 |
+| 02:35 | Edited src/components/layout/Header.tsx | "/" → "/home" | ~29 |
+| 02:35 | Edited src/components/ui/SplitChooser.tsx | 2→2 lines | ~78 |
+| 02:35 | Created src/components/ui/SplitChooser.tsx | — | ~2190 |
+
+## Session: 2026-05-18 02:38
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 02:38 | Task C verified: ThemeToggle rewrite + Header logo href fix + SplitChooser panel swap (luxury-left, savage-right) | ThemeToggle.tsx, Header.tsx, SplitChooser.tsx | pnpm build clean 17 routes | ~800 |
+| 02:39 | Edited src/components/ui/SplitChooser.tsx | reduced (-14 lines) | ~85 |
+| 02:40 | Edited src/components/ui/SplitChooser.tsx | reduced (-16 lines) | ~90 |
+| 02:40 | Session end: 2 writes across 1 files (SplitChooser.tsx) | 0 reads | ~175 tok |

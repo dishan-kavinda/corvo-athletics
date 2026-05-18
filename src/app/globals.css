@@ -84,6 +84,12 @@ html.dark {
     rgba(7, 9, 15, 0)    83%
   );
   --card-shadow: none;
+  --section-dark:  #07090F;
+  --footer-bg:     #07090F;
+  --footer-border: #1B2038;
+  --footer-accent: #D81829;
+  --footer-muted:  #47516B;
+  --footer-fg:     #CDD4EA;
 }
 
 html { scroll-behavior: smooth; }
@@ -182,4 +188,64 @@ body::after {
 .section-dark {
   background: #07090F;
   color: #CDD4EA;
+}
+
+/* ── Luxury mode ──────────────────────────────── */
+html.luxury {
+  --font-display:     var(--font-cormorant);
+  --color-blade:      #B8962C;
+  --color-blade-deep: #9A7A1A;
+
+  --page-bg:          #FAF7F0;
+  --page-fg:          #1A1008;
+  --surface:          #FFFFFF;
+  --surface-elevated: #F5F1E8;
+  --border:           rgba(184, 150, 44, 0.18);
+  --border-subtle:    rgba(184, 150, 44, 0.08);
+  --muted:            #8B7355;
+  --header-bg:        rgba(250, 247, 240, 0.92);
+  --accent:           #B8962C;
+  --accent-dim:       rgba(184, 150, 44, 0.1);
+  --glow:             rgba(184, 150, 44, 0.06);
+  --hero-gradient: linear-gradient(
+    90deg,
+    rgba(250, 247, 240, 1)    0%,
+    rgba(250, 247, 240, 0.96) 36%,
+    rgba(250, 247, 240, 0.62) 62%,
+    rgba(250, 247, 240, 0)    83%
+  );
+  --card-shadow: 0 2px 24px rgba(0, 0, 0, 0.05), 0 1px 6px rgba(0, 0, 0, 0.03);
+  --section-dark:  #1A1008;
+  --footer-bg:     #1A1008;
+  --footer-border: rgba(184, 150, 44, 0.22);
+  --footer-accent: #B8962C;
+  --footer-muted:  #7A6547;
+  --footer-fg:     #E8E2D6;
+  --color-pulse:   #D4AB4B;
+}
+
+html.luxury .font-display {
+  font-family: var(--font-cormorant), 'Playfair Display', Georgia, serif !important;
+}
+
+/* Luxury — no glow on interactive elements */
+html.luxury button,
+html.luxury a[class] {
+  box-shadow: none !important;
+}
+html.luxury button:hover,
+html.luxury a[class]:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Luxury — .section-dark uses warm walnut instead of cold black */
+html.luxury .section-dark {
+  background: var(--section-dark);
+  color: #E8E2D6;
+}
+
+/* Luxury — ::selection uses gold */
+html.luxury ::selection {
+  background: #B8962C;
+  color: #FAF7F0;
 }

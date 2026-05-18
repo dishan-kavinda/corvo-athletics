@@ -41,7 +41,7 @@ export function Header() {
         {/* ── Left: hamburger + wordmark ──────────────── */}
         <div className="flex items-center gap-4">
           <MobileNav />
-          <Link href="/" className="group flex flex-col items-center leading-none select-none">
+          <Link href="/home" className="group flex flex-col items-center leading-none select-none">
             <span
               className="font-display uppercase transition-colors duration-200 group-hover:text-blade"
               style={{ fontSize: '1.2rem', letterSpacing: '0.32em', marginRight: '-0.32em' }}
