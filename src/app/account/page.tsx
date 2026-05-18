@@ -178,7 +178,7 @@ export default async function AccountPage({
               >
                 Create a Corvo account for early drops, order tracking, and member exclusives.
               </p>
-              <Button href="/account/login" variant="outline" size="md">
+              <Button href="/account/register" variant="outline" size="md">
                 Create Account →
               </Button>
             </div>
