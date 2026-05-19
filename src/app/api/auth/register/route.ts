@@ -16,11 +16,10 @@ async function generateAuthUrl(sessionToken: string) {
 }
 
 export async function POST(req: NextRequest) {
-  const { email, password, name, captchaToken } = (await req.json()) as {
+  const { email, password, name } = (await req.json()) as {
     email?: string;
     password?: string;
     name?: string;
-    captchaToken?: string;
   };
   if (!email || !password) {
     return NextResponse.json({ error: 'Missing credentials' }, { status: 400 });
@@ -32,7 +31,6 @@ export async function POST(req: NextRequest) {
       email,
       password,
       ...(name ? { profile: { nickname: name } } : {}),
-      ...(captchaToken ? { captchaTokens: { invisibleRecaptchaToken: captchaToken } } : {}),
     });
 
     if (result.loginState === LoginState.SUCCESS) {
@@ -60,11 +58,9 @@ export async function POST(req: NextRequest) {
     }
 
     const errorCode = 'errorCode' in result ? (result as { errorCode?: string }).errorCode : undefined;
-    return NextResponse.json(
-      { loginState: 'FAILURE', errorCode },
-      { status: 400 },
-    );
-  } catch {
+    return NextResponse.json({ loginState: 'FAILURE', errorCode }, { status: 400 });
+  } catch (err) {
+    console.error('[register]', err);
     return NextResponse.json({ loginState: 'FAILURE', error: 'Could not create account.' }, { status: 500 });
   }
 }
