@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T07:58:19.746Z
-> Files: 48 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T08:26:09.233Z
+> Files: 53 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -42,6 +42,7 @@
 
 ## src/app/account/login/
 
+- `page.tsx` — metadata (~520 tok)
 - `route.ts` — Next.js API route: GET (~212 tok)
 
 ## src/app/account/logout/
@@ -50,7 +51,12 @@
 
 ## src/app/account/register/
 
+- `page.tsx` — metadata (~524 tok)
 - `route.ts` — Next.js API route: GET (~217 tok)
+
+## src/app/api/auth/exchange/
+
+- `route.ts` — Next.js API route: POST (~290 tok)
 
 ## src/app/api/set-aesthetic/
 
@@ -112,6 +118,7 @@
 
 ## src/components/ui/
 
+- `AuthForm.tsx` — LABEL — renders form (~3961 tok)
 - `Button.tsx` — variants (~517 tok)
 - `MarqueeStrip.tsx` — WORDS (~453 tok)
 - `NewsletterForm.tsx` — NewsletterForm — renders form (~1187 tok)
@@ -132,6 +139,7 @@
 
 ## src/lib/
 
+- `wix-browser.ts` — Module singleton preserves internal OAuth state (e.g. stateToken for email verification). (~137 tok)
 - `wix-member-client.ts` — Exports WixTokens, WixOAuthData, createServerMemberClient (~190 tok)
 - `wix-orders.ts` — Exports WixOrderSummary, getMemberOrders, getWixOrder (~1709 tok)
 
