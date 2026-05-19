@@ -1223,10 +1223,321 @@
       "file": "src/components/ui/AuthForm.tsx",
       "root_cause": "Browser-side Wix SDK calls to www.wixapis.com return 403; SDK also opens a cross-origin iframe to the Wix OAuth endpoint which browsers block",
       "fix": "Moved all auth calls (login, register, verify, reset) to server-side Next.js API routes (/api/auth/login, /api/auth/register, /api/auth/verify, /api/auth/reset). AuthForm now uses fetch() to those routes instead of the Wix SDK directly. Removed wix-browser.ts singleton.",
-      "tags": ["auth", "cors", "403", "iframe-blocked", "wix-sdk", "server-side"],
+      "tags": [
+        "auth",
+        "cors",
+        "403",
+        "iframe-blocked",
+        "wix-sdk",
+        "server-side"
+      ],
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-19T00:00:00.000Z"
+    },
+    {
+      "id": "bug-076",
+      "timestamp": "2026-05-19T09:25:31.350Z",
+      "error_message": "Missing await",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "Async call without await — returned Promise instead of value",
+      "fix": "Added await to async call",
+      "tags": [
+        "auto-detected",
+        "async-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T09:25:31.350Z"
+    },
+    {
+      "id": "bug-077",
+      "timestamp": "2026-05-19T10:39:41.655Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/api/auth/register/route.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T10:39:41.655Z"
+    },
+    {
+      "id": "bug-078",
+      "timestamp": "2026-05-19T11:17:56.440Z",
+      "error_message": "CSS fix: email",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "email: form.email, password: form.password, name: form.name || undefined, captchaToken → form.email, password: form.password, name: form.name || undefined",
+      "fix": "Changed email: form.email, password: form.password, name: form.name || undefined, captchaToken → form.email, password: form.password, name: form.name || undefined",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:17:56.440Z"
+    },
+    {
+      "id": "bug-079",
+      "timestamp": "2026-05-19T11:52:14.082Z",
+      "error_message": "CSS fix: opacity, background-image",
+      "file": "src/app/globals.css",
+      "root_cause": "opacity: 0.032 → 0.028; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\") → url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
+      "fix": "Changed opacity: 0.032 → 0.028; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\") → url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "css"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-19T11:52:25.604Z"
+    },
+    {
+      "id": "bug-080",
+      "timestamp": "2026-05-19T11:52:35.734Z",
+      "error_message": "CSS fix: primary, gold",
+      "file": "src/components/ui/Button.tsx",
+      "root_cause": "primary: 'bg-blade text-pure hover:bg-blade-deep shadow-[0_0_0_0_rgba(216,24,41,0)] hover:shadow-[0_0_36px_rgba(216,24,41,0.5)] active:scale-[0.98]', → 'bg-blade text-pure hover:bg-blade-deep btn-glow active:scale-[0.98]',; gold: 'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden shadow-[0_0_0_0_rgba(201,169,97,0)] hover:shadow-[0_0_28px_rgba(201,169,97,0.4)]', → 'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden btn-glow',",
+      "fix": "Changed primary: 'bg-blade text-pure hover:bg-blade-deep shadow-[0_0_0_0_rgba(216,24,41,0)] hover:shadow-[0_0_36px_rgba(216,24,41,0.5)] active:scale-[0.98]', → 'bg-blade text-pure hover:bg-blade-deep btn-glow active:scale-[0.98]',; gold: 'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden shadow-[0_0_0_0_rgba(201,169,97,0)] hover:shadow-[0_0_28px_rgba(201,169,97,0.4)]', → 'relative bg-gold text-ink hover:bg-gold-deep overflow-hidden btn-glow',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:52:35.734Z"
+    },
+    {
+      "id": "bug-081",
+      "timestamp": "2026-05-19T11:52:50.578Z",
+      "error_message": "CSS fix: background, color, transition",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "background: loading ? 'var(--border)' : '#D81829', → loading ? 'var(--border)' : 'var(--accent)',; color: '#fff', → loading ? 'var(--muted)' : '#fff',; transition: 'background 0.2s', → 'background 0.2s, color 0.2s',",
+      "fix": "Changed background: loading ? 'var(--border)' : '#D81829', → loading ? 'var(--border)' : 'var(--accent)',; color: '#fff', → loading ? 'var(--muted)' : '#fff',; transition: 'background 0.2s', → 'background 0.2s, color 0.2s',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:52:50.578Z"
+    },
+    {
+      "id": "bug-082",
+      "timestamp": "2026-05-19T11:55:15.441Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/cart/CartDrawer.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-19T11:55:16.596Z"
+    },
+    {
+      "id": "bug-083",
+      "timestamp": "2026-05-19T11:55:32.340Z",
+      "error_message": "Type error",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation | Also: <button; onClick={(e) => { e.stopPropagation(); pick('savage'); }}",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-19T11:55:39.466Z"
+    },
+    {
+      "id": "bug-084",
+      "timestamp": "2026-05-19T11:56:33.127Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/cart/CartIcon.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:56:33.127Z"
+    },
+    {
+      "id": "bug-085",
+      "timestamp": "2026-05-19T11:56:34.269Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/account/page.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:56:34.269Z"
+    },
+    {
+      "id": "bug-086",
+      "timestamp": "2026-05-19T11:56:35.141Z",
+      "error_message": "Wrong reference: D81829 should be var",
+      "file": "src/app/thank-you/page.tsx",
+      "root_cause": "Used \"D81829\" instead of \"var\"",
+      "fix": "Changed D81829 → var",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:56:35.141Z"
+    },
+    {
+      "id": "bug-087",
+      "timestamp": "2026-05-19T11:57:01.139Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/checkout/CheckoutForm.tsx",
+      "root_cause": "Had '#D81829'",
+      "fix": "Changed to 'var(--accent)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 5,
+      "last_seen": "2026-05-19T11:57:16.011Z"
+    },
+    {
+      "id": "bug-088",
+      "timestamp": "2026-05-19T11:57:46.480Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:57:46.480Z"
+    },
+    {
+      "id": "bug-089",
+      "timestamp": "2026-05-19T11:57:59.085Z",
+      "error_message": "CSS fix: antialias",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "antialias: true, alpha: true → !lowEnd, alpha: true, powerPreference: 'high-performance'",
+      "fix": "Changed antialias: true, alpha: true → !lowEnd, alpha: true, powerPreference: 'high-performance'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-19T11:58:33.372Z"
+    },
+    {
+      "id": "bug-090",
+      "timestamp": "2026-05-19T11:58:14.476Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 16→13 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T11:58:14.476Z"
+    },
+    {
+      "id": "bug-091",
+      "timestamp": "2026-05-19T12:16:26.214Z",
+      "error_message": "CSS fix: main",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "main: 'M8 0 L0 44 L7 44 L0 80 L8 80 L2 115',     branch: null,              x: '41%', top: '0%',  w: 13, delay: 2.1, period: 3.5 → 'M6 0 L0 30 L9 30 L2 60 L10 60 L0 120',    branches: [],                                 x: '22%', top: '12%', w: 14, delay: 2.6, period: 3.7",
+      "fix": "Changed main: 'M8 0 L0 44 L7 44 L0 80 L8 80 L2 115',     branch: null,              x: '41%', top: '0%',  w: 13, delay: 2.1, period: 3.5 → 'M6 0 L0 30 L9 30 L2 60 L10 60 L0 120',    branches: [],                                 x: '22%', top: '12%', w: 14, delay: 2.6, period: 3.7",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 4,
+      "last_seen": "2026-05-19T12:21:22.085Z"
+    },
+    {
+      "id": "bug-092",
+      "timestamp": "2026-05-19T12:16:49.909Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "23 lines replaced/restructured",
+      "fix": "Rewrote 50→77 lines (23 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T12:16:49.909Z"
+    },
+    {
+      "id": "bug-093",
+      "timestamp": "2026-05-19T12:23:36.457Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "10 lines replaced/restructured",
+      "fix": "Rewrote 29→47 lines (10 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T12:23:36.457Z"
+    },
+    {
+      "id": "bug-094",
+      "timestamp": "2026-05-19T12:29:52.555Z",
+      "error_message": "CSS fix: left",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "left: '80%',  top: '-1%', h: '52%', rotate: '-4deg',  delay: 1.2,  period: 3.0 → `${(i * 4.3 + 2) % 96",
+      "fix": "Changed left: '80%',  top: '-1%', h: '52%', rotate: '-4deg',  delay: 1.2,  period: 3.0 → `${(i * 4.3 + 2) % 96",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T12:29:52.555Z"
     }
   ]
 }

@@ -707,3 +707,28 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 00:10 | UI/UX pass complete — replaced all #D81829 hardcoded accents with var(--accent) across CartDrawer, CartIcon, MarqueeStrip, AuthForm, NewsletterForm, Button, account/page, thank-you/page, CheckoutForm | 10 files | ~650 |
 | 00:10 | Added CTA entry buttons to SplitChooser.tsx — "Enter the House" (luxury) and "Enter the Arena" (savage) | SplitChooser.tsx | ~90 |
 | 00:10 | HeroScene performance — low-end detection (mobile<768px or hardwareConcurrency<=2), disables Bloom/Sparkles/antialias, caps dpr=1, reduces sphere segments 64→32 | HeroScene.tsx | ~180 |
+| 00:02 | Session end: 19 writes across 7 files (CartDrawer.tsx, MarqueeStrip.tsx, SplitChooser.tsx, CartIcon.tsx, page.tsx) | 9 reads | ~28347 tok |
+| 00:05 | Created src/components/ui/SplitChooser.tsx | — | ~3028 |
+| 00:06 | Session end: 20 writes across 7 files (CartDrawer.tsx, MarqueeStrip.tsx, SplitChooser.tsx, CartIcon.tsx, page.tsx) | 9 reads | ~32068 tok |
+| 00:08 | Created src/components/ui/SplitChooser.tsx | — | ~2697 |
+| 00:13 | Created src/components/ui/SplitChooser.tsx | — | ~3861 |
+| 00:16 | Edited src/components/ui/SplitChooser.tsx | 7→8 lines | ~268 |
+| 00:16 | Edited src/components/ui/SplitChooser.tsx | modified LightningOverlay() | ~988 |
+| 00:16 | Edited src/components/ui/SplitChooser.tsx | CSS: backgroundColor | ~74 |
+| 00:20 | Edited src/components/ui/SplitChooser.tsx | 8→8 lines | ~142 |
+| 00:21 | Edited src/components/ui/SplitChooser.tsx | modified LightningOverlay() | ~907 |
+| 00:23 | Edited src/components/ui/SplitChooser.tsx | modified corner() | ~151 |
+| 00:23 | Edited src/components/ui/SplitChooser.tsx | CSS: div, div, glow | ~628 |
+| 00:23 | Edited src/components/ui/SplitChooser.tsx | 36→33 lines | ~468 |
+| 00:24 | Edited src/components/ui/SplitChooser.tsx | 1→2 lines | ~66 |
+| 00:24 | Edited src/components/ui/SplitChooser.tsx | 33→28 lines | ~371 |
+
+## Session: 2026-05-19 00:27
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 00:29 | Edited src/components/ui/SplitChooser.tsx | expanded (+11 lines) | ~211 |
+| 00:30 | Edited src/components/ui/SplitChooser.tsx | modified FireEffect() | ~878 |
+| 00:30 | Edited src/components/ui/SplitChooser.tsx | 2→2 lines | ~30 |
+| 00:30 | replaced LightningOverlay with FireEffect (crimson fire at bottom) | src/components/ui/SplitChooser.tsx | done | ~800 |
+| 00:31 | Session end: 3 writes across 1 files (SplitChooser.tsx) | 1 reads | ~5179 tok |

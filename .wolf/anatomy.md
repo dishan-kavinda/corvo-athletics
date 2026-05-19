@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T08:26:09.233Z
-> Files: 53 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T12:30:31.977Z
+> Files: 57 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -20,7 +20,7 @@
 
 ## src/app/
 
-- `globals.css` — Styles: 19 rules, 81 vars (~2118 tok)
+- `globals.css` — Styles: 23 rules, 87 vars (~2394 tok)
 - `layout.tsx` — anton (~1105 tok)
 - `page.tsx` — metadata (~73 tok)
 
@@ -30,7 +30,7 @@
 
 ## src/app/account/
 
-- `page.tsx` — metadata (~1842 tok)
+- `page.tsx` — metadata (~1844 tok)
 
 ## src/app/account/callback/
 
@@ -38,7 +38,7 @@
 
 ## src/app/account/dashboard/
 
-- `page.tsx` — metadata (~4076 tok)
+- `page.tsx` — metadata (~4099 tok)
 
 ## src/app/account/login/
 
@@ -47,7 +47,7 @@
 
 ## src/app/account/logout/
 
-- `route.ts` — GET: Clears wix_member_tokens and wix_member_name cookies, redirects to / (~60 tok)
+- `route.ts` — Next.js API route: GET (~80 tok)
 
 ## src/app/account/register/
 
@@ -58,6 +58,22 @@
 
 - `route.ts` — Next.js API route: POST (~290 tok)
 
+## src/app/api/auth/login/
+
+- `route.ts` — Next.js API route: POST (~550 tok)
+
+## src/app/api/auth/register/
+
+- `route.ts` — Next.js API route: POST (~660 tok)
+
+## src/app/api/auth/reset/
+
+- `route.ts` — Next.js API route: POST (~212 tok)
+
+## src/app/api/auth/verify/
+
+- `route.ts` — Next.js API route: POST (~529 tok)
+
 ## src/app/api/set-aesthetic/
 
 - `route.ts` — POST: validates aesthetic ('savage'|'luxury'), sets corvo_aesthetic cookie (1yr, non-httpOnly), returns {ok:true} (~173 tok)
@@ -65,7 +81,7 @@
 ## src/app/checkout/
 
 - `actions.ts` — Exports CreatePaymentIntentResult, createCheckoutPaymentIntent, CompleteOrderInput, CompleteOrderRes (~3020 tok)
-- `CheckoutForm.tsx` — initialShipping — renders form (~4831 tok)
+- `CheckoutForm.tsx` — initialShipping — renders form (~4843 tok)
 
 ## src/app/contact/
 
@@ -93,18 +109,18 @@
 
 ## src/app/thank-you/
 
-- `page.tsx` — metadata (~3057 tok)
+- `page.tsx` — metadata (~3073 tok)
 
 ## src/components/3d/
 
-- `HeroScene.tsx` — dodecVerts (~2550 tok)
+- `HeroScene.tsx` — useIsLowEnd (~2720 tok)
 - `LuxuryHeroSceneClient.tsx` — LuxuryHeroScene (~84 tok)
 
 ## src/components/cart/
 
 - `AddToCartButton.tsx` — AddToCartButton (~236 tok)
-- `CartDrawer.tsx` — CartDrawer (~2575 tok)
-- `CartIcon.tsx` — CartIcon (~500 tok)
+- `CartDrawer.tsx` — CartDrawer (~2578 tok)
+- `CartIcon.tsx` — CartIcon (~501 tok)
 - `CartProvider.tsx` — WIX_STORES_APP_ID (~1631 tok)
 
 ## src/components/layout/
@@ -118,17 +134,17 @@
 
 ## src/components/ui/
 
-- `AuthForm.tsx` — LABEL — renders form (~3961 tok)
-- `Button.tsx` — variants (~517 tok)
-- `MarqueeStrip.tsx` — WORDS (~453 tok)
-- `NewsletterForm.tsx` — NewsletterForm — renders form (~1187 tok)
+- `AuthForm.tsx` — LABEL — renders form (~3924 tok)
+- `Button.tsx` — variants (~476 tok)
+- `MarqueeStrip.tsx` — WORDS (~455 tok)
+- `NewsletterForm.tsx` — NewsletterForm — renders form (~1093 tok)
 - `ProductCard.tsx` — ProductCard (~1821 tok)
 - `QuickView.tsx` — QuickView (~1920 tok)
 - `RestockNotify.tsx` — RestockNotify — renders form (~1068 tok)
 - `SearchModal.tsx` — SearchModal (~2247 tok)
 - `SizeGuideButton.tsx` — SizeGuideButton (~338 tok)
 - `SizeGuideModal.tsx` — sizes — renders table (~2490 tok)
-- `SplitChooser.tsx` — T (~1906 tok)
+- `SplitChooser.tsx` — EASE (~4060 tok)
 - `StickyAddToCart.tsx` — StickyAddToCart (~1011 tok)
 - `ThemeToggle.tsx` — ThemeToggle (~241 tok)
 - `WishlistButton.tsx` — WishlistButton (~471 tok)
