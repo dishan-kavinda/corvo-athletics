@@ -54,7 +54,7 @@ export function MarqueeStrip({ reverse = false, light = false, className = '' }:
                   ? 'rgba(255,255,255,0.4)'
                   : 'rgba(255,255,255,0.82)'
                 : word === '✦'
-                ? '#D81829'
+                ? 'var(--accent)'
                 : 'var(--muted)',
               flexShrink: 0,
             }}

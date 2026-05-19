@@ -34,7 +34,7 @@ export function CartIcon() {
             width: '16px',
             height: '16px',
             borderRadius: '50%',
-            background: '#D81829',
+            background: 'var(--accent)',
             color: '#FFFFFF',
             fontSize: '9px',
             fontWeight: 700,

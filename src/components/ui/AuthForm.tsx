@@ -36,9 +36,9 @@ function ErrBox({ msg }: { msg: string }) {
     <div
       style={{
         padding: '0.75rem 1rem',
-        border: '1px solid rgba(216,24,41,0.4)',
-        background: 'rgba(216,24,41,0.08)',
-        color: '#FF6070',
+        border: '1px solid var(--accent-dim)',
+        background: 'var(--accent-dim)',
+        color: 'var(--accent)',
         fontFamily: 'var(--font-rajdhani)',
         fontSize: '11px',
         letterSpacing: '0.18em',
@@ -56,27 +56,21 @@ function SubmitBtn({ loading, label }: { loading: boolean; label: string }) {
     <button
       type="submit"
       disabled={loading}
-      className="font-display uppercase"
+      className="font-display uppercase btn-glow"
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: '13px',
         letterSpacing: '0.24em',
-        background: loading ? 'var(--border)' : '#D81829',
-        color: '#fff',
+        background: loading ? 'var(--border)' : 'var(--accent)',
+        color: loading ? 'var(--muted)' : '#fff',
         border: 'none',
         height: '3.25rem',
         padding: '0 2.5rem',
         cursor: loading ? 'default' : 'pointer',
-        transition: 'background 0.2s',
+        transition: 'background 0.2s, color 0.2s',
         minWidth: '200px',
-      }}
-      onMouseEnter={(e) => {
-        if (!loading) (e.currentTarget as HTMLButtonElement).style.background = '#b31420';
-      }}
-      onMouseLeave={(e) => {
-        if (!loading) (e.currentTarget as HTMLButtonElement).style.background = '#D81829';
       }}
     >
       {loading ? 'Loading...' : label}

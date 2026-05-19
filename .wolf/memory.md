@@ -642,3 +642,68 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 21:16 | Created src/components/ui/AuthForm.tsx | — | ~3982 |
 | 00:00 | Moved auth to server routes: created /api/auth/login, register, verify, reset | 4 new route files + AuthForm.tsx rewrite | fixes 403+iframe-blocked | ~2800 |
 | 21:17 | Session end: 5 writes across 2 files (route.ts, AuthForm.tsx) | 1 reads | ~6116 tok |
+| 21:18 | Session end: 5 writes across 2 files (route.ts, AuthForm.tsx) | 1 reads | ~6116 tok |
+| 21:18 | Session end: 5 writes across 2 files (route.ts, AuthForm.tsx) | 1 reads | ~6116 tok |
+| 21:25 | Edited src/app/api/auth/register/route.ts | modified POST() | ~177 |
+| 21:25 | Edited src/components/ui/AuthForm.tsx | 3→6 lines | ~52 |
+| 21:25 | Edited src/components/ui/AuthForm.tsx | 10→11 lines | ~158 |
+| 21:25 | Edited src/components/ui/AuthForm.tsx | CSS: captchaToken | ~178 |
+| 21:25 | Edited src/components/ui/AuthForm.tsx | expanded (+9 lines) | ~101 |
+| 21:49 | designqc: captured 0 screenshots (0KB, ~0 tok) | C:/Program Files/Git/account/login, C:/Program Files/Git/account/register | ready for eval | ~0 |
+| 21:49 | designqc: captured 6 screenshots (130KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 21:50 | designqc: captured 6 screenshots (135KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 22:07 | Session end: 10 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~7935 tok |
+| 22:39 | Edited src/app/api/auth/register/route.ts | added optional chaining | ~60 |
+| 22:39 | Edited src/app/api/auth/register/route.ts | 5→6 lines | ~88 |
+| 22:39 | Edited src/app/api/auth/register/route.ts | modified catch() | ~54 |
+| 22:51 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 22:53 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:12 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:12 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:14 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:14 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:16 | Session end: 13 writes across 2 files (route.ts, AuthForm.tsx) | 3 reads | ~8137 tok |
+| 23:17 | Edited src/components/ui/AuthForm.tsx | 4→1 lines | ~12 |
+| 23:17 | Edited src/components/ui/AuthForm.tsx | 3→2 lines | ~30 |
+| 23:17 | Edited src/components/ui/AuthForm.tsx | reduced (-6 lines) | ~79 |
+| 23:18 | Edited src/components/ui/AuthForm.tsx | reduced (-9 lines) | ~25 |
+| 23:18 | Created src/app/api/auth/register/route.ts | — | ~660 |
+| 23:19 | Session end: 18 writes across 2 files (route.ts, AuthForm.tsx) | 4 reads | ~13092 tok |
+| 23:44 | Edited src/app/account/dashboard/page.tsx | 10→11 lines | ~105 |
+| 23:44 | Edited src/app/account/logout/route.ts | "/" → "/account" | ~20 |
+| 23:45 | Session end: 20 writes across 3 files (route.ts, AuthForm.tsx, page.tsx) | 7 reads | ~19195 tok |
+| 23:49 | designqc: captured 6 screenshots (126KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 23:52 | Edited src/app/globals.css | expanded (+7 lines) | ~286 |
+| 23:52 | Edited src/app/globals.css | CSS: min-width, prefers-reduced-motion | ~177 |
+| 23:52 | Edited src/app/globals.css | modified media() | ~202 |
+| 23:52 | Edited src/app/globals.css | 4→4 lines | ~26 |
+| 23:52 | Edited src/components/ui/Button.tsx | 10→10 lines | ~154 |
+| 23:52 | Edited src/components/ui/AuthForm.tsx | modified ErrBox() | ~346 |
+| 23:53 | Created src/components/ui/NewsletterForm.tsx | — | ~1093 |
+
+## Session: 2026-05-19 23:54
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 23:55 | Edited src/components/cart/CartDrawer.tsx | inline fix | ~27 |
+| 23:55 | Edited src/components/cart/CartDrawer.tsx | inline fix | ~31 |
+| 23:55 | Edited src/components/ui/MarqueeStrip.tsx | 3→3 lines | ~28 |
+| 23:55 | Edited src/components/ui/SplitChooser.tsx | expanded (+29 lines) | ~444 |
+| 23:55 | Edited src/components/ui/SplitChooser.tsx | expanded (+29 lines) | ~441 |
+| 23:56 | Edited src/components/cart/CartIcon.tsx | "#D81829" → "var(--accent)" | ~12 |
+| 23:56 | Edited src/app/account/page.tsx | "#D81829" → "var(--accent)" | ~20 |
+| 23:56 | Edited src/app/thank-you/page.tsx | inline fix | ~4 |
+| 23:57 | Edited src/app/checkout/CheckoutForm.tsx | "#D81829" → "var(--accent)" | ~29 |
+| 23:57 | Edited src/app/checkout/CheckoutForm.tsx | inline fix | ~49 |
+| 23:57 | Edited src/app/checkout/CheckoutForm.tsx | inline fix | ~31 |
+| 23:57 | Edited src/app/checkout/CheckoutForm.tsx | inline fix | ~29 |
+| 23:57 | Edited src/app/checkout/CheckoutForm.tsx | inline fix | ~27 |
+| 23:57 | Edited src/components/3d/HeroScene.tsx | modified useIsLowEnd() | ~168 |
+| 23:57 | Edited src/components/3d/HeroScene.tsx | 5→5 lines | ~33 |
+| 23:57 | Edited src/components/3d/HeroScene.tsx | CSS: powerPreference, 1 | ~192 |
+| 23:58 | Edited src/components/3d/HeroScene.tsx | 16→13 lines | ~133 |
+| 23:58 | Edited src/components/3d/HeroScene.tsx | expanded (+7 lines) | ~90 |
+| 23:58 | Edited src/components/3d/HeroScene.tsx | CSS: powerPreference, 1 | ~106 |
+| 00:10 | UI/UX pass complete — replaced all #D81829 hardcoded accents with var(--accent) across CartDrawer, CartIcon, MarqueeStrip, AuthForm, NewsletterForm, Button, account/page, thank-you/page, CheckoutForm | 10 files | ~650 |
+| 00:10 | Added CTA entry buttons to SplitChooser.tsx — "Enter the House" (luxury) and "Enter the Arena" (savage) | SplitChooser.tsx | ~90 |
+| 00:10 | HeroScene performance — low-end detection (mobile<768px or hardwareConcurrency<=2), disables Bloom/Sparkles/antialias, caps dpr=1, reduces sphere segments 64→32 | HeroScene.tsx | ~180 |

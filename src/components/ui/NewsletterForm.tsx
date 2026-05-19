@@ -26,7 +26,7 @@ export function NewsletterForm() {
             className="py-4"
           >
             <div className="flex items-center gap-3 mb-2">
-              <span className="block w-4 h-[1.5px]" style={{ background: '#D81829' }} />
+              <span className="block w-4 h-[1.5px]" style={{ background: 'var(--accent)' }} />
               <p
                 style={{
                   fontFamily: 'var(--font-rajdhani)',
@@ -34,7 +34,7 @@ export function NewsletterForm() {
                   fontWeight: 700,
                   letterSpacing: '0.38em',
                   textTransform: 'uppercase',
-                  color: '#D81829',
+                  color: 'var(--accent)',
                 }}
               >
                 You&apos;re in.
@@ -61,10 +61,10 @@ export function NewsletterForm() {
                   background: 'var(--surface-elevated)',
                   border: '1px solid var(--border)',
                   color: 'var(--page-fg)',
-                  caretColor: '#D81829',
+                  caretColor: 'var(--accent)',
                   transition: 'border-color 0.2s ease',
                 }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#D81829')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--accent)')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
             </div>
@@ -74,26 +74,19 @@ export function NewsletterForm() {
               disabled={status === 'loading'}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              className="btn-glow"
               style={{
                 padding: '1rem 2rem',
                 fontFamily: 'var(--font-anton)',
                 fontSize: '0.875rem',
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
-                background: '#D81829',
+                background: 'var(--accent)',
                 color: '#FFFFFF',
                 border: 'none',
                 cursor: 'pointer',
                 opacity: status === 'loading' ? 0.7 : 1,
-                transition: 'background 0.2s ease, box-shadow 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#A91321';
-                e.currentTarget.style.boxShadow = '0 0 28px rgba(216,24,41,0.45)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#D81829';
-                e.currentTarget.style.boxShadow = 'none';
+                transition: 'background 0.2s ease',
               }}
             >
               {status === 'loading' ? 'Joining…' : 'Join the Circle →'}

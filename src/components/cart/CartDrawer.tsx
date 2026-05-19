@@ -80,7 +80,7 @@ export function CartDrawer() {
           style={{ borderBottom: '1px solid #1B2038' }}
         >
           <div className="flex items-center gap-3">
-            <span className="block w-4 h-[1.5px]" style={{ background: '#D81829' }} />
+            <span className="block w-4 h-[1.5px]" style={{ background: 'var(--accent)' }} />
             <h2
               className="font-display uppercase"
               style={{ fontSize: '1.1rem', letterSpacing: '0.28em' }}
@@ -208,7 +208,7 @@ export function CartDrawer() {
               >
                 Subtotal
               </span>
-              <span className="font-display text-2xl" style={{ color: '#D81829' }}>{subtotal}</span>
+              <span className="font-display text-2xl" style={{ color: 'var(--accent)' }}>{subtotal}</span>
             </div>
             <Button
               onClick={checkout}

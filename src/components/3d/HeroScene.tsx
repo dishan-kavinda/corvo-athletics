@@ -1,10 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sparkles } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+
+function useIsLowEnd(): boolean {
+  const [lowEnd, setLowEnd] = useState(false);
+  useEffect(() => {
+    const narrow = window.innerWidth < 768;
+    const fewCores = navigator.hardwareConcurrency != null && navigator.hardwareConcurrency <= 2;
+    setLowEnd(narrow || fewCores);
+  }, []);
+  return lowEnd;
+}
 
 /* ─── Helpers ───────────────────────────────────────────────
    Extract the 20 unique vertex positions from DodecahedronGeometry.
@@ -91,7 +101,7 @@ function PowerCore() {
 
   return (
     <mesh ref={meshRef} material={mat}>
-      <sphereGeometry args={[0.22, 64, 64]} />
+      <sphereGeometry args={[0.22, 32, 32]} />
     </mesh>
   );
 }
@@ -155,9 +165,6 @@ function DodecCage() {
         <PowerCore />
       </group>
 
-      <Sparkles count={35} size={0.7} scale={[9, 7, 5]} speed={0.16} color="#CC0000" opacity={0.28} />
-      <Sparkles count={14} size={0.5} scale={[6, 4, 4]} speed={0.10} color="#00BDAC" opacity={0.18} />
-
       <pointLight position={[0, 0, 0]} color="#CC0000" intensity={28} distance={9}  />
       <pointLight position={[0, 0, 0]} color="#880000" intensity={12} distance={18} />
     </>
@@ -166,24 +173,34 @@ function DodecCage() {
 
 /* ─── Scene ─────────────────────────────────────────────── */
 export function HeroScene() {
+  const lowEnd = useIsLowEnd();
   return (
     <Canvas
       camera={{ position: [0, 0, 7], fov: 48 }}
-      gl={{ antialias: true, alpha: true }}
-      dpr={[1, 1.5]}
+      gl={{ antialias: !lowEnd, alpha: true, powerPreference: 'high-performance' }}
+      dpr={lowEnd ? 1 : [1, 1.5]}
       style={{ background: 'transparent' }}
     >
       <DodecCage />
 
-      <EffectComposer>
-        <Bloom
-          intensity={2.0}
-          luminanceThreshold={0.18}
-          luminanceSmoothing={0.88}
-          mipmapBlur
-          radius={0.75}
-        />
-      </EffectComposer>
+      {!lowEnd && (
+        <>
+          <Sparkles count={35} size={0.7} scale={[9, 7, 5]} speed={0.16} color="#CC0000" opacity={0.28} />
+          <Sparkles count={14} size={0.5} scale={[6, 4, 4]} speed={0.10} color="#00BDAC" opacity={0.18} />
+        </>
+      )}
+
+      {!lowEnd && (
+        <EffectComposer>
+          <Bloom
+            intensity={2.0}
+            luminanceThreshold={0.18}
+            luminanceSmoothing={0.88}
+            mipmapBlur
+            radius={0.75}
+          />
+        </EffectComposer>
+      )}
     </Canvas>
   );
 }
@@ -248,11 +265,12 @@ function LuxuryForm() {
 
 /* No bloom, no sparkles, no point lights — matte and clean */
 export function LuxuryHeroScene() {
+  const lowEnd = useIsLowEnd();
   return (
     <Canvas
       camera={{ position: [0, 0, 6.5], fov: 42 }}
-      gl={{ antialias: true, alpha: true }}
-      dpr={[1, 1.5]}
+      gl={{ antialias: !lowEnd, alpha: true, powerPreference: 'high-performance' }}
+      dpr={lowEnd ? 1 : [1, 1.5]}
       style={{ background: 'transparent' }}
     >
       <ambientLight intensity={0.9} />

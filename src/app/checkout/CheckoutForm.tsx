@@ -95,7 +95,7 @@ function StyledInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
     <input
       {...props}
       style={inputStyle}
-      onFocus={(e) => { e.currentTarget.style.borderColor = '#D81829'; props.onFocus?.(e); }}
+      onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; props.onFocus?.(e); }}
       onBlur={(e)  => { e.currentTarget.style.borderColor = 'var(--border)'; props.onBlur?.(e); }}
     />
   );
@@ -104,7 +104,7 @@ function StyledInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
 function SectionHead({ n, title }: { n: string; title: string }) {
   return (
     <div className="flex items-center gap-4 mb-6">
-      <span style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: '#D81829' }}>
+      <span style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: 'var(--accent)' }}>
         {n}
       </span>
       <span style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
@@ -311,7 +311,7 @@ export function CheckoutForm() {
       <Section className="min-h-[60vh] flex items-center">
         <Container>
           <div className="max-w-md mx-auto text-center">
-            <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: '#D81829', marginBottom: '1.25rem' }}>
+            <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.25rem' }}>
               Cart
             </p>
             <h1 className="font-display text-4xl uppercase tracking-tight mb-6">Empty</h1>
@@ -331,7 +331,7 @@ export function CheckoutForm() {
       <Section>
         <Container>
           <div className="max-w-md mx-auto py-20">
-            <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: '#D81829', marginBottom: '1rem' }}>
+            <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1rem' }}>
               Checkout
             </p>
             <h1 className="font-display text-3xl uppercase tracking-tight mb-6">Couldn&apos;t start checkout</h1>
@@ -405,7 +405,7 @@ export function CheckoutForm() {
       <Container>
         {/* Header */}
         <div className="mb-12">
-          <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: '#D81829', marginBottom: '0.75rem' }}>
+          <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.42em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
             Checkout
           </p>
           <h1 className="font-display text-4xl md:text-5xl uppercase tracking-tight">
@@ -429,7 +429,7 @@ export function CheckoutForm() {
           {/* ── Order Summary ── */}
           <aside className="lg:sticky lg:top-28 self-start">
             <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', padding: '2rem' }}>
-              <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#D81829', marginBottom: '1.25rem' }}>
+              <p style={{ fontFamily: 'var(--font-rajdhani)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1.25rem' }}>
                 Order Summary
               </p>
 
@@ -462,7 +462,7 @@ export function CheckoutForm() {
                 </div>
                 <div className="flex justify-between pt-4 mt-2" style={{ borderTop: '1px solid var(--border)' }}>
                   <span className="font-display uppercase tracking-widest text-sm">Total</span>
-                  <span className="font-display text-2xl" style={{ color: '#D81829' }}>
+                  <span className="font-display text-2xl" style={{ color: 'var(--accent)' }}>
                     {fmt(intent.amount / 100, intent.currency.toUpperCase())}
                   </span>
                 </div>

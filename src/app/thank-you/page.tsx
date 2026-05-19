@@ -35,8 +35,8 @@ function GenericConfirmation() {
             style={{
               width: '64px',
               height: '64px',
-              border: '2px solid #D81829',
-              color: '#D81829',
+              border: '2px solid var(--accent)',
+              color: 'var(--accent)',
             }}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -51,7 +51,7 @@ function GenericConfirmation() {
               fontWeight: 700,
               letterSpacing: '0.52em',
               textTransform: 'uppercase',
-              color: '#D81829',
+              color: 'var(--accent)',
               marginBottom: '1.25rem',
             }}
           >
@@ -104,8 +104,8 @@ function OrderDetails({ order }: { order: WixOrderSummary }) {
             style={{
               width: '64px',
               height: '64px',
-              border: '2px solid #D81829',
-              color: '#D81829',
+              border: '2px solid var(--accent)',
+              color: 'var(--accent)',
             }}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -120,7 +120,7 @@ function OrderDetails({ order }: { order: WixOrderSummary }) {
               fontWeight: 700,
               letterSpacing: '0.52em',
               textTransform: 'uppercase',
-              color: '#D81829',
+              color: 'var(--accent)',
               marginBottom: '1rem',
             }}
           >
@@ -158,7 +158,7 @@ function OrderDetails({ order }: { order: WixOrderSummary }) {
           style={{
             background: 'var(--surface)',
             border: '1px solid var(--border)',
-            borderLeft: '2px solid #D81829',
+            borderLeft: '2px solid var(--accent)',
           }}
         >
           <div
@@ -207,7 +207,7 @@ function OrderDetails({ order }: { order: WixOrderSummary }) {
                     Qty {it.quantity}
                   </p>
                 </div>
-                <p className="font-display whitespace-nowrap" style={{ color: '#D81829' }}>
+                <p className="font-display whitespace-nowrap" style={{ color: 'var(--accent)' }}>
                   {it.lineTotalFormatted}
                 </p>
               </li>
@@ -239,7 +239,7 @@ function OrderDetails({ order }: { order: WixOrderSummary }) {
               </span>
               <span
                 className="font-display"
-                style={{ fontSize: '1.6rem', color: '#D81829' }}
+                style={{ fontSize: '1.6rem', color: 'var(--accent)' }}
               >
                 {order.totalFormatted}
               </span>

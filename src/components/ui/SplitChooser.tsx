@@ -101,6 +101,35 @@ export function SplitChooser() {
           }}>
             The standard worth keeping.
           </p>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); pick('luxury'); }}
+            style={{
+              marginTop: '2.5rem',
+              display: 'inline-block',
+              fontFamily: 'var(--font-cormorant), "Playfair Display", Georgia, serif',
+              fontSize: 14,
+              fontWeight: 500,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: '#B8962C',
+              background: 'transparent',
+              border: '1px solid rgba(184,150,44,0.5)',
+              padding: '0.75rem 2rem',
+              cursor: 'pointer',
+              transition: 'border-color 0.3s ease, background 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = '#B8962C';
+              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(184,150,44,0.06)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(184,150,44,0.5)';
+              (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+            }}
+          >
+            Enter the House →
+          </button>
         </div>
       </div>
 
@@ -190,6 +219,35 @@ export function SplitChooser() {
           }}>
             Raw. Athletic. No compromise.
           </p>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); pick('savage'); }}
+            style={{
+              marginTop: '2.5rem',
+              display: 'inline-block',
+              fontFamily: 'var(--font-rajdhani), sans-serif',
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '0.42em',
+              textTransform: 'uppercase',
+              color: '#D81829',
+              background: 'transparent',
+              border: '1px solid rgba(216,24,41,0.4)',
+              padding: '0.75rem 2rem',
+              cursor: 'pointer',
+              transition: 'border-color 0.3s ease, background 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = '#D81829';
+              (e.currentTarget as HTMLButtonElement).style.background = 'rgba(216,24,41,0.06)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(216,24,41,0.4)';
+              (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+            }}
+          >
+            Enter the Arena →
+          </button>
         </div>
       </div>
     </div>

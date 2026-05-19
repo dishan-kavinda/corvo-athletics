@@ -87,7 +87,7 @@ export default async function AccountPage({
           >
             YOUR
             <br />
-            <span style={{ color: '#D81829' }}>ACCOUNT.</span>
+            <span style={{ color: 'var(--accent)' }}>ACCOUNT.</span>
           </h1>
         </HeroReveal>
 
