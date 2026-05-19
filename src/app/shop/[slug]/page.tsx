@@ -5,6 +5,10 @@ import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { getProductBySlug } from '@/lib/wix-products';
+import { WishlistButton } from '@/components/ui/WishlistButton';
+import { SizeGuideButton } from '@/components/ui/SizeGuideButton';
+import { StickyAddToCart } from '@/components/ui/StickyAddToCart';
+import { RestockNotify } from '@/components/ui/RestockNotify';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -219,12 +223,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </HeroReveal>
 
             <HeroReveal delay={0.2} y={30}>
-              <h1
-                className="font-display uppercase leading-[0.92] mb-6"
-                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.01em' }}
-              >
-                {product.name}
-              </h1>
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                <h1
+                  className="font-display uppercase leading-[0.92]"
+                  style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)', letterSpacing: '-0.01em' }}
+                >
+                  {product.name}
+                </h1>
+                {product.slug && <WishlistButton slug={product.slug} size={22} />}
+              </div>
             </HeroReveal>
 
             <HeroReveal delay={0.35}>
@@ -267,7 +274,20 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <HeroReveal delay={0.65}>
               {product._id && (
                 <div className="mb-10">
-                  <AddToCartButton productId={product._id} variantId={defaultVariantId} />
+                  {product.stock?.inStock !== false ? (
+                    <AddToCartButton productId={product._id} variantId={defaultVariantId} />
+                  ) : (
+                    <RestockNotify productSlug={product.slug ?? product._id} />
+                  )}
+                  {product._id && (
+                    <StickyAddToCart
+                      productId={product._id}
+                      variantId={defaultVariantId}
+                      productName={product.name ?? ''}
+                      price={product.priceData?.formatted?.price ?? ''}
+                      inStock={product.stock?.inStock !== false}
+                    />
+                  )}
                 </div>
               )}
 
@@ -281,7 +301,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     { icon: '→', label: 'Free Shipping on Orders Over $100' },
                     { icon: '→', label: '30-Day Returns' },
                     { icon: '→', label: 'Lab-Tested & Independently Verified' },
-                  ].map((item) => (
+                  ].map((item, idx) => (
                     <div key={item.label} className="flex items-center gap-3">
                       <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '14px' }}>
                         {item.icon}
@@ -298,6 +318,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                       >
                         {item.label}
                       </p>
+                      {idx === 0 && <SizeGuideButton />}
                     </div>
                   ))}
                 </div>

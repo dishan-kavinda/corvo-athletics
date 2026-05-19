@@ -537,3 +537,61 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 02:39 | Edited src/components/ui/SplitChooser.tsx | reduced (-14 lines) | ~85 |
 | 02:40 | Edited src/components/ui/SplitChooser.tsx | reduced (-16 lines) | ~90 |
 | 02:40 | Session end: 2 writes across 1 files (SplitChooser.tsx) | 0 reads | ~175 tok |
+| 02:41 | Session end: 2 writes across 1 files (SplitChooser.tsx) | 0 reads | ~175 tok |
+| 02:47 | Session end: 2 writes across 1 files (SplitChooser.tsx) | 0 reads | ~175 tok |
+| 02:48 | Session end: 2 writes across 1 files (SplitChooser.tsx) | 0 reads | ~175 tok |
+| 02:51 | Created src/app/account/register/route.ts | — | ~208 |
+| 02:51 | Edited src/app/account/page.tsx | 3→3 lines | ~38 |
+| 02:53 | Edited src/app/account/register/route.ts | 1→2 lines | ~50 |
+| 02:54 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 02:57 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 03:02 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 03:06 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 03:09 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 03:10 | Session end: 5 writes across 3 files (SplitChooser.tsx, route.ts, page.tsx) | 1 reads | ~2312 tok |
+| 03:12 | Edited next.config.ts | modified rewrites() | ~129 |
+| 12:28 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:30 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:32 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:33 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:33 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:35 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 12:35 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 17:17 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 17:18 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 17:20 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 17:22 | Session end: 6 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 2 reads | ~2441 tok |
+| 17:24 | Edited src/app/account/login/route.ts | inline fix | ~28 |
+| 17:24 | Edited src/app/account/register/route.ts | 2→1 lines | ~34 |
+| 17:25 | Session end: 8 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 3 reads | ~2703 tok |
+| 17:27 | Session end: 8 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 3 reads | ~2703 tok |
+| 19:42 | Session end: 8 writes across 4 files (SplitChooser.tsx, route.ts, page.tsx, next.config.ts) | 3 reads | ~2703 tok |
+| 19:49 | Created src/hooks/useWishlist.ts | — | ~220 |
+| 19:49 | Created src/components/ui/WishlistButton.tsx | — | ~471 |
+| 19:49 | Created src/components/ui/SizeGuideModal.tsx | — | ~2490 |
+| 19:50 | Created src/components/ui/RestockNotify.tsx | — | ~1068 |
+| 19:50 | Created src/components/ui/StickyAddToCart.tsx | — | ~1011 |
+| 19:50 | Created src/components/ui/QuickView.tsx | — | ~1920 |
+| 19:51 | Created src/components/ui/SearchModal.tsx | — | ~2247 |
+| 19:52 | Edited src/lib/wix-orders.ts | added error handling | ~310 |
+| 19:52 | Created src/components/ui/ProductCard.tsx | — | ~1821 |
+| 19:52 | Created src/components/layout/Header.tsx | — | ~1704 |
+| 19:54 | Created src/components/layout/MobileNav.tsx | — | ~1855 |
+| 19:54 | Edited src/app/shop/[slug]/page.tsx | added 4 import(s) | ~180 |
+| 19:54 | Edited src/app/shop/[slug]/page.tsx | 24→27 lines | ~306 |
+| 19:54 | Edited src/app/shop/[slug]/page.tsx | added optional chaining | ~237 |
+| 19:54 | Edited src/app/shop/[slug]/page.tsx | 5→5 lines | ~81 |
+| 19:55 | Edited src/app/shop/[slug]/page.tsx | 19→20 lines | ~248 |
+| 19:55 | Created src/components/ui/SizeGuideButton.tsx | — | ~338 |
+
+## Session: 2026-05-19 19:56
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 19:57 | Edited src/lib/wix-orders.ts | 5→6 lines | ~41 |
+| 19:57 | Edited src/lib/wix-orders.ts | 5→6 lines | ~37 |
+| 19:57 | Edited src/lib/wix-orders.ts | 4→5 lines | ~57 |
+| 19:57 | Edited src/app/shop/page.tsx | 7→8 lines | ~110 |
+| 19:57 | Edited src/app/account/dashboard/page.tsx | added 1 import(s) | ~129 |
+| 19:57 | Edited src/app/account/dashboard/page.tsx | added nullish coalescing | ~41 |
+| 19:58 | Edited src/app/account/dashboard/page.tsx | expanded (+189 lines) | ~2500 |

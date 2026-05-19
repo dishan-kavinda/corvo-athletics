@@ -6,6 +6,7 @@ export interface WixOrderSummary {
   orderNumber: string;
   email: string;
   paymentStatus: string;
+  createdDate?: string;
   items: Array<{
     name: string;
     quantity: number;
@@ -53,6 +54,7 @@ interface WixOrderRaw {
   number?: string;
   currency?: string;
   paymentStatus?: string;
+  _createdDate?: string;
   buyerInfo?: { email?: string };
   lineItems?: Array<{
     productName?: { original?: string };
@@ -101,6 +103,7 @@ function normalize(order: WixOrderRaw): WixOrderSummary {
     orderNumber: order.number ?? '—',
     email: order.buyerInfo?.email ?? '',
     paymentStatus: order.paymentStatus ?? 'UNKNOWN',
+    createdDate: order._createdDate,
     items: (order.lineItems ?? []).map((li) => ({
       name: li.productName?.original ?? 'Product',
       quantity: li.quantity ?? 1,
@@ -124,6 +127,36 @@ function normalize(order: WixOrderRaw): WixOrderSummary {
         }
       : null,
   };
+}
+
+export async function getMemberOrders(buyerEmail: string): Promise<WixOrderSummary[]> {
+  const rawAdminKey = process.env.WIX_ADMIN_API_KEY;
+  if (!rawAdminKey) return [];
+  const adminKey = rawAdminKey.trim().replace(/^["']|["']$/g, '');
+  const rawSiteId = process.env.WIX_SITE_ID ?? DEFAULT_SITE_ID;
+  const siteId = rawSiteId.trim().replace(/^["']|["']$/g, '');
+
+  try {
+    const res = await fetch(`${WIX_API_BASE}/ecom/v1/orders/search`, {
+      method: 'POST',
+      headers: {
+        Authorization: adminKey,
+        'wix-site-id': siteId,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        filter: { 'buyerInfo.email': buyerEmail },
+        sort: [{ fieldName: '_createdDate', order: 'DESC' }],
+        cursorPaging: { limit: 20 },
+      }),
+      cache: 'no-store',
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as { orders?: WixOrderRaw[] };
+    return (data.orders ?? []).map(normalize);
+  } catch {
+    return [];
+  }
 }
 
 export async function getWixOrder(orderId: string): Promise<WixOrderSummary | null> {

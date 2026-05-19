@@ -1,10 +1,11 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-18T14:40:05.576Z
-> Files: 37 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T07:58:19.746Z
+> Files: 48 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
+- `next.config.ts` — Declares WIX_SITE_URL (~136 tok)
 - `PRODUCT-RESEARCH.txt` (~3613 tok)
 
 ## .claude/
@@ -29,7 +30,7 @@
 
 ## src/app/account/
 
-- `page.tsx` — metadata (~1841 tok)
+- `page.tsx` — metadata (~1842 tok)
 
 ## src/app/account/callback/
 
@@ -37,15 +38,19 @@
 
 ## src/app/account/dashboard/
 
-- `page.tsx` — metadata (~1773 tok)
+- `page.tsx` — metadata (~4076 tok)
 
 ## src/app/account/login/
 
-- `route.ts` — GET: Initiates Wix OAuth. Generates PKCE oauthData, stores in cookie (10min), redirects to Wix auth URL (~200 tok)
+- `route.ts` — Next.js API route: GET (~212 tok)
 
 ## src/app/account/logout/
 
 - `route.ts` — GET: Clears wix_member_tokens and wix_member_name cookies, redirects to / (~60 tok)
+
+## src/app/account/register/
+
+- `route.ts` — Next.js API route: GET (~217 tok)
 
 ## src/app/api/set-aesthetic/
 
@@ -74,11 +79,11 @@
 
 ## src/app/shop/
 
-- `page.tsx` — dynamic (~2018 tok)
+- `page.tsx` — dynamic (~2030 tok)
 
 ## src/app/shop/[slug]/
 
-- `page.tsx` — dynamic (~3380 tok)
+- `page.tsx` — dynamic (~3715 tok)
 
 ## src/app/thank-you/
 
@@ -99,8 +104,8 @@
 ## src/components/layout/
 
 - `Footer.tsx` — footerLinks (~1480 tok)
-- `Header.tsx` — navItems (~1226 tok)
-- `MobileNav.tsx` — navItems (~1757 tok)
+- `Header.tsx` — navItems (~1704 tok)
+- `MobileNav.tsx` — navItems (~1855 tok)
 
 ## src/components/motion/
 
@@ -110,13 +115,25 @@
 - `Button.tsx` — variants (~517 tok)
 - `MarqueeStrip.tsx` — WORDS (~453 tok)
 - `NewsletterForm.tsx` — NewsletterForm — renders form (~1187 tok)
-- `ProductCard.tsx` — ProductCard (~1160 tok)
+- `ProductCard.tsx` — ProductCard (~1821 tok)
+- `QuickView.tsx` — QuickView (~1920 tok)
+- `RestockNotify.tsx` — RestockNotify — renders form (~1068 tok)
+- `SearchModal.tsx` — SearchModal (~2247 tok)
+- `SizeGuideButton.tsx` — SizeGuideButton (~338 tok)
+- `SizeGuideModal.tsx` — sizes — renders table (~2490 tok)
 - `SplitChooser.tsx` — T (~1906 tok)
+- `StickyAddToCart.tsx` — StickyAddToCart (~1011 tok)
 - `ThemeToggle.tsx` — ThemeToggle (~241 tok)
+- `WishlistButton.tsx` — WishlistButton (~471 tok)
+
+## src/hooks/
+
+- `useWishlist.ts` — Exports useWishlist (~220 tok)
 
 ## src/lib/
 
 - `wix-member-client.ts` — Exports WixTokens, WixOAuthData, createServerMemberClient (~190 tok)
+- `wix-orders.ts` — Exports WixOrderSummary, getMemberOrders, getWixOrder (~1709 tok)
 
 ## src/providers/
 

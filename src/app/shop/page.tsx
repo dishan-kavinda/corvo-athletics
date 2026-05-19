@@ -160,6 +160,7 @@ export default async function ShopPage() {
                     price={product.priceData?.formatted?.price ?? ''}
                     image={product.media?.mainMedia?.image?.url ?? ''}
                     imageAlt={product.name ?? undefined}
+                    productId={product._id}
                   />
                 </StaggerItem>
               ))}

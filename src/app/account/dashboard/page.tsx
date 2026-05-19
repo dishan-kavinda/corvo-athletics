@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerMemberClient, type WixTokens } from '@/lib/wix-member-client';
+import { getMemberOrders } from '@/lib/wix-orders';
 import { Button } from '@/components/ui/Button';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { HeroReveal } from '@/components/motion/HeroReveal';
@@ -35,6 +36,8 @@ export default async function DashboardPage() {
   }
 
   if (!member) redirect('/account');
+
+  const orders = await getMemberOrders(member.loginEmail ?? '').catch(() => []);
 
   const displayName =
     member.profile?.nickname ??
@@ -179,6 +182,195 @@ export default async function DashboardPage() {
             >
               Sign Out
             </a>
+          </div>
+        </FadeIn>
+
+        {/* Order history */}
+        <FadeIn delay={0.65}>
+          <div className="mt-20">
+            <div
+              className="flex items-center gap-4 mb-8"
+              style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}
+            >
+              <p
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.42em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                }}
+              >
+                ── Order History
+              </p>
+              <span
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '10px',
+                  fontWeight: 700,
+                  letterSpacing: '0.28em',
+                  textTransform: 'uppercase',
+                  color: 'var(--muted)',
+                }}
+              >
+                {orders.length} order{orders.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+
+            {orders.length === 0 ? (
+              <div
+                className="py-14 text-center"
+                style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
+              >
+                <p
+                  className="font-display uppercase mb-2"
+                  style={{ fontSize: '1.4rem', color: 'var(--muted)', letterSpacing: '0.04em' }}
+                >
+                  No orders yet
+                </p>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: '12px',
+                    letterSpacing: '0.18em',
+                    color: 'var(--muted)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Your orders will appear here once placed.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-[1px]" style={{ background: 'var(--border)' }}>
+                {orders.map((order) => {
+                  const isPaid =
+                    order.paymentStatus === 'PAID' || order.paymentStatus === 'FULLY_PAID';
+                  const statusColor = isPaid ? '#00BDAC' : '#838DAA';
+                  const statusLabel = isPaid
+                    ? 'Paid'
+                    : order.paymentStatus === 'PENDING'
+                    ? 'Pending'
+                    : order.paymentStatus === 'REFUNDED'
+                    ? 'Refunded'
+                    : order.paymentStatus;
+                  const dateStr = order.createdDate
+                    ? new Intl.DateTimeFormat('en-NZ', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      }).format(new Date(order.createdDate))
+                    : null;
+
+                  return (
+                    <div
+                      key={order.orderId}
+                      style={{ background: 'var(--surface)', padding: '1.5rem 1.75rem' }}
+                    >
+                      {/* Order header row */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-4">
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-rajdhani)',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              letterSpacing: '0.36em',
+                              textTransform: 'uppercase',
+                              color: 'var(--accent)',
+                            }}
+                          >
+                            #{order.orderNumber}
+                          </span>
+                          {dateStr && (
+                            <span
+                              style={{
+                                fontFamily: 'var(--font-rajdhani)',
+                                fontSize: '11px',
+                                letterSpacing: '0.18em',
+                                color: 'var(--muted)',
+                              }}
+                            >
+                              {dateStr}
+                            </span>
+                          )}
+                          <span
+                            style={{
+                              fontFamily: 'var(--font-rajdhani)',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              letterSpacing: '0.28em',
+                              textTransform: 'uppercase',
+                              color: statusColor,
+                              padding: '0.2rem 0.55rem',
+                              border: `1px solid ${statusColor}`,
+                            }}
+                          >
+                            {statusLabel}
+                          </span>
+                        </div>
+                        <span
+                          className="font-display"
+                          style={{ fontSize: '1.1rem', color: 'var(--page-fg)' }}
+                        >
+                          {order.totalFormatted}
+                        </span>
+                      </div>
+
+                      {/* Line items */}
+                      <div className="flex flex-col gap-2">
+                        {order.items.map((item, i) => (
+                          <div key={i} className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <span
+                                style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  width: '1.4rem',
+                                  height: '1.4rem',
+                                  background: 'var(--surface-elevated)',
+                                  border: '1px solid var(--border)',
+                                  fontFamily: 'var(--font-rajdhani)',
+                                  fontSize: '10px',
+                                  fontWeight: 700,
+                                  color: 'var(--muted)',
+                                  flexShrink: 0,
+                                }}
+                              >
+                                {item.quantity}
+                              </span>
+                              <span
+                                style={{
+                                  fontFamily: 'var(--font-rajdhani)',
+                                  fontSize: '12px',
+                                  fontWeight: 600,
+                                  letterSpacing: '0.14em',
+                                  textTransform: 'uppercase',
+                                  color: 'var(--page-fg)',
+                                }}
+                              >
+                                {item.name}
+                              </span>
+                            </div>
+                            <span
+                              style={{
+                                fontFamily: 'var(--font-rajdhani)',
+                                fontSize: '12px',
+                                color: 'var(--muted)',
+                                letterSpacing: '0.1em',
+                              }}
+                            >
+                              {item.lineTotalFormatted}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </FadeIn>
       </div>
