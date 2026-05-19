@@ -732,3 +732,46 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 00:30 | Edited src/components/ui/SplitChooser.tsx | 2→2 lines | ~30 |
 | 00:30 | replaced LightningOverlay with FireEffect (crimson fire at bottom) | src/components/ui/SplitChooser.tsx | done | ~800 |
 | 00:31 | Session end: 3 writes across 1 files (SplitChooser.tsx) | 1 reads | ~5179 tok |
+| 00:32 | Session end: 3 writes across 1 files (SplitChooser.tsx) | 1 reads | ~5179 tok |
+| 00:35 | Session end: 3 writes across 1 files (SplitChooser.tsx) | 1 reads | ~5179 tok |
+| 00:37 | Edited src/app/layout.tsx | inline fix | ~21 |
+| 00:37 | Edited src/app/layout.tsx | Playfair_Display() → Bodoni_Moda() | ~51 |
+| 00:37 | Edited src/app/layout.tsx | "${anton.variable} ${rajdh" → "${anton.variable} ${rajdh" | ~37 |
+| 00:37 | Edited src/app/globals.css | 3→3 lines | ~34 |
+| 00:37 | Edited src/components/ui/SplitChooser.tsx | "Playfair Display" → "Bodoni MT" | ~4 |
+| 00:38 | Session end: 8 writes across 3 files (SplitChooser.tsx, layout.tsx, globals.css) | 3 reads | ~8825 tok |
+| 00:39 | Session end: 8 writes across 3 files (SplitChooser.tsx, layout.tsx, globals.css) | 3 reads | ~8825 tok |
+| 00:40 | Edited src/components/ui/SplitChooser.tsx | CSS: textTransform | ~108 |
+| 00:40 | Session end: 9 writes across 3 files (SplitChooser.tsx, layout.tsx, globals.css) | 3 reads | ~8927 tok |
+| 00:49 | Edited src/components/ui/SplitChooser.tsx | modified TornDivider() | ~820 |
+| 00:49 | Edited src/components/ui/SplitChooser.tsx | 7→2 lines | ~29 |
+| 00:50 | Session end: 11 writes across 3 files (SplitChooser.tsx, layout.tsx, globals.css) | 3 reads | ~9781 tok |
+| 00:53 | Edited src/components/ui/SplitChooser.tsx | inline fix | ~17 |
+| 00:53 | Edited src/components/ui/SplitChooser.tsx | added 2 condition(s) | ~449 |
+| 00:53 | Edited src/components/ui/SplitChooser.tsx | pick() → handlePanel() | ~114 |
+| 00:53 | Edited src/components/ui/SplitChooser.tsx | inline fix | ~20 |
+| 00:54 | Edited src/components/ui/SplitChooser.tsx | pick() → handlePanel() | ~135 |
+| 00:54 | Session end: 16 writes across 3 files (SplitChooser.tsx, layout.tsx, globals.css) | 3 reads | ~11245 tok |
+| 00:56 | designqc: captured 6 screenshots (129KB, ~15000 tok) | /, /page, /robots, /sitemap, /template, /about, /account, /checkout/actions, /checkout/CheckoutForm, /checkout | ready for eval | ~0 |
+| 01:02 | Created src/lib/format.ts | — | ~113 |
+| 01:02 | Edited src/app/checkout/actions.ts | added 1 import(s) | ~34 |
+| 01:02 | Edited src/app/checkout/actions.ts | — | ~0 |
+| 01:02 | Edited src/app/checkout/CheckoutForm.tsx | added 1 import(s) | ~27 |
+| 01:02 | Edited src/app/checkout/CheckoutForm.tsx | removed 3 lines | ~6 |
+| 01:03 | Edited src/components/cart/CartDrawer.tsx | added 1 import(s) | ~26 |
+| 01:03 | Edited src/components/cart/CartDrawer.tsx | 4→1 lines | ~15 |
+| 01:03 | Edited src/app/account/dashboard/page.tsx | added 1 import(s) | ~26 |
+| 01:03 | Edited src/app/account/dashboard/page.tsx | modified fmtDateLong() | ~41 |
+| 01:03 | Edited src/app/account/dashboard/page.tsx | inline fix | ~21 |
+| 01:04 | Edited src/app/account/dashboard/page.tsx | modified fmtDate() | ~26 |
+| 01:05 | Session end: 27 writes across 8 files (SplitChooser.tsx, layout.tsx, globals.css, format.ts, actions.ts) | 32 reads | ~44472 tok |
+| 01:26 | Session end: 27 writes across 8 files (SplitChooser.tsx, layout.tsx, globals.css, format.ts, actions.ts) | 32 reads | ~44472 tok |
+
+## Session — 2026-05-20
+
+| 01:27 | Replaced lightning overlay with crimson fire effect (FLAMES/EMBERS data, blurred flame tongues, rising embers) | SplitChooser.tsx | pushed d7edb0e |
+| 01:27 | Swapped luxury font from Playfair Display to Bodoni Moda (high-contrast Didone) | layout.tsx, globals.css, SplitChooser.tsx | pushed 087846c |
+| 01:27 | Replaced luxury headline with "Grace Under Pressure" to match 3-word structure of savage side | SplitChooser.tsx | pushed 87f8d5c |
+| 01:27 | Mobile tap-to-expand: isTouch detection, mobileFocused state, two-step flow on touch devices | SplitChooser.tsx | pushed 87854af |
+| 01:27 | Rejected torn SVG crack divider per user — reverted, straight gradient line kept | SplitChooser.tsx | reverted |
+| 01:27 | Design QC + codebase cleanup: extracted fmtMoney/fmtDate to src/lib/format.ts, removed 4 duplicate Intl formatters | format.ts + 4 consumers | pushed 299a659 |

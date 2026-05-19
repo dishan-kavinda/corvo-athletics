@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T12:30:31.977Z
-> Files: 57 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T13:04:01.364Z
+> Files: 58 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -20,8 +20,8 @@
 
 ## src/app/
 
-- `globals.css` — Styles: 23 rules, 87 vars (~2394 tok)
-- `layout.tsx` — anton (~1105 tok)
+- `globals.css` — Styles: 23 rules, 87 vars (~2395 tok)
+- `layout.tsx` — anton (~1097 tok)
 - `page.tsx` — metadata (~73 tok)
 
 ## src/app/about/
@@ -38,7 +38,7 @@
 
 ## src/app/account/dashboard/
 
-- `page.tsx` — metadata (~4099 tok)
+- `page.tsx` — metadata (~4032 tok)
 
 ## src/app/account/login/
 
@@ -80,8 +80,8 @@
 
 ## src/app/checkout/
 
-- `actions.ts` — Exports CreatePaymentIntentResult, createCheckoutPaymentIntent, CompleteOrderInput, CompleteOrderRes (~3020 tok)
-- `CheckoutForm.tsx` — initialShipping — renders form (~4843 tok)
+- `actions.ts` — Exports CreatePaymentIntentResult, createCheckoutPaymentIntent, CompleteOrderInput, CompleteOrderRes (~2988 tok)
+- `CheckoutForm.tsx` — initialShipping — renders form (~4821 tok)
 
 ## src/app/contact/
 
@@ -119,7 +119,7 @@
 ## src/components/cart/
 
 - `AddToCartButton.tsx` — AddToCartButton (~236 tok)
-- `CartDrawer.tsx` — CartDrawer (~2578 tok)
+- `CartDrawer.tsx` — CartDrawer (~2572 tok)
 - `CartIcon.tsx` — CartIcon (~501 tok)
 - `CartProvider.tsx` — WIX_STORES_APP_ID (~1631 tok)
 
@@ -144,7 +144,7 @@
 - `SearchModal.tsx` — SearchModal (~2247 tok)
 - `SizeGuideButton.tsx` — SizeGuideButton (~338 tok)
 - `SizeGuideModal.tsx` — sizes — renders table (~2490 tok)
-- `SplitChooser.tsx` — EASE (~4060 tok)
+- `SplitChooser.tsx` — EASE (~4360 tok)
 - `StickyAddToCart.tsx` — StickyAddToCart (~1011 tok)
 - `ThemeToggle.tsx` — ThemeToggle (~241 tok)
 - `WishlistButton.tsx` — WishlistButton (~471 tok)
@@ -155,6 +155,7 @@
 
 ## src/lib/
 
+- `format.ts` — Exports fmtMoney, fmtDate (~113 tok)
 - `wix-browser.ts` — Module singleton preserves internal OAuth state (e.g. stateToken for email verification). (~137 tok)
 - `wix-member-client.ts` — Exports WixTokens, WixOAuthData, createServerMemberClient (~190 tok)
 - `wix-orders.ts` — Exports WixOrderSummary, getMemberOrders, getWixOrder (~1709 tok)
