@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useId } from 'react';
+import { useState, useId, useRef } from 'react';
 import { getWixBrowserClient } from '@/lib/wix-browser';
 import { LoginState } from '@wix/sdk';
 
@@ -96,6 +96,9 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
   const [verifyCode, setVerifyCode] = useState('');
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
+  // Explicitly store the state from the initial auth call so we can pass it
+  // to processVerification — more reliable than relying on the SDK's internal _state.
+  const verifyStateRef = useRef<unknown>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -136,6 +139,7 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
           await exchangeAndRedirect(result.data.sessionToken);
           break;
         case LoginState.EMAIL_VERIFICATION_REQUIRED:
+          verifyStateRef.current = result;
           setStep('verify');
           setLoading(false);
           break;
@@ -167,14 +171,19 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
     setLoading(true);
     try {
       const c = getWixBrowserClient();
-      const result = await c.auth.processVerification({ verificationCode: verifyCode });
+      const result = await c.auth.processVerification(
+        { verificationCode: verifyCode.trim() },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        verifyStateRef.current as any,
+      );
       if (result.loginState === LoginState.SUCCESS) {
         await exchangeAndRedirect(result.data.sessionToken);
       } else {
-        setError('Invalid code. Check your email and try again.');
+        setError('Invalid or expired code. Please request a new one.');
         setLoading(false);
       }
-    } catch {
+    } catch (err) {
+      console.error('[AuthForm] processVerification error:', err);
       setError('Verification failed. Please try again.');
       setLoading(false);
     }
