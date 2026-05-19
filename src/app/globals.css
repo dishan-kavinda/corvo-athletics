@@ -254,7 +254,7 @@ html.luxury {
 }
 
 html.luxury .font-display {
-  font-family: var(--font-cormorant), 'Playfair Display', Georgia, serif !important;
+  font-family: var(--font-cormorant), 'Bodoni MT', 'Didot', Georgia, serif !important;
 }
 
 /* Luxury — no glow on interactive elements */

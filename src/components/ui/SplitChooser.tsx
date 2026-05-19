@@ -228,14 +228,14 @@ export function SplitChooser() {
           transition={{ duration: 0.55, ease: EASE }}
           style={{ position: 'relative', textAlign: 'center', maxWidth: '460px', zIndex: 1 }}
         >
-          <p style={{ fontFamily: 'var(--font-cormorant), "Playfair Display", Georgia, serif', fontSize: 11, fontWeight: 400, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#B8962C', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 11, fontWeight: 400, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#B8962C', marginBottom: '2rem' }}>
             The House of Corvo
           </p>
-          <h2 style={{ fontFamily: 'var(--font-cormorant), "Playfair Display", Georgia, serif', fontSize: 'clamp(2.8rem, 6.5vw, 6rem)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#1A1008', marginBottom: '1.5rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 'clamp(2.8rem, 6.5vw, 6rem)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '-0.01em', color: '#1A1008', marginBottom: '1.5rem' }}>
             Quality Needs<br />No<br />
             <span style={{ color: '#B8962C' }}>Introduction.</span>
           </h2>
-          <p style={{ fontFamily: 'var(--font-cormorant), "Playfair Display", Georgia, serif', fontSize: 16, fontWeight: 400, letterSpacing: '0.04em', color: '#8B7355' }}>
+          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 16, fontWeight: 400, letterSpacing: '0.04em', color: '#8B7355' }}>
             The standard worth keeping.
           </p>
           <button

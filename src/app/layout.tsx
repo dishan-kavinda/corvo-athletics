@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Anton, Inter, Rajdhani, Playfair_Display } from 'next/font/google';
+import { Anton, Inter, Rajdhani, Bodoni_Moda } from 'next/font/google';
 import { cookies, headers } from 'next/headers';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
@@ -27,8 +27,8 @@ const inter = Inter({
   display: 'swap',
 });
 
-const playfair = Playfair_Display({
-  weight: ['400', '500', '600', '700', '800', '900'],
+const bodoni = Bodoni_Moda({
+  weight: ['400', '500', '700', '900'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   subsets: ['latin'],
@@ -105,7 +105,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${rajdhani.variable} ${inter.variable} ${playfair.variable} h-full antialiased ${themeClass}`}
+      className={`${anton.variable} ${rajdhani.variable} ${inter.variable} ${bodoni.variable} h-full antialiased ${themeClass}`}
       suppressHydrationWarning
     >
       <head>
