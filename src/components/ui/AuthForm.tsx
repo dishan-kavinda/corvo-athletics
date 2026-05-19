@@ -1,6 +1,9 @@
 'use client';
 
-import { useState, useId } from 'react';
+import { useState, useId, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+const WIX_CAPTCHA_KEY = '6LdoPaUfAAAAAJphvHoUoOob7mx0KDlXyXlgrx5v';
 
 type Mode = 'login' | 'register';
 type Step = 'form' | 'verify' | 'reset-sent';
@@ -95,6 +98,7 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
   const [stateToken, setStateToken] = useState('');
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -109,10 +113,16 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
     setError('');
     setLoading(true);
     try {
+      let captchaToken: string | null = null;
+      if (mode === 'register' && recaptchaRef.current) {
+        captchaToken = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+      }
+
       const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
       const body = mode === 'login'
         ? { email: form.email, password: form.password }
-        : { email: form.email, password: form.password, name: form.name || undefined };
+        : { email: form.email, password: form.password, name: form.name || undefined, captchaToken };
 
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -377,6 +387,15 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
           <SubmitBtn loading={loading} label={isLogin ? 'Sign In →' : 'Create Account →'} />
         </div>
       </form>
+
+      {!isLogin && (
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={WIX_CAPTCHA_KEY}
+          size="invisible"
+          badge="bottomright"
+        />
+      )}
 
       <div style={{ height: '1px', background: 'var(--border)', margin: '2rem 0' }} />
 

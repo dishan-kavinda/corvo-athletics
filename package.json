@@ -13,6 +13,7 @@
     "@react-three/postprocessing": "^3.0.4",
     "@stripe/react-stripe-js": "^6.3.0",
     "@stripe/stripe-js": "^9.5.0",
+    "@types/react-google-recaptcha": "^2.1.9",
     "@wix/ecom": "^1.0.2058",
     "@wix/members": "^1.0.450",
     "@wix/redirects": "^1.0.113",
@@ -25,6 +26,7 @@
     "postprocessing": "^6.39.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-google-recaptcha": "^3.1.0",
     "stripe": "^22.1.1",
     "three": "^0.184.0"
   },
