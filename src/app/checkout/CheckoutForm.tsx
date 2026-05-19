@@ -19,6 +19,7 @@ import {
   createCheckoutPaymentIntent,
   type CreatePaymentIntentResult,
 } from './actions';
+import { fmtMoney } from '@/lib/format';
 
 interface ShippingForm {
   email: string;
@@ -46,9 +47,7 @@ const initialShipping: ShippingForm = {
   state: '',
 };
 
-function fmt(amount: number, currency: string) {
-  return new Intl.NumberFormat('en-NZ', { style: 'currency', currency }).format(amount);
-}
+const fmt = fmtMoney;
 
 const label: React.CSSProperties = {
   display: 'block',

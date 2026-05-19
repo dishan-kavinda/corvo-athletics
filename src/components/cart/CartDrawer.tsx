@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useCart } from './CartProvider';
 import { Button } from '@/components/ui/Button';
+import { fmtMoney } from '@/lib/format';
 
 export function CartDrawer() {
   const { cart, isOpen, close, removeFromCart, updateQuantity, checkout, loading, error, clearError } =
@@ -34,10 +35,7 @@ export function CartDrawer() {
     const amount = parseFloat(item.price?.amount ?? '0');
     return sum + amount * (item.quantity ?? 0);
   }, 0);
-  const subtotal = new Intl.NumberFormat('en-NZ', {
-    style: 'currency',
-    currency,
-  }).format(subtotalNum);
+  const subtotal = fmtMoney(subtotalNum, currency);
 
   const drawer = (
     <>

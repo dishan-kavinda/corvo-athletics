@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { createServerMemberClient, type WixTokens } from '@/lib/wix-member-client';
 import { getMemberOrders } from '@/lib/wix-orders';
 import { Button } from '@/components/ui/Button';
+import { fmtDate } from '@/lib/format';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
@@ -14,9 +15,9 @@ export const metadata = {
 
 export const dynamic = 'force-dynamic';
 
-function fmtDate(d: Date | string | null | undefined) {
+function fmtDateLong(d: Date | string | null | undefined) {
   if (!d) return 'N/A';
-  return new Intl.DateTimeFormat('en-NZ', { month: 'long', year: 'numeric' }).format(new Date(d as string));
+  return fmtDate(d, { month: 'long', year: 'numeric' });
 }
 
 export default async function DashboardPage() {
@@ -52,7 +53,7 @@ export default async function DashboardPage() {
 
   const infoItems = [
     { label: 'Email', value: member.loginEmail ?? 'N/A' },
-    { label: 'Member Since', value: fmtDate(member._createdDate) },
+    { label: 'Member Since', value: fmtDateLong(member._createdDate) },
     { label: 'Status', value: member.activityStatus === 'ACTIVE' ? 'Active' : 'Pending' },
   ];
 
@@ -255,13 +256,7 @@ export default async function DashboardPage() {
                     : order.paymentStatus === 'REFUNDED'
                     ? 'Refunded'
                     : order.paymentStatus;
-                  const dateStr = order.createdDate
-                    ? new Intl.DateTimeFormat('en-NZ', {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                      }).format(new Date(order.createdDate))
-                    : null;
+                  const dateStr = order.createdDate ? fmtDate(order.createdDate) : null;
 
                   return (
                     <div

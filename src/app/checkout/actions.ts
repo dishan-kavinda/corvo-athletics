@@ -2,6 +2,7 @@
 
 import { stripe } from '@/lib/stripe';
 import { wixClient } from '@/lib/wix';
+import { fmtMoney } from '@/lib/format';
 
 interface CartLineItemIn {
   productId: string;
@@ -148,9 +149,6 @@ interface EnrichedLine extends CartLineItemIn {
   lineTotal: number;
 }
 
-function fmtMoney(amount: number, currency: string): string {
-  return new Intl.NumberFormat('en-NZ', { style: 'currency', currency }).format(amount);
-}
 
 async function createWixOrder(payload: {
   paymentIntentId: string;
