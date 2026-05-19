@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -175,8 +175,14 @@ const BTN: React.CSSProperties = {
 
 /* ── Main component ──────────────────────────────────────── */
 export function SplitChooser() {
-  const [hovered, setHovered] = useState<'savage' | 'luxury' | null>(null);
-  const [chosen, setChosen]   = useState<'savage' | 'luxury' | null>(null);
+  const [hovered,       setHovered]       = useState<'savage' | 'luxury' | null>(null);
+  const [chosen,        setChosen]        = useState<'savage' | 'luxury' | null>(null);
+  const [mobileFocused, setMobileFocused] = useState<'savage' | 'luxury' | null>(null);
+  const [isTouch,       setIsTouch]       = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+  }, []);
 
   const pick = useCallback(async (aesthetic: 'savage' | 'luxury') => {
     if (chosen) return;
@@ -188,23 +194,32 @@ export function SplitChooser() {
     setTimeout(() => { window.location.href = '/home'; }, 750);
   }, [chosen]);
 
-  const luxuryGrow  = chosen === 'luxury' ? 10 : chosen === 'savage' ? 0 : hovered === 'luxury' ? 1.55 : hovered === 'savage' ? 0.45 : 1;
-  const savageGrow  = chosen === 'savage' ? 10 : chosen === 'luxury' ? 0 : hovered === 'savage' ? 1.55 : hovered === 'luxury' ? 0.45 : 1;
-  const luxuryActive = !chosen && hovered === 'luxury';
-  const savageActive = !chosen && hovered === 'savage';
+  // On touch: tap expands the panel (mobileFocused); the button confirms pick.
+  // On desktop: hover expands, click anywhere on panel picks.
+  const active       = isTouch ? mobileFocused : hovered;
+  const luxuryActive = !chosen && active === 'luxury';
+  const savageActive = !chosen && active === 'savage';
+  const luxuryGrow   = chosen === 'luxury' ? 10 : chosen === 'savage' ? 0 : luxuryActive ? 1.55 : savageActive ? 0.45 : 1;
+  const savageGrow   = chosen === 'savage' ? 10 : chosen === 'luxury' ? 0 : savageActive ? 1.55 : luxuryActive ? 0.45 : 1;
+
+  const handlePanel = (side: 'luxury' | 'savage') => {
+    if (chosen) return;
+    if (isTouch) setMobileFocused(prev => prev === side ? null : side);
+    else pick(side);
+  };
 
   return (
     <div className="flex flex-col md:flex-row" style={{ height: '100svh', overflow: 'hidden' }}>
 
       {/* ── LUXURY ──────────────────────────────────── */}
       <motion.div
-        onClick={() => pick('luxury')}
-        onHoverStart={() => !chosen && setHovered('luxury')}
-        onHoverEnd={() => setHovered(null)}
+        onClick={() => handlePanel('luxury')}
+        onHoverStart={() => !chosen && !isTouch && setHovered('luxury')}
+        onHoverEnd={() => !isTouch && setHovered(null)}
         animate={{ flexGrow: luxuryGrow, opacity: savageActive ? 0.5 : 1 }}
         transition={{ duration: 0.55, ease: EASE }}
         style={{
-          flexShrink: 1, flexBasis: 0, minHeight: '50svh',
+          flexShrink: 1, flexBasis: 0, minHeight: '20svh',
           background: '#FAF7F0', cursor: 'pointer',
           position: 'relative', overflow: 'hidden',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -252,20 +267,20 @@ export function SplitChooser() {
       {/* ── DIVIDER ─────────────────────────────────── */}
       <motion.div
         className="h-px w-full md:h-full md:w-px"
-        animate={{ opacity: hovered ? 0.8 : 0.4 }}
+        animate={{ opacity: (hovered || mobileFocused) ? 0.8 : 0.4 }}
         transition={{ duration: 0.3 }}
         style={{ flexShrink: 0, background: 'linear-gradient(to bottom, #B8962C 0%, #B8962C 45%, #D81829 55%, #D81829 100%)' }}
       />
 
       {/* ── SAVAGE ──────────────────────────────────── */}
       <motion.div
-        onClick={() => pick('savage')}
-        onHoverStart={() => !chosen && setHovered('savage')}
-        onHoverEnd={() => setHovered(null)}
+        onClick={() => handlePanel('savage')}
+        onHoverStart={() => !chosen && !isTouch && setHovered('savage')}
+        onHoverEnd={() => !isTouch && setHovered(null)}
         animate={{ flexGrow: savageGrow, opacity: luxuryActive ? 0.5 : 1, backgroundColor: savageActive ? '#0C0418' : '#07090F' }}
         transition={{ duration: 0.55, ease: EASE }}
         style={{
-          flexShrink: 1, flexBasis: 0, minHeight: '50svh', cursor: 'pointer',
+          flexShrink: 1, flexBasis: 0, minHeight: '20svh', cursor: 'pointer',
           position: 'relative', overflow: 'hidden',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: 'clamp(2rem, 5vw, 4rem)',
