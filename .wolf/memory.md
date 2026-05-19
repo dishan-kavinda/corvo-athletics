@@ -602,3 +602,43 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 20:25 | Created src/components/ui/AuthForm.tsx | — | ~3961 |
 | 20:26 | Created src/app/account/login/page.tsx | — | ~520 |
 | 20:26 | Created src/app/account/register/page.tsx | — | ~524 |
+| 20:28 | Session end: 12 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 8 reads | ~16455 tok |
+| 20:33 | Edited src/components/ui/AuthForm.tsx | inline fix | ~14 |
+| 20:33 | Edited src/components/ui/AuthForm.tsx | 9→12 lines | ~190 |
+| 20:33 | Edited src/components/ui/AuthForm.tsx | 4→5 lines | ~49 |
+| 20:33 | Edited src/components/ui/AuthForm.tsx | CSS: error | ~231 |
+| 20:34 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:36 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:37 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:39 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:40 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:45 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:47 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:49 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:50 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:50 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:51 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:53 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:53 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:55 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:56 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:56 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 20:57 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:00 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:02 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:05 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:06 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:07 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+| 21:09 | Session end: 16 writes across 5 files (wix-orders.ts, page.tsx, route.ts, wix-browser.ts, AuthForm.tsx) | 9 reads | ~20903 tok |
+
+## Session: 2026-05-19 21:15
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 21:15 | Created src/app/api/auth/login/route.ts | — | ~550 |
+| 21:15 | Created src/app/api/auth/register/route.ts | — | ~653 |
+| 21:15 | Created src/app/api/auth/verify/route.ts | — | ~529 |
+| 21:16 | Created src/app/api/auth/reset/route.ts | — | ~212 |
+| 21:16 | Created src/components/ui/AuthForm.tsx | — | ~3982 |
+| 00:00 | Moved auth to server routes: created /api/auth/login, register, verify, reset | 4 new route files + AuthForm.tsx rewrite | fixes 403+iframe-blocked | ~2800 |
+| 21:17 | Session end: 5 writes across 2 files (route.ts, AuthForm.tsx) | 1 reads | ~6116 tok |

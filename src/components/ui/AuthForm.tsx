@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useId, useRef } from 'react';
-import { getWixBrowserClient } from '@/lib/wix-browser';
-import { LoginState } from '@wix/sdk';
+import { useState, useId } from 'react';
 
 type Mode = 'login' | 'register';
 type Step = 'form' | 'verify' | 'reset-sent';
@@ -94,11 +92,9 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
   const [error, setError] = useState('');
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [verifyCode, setVerifyCode] = useState('');
+  const [stateToken, setStateToken] = useState('');
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
-  // Explicitly store the state from the initial auth call so we can pass it
-  // to processVerification — more reliable than relying on the SDK's internal _state.
-  const verifyStateRef = useRef<unknown>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -108,59 +104,55 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) =>
     (e.currentTarget.style.borderBottomColor = 'var(--border)');
 
-  const exchangeAndRedirect = async (sessionToken: string) => {
-    const res = await fetch('/api/auth/exchange', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionToken }),
-    });
-    if (!res.ok) throw new Error('exchange failed');
-    const { authUrl } = (await res.json()) as { authUrl: string };
-    window.location.href = authUrl;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
-      const c = getWixBrowserClient();
-      const result =
-        mode === 'login'
-          ? await c.auth.login({ email: form.email, password: form.password })
-          : await c.auth.register({
-              email: form.email,
-              password: form.password,
-              ...(form.name ? { profile: { nickname: form.name } } : {}),
-            });
+      const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
+      const body = mode === 'login'
+        ? { email: form.email, password: form.password }
+        : { email: form.email, password: form.password, name: form.name || undefined };
 
-      switch (result.loginState) {
-        case LoginState.SUCCESS:
-          await exchangeAndRedirect(result.data.sessionToken);
-          break;
-        case LoginState.EMAIL_VERIFICATION_REQUIRED:
-          verifyStateRef.current = result;
-          setStep('verify');
-          setLoading(false);
-          break;
-        case LoginState.OWNER_APPROVAL_REQUIRED:
-          setError('Account pending approval. You will receive an email when approved.');
-          setLoading(false);
-          break;
-        default:
-          setError(
-            'errorCode' in result && result.errorCode === 'emailAlreadyExists'
-              ? 'An account with this email already exists. Try signing in.'
-              : mode === 'login'
-              ? 'Invalid email or password.'
-              : 'Could not create account. Please try again.',
-          );
-          setLoading(false);
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = (await res.json()) as {
+        loginState?: string;
+        authUrl?: string;
+        stateToken?: string;
+        errorCode?: string;
+        error?: string;
+      };
+
+      if (data.loginState === 'SUCCESS' && data.authUrl) {
+        window.location.href = data.authUrl;
+        return;
       }
-    } catch {
+      if (data.loginState === 'EMAIL_VERIFICATION_REQUIRED') {
+        setStateToken(data.stateToken ?? '');
+        setStep('verify');
+        setLoading(false);
+        return;
+      }
+      if (data.loginState === 'OWNER_APPROVAL_REQUIRED') {
+        setError('Account pending approval. You will receive an email when approved.');
+        setLoading(false);
+        return;
+      }
+
       setError(
-        mode === 'login' ? 'Invalid email or password.' : 'Could not create account. Please try again.',
+        data.errorCode === 'emailAlreadyExists'
+          ? 'An account with this email already exists. Try signing in.'
+          : mode === 'login'
+          ? 'Invalid email or password.'
+          : 'Could not create account. Please try again.',
       );
+      setLoading(false);
+    } catch {
+      setError(mode === 'login' ? 'Invalid email or password.' : 'Could not create account. Please try again.');
       setLoading(false);
     }
   };
@@ -170,20 +162,19 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
     setError('');
     setLoading(true);
     try {
-      const c = getWixBrowserClient();
-      const result = await c.auth.processVerification(
-        { verificationCode: verifyCode.trim() },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        verifyStateRef.current as any,
-      );
-      if (result.loginState === LoginState.SUCCESS) {
-        await exchangeAndRedirect(result.data.sessionToken);
-      } else {
-        setError('Invalid or expired code. Please request a new one.');
-        setLoading(false);
+      const res = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ verificationCode: verifyCode.trim(), stateToken }),
+      });
+      const data = (await res.json()) as { loginState?: string; authUrl?: string; error?: string };
+      if (data.loginState === 'SUCCESS' && data.authUrl) {
+        window.location.href = data.authUrl;
+        return;
       }
-    } catch (err) {
-      console.error('[AuthForm] processVerification error:', err);
+      setError(data.error ?? 'Invalid or expired code. Please try again.');
+      setLoading(false);
+    } catch {
       setError('Verification failed. Please try again.');
       setLoading(false);
     }
@@ -194,8 +185,12 @@ export function AuthForm({ mode: initialMode }: { mode: Mode }) {
     setError('');
     setLoading(true);
     try {
-      const c = getWixBrowserClient();
-      await c.auth.sendPasswordResetEmail(resetEmail, `${window.location.origin}/account`);
+      const res = await fetch('/api/auth/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: resetEmail }),
+      });
+      if (!res.ok) throw new Error('reset failed');
       setStep('reset-sent');
     } catch {
       setError('Could not send reset email. Please check the address.');

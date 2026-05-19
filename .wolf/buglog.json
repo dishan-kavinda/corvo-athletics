@@ -1183,6 +1183,50 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-19T07:58:19.779Z"
+    },
+    {
+      "id": "bug-073",
+      "timestamp": "2026-05-19T08:33:27.304Z",
+      "error_message": "CSS fix: EMAIL_VERIFICATION_REQUIRED",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "EMAIL_VERIFICATION_REQUIRED: setStep('verify') → verifyStateRef.current = result",
+      "fix": "Changed EMAIL_VERIFICATION_REQUIRED: setStep('verify') → verifyStateRef.current = result",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T08:33:27.304Z"
+    },
+    {
+      "id": "bug-074",
+      "timestamp": "2026-05-19T08:33:35.738Z",
+      "error_message": "Type error",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T08:33:35.739Z"
+    },
+    {
+      "id": "bug-075",
+      "timestamp": "2026-05-19T00:00:00.000Z",
+      "error_message": "403 on /api/v1/iam/authentication/v2/register + iframe blocked: Unsafe attempt to load URL https://dishanbulugoda.wixsite.com/...",
+      "file": "src/components/ui/AuthForm.tsx",
+      "root_cause": "Browser-side Wix SDK calls to www.wixapis.com return 403; SDK also opens a cross-origin iframe to the Wix OAuth endpoint which browsers block",
+      "fix": "Moved all auth calls (login, register, verify, reset) to server-side Next.js API routes (/api/auth/login, /api/auth/register, /api/auth/verify, /api/auth/reset). AuthForm now uses fetch() to those routes instead of the Wix SDK directly. Removed wix-browser.ts singleton.",
+      "tags": ["auth", "cors", "403", "iframe-blocked", "wix-sdk", "server-side"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-19T00:00:00.000Z"
     }
   ]
 }
