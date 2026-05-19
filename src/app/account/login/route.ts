@@ -8,7 +8,7 @@ export async function GET() {
 
   const client = createServerMemberClient();
   const oauthData = client.auth.generateOAuthData(callbackUrl);
-  const { authUrl } = await client.auth.getAuthUrl(oauthData);
+  const { authUrl } = await client.auth.getAuthUrl(oauthData, { responseMode: 'query' } as never);
 
   const res = NextResponse.redirect(authUrl);
   res.cookies.set('wix_oauth_data', JSON.stringify(oauthData), {
