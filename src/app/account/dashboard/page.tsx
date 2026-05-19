@@ -32,10 +32,11 @@ export default async function DashboardPage() {
     const res = await client.members.getCurrentMember();
     member = res.member ?? null;
   } catch {
-    redirect('/account');
+    // Tokens invalid/expired — clear cookie then redirect to login
+    redirect('/account/logout');
   }
 
-  if (!member) redirect('/account');
+  if (!member) redirect('/account/logout');
 
   const orders = await getMemberOrders(member.loginEmail ?? '').catch(() => []);
 
