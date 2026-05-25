@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-19T13:04:01.364Z
-> Files: 58 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T09:06:17.669Z
+> Files: 59 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -26,7 +26,7 @@
 
 ## src/app/about/
 
-- `page.tsx` — metadata (~3712 tok)
+- `page.tsx` — metadata (~3829 tok)
 
 ## src/app/account/
 
@@ -89,7 +89,7 @@
 
 ## src/app/home/
 
-- `page.tsx` — metadata (~8593 tok)
+- `page.tsx` — metadata (~8677 tok)
 
 ## src/app/returns/
 
@@ -113,7 +113,7 @@
 
 ## src/components/3d/
 
-- `HeroScene.tsx` — useIsLowEnd (~2720 tok)
+- `HeroScene.tsx` — useIsLowEnd (~2895 tok)
 - `LuxuryHeroSceneClient.tsx` — LuxuryHeroScene (~84 tok)
 
 ## src/components/cart/
@@ -125,9 +125,10 @@
 
 ## src/components/layout/
 
-- `Footer.tsx` — footerLinks (~1480 tok)
-- `Header.tsx` — navItems (~1704 tok)
-- `MobileNav.tsx` — navItems (~1855 tok)
+- `Footer.tsx` — footerLinks (~1488 tok)
+- `Header.tsx` — navItems (~1538 tok)
+- `Logo.tsx` — Logo (~250 tok)
+- `MobileNav.tsx` — navItems (~1861 tok)
 
 ## src/components/motion/
 
@@ -144,7 +145,7 @@
 - `SearchModal.tsx` — SearchModal (~2247 tok)
 - `SizeGuideButton.tsx` — SizeGuideButton (~338 tok)
 - `SizeGuideModal.tsx` — sizes — renders table (~2490 tok)
-- `SplitChooser.tsx` — EASE (~4360 tok)
+- `SplitChooser.tsx` — EASE (~4823 tok)
 - `StickyAddToCart.tsx` — StickyAddToCart (~1011 tok)
 - `ThemeToggle.tsx` — ThemeToggle (~241 tok)
 - `WishlistButton.tsx` — WishlistButton (~471 tok)

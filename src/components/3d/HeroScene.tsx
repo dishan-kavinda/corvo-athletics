@@ -53,55 +53,72 @@ function dodecSpokes(outerR: number, innerR: number): THREE.BufferGeometry {
   return geo;
 }
 
-/* ─── Power Core ────────────────────────────────────────────
-   Single sphere — GLSL fresnel gradient, hot centre → dark rim.
+/* ─── Logo Texture + Mesh ───────────────────────────────────
+   Rasterises the SVG to a canvas, tints it, feeds a CanvasTexture
+   to a translucent plane. Lerps at 0.026 (cage lerps at 0.055)
+   so the logo moves slower — creating perceived z-depth.
 ──────────────────────────────────────────────────────────── */
-function PowerCore() {
+function useLogoTexture(tint: string): THREE.CanvasTexture | null {
+  const [tex, setTex] = useState<THREE.CanvasTexture | null>(null);
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = 1200; c.height = 600;
+      const ctx = c.getContext('2d')!;
+      ctx.drawImage(img, 0, 0, 1200, 600);
+      ctx.globalCompositeOperation = 'source-in';
+      ctx.fillStyle = tint;
+      ctx.fillRect(0, 0, 1200, 600);
+      setTex(new THREE.CanvasTexture(c));
+    };
+    img.src = '/logo-savage-clean.svg';
+  }, [tint]);
+  return tex;
+}
+
+function LogoMesh({ tint, baseOpacity }: { tint: string; baseOpacity: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const mouse   = useRef({ x: 0, y: 0 });
+  const tex     = useLogoTexture(tint);
 
   const mat = useMemo(
     () =>
-      new THREE.ShaderMaterial({
-        uniforms: { uTime: { value: 0 } },
-        vertexShader: /* glsl */ `
-          varying vec3 vNormal;
-          varying vec3 vViewPos;
-          void main() {
-            vNormal  = normalize(normalMatrix * normal);
-            vec4 mv  = modelViewMatrix * vec4(position, 1.0);
-            vViewPos = -mv.xyz;
-            gl_Position = projectionMatrix * mv;
-          }
-        `,
-        fragmentShader: /* glsl */ `
-          uniform float uTime;
-          varying vec3 vNormal;
-          varying vec3 vViewPos;
-          void main() {
-            float NdotV  = clamp(dot(normalize(vNormal), normalize(vViewPos)), 0.0, 1.0);
-            float pulse  = 1.0 + sin(uTime * 1.3) * 0.055;
-            float bright = pow(NdotV, 1.4) * pulse;
-
-            /* Fixed crimson hue — only brightness varies, hue never shifts */
-            vec3 crimson = vec3(0.847, 0.0, 0.035);   /* linear #D81829, B only */
-            float scale  = mix(0.10, 7.5, bright);
-
-            gl_FragColor = vec4(crimson * scale, 1.0);
-          }
-        `,
-      }),
-    [],
+      tex
+        ? new THREE.MeshBasicMaterial({
+            map: tex,
+            transparent: true,
+            opacity: baseOpacity,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+          })
+        : null,
+    [tex, baseOpacity],
   );
 
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouse.current.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+      mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1);
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
   useFrame(({ clock }) => {
-    if (meshRef.current)
-      (meshRef.current.material as THREE.ShaderMaterial).uniforms.uTime.value =
-        clock.getElapsedTime();
+    if (!meshRef.current || !mat) return;
+    const t = clock.getElapsedTime();
+    const { x, y } = mouse.current;
+    meshRef.current.rotation.y += (x * Math.PI * 0.22 - meshRef.current.rotation.y) * 0.026;
+    meshRef.current.rotation.x += (y * Math.PI * 0.11 - meshRef.current.rotation.x) * 0.026;
+    mat.opacity = baseOpacity * (0.82 + Math.sin(t * 0.85) * 0.18);
   });
 
+  if (!mat) return null;
+
   return (
-    <mesh ref={meshRef} material={mat}>
-      <sphereGeometry args={[0.22, 32, 32]} />
+    <mesh ref={meshRef} material={mat} position={[0, 0, -0.6]}>
+      <planeGeometry args={[3.6, 1.8]} />
     </mesh>
   );
 }
@@ -158,15 +175,12 @@ function DodecCage() {
 
   return (
     <>
+      <LogoMesh tint="#FF1428" baseOpacity={0.92} />
       <group ref={cageRef}>
         <lineSegments geometry={outerGeo} material={outerMat} />
         <lineSegments geometry={spokeGeo} material={spokeMat} />
         <lineSegments geometry={innerGeo} material={innerMat} />
-        <PowerCore />
       </group>
-
-      <pointLight position={[0, 0, 0]} color="#CC0000" intensity={28} distance={9}  />
-      <pointLight position={[0, 0, 0]} color="#880000" intensity={12} distance={18} />
     </>
   );
 }
@@ -193,11 +207,11 @@ export function HeroScene() {
       {!lowEnd && (
         <EffectComposer>
           <Bloom
-            intensity={2.0}
-            luminanceThreshold={0.18}
+            intensity={2.8}
+            luminanceThreshold={0.10}
             luminanceSmoothing={0.88}
             mipmapBlur
-            radius={0.75}
+            radius={0.85}
           />
         </EffectComposer>
       )}
@@ -256,10 +270,13 @@ function LuxuryForm() {
   });
 
   return (
-    <group ref={groupRef}>
-      <lineSegments geometry={outerGeo} material={outerMat} />
-      <lineSegments geometry={innerGeo} material={innerMat} />
-    </group>
+    <>
+      <LogoMesh tint="#C9A961" baseOpacity={0.50} />
+      <group ref={groupRef}>
+        <lineSegments geometry={outerGeo} material={outerMat} />
+        <lineSegments geometry={innerGeo} material={innerMat} />
+      </group>
+    </>
   );
 }
 

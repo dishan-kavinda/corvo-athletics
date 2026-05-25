@@ -30,26 +30,28 @@ export function Footer() {
           style={{ maxWidth: '1440px' }}
         >
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="overflow-hidden">
-              <p
-                className="font-display uppercase leading-[0.88]"
+            <div>
+              {/* ── Brand mark ── */}
+              <img
+                src="/logo-savage-clean.svg"
+                alt="Corvo Athletic"
                 style={{
-                  fontSize: 'clamp(3.5rem, 9vw, 8rem)',
-                  color: 'var(--footer-fg)',
-                  letterSpacing: '-0.01em',
+                  height: 'clamp(72px, 10vw, 128px)',
+                  width: 'auto',
+                  display: 'block',
+                  marginBottom: '1rem',
                 }}
-              >
-                CORVO
-              </p>
+              />
               <p
-                className="font-display uppercase leading-[0.88]"
+                className="font-display uppercase"
                 style={{
-                  fontSize: 'clamp(3.5rem, 9vw, 8rem)',
+                  fontSize: 'clamp(1.1rem, 2.5vw, 2rem)',
                   color: 'var(--footer-accent)',
-                  letterSpacing: '-0.01em',
+                  letterSpacing: '0.22em',
+                  lineHeight: 1,
                 }}
               >
-                ATHLETIC
+                Athletic
               </p>
             </div>
             <div className="max-w-xs">

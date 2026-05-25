@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { CartIcon } from '@/components/cart/CartIcon';
+import { Logo } from '@/components/layout/Logo';
 import { MobileNav } from '@/components/layout/MobileNav';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { SearchModal } from '@/components/ui/SearchModal';
@@ -55,26 +56,8 @@ export function Header() {
           {/* ── Left: hamburger + wordmark ──────────────── */}
           <div className="flex items-center gap-4">
             <MobileNav onSearchOpen={() => setSearchOpen(true)} />
-            <Link href="/home" className="group flex flex-col items-center leading-none select-none">
-              <span
-                className="font-display uppercase transition-colors duration-200 group-hover:text-blade"
-                style={{ fontSize: '1.2rem', letterSpacing: '0.32em', marginRight: '-0.32em' }}
-              >
-                Corvo
-              </span>
-              <span
-                style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '8.5px',
-                  letterSpacing: '0.32em',
-                  marginRight: '-0.32em',
-                  color: 'var(--muted)',
-                  textTransform: 'uppercase',
-                  fontWeight: 700,
-                }}
-              >
-                Athletic
-              </span>
+            <Link href="/home" className="group flex items-center leading-none select-none transition-opacity duration-200 hover:opacity-80">
+              <Logo height={38} />
             </Link>
           </div>
 

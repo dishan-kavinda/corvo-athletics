@@ -775,3 +775,54 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 01:27 | Mobile tap-to-expand: isTouch detection, mobileFocused state, two-step flow on touch devices | SplitChooser.tsx | pushed 87854af |
 | 01:27 | Rejected torn SVG crack divider per user — reverted, straight gradient line kept | SplitChooser.tsx | reverted |
 | 01:27 | Design QC + codebase cleanup: extracted fmtMoney/fmtDate to src/lib/format.ts, removed 4 duplicate Intl formatters | format.ts + 4 consumers | pushed 299a659 |
+| 01:28 | Session end: 27 writes across 8 files (SplitChooser.tsx, layout.tsx, globals.css, format.ts, actions.ts) | 32 reads | ~44472 tok |
+
+## Session: 2026-05-20 20:05
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-25 20:05
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 20:13 | Created src/components/layout/Logo.tsx | — | ~238 |
+| 20:14 | Edited src/components/layout/Header.tsx | added 1 import(s) | ~80 |
+| 20:14 | Edited src/components/layout/Header.tsx | CSS: hover | ~56 |
+| 20:14 | Edited src/components/layout/MobileNav.tsx | added 1 import(s) | ~48 |
+| 20:14 | Edited src/components/layout/MobileNav.tsx | CSS: display, alignItems | ~56 |
+
+| 20:14 | SVG logo: removed CORVO text sub-paths, tightened viewBox to 700 240 2400 1200; created Logo.tsx (CSS mask, currentColor); updated Header + MobileNav wordmarks | public/logo-savage-clean.svg, src/components/layout/Logo.tsx, Header.tsx, MobileNav.tsx | done | ~200 |
+| 20:14 | Session end: 5 writes across 3 files (Logo.tsx, Header.tsx, MobileNav.tsx) | 3 reads | ~4037 tok |
+| 20:41 | Edited src/components/layout/Footer.tsx | added 1 import(s) | ~18 |
+| 20:41 | Edited src/components/layout/Footer.tsx | 2→1 lines | ~9 |
+| 20:41 | Edited src/components/layout/Footer.tsx | 22→24 lines | ~216 |
+| 20:42 | Edited src/components/ui/SplitChooser.tsx | added 1 import(s) | ~51 |
+| 20:42 | Edited src/components/ui/SplitChooser.tsx | CSS: opacity, margin | ~113 |
+| 20:42 | Edited src/components/ui/SplitChooser.tsx | CSS: opacity, margin | ~109 |
+| 20:42 | Edited src/app/about/page.tsx | 20→19 lines | ~172 |
+| 20:43 | Edited src/app/home/page.tsx | added 1 import(s) | ~57 |
+| 20:43 | Edited src/app/home/page.tsx | CSS: opacity | ~243 |
+| 20:43 | Edited src/app/home/page.tsx | CSS: margin | ~166 |
+| 20:43 | Edited src/app/about/page.tsx | added 1 import(s) | ~55 |
+| 20:44 | Edited src/app/about/page.tsx | 15→20 lines | ~247 |
+| 20:44 | Edited src/components/layout/Logo.tsx | added 1 import(s) | ~39 |
+| 20:45 | Implemented logo site-wide: Footer (img watermark + Athletic text), SplitChooser (Logo mark both panels), about hero (SVG watermark replaces CORVO text), home hero eyebrow (Logo+line+text), home CTA (Logo above eyebrow), about eyebrow (Logo+line+text); all TS clean | Footer.tsx, SplitChooser.tsx, home/page.tsx, about/page.tsx, Logo.tsx | done | ~800 |
+| 20:45 | Session end: 18 writes across 6 files (Logo.tsx, Header.tsx, MobileNav.tsx, Footer.tsx, SplitChooser.tsx) | 11 reads | ~27862 tok |
+
+## Session: 2026-05-25 20:58
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 21:01 | Edited src/components/3d/HeroScene.tsx | added 2 condition(s) | ~730 |
+| 21:01 | Edited src/components/3d/HeroScene.tsx | 13→14 lines | ~148 |
+| 21:01 | Edited src/components/3d/HeroScene.tsx | 6→9 lines | ~74 |
+| 21:01 | Edited src/components/ui/SplitChooser.tsx | expanded (+14 lines) | ~256 |
+| 21:02 | Edited src/components/ui/SplitChooser.tsx | expanded (+14 lines) | ~240 |
+| 21:03 | Add interactive 3D logo mesh to HeroScene (savage+luxury) + background silhouettes in SplitChooser (luxury mirrored) | HeroScene.tsx, SplitChooser.tsx | done | ~1800 |
+| 21:03 | Session end: 5 writes across 2 files (HeroScene.tsx, SplitChooser.tsx) | 2 reads | ~9334 tok |
+| 21:05 | Edited src/components/3d/HeroScene.tsx | removed 54 lines | ~5 |
+| 21:06 | Edited src/components/3d/HeroScene.tsx | 10→6 lines | ~83 |
+| 21:06 | Edited src/components/3d/HeroScene.tsx | 7→7 lines | ~52 |
+| 21:06 | Edited src/components/ui/SplitChooser.tsx | "88%" → "118%" | ~11 |
+| 21:06 | Session end: 9 writes across 2 files (HeroScene.tsx, SplitChooser.tsx) | 2 reads | ~11799 tok |

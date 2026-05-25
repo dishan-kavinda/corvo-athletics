@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Logo } from '@/components/layout/Logo';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -237,12 +238,30 @@ export function SplitChooser() {
         {/* Animated gold aura */}
         <AnimatePresence>{luxuryActive && <GoldAuraEffect />}</AnimatePresence>
 
+        {/* Background logo silhouette — mirrored so raven head faces left */}
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          width: '118%', aspectRatio: '2 / 1',
+          transform: 'translate(-50%, -50%) scaleX(-1)',
+          background: '#B8962C',
+          WebkitMaskImage: 'url(/logo-savage-clean.svg)',
+          maskImage: 'url(/logo-savage-clean.svg)',
+          WebkitMaskSize: 'contain', maskSize: 'contain',
+          WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center', maskPosition: 'center',
+          opacity: 0.11, pointerEvents: 'none',
+        }} />
+
         {/* Content */}
         <motion.div
           animate={{ y: luxuryActive ? -12 : 0, scale: luxuryActive ? 1.04 : 1 }}
           transition={{ duration: 0.55, ease: EASE }}
           style={{ position: 'relative', textAlign: 'center', maxWidth: '460px', zIndex: 1 }}
         >
+          <Logo
+            height={34}
+            style={{ color: '#B8962C', opacity: 0.5, margin: '0 auto 2.25rem' }}
+          />
           <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 11, fontWeight: 400, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#B8962C', marginBottom: '2rem' }}>
             The House of Corvo
           </p>
@@ -298,12 +317,30 @@ export function SplitChooser() {
         {/* Crimson fire */}
         <AnimatePresence>{savageActive && <FireEffect />}</AnimatePresence>
 
+        {/* Background logo silhouette */}
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          width: '118%', aspectRatio: '2 / 1',
+          transform: 'translate(-50%, -50%)',
+          background: '#FFFFFF',
+          WebkitMaskImage: 'url(/logo-savage-clean.svg)',
+          maskImage: 'url(/logo-savage-clean.svg)',
+          WebkitMaskSize: 'contain', maskSize: 'contain',
+          WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center', maskPosition: 'center',
+          opacity: 0.065, pointerEvents: 'none',
+        }} />
+
         {/* Content */}
         <motion.div
           animate={{ y: savageActive ? -12 : 0, scale: savageActive ? 1.04 : 1 }}
           transition={{ duration: 0.55, ease: EASE }}
           style={{ position: 'relative', textAlign: 'center', maxWidth: '460px', zIndex: 1 }}
         >
+          <Logo
+            height={34}
+            style={{ color: '#FFFFFF', opacity: 0.38, margin: '0 auto 2.25rem' }}
+          />
           <p style={{ fontFamily: 'var(--font-rajdhani), sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: '0.52em', textTransform: 'uppercase', color: '#D81829', marginBottom: '2rem' }}>
             ── Corvo Athletic ──
           </p>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Logo } from '@/components/layout/Logo';
 
 const navItems = [
   { label: 'Shop All', href: '/shop', num: '01' },
@@ -58,8 +59,8 @@ export function MobileNav({ onSearchOpen }: MobileNavProps) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem 1.75rem', borderBottom: '1px solid var(--border)' }}>
-          <Link href="/home" onClick={close} className="font-display uppercase" style={{ fontSize: '1.4rem', letterSpacing: '0.32em', color: 'var(--page-fg)', textDecoration: 'none' }}>
-            Corvo
+          <Link href="/home" onClick={close} style={{ textDecoration: 'none', color: 'var(--page-fg)', display: 'flex', alignItems: 'center' }}>
+            <Logo height={34} />
           </Link>
           <button type="button" onClick={close} aria-label="Close menu" style={{ color: 'var(--muted)', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px' }}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4L16 16M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>

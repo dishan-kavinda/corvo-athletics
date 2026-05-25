@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { Button } from '@/components/ui/Button';
+import { Logo } from '@/components/layout/Logo';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
@@ -46,25 +47,24 @@ export default async function AboutPage() {
         className="relative min-h-[70vh] flex items-end overflow-hidden"
         style={{ background: 'var(--section-dark)' }}
       >
-        {/* Giant watermark */}
+        {/* Giant watermark — SVG raven mark */}
         <div
           className="absolute inset-0 flex items-center overflow-hidden pointer-events-none"
           aria-hidden
         >
-          <span
-            className="font-display uppercase select-none"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-savage-clean.svg"
+            alt=""
             style={{
-              fontSize: 'clamp(10rem, 26vw, 22rem)',
-              color: 'var(--footer-fg)',
-              opacity: 0.03,
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
+              height: 'clamp(260px, 34vw, 520px)',
+              width: 'auto',
+              opacity: 0.045,
               paddingLeft: '2rem',
-              whiteSpace: 'nowrap',
+              display: 'block',
+              flexShrink: 0,
             }}
-          >
-            CORVO
-          </span>
+          />
         </div>
 
         {/* Crimson diagonal line */}
@@ -80,19 +80,24 @@ export default async function AboutPage() {
           style={{ maxWidth: '1440px' }}
         >
           <HeroReveal delay={0.08} y={12}>
-            <p
-              style={{
-                fontFamily: 'var(--font-rajdhani)',
-                fontSize: '11px',
-                fontWeight: 700,
-                letterSpacing: '0.52em',
-                textTransform: 'uppercase',
-                color: 'var(--accent)',
-                marginBottom: '1.5rem',
-              }}
-            >
-              {isLuxury ? '── The House' : '── The Brand'}
-            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <Logo height={18} style={{ color: 'var(--accent)', opacity: 0.85, flexShrink: 0 }} />
+              <span
+                style={{ display: 'block', width: '22px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--font-rajdhani)',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.52em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                }}
+              >
+                {isLuxury ? 'The House' : 'The Brand'}
+              </span>
+            </div>
           </HeroReveal>
 
           <HeroReveal delay={0.22} y={50} duration={1.0}>

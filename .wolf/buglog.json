@@ -1682,6 +1682,134 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-19T13:03:56.570Z"
+    },
+    {
+      "id": "bug-104",
+      "timestamp": "2026-05-25T08:14:07.972Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/layout/Header.tsx",
+      "root_cause": "20 lines replaced/restructured",
+      "fix": "Rewrote 21→3 lines (20 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T08:14:07.972Z"
+    },
+    {
+      "id": "bug-105",
+      "timestamp": "2026-05-25T08:14:15.688Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/layout/MobileNav.tsx",
+      "root_cause": "Had \"font-display uppercase\"",
+      "fix": "Changed to 'none'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T08:14:15.688Z"
+    },
+    {
+      "id": "bug-106",
+      "timestamp": "2026-05-25T08:41:59.697Z",
+      "error_message": "CSS fix: fontSize, letterSpacing",
+      "file": "src/components/layout/Footer.tsx",
+      "root_cause": "fontSize: 'clamp(3.5rem, 9vw, 8rem)', → 'clamp(1.1rem, 2.5vw, 2rem)',; letterSpacing: '-0.01em', → '0.22em',",
+      "fix": "Changed fontSize: 'clamp(3.5rem, 9vw, 8rem)', → 'clamp(1.1rem, 2.5vw, 2rem)',; letterSpacing: '-0.01em', → '0.22em',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T08:41:59.697Z"
+    },
+    {
+      "id": "bug-107",
+      "timestamp": "2026-05-25T08:42:27.787Z",
+      "error_message": "CSS fix: opacity",
+      "file": "src/app/about/page.tsx",
+      "root_cause": "opacity: 0.03, → 0.045,",
+      "fix": "Changed opacity: 0.03, → 0.045,",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T08:43:43.540Z"
+    },
+    {
+      "id": "bug-108",
+      "timestamp": "2026-05-25T08:44:02.560Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/about/page.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 15→20 lines (4 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T08:44:02.560Z"
+    },
+    {
+      "id": "bug-109",
+      "timestamp": "2026-05-25T09:01:11.050Z",
+      "error_message": "Missing guard clause",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "No early return/throw for edge case: !meshRef.current || !mat",
+      "fix": "Added guard clause: if (!meshRef.current || !mat)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T09:01:11.050Z"
+    },
+    {
+      "id": "bug-110",
+      "timestamp": "2026-05-25T09:06:00.742Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/3d/HeroScene.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 10→6 lines (4 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T09:06:00.742Z"
+    },
+    {
+      "id": "bug-111",
+      "timestamp": "2026-05-25T09:06:17.681Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Had '88%'",
+      "fix": "Changed to '118%'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T09:06:17.681Z"
     }
   ]
 }

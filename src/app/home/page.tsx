@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { Button } from '@/components/ui/Button';
+import { Logo } from '@/components/layout/Logo';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
@@ -179,9 +180,10 @@ export default async function Home() {
           <div style={{ maxWidth: '580px' }}>
             <HeroReveal delay={0.05} y={10}>
               <div className="flex items-center gap-3 mb-10">
+                <Logo height={20} style={{ color: 'var(--accent)', opacity: 0.88, flexShrink: 0 }} />
                 <span
                   className="block"
-                  style={{ width: '40px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
+                  style={{ width: '26px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
                 />
                 <span
                   style={{
@@ -664,6 +666,10 @@ export default async function Home() {
         />
         <div className="relative mx-auto px-6 md:px-10 lg:px-14 text-center" style={{ maxWidth: '1440px' }}>
           <FadeIn>
+            <Logo
+              height={40}
+              style={{ color: 'rgba(255,255,255,0.38)', margin: '0 auto 2.25rem' }}
+            />
             <p style={{
               fontFamily: 'var(--font-rajdhani)',
               fontSize: '11px',

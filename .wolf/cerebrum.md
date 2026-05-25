@@ -148,6 +148,11 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
 - [2026-05-20] **SplitChooser mobile: tap-to-expand pattern.** Touch devices use `mobileFocused` state — first tap expands panel + triggers animation, button tap confirms pick. Detect touch with `window.matchMedia('(hover: none) and (pointer: coarse)')`. `minHeight` reduced to `20svh` so panels can shrink during expand. Desktop hover behaviour unchanged.
 - [2026-05-20] **Shared formatters live at `src/lib/format.ts`.** `fmtMoney(amount, currency)` and `fmtDate(d, options?)` — both `en-NZ` locale. All checkout, cart, and account files import from here. Do not inline `new Intl.NumberFormat` or `new Intl.DateTimeFormat` again.
 
+## Key Learnings
+
+- [2026-05-25] **Logo system:** `src/components/layout/Logo.tsx` — CSS mask-image approach (background: currentColor, mask: url(/logo-savage-clean.svg)), viewBox "700 240 2400 1200", aspect ratio exactly 2:1. Use `<img src="/logo-savage-clean.svg">` when fill must always be white (footer, watermarks). Use Logo component when color must adapt to theme (header, nav, eyebrows, chooser marks).
+- [2026-05-25] **Logo placement pattern across site:** Header (38px), MobileNav (34px), Footer (img, clamp 72-128px + "Athletic" text), SplitChooser (Logo 34px, luxury gold #B8962C op0.5 / savage white op0.38), about hero watermark (img, clamp 260-520px op0.045), home/about eyebrows (Logo 18-20px in accent color), home CTA (Logo 40px white op0.38).
+
 ## Do-Not-Repeat
 
 - [2026-05-20] **Don't implement a torn/jagged SVG divider on the SplitChooser without explicit user approval.** User rejected the SVG crack approach — too gimmicky. The straight gradient line (gold→crimson) is the current divider and the user is fine with it.
