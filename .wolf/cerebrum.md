@@ -57,7 +57,7 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
 - Durations: 300–900ms (most sit 400–600ms).
 - No bouncing, spinning, or scale > 1.05.
 - All scroll-triggered animations use `viewport={{ once: true }}` — animate once per scroll, not on every re-entry.
-- Motion primitives at `src/components/motion/`: `FadeIn` (whileInView), `HeroReveal` (animate on mount, for sequential reveals), `Stagger` + `StaggerItem`.
+- Motion primitives at `src/components/motion/`: `FadeIn` (whileInView), `HeroReveal` (animate on mount, for sequential reveals), `Stagger` + `StaggerItem`, `RevealText` (clip-mask slide-up), `RevealImage` (scale 1.1→1 on scroll), `ParallaxImage` (full-section parallax + scale + dark overlay + children slot at z:2).
 - Page transitions in `src/app/template.tsx` — 350ms fade.
 
 ### Architecture patterns
@@ -114,11 +114,17 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
   - `shippingInfo.logistics.shippingDestination: { address, contactDetails }`
   Address fields: `addressLine`, `addressLine2`, `city`, `postalCode`, `country`, `subdivision`. Contact fields: `firstName`, `lastName`, `phone`. When READING, check `recipientInfo` first, fall back to `shippingInfo.logistics.shippingDestination`. Discovered when /thank-you?orderId=... rendered without a SHIPPING TO block — direct API probe of order showed `shippingInfo: {"title": ""}` despite our payload including shipmentDetails. Verified the correct schema by probing creation with the new shape (orders #10004, #10005, #10006 all show addresses saved on both paths).
 
+- [2026-05-26] **CartDrawer was the most inconsistently styled component** — it mixed hardcoded hex colors (`#000000`, `#262626`, `#1B2038`, `#838DAA`) and legacy Tailwind classes (`text-ash`, `bg-ink`, `border-graphite`) that completely bypassed the CSS variable system. Fully rewritten to use CSS vars. Pattern: always use `var(--surface)`, `var(--border)`, `var(--muted)`, `var(--page-fg)` inline styles, NEVER hardcoded hex or old palette classes.
+- [2026-05-26] **`ParallaxImage` overlay is now a prop** — accepts `overlay` string defaulting to the dark scrim. Pass a custom gradient per aesthetic when the page background is light (luxury mode uses `rgba(245,240,235,...)` at the bottom to blend into `--page-bg: #FAF7F0`).
+- [2026-05-26] **`FadeIn.tsx` ease array requires the tuple cast** — `ease: [0.16, 1, 0.3, 1] as [number, number, number, number]`. Without the cast, TypeScript infers `number[]` which is incompatible with Framer Motion v12's `Easing` type.
+- [2026-05-26] **After removing packages, clean up `tsconfig.json` `"types"` array.** Stale entries like `"@react-three/fiber"` or `"@types/three"` after `pnpm remove` cause `tsc` error TS2688. Set `"types": []` to clear, or remove the array entirely.
 - [2026-05-18] **In Next.js 16, `middleware.ts` is deprecated — use `proxy.ts` with a `proxy` (not `middleware`) export function.** Using the old name produces a build warning; the proxy file needs `export function proxy(req)` or `export default function(req)`. The `config.matcher` export is unchanged.
 - [2026-05-18] **`Cormorant_Garant` is not recognized by Next.js 16/Turbopack's `next/font/google` registry.** Use `Playfair_Display` instead for a luxury serif — it supports weights 400–900, styles normal+italic, and works reliably. Mapped to CSS var `--font-cormorant` so all luxury component references remain unchanged.
 - [2026-05-18] **Dual-aesthetic system architecture:** Cookie `corvo_aesthetic` (`'savage'|'luxury'`) is set by `/api/set-aesthetic` (POST), read server-side in `layout.tsx` (`cookies()`) to inject `html.dark` or `html.luxury` class. Proxy injects `x-pathname` header; layout reads it (`headers()`) to skip Header/Footer on `/` (chooser page). Homepage content lives at `/home`; `/` is the full-screen split chooser.
 - [2026-05-18] **Dual-aesthetic CSS variable strategy:** All page-level color tokens use `var(--accent)`, `var(--page-bg)`, `var(--muted)`, `var(--border)` etc — these cascade correctly from `html.dark` or `html.luxury`. Dark-section-specific tokens use `var(--section-dark)`, `var(--footer-*)` (bg, border, accent, muted, fg) — defined in both `html.dark` and `html.luxury` for warm vs cold dark variants. `var(--color-pulse)` = teal in savage, warm gold in luxury.
 - [2026-05-18] **Luxury 3D: NO glow, NO bloom, NO sparkles, NO point lights.** `LuxuryHeroScene` uses only `ambientLight` + `directionalLight`, `LineBasicMaterial` (matte by design), `IcosahedronGeometry` with `EdgesGeometry` — gentle slow rotation (lerp 0.022, z=t*0.018). Dynamic import in `LuxuryHeroSceneClient.tsx` (ssr:false). Home page reads `corvo_aesthetic` cookie server-side to choose between `HeroSceneClient` and `LuxuryHeroSceneClient`.
+- [2026-05-26] **Homepage hero is photography-driven, NOT 3D.** All `@react-three/*` and `three` packages removed. Hero uses `ParallaxImage` (`src/components/motion/ParallaxImage.tsx`) with `/hero_savage.png` or `/hero_luxury.png`. Standards section uses `/fabric_savage.png` or `/fabric_luxury.png` as 7%-opacity CSS `background-image` texture. Category section uses `CategoryGrid` client component with `motion.create(Link)` and Framer Motion variant cascading for hover effects (2×2 grid on sm+).
+- [2026-05-26] **`motion.create(Link)` variant propagation pattern** — parent has `initial="rest" whileHover="hover" animate="rest"`, child `motion.div`s declare `variants={{ rest: {...}, hover: {...} }}` without their own `animate` prop. Transition definitions go inside each variant state. CSS-only properties (transformOrigin, willChange) go in the `style` prop, not in variants.
 - [2026-05-19] **Luxury copy is old-money understated — no ALL CAPS headlines, no italics, title-case, no gimmicks.** SplitChooser luxury panel: eyebrow "The House of Corvo", headline "Quality Needs No Introduction.", tagline "The standard worth keeping.", CTA "Enter the House →".
 
 ## Decision Log
@@ -156,3 +162,48 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
 ## Do-Not-Repeat
 
 - [2026-05-20] **Don't implement a torn/jagged SVG divider on the SplitChooser without explicit user approval.** User rejected the SVG crack approach — too gimmicky. The straight gradient line (gold→crimson) is the current divider and the user is fine with it.
+- [2026-05-26] **Logo.tsx is now an inline SVG component, not a CSS mask-image approach.** Path 1 uses `fill="currentColor"` (raven body adapts to theme), Path 2 uses `fill="#FF0000"` (eye always red). The old mask approach stripped all colors. Don't revert to mask-image.
+- [2026-05-26] **Framer Motion Variants with cubic-bezier ease require the array to be typed as `[number, number, number, number]` in v12+.** TypeScript infers `number[]` which doesn't match `Easing`. Fix: `ease: [0.16, 1, 0.3, 1] as [number, number, number, number]`. Applies to all Variants objects with ease arrays.
+- [2026-05-26] **PresentationControls `snap` prop in @react-three/drei — only accepts `boolean` in TypeScript.** The object form `{ mass, tension }` is documented but the TS types may not include it. Use `snap` (boolean true) to avoid TS error.
+- [2026-05-26] **SVGLoader for ExtrudeGeometry: scale = 0.00155, position = [-1900*s, 840*s, 0] to center raven using "700 240 2400 1200" crop.** Do NOT divide LOGO_POS_X/Y by scale — those are already in scene units. Position is in parent/scene space, not local SVG space.
+- [2026-05-26] **@studio-freight/lenis is deprecated but still works; renamed to `lenis`.** If reinstalling, use `lenis` package. Current install uses `@studio-freight/lenis@1.0.42` which includes TypeScript types in `dist/types/`.
+
+## Key Learnings (2026-06-11 redesign session)
+
+- [2026-06-11] **Production Wix catalog is now EMPTY** — user removed the 15 dropship products (confirmed live: www.corvoathletic.com/shop shows 0). Shop page renders a newsletter-capture empty state; FeaturedProducts on /home renders null. Both light up automatically when the real catalog lands. Local dev shows the same (0 products) — this is correct, not a bug.
+- [2026-06-11] **Design-system utilities now live in globals.css**: `.shell` (1440px container + responsive gutters), `.eyebrow` (rajdhani 11px 0.48em accent label), `.tech-label` (rajdhani muted metadata), `.field` (form inputs), global `:focus-visible` outline, themed scrollbar. Use these instead of re-inlining the same style objects.
+- [2026-06-11] **Footer is always dark, but page-level CSS vars are light in luxury/light mode.** Components that read `--surface-elevated/--border/--page-fg/--muted/--accent` (e.g. NewsletterForm) must be wrapped in a div that re-scopes those vars to `--footer-*` equivalents (see Footer.tsx newsletter column).
+- [2026-06-11] **New interactive components:** ShopGrid (client search/sort), ProductGallery (clickable thumbs + crossfade), InfoAccordion (PDP details), FeaturedProducts (server, null-safe), BackToTop. Product page now has a related-products rail.
+
+## Do-Not-Repeat (2026-06-11)
+
+- [2026-06-11] **Don't run `openwolf designqc` through the Bash tool on Windows.** MSYS path conversion mangles `/route` args into `C:/Program Files/Git/route` → "Cannot navigate to invalid URL". Run it from PowerShell. Also: it only reliably captures the FIRST route per invocation — pass one route at a time, and warm-compile dev routes (Invoke-WebRequest) before capturing.
+- [2026-06-11] **designqc's browser has no corvo_aesthetic cookie**, so `/` AND `/home` both screenshot the SplitChooser (proxy redirects /home→/ without cookie). /home content cannot be captured this way.
+- [2026-06-11] **Don't link to routes that don't exist.** Footer had /shop/supplements and /shop/apparel — those resolve to /shop/[slug] product lookups and 404. Real routes only: /shop /about /contact /shipping /returns /account.
+- [2026-06-11] **Don't ship non-functional UI that looks interactive.** Shop page had filter tabs styled as buttons with cursor:default that did nothing — replaced with genuinely working search+sort. If a control can't work yet, don't render it.
+
+## Decision Log (2026-06-11 remake)
+
+- [2026-06-11] **User found the v2 design "bland, not lively" → full visual remake ordered.** New committed direction: the two aesthetics must be DISTINCT WORLDS, not one layout with two color swaps. Savage = pure-black brutalism (#070708 bg, electric crimson #FF2B3A primary, volt green #C8FF2E secondary, outlined display type, EKG heartbeat lines, rotating reticles, marching hazard stripes, blinking live-dot). Luxury = warm ivory atelier (#F4EFE4 bg, antique gold #9C7C26, Bodoni italic accent words, self-drawing gold flourishes, rising gold dust). The old navy-tinted dark palette (#07090F/#0C0F1B/#1B2038) and #D81829/#B8962C accents are RETIRED — do not reintroduce.
+- [2026-06-11] **"Lively" = ambient animated SVG, always-on but subtle.** Library at src/components/svg/: EKGPulse + Reticle + DustField are server-safe (pure CSS keyframes — usable in server components); GoldFlourish is client (framer pathLength whileInView). Pattern for traveling-segment lines: pathLength={1} + strokeDasharray fractions + ekg-run keyframe animating stroke-dashoffset 1→-1.
+- [2026-06-11] **Theme-specific ornament rule:** savage gets EKG/reticle/hazard-stripes/volt; luxury gets flourish/dust/italics — never cross them. html.luxury CSS neutralizes .hazard-stripes into hairlines as a safety net, but prefer conditional rendering on isLuxury.
+- [2026-06-11] **Screenshot trick for cookie-gated pages:** temporary GET route /api/preview-aesthetic?a=savage|luxury that sets corvo_aesthetic and redirects /home — lets the designqc browser capture both themes. Create, capture, DELETE the route (never ship it).
+- [2026-06-11] **Stripe PaymentElement appearance hexes live in src/app/checkout/CheckoutForm.tsx (colorPrimary, input bg/border)** — they are JS strings, not CSS vars, so palette changes must be applied there manually (done for the remake palette).
+
+## Key Learnings (2026-06-12 remake + security)
+
+- [2026-06-12] **Homepage heroes are now 100% typographic/SVG — NO photography.** hero_savage.png and hero_luxury.png are deleted from public/. SavageHero + LuxuryHero are separate components inside src/app/home/page.tsx. ParallaxImage is now unused on the homepage (component still exists for future use). User explicitly rejected the AI-generated hero photos — do not bring photographic heroes back without being asked.
+- [2026-06-12] **Checkout trust model:** the PaymentIntent is the source of truth. Order completion verifies (1) PI status succeeded, (2) PI amount === server-repriced cart total, (3) PI metadata.cart_items fingerprint === submitted lines, (4) PI metadata.order_created not already set (replay), then flags the PI as consumed via metadata update. Any future checkout change must preserve all four checks.
+- [2026-06-12] **CSP lives in next.config.ts headers()** — script-src needs ''unsafe-eval'' ONLY in dev (Turbopack HMR); prod omits it. Stripe needs js.stripe.com (script+frame), hooks.stripe.com (frame), api.stripe.com + m.stripe.network (connect), *.stripe.com (img). Wix browser SDK needs www.wixapis.com in connect-src; product images need static.wixstatic.com in img-src. If a third-party script breaks, check CSP first.
+- [2026-06-12] **CheckoutForm country field is ISO-2** (default NZ, maxLength 2) — server validation slices to 2 chars uppercase; keep the form ISO-2.
+- [2026-06-12] **No ESLint config in this project** — `pnpm lint` does not exist; `npx tsc --noEmit` is the static gate.
+
+## Do-Not-Repeat (2026-06-12 ScrollSpine session)
+
+- [2026-06-12] **Wix browser SDK calls edge.wixapis.com, NOT www.wixapis.com.** Any CSP connect-src must use https://*.wixapis.com or the cart silently breaks. The 404 from /ecom/v1/carts/current for fresh visitors is NORMAL (no cart yet) — do not chase it as a bug.
+- [2026-06-12] **framer-motion MotionValues in SVG styles cause SSR hydration mismatches.** Any fixed/ambient framer component mounted in layout.tsx must be mount-gated (return null until useEffect fires, then fade in). ScrollSpine does this — follow the same pattern for future ambient layers.
+- [2026-06-12] **designqc skips mobile captures when a page produces many desktop sections.** For guaranteed mobile verification, drive puppeteer-core directly from openwolf global install (npm root -g → openwolf/node_modules/puppeteer-core, headless new, viewport 390x844) — also the only way to read console/pageerror output, which designqc does not surface. Console checks caught 2 real bugs screenshots could not.
+
+## Key Learnings (2026-06-12)
+
+- [2026-06-12] **ScrollSpine** (src/components/svg/ScrollSpine.tsx) is the persistent cross-page scroll companion, mounted in layout.tsx (hidden on chooser). Savage = Vital Spine seismograph w/ scroll-velocity-reactive tip (volt flare on fast scroll); luxury = Golden Thread silk curve w/ diamond charm. Slimmer + 55% opacity under 768px; static hairline under prefers-reduced-motion. Savage hero vertical rail sits at right:4rem to clear it.

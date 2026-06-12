@@ -4,10 +4,14 @@ import { Logo } from '@/components/layout/Logo';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
+import { CategoryGrid } from '@/components/ui/CategoryGrid';
+import { FeaturedProducts } from '@/components/ui/FeaturedProducts';
 import { MarqueeStrip } from '@/components/ui/MarqueeStrip';
-import { HeroSceneClient } from '@/components/3d/HeroSceneClient';
-import { LuxuryHeroSceneClient } from '@/components/3d/LuxuryHeroSceneClient';
 import { NewsletterForm } from '@/components/ui/NewsletterForm';
+import { EKGPulse } from '@/components/svg/EKGPulse';
+import { Reticle } from '@/components/svg/Reticle';
+import { GoldFlourish } from '@/components/svg/GoldFlourish';
+import { DustField } from '@/components/svg/DustField';
 
 export const metadata = {
   title: 'Home',
@@ -15,13 +19,6 @@ export const metadata = {
 };
 
 /* ── Data ─────────────────────────────────────────── */
-
-const categories = [
-  { label: 'Training', sub: 'Performance Apparel', href: '/shop', shade: 'rgba(216,24,41,0.06)' },
-  { label: 'Supplements', sub: 'Elite Nutrition',  href: '/shop', shade: 'rgba(0,189,172,0.05)' },
-  { label: 'Recovery', sub: 'Gear & Accessories',  href: '/shop', shade: 'rgba(216,24,41,0.04)' },
-  { label: 'Lifestyle', sub: 'Athleisure Collection', href: '/shop', shade: 'rgba(0,189,172,0.04)' },
-];
 
 const standardsSavage = [
   {
@@ -73,58 +70,300 @@ const statsLuxury = [
   { value: '0',    label: 'Exceptions Made' },
 ];
 
-/* ── Hero mark SVG ────────────────────────────────── */
+/* ── Heroes — typographic, zero photography ───────── */
 
-function RavenMark() {
+function SavageHero() {
   return (
-    <svg
-      viewBox="0 0 500 500"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="absolute inset-0 w-full h-full"
-      aria-hidden="true"
+    <section
+      className="relative flex flex-col justify-center overflow-hidden"
+      style={{ minHeight: '100svh', background: 'var(--page-bg)' }}
     >
-      <circle cx="250" cy="250" r="210" stroke="#D81829" strokeWidth="0.6" strokeDasharray="5 8" opacity="0.3" />
-      <circle cx="250" cy="250" r="135" stroke="#00BDAC" strokeWidth="0.5" opacity="0.22" />
-      <circle cx="250" cy="250" r="60"  stroke="#D81829" strokeWidth="0.8" opacity="0.25" />
-      <circle cx="250" cy="250" r="12"  fill="#00BDAC" opacity="0.7" />
-      <circle cx="250" cy="250" r="5"   fill="#FFFFFF"  opacity="0.9" />
-      {Array.from({ length: 12 }, (_, i) => {
-        const angle = (i * 30 * Math.PI) / 180;
-        const x1 = 250 + Math.cos(angle) * 68;
-        const y1 = 250 + Math.sin(angle) * 68;
-        const x2 = 250 + Math.cos(angle) * 200;
-        const y2 = 250 + Math.sin(angle) * 200;
-        return (
-          <line
-            key={i}
-            x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke={i % 3 === 0 ? '#D81829' : '#00BDAC'}
-            strokeWidth="0.5"
-            opacity={i % 3 === 0 ? '0.35' : '0.18'}
-          />
-        );
-      })}
-      <line x1="60"  y1="60"  x2="440" y2="440" stroke="#D81829" strokeWidth="1.2" opacity="0.2" />
-      <line x1="440" y1="60"  x2="60"  y2="440" stroke="#D81829" strokeWidth="0.4" opacity="0.08" />
-      {Array.from({ length: 36 }, (_, i) => {
-        const angle = (i * 10 * Math.PI) / 180;
-        const r1 = i % 3 === 0 ? 225 : 220;
-        const r2 = 235;
-        return (
-          <line
-            key={i}
-            x1={250 + Math.cos(angle) * r1}
-            y1={250 + Math.sin(angle) * r1}
-            x2={250 + Math.cos(angle) * r2}
-            y2={250 + Math.sin(angle) * r2}
-            stroke="#D81829"
-            strokeWidth={i % 3 === 0 ? '1' : '0.4'}
-            opacity="0.25"
-          />
-        );
-      })}
-    </svg>
+      {/* Scanline texture */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 4px)',
+        }}
+      />
+
+      {/* Targeting reticle — rotates slowly off the right edge */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none hidden md:block"
+        style={{
+          top: '50%',
+          right: '-14%',
+          transform: 'translateY(-50%)',
+          width: 'min(820px, 64vw)',
+          aspectRatio: '1 / 1',
+          opacity: 0.13,
+        }}
+      >
+        <Reticle />
+      </div>
+
+      {/* Raven watermark */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/logo-savage-clean.svg"
+        alt=""
+        aria-hidden
+        style={{
+          position: 'absolute',
+          bottom: '-5%',
+          left: '-3%',
+          height: '50vh',
+          width: 'auto',
+          opacity: 0.05,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Left accent rule */}
+      <div
+        aria-hidden
+        className="absolute hidden lg:block"
+        style={{
+          left: 'max(1.5rem, calc(50vw - 680px))',
+          top: 0,
+          bottom: 0,
+          width: '2px',
+          background:
+            'linear-gradient(to bottom, transparent 0%, var(--accent) 15%, var(--accent) 85%, transparent 100%)',
+          opacity: 0.45,
+        }}
+      />
+
+      {/* Vertical rail — right edge */}
+      <div
+        aria-hidden
+        className="absolute hidden lg:flex items-center"
+        style={{ right: '4rem', top: 0, bottom: 0 }}
+      >
+        <p
+          style={{
+            writingMode: 'vertical-rl',
+            fontFamily: 'var(--font-rajdhani)',
+            fontSize: '10px',
+            fontWeight: 700,
+            letterSpacing: '0.52em',
+            textTransform: 'uppercase',
+            color: 'var(--muted)',
+            opacity: 0.55,
+          }}
+        >
+          Est. New Zealand ── The Raven Standard ── No Compromise
+        </p>
+      </div>
+
+      {/* Heartbeat */}
+      <div
+        aria-hidden
+        className="absolute left-0 right-0 pointer-events-none"
+        style={{ bottom: '88px', opacity: 0.5 }}
+      >
+        <EKGPulse height={50} />
+      </div>
+
+      {/* Content */}
+      <div className="relative shell w-full py-28">
+        <HeroReveal delay={0.05} y={10}>
+          <div className="flex items-center gap-3 mb-10">
+            <Logo height={20} style={{ color: 'var(--accent)', opacity: 0.88, flexShrink: 0 }} />
+            <span
+              className="block"
+              style={{ width: '26px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
+            />
+            <span className="eyebrow" style={{ letterSpacing: '0.52em' }}>
+              Corvo Athletic
+            </span>
+            <span className="live-dot" aria-hidden />
+          </div>
+        </HeroReveal>
+
+        <HeroReveal delay={0.18} y={60} duration={1.1}>
+          <h1
+            className="font-display uppercase leading-[0.82] mb-8"
+            style={{ fontSize: 'clamp(4rem, 13vw, 11rem)', letterSpacing: '-0.01em' }}
+          >
+            <span className="block" style={{ color: 'var(--page-fg)' }}>HUNT</span>
+            <span className="block text-outline">WITHOUT</span>
+            <span className="block text-gradient-blade">MERCY.</span>
+          </h1>
+        </HeroReveal>
+
+        <HeroReveal delay={0.45}>
+          <p
+            className="text-base md:text-lg leading-relaxed mb-10"
+            style={{ color: 'var(--muted)', maxWidth: '420px' }}
+          >
+            Elite training gear for those who thrive where others fold.
+            No shortcuts. Zero compromise.
+          </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.65}>
+          <div className="flex flex-wrap gap-4 items-center">
+            <Button href="/shop" size="lg" variant="primary">
+              Enter the Collection →
+            </Button>
+            <Button href="/about" size="lg" variant="ghost">
+              Our Story
+            </Button>
+          </div>
+        </HeroReveal>
+
+        <HeroReveal delay={1.0}>
+          <div className="mt-16 flex items-center gap-6 sm:gap-10">
+            {[
+              { v: '10K+', l: 'Athletes' },
+              { v: '5★',   l: 'Rated' },
+              { v: 'NZ',   l: 'Based' },
+            ].map((s, i) => (
+              <div key={s.l} className="flex items-center gap-6 sm:gap-10">
+                {i > 0 && (
+                  <span
+                    className="block"
+                    style={{ width: '1px', height: '24px', background: 'var(--border)', flexShrink: 0 }}
+                  />
+                )}
+                <div>
+                  <p className="font-display leading-none" style={{ fontSize: '1rem', color: 'var(--accent)' }}>
+                    {s.v}
+                  </p>
+                  <p
+                    className="tech-label"
+                    style={{ fontSize: '9px', letterSpacing: '0.32em', marginTop: '2px' }}
+                  >
+                    {s.l}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </HeroReveal>
+      </div>
+    </section>
+  );
+}
+
+function LuxuryHero() {
+  return (
+    <section
+      className="relative flex items-center justify-center overflow-hidden"
+      style={{ minHeight: '100svh', background: 'var(--page-bg)' }}
+    >
+      {/* Double hairline frame — invitation card */}
+      <div
+        aria-hidden
+        className="absolute pointer-events-none"
+        style={{ inset: 'clamp(12px, 2.5vw, 28px)', border: '1px solid rgba(156,124,38,0.42)' }}
+      />
+      <div
+        aria-hidden
+        className="absolute pointer-events-none"
+        style={{ inset: 'clamp(22px, 3.8vw, 44px)', border: '1px solid rgba(156,124,38,0.16)' }}
+      />
+
+      {/* Warm center light */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 42%, rgba(201,169,97,0.1) 0%, transparent 70%)',
+        }}
+      />
+
+      <DustField count={20} color="#9C7C26" />
+
+      {/* Content — centered, symmetric */}
+      <div className="relative text-center px-6 py-32" style={{ maxWidth: '880px' }}>
+        <HeroReveal delay={0.05} y={10}>
+          <Logo height={38} style={{ color: 'var(--accent)', opacity: 0.75, margin: '0 auto 2.5rem' }} />
+        </HeroReveal>
+
+        <HeroReveal delay={0.16} y={12}>
+          <p
+            style={{
+              fontFamily: 'var(--font-cormorant), Georgia, serif',
+              fontSize: '13px',
+              letterSpacing: '0.42em',
+              textTransform: 'uppercase',
+              color: 'var(--accent)',
+              marginBottom: '2.5rem',
+            }}
+          >
+            The House of Corvo
+          </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.3} y={50} duration={1.1}>
+          <h1
+            className="font-display leading-[0.98] mb-8"
+            style={{ fontSize: 'clamp(3.2rem, 9vw, 8rem)', letterSpacing: '0.005em' }}
+          >
+            <span className="block" style={{ color: 'var(--page-fg)' }}>The Pursuit</span>
+            <span className="block" style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
+              of Excellence.
+            </span>
+          </h1>
+        </HeroReveal>
+
+        <HeroReveal delay={0.55}>
+          <GoldFlourish width={240} style={{ margin: '0 auto 2.5rem' }} delay={0.4} />
+        </HeroReveal>
+
+        <HeroReveal delay={0.62}>
+          <p
+            className="text-base leading-relaxed mx-auto mb-12"
+            style={{ color: 'var(--muted)', maxWidth: '460px' }}
+          >
+            Meticulously crafted performance wear for athletes who understand
+            that true excellence requires no compromise.
+          </p>
+        </HeroReveal>
+
+        <HeroReveal delay={0.8}>
+          <div className="flex flex-wrap gap-4 items-center justify-center">
+            <Button href="/shop" size="lg" variant="primary">
+              View the Collection →
+            </Button>
+            <Button href="/about" size="lg" variant="ghost">
+              Our Story
+            </Button>
+          </div>
+        </HeroReveal>
+
+        <HeroReveal delay={1.05}>
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            {['10K+ Members', '5★ Rated', 'Est. New Zealand'].map((s, i) => (
+              <div key={s} className="flex items-center gap-8">
+                {i > 0 && (
+                  <span
+                    className="block"
+                    style={{ width: '1px', height: '16px', background: 'rgba(156,124,38,0.35)', flexShrink: 0 }}
+                  />
+                )}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontSize: '12px',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'var(--muted)',
+                  }}
+                >
+                  {s}
+                </p>
+              </div>
+            ))}
+          </div>
+        </HeroReveal>
+      </div>
+    </section>
   );
 }
 
@@ -138,183 +377,27 @@ export default async function Home() {
 
   return (
     <>
-      {/* §1 · HERO */}
-      <section
-        className="relative h-[100svh] min-h-[640px] flex items-center overflow-hidden"
-        style={{ background: 'var(--page-bg)' }}
-      >
-        <div
-          className="absolute right-0 top-0 h-full pointer-events-none"
-          style={{
-            width: 'clamp(300px, 52%, 800px)',
-            maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)',
-            opacity: 0.85,
-          }}
-        >
-          {isLuxury ? <LuxuryHeroSceneClient /> : <HeroSceneClient />}
+      {/* §1 · HERO — brand-native typography, no photography */}
+      {isLuxury ? <LuxuryHero /> : <SavageHero />}
+
+      {/* §2 · MOTION TICKER — hazard-striped edges in savage */}
+      <div style={{ background: 'var(--accent)' }}>
+        {!isLuxury && <div className="hazard-stripes" style={{ height: '8px' }} />}
+        <div className="overflow-hidden py-[1rem]">
+          <MarqueeStrip light />
         </div>
-
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'var(--hero-gradient)' }}
-        />
-
-        <div
-          className="absolute left-0 md:left-[max(1.5rem,_calc(50vw_-_680px))] top-0 bottom-0 w-[2px] hidden lg:block"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 0%, var(--accent) 15%, var(--accent) 85%, transparent 100%)',
-            opacity: 0.5,
-          }}
-        />
-
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, var(--page-bg), transparent)' }}
-        />
-
-        <div
-          className="relative z-10 px-6 md:px-10 lg:px-14 pt-10"
-          style={{ maxWidth: '1440px', width: '100%', margin: '0 auto' }}
-        >
-          <div style={{ maxWidth: '580px' }}>
-            <HeroReveal delay={0.05} y={10}>
-              <div className="flex items-center gap-3 mb-10">
-                <Logo height={20} style={{ color: 'var(--accent)', opacity: 0.88, flexShrink: 0 }} />
-                <span
-                  className="block"
-                  style={{ width: '26px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
-                />
-                <span
-                  style={{
-                    fontFamily: 'var(--font-rajdhani)',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    letterSpacing: '0.52em',
-                    textTransform: 'uppercase',
-                    color: 'var(--accent)',
-                  }}
-                >
-                  Corvo Athletic
-                </span>
-              </div>
-            </HeroReveal>
-
-            <HeroReveal delay={0.18} y={60} duration={1.1}>
-              <h1
-                className={`font-display leading-[0.88] mb-8${isLuxury ? '' : ' uppercase'}`}
-                style={{ fontSize: 'clamp(3.8rem, 11vw, 9rem)', letterSpacing: '-0.01em' }}
-              >
-                {isLuxury ? (
-                  <>
-                    <span className="block" style={{ color: 'var(--page-fg)' }}>The Pursuit</span>
-                    <span className="block" style={{ color: 'var(--page-fg)' }}>of</span>
-                    <span className="block" style={{ color: 'var(--accent)' }}>Excellence.</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="block" style={{ color: 'var(--page-fg)' }}>HUNT</span>
-                    <span className="block" style={{ color: 'var(--page-fg)' }}>WITHOUT</span>
-                    <span className="block" style={{ color: 'var(--accent)' }}>MERCY.</span>
-                  </>
-                )}
-              </h1>
-            </HeroReveal>
-
-            <HeroReveal delay={0.45}>
-              <p
-                className="text-base md:text-lg leading-relaxed mb-10"
-                style={{ color: 'var(--muted)', maxWidth: '380px' }}
-              >
-                {isLuxury
-                  ? 'Meticulously crafted performance wear for athletes who understand that true excellence requires no compromise.'
-                  : 'Elite training gear for those who thrive where others fold. No shortcuts. Zero compromise.'}
-              </p>
-            </HeroReveal>
-
-            <HeroReveal delay={0.65}>
-              <div className="flex flex-wrap gap-4 items-center">
-                <Button href="/shop" size="lg" variant="primary">
-                  Enter the Collection →
-                </Button>
-                <Button href="/about" size="lg" variant="ghost">
-                  Our Story
-                </Button>
-              </div>
-            </HeroReveal>
-
-            <HeroReveal delay={1.05}>
-              <div className="mt-16 flex items-center gap-6 sm:gap-10">
-                {[
-                  { v: '10K+', l: 'Athletes' },
-                  { v: '5★',   l: 'Rated' },
-                  { v: 'NZ',   l: 'Based' },
-                ].map((s, i) => (
-                  <div key={s.l} className="flex items-center gap-6 sm:gap-10">
-                    {i > 0 && (
-                      <span
-                        className="block"
-                        style={{ width: '1px', height: '24px', background: 'var(--border)', flexShrink: 0 }}
-                      />
-                    )}
-                    <div>
-                      <p
-                        className="font-display leading-none"
-                        style={{ fontSize: '1rem', color: 'var(--accent)' }}
-                      >
-                        {s.v}
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: 'var(--font-rajdhani)',
-                          fontSize: '9px',
-                          letterSpacing: '0.32em',
-                          textTransform: 'uppercase',
-                          color: 'var(--muted)',
-                          marginTop: '2px',
-                          fontWeight: 600,
-                        }}
-                      >
-                        {s.l}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </HeroReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* §2 · MOTION TICKER */}
-      <div
-        className="overflow-hidden py-[1.1rem]"
-        style={{ background: 'var(--accent)' }}
-      >
-        <MarqueeStrip light />
+        {!isLuxury && <div className="hazard-stripes" style={{ height: '8px' }} />}
       </div>
 
       {/* §3 · COLLECTION FEATURE */}
       <section
-        className="py-32 md:py-44 border-y"
+        className="py-20 md:py-28 border-y"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
-        <div className="mx-auto px-6 md:px-10 lg:px-14" style={{ maxWidth: '1440px' }}>
+        <div className="shell">
           <div className="flex flex-col lg:flex-row lg:items-end gap-10 lg:gap-20">
             <FadeIn className="flex-1">
-              <p
-                style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.48em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                ── The Collection
-              </p>
+              <p className="eyebrow mb-6">── The Collection</p>
               <h2
                 className={`font-display leading-[0.9]${isLuxury ? '' : ' uppercase'}`}
                 style={{ fontSize: 'clamp(3rem, 7vw, 6.5rem)', letterSpacing: '-0.01em' }}
@@ -323,15 +406,15 @@ export default async function Home() {
                   <>
                     <span style={{ color: 'var(--page-fg)' }}>Made</span>
                     <br />
-                    <span style={{ color: 'var(--page-fg)' }}>to</span>
+                    <span style={{ color: 'var(--page-fg)', fontStyle: 'italic' }}>to</span>
                     <br />
-                    <span style={{ color: 'var(--accent)' }}>Endure.</span>
+                    <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Endure.</span>
                   </>
                 ) : (
                   <>
                     <span style={{ color: 'var(--page-fg)' }}>FORGED</span>
                     <br />
-                    <span style={{ color: 'var(--page-fg)' }}>IN THE</span>
+                    <span className="text-outline">IN THE</span>
                     <br />
                     <span style={{ color: 'var(--accent)' }}>DARK.</span>
                   </>
@@ -378,26 +461,17 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* §4 · CATEGORY PANELS */}
+      {/* §4 · CATEGORY GRID */}
       <section style={{ background: 'var(--page-bg)' }}>
-        <div className="mx-auto px-6 md:px-10 lg:px-14 pt-24 pb-10" style={{ maxWidth: '1440px' }}>
+        <div className="shell pt-14 pb-8">
           <FadeIn>
             <div className="flex items-end justify-between mb-12">
               <div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-rajdhani)',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    letterSpacing: '0.48em',
-                    textTransform: 'uppercase',
-                    color: 'var(--accent)',
-                    marginBottom: '0.75rem',
-                  }}
+                <p className="eyebrow mb-3">── Shop by Category</p>
+                <h2
+                  className={`font-display leading-none${isLuxury ? '' : ' uppercase'}`}
+                  style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
                 >
-                  ── Shop by Category
-                </p>
-                <h2 className={`font-display leading-none${isLuxury ? '' : ' uppercase'}`} style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
                   {isLuxury ? <>The Art of<br />Performance</> : <>What Are You<br />Training For?</>}
                 </h2>
               </div>
@@ -406,82 +480,34 @@ export default async function Home() {
           </FadeIn>
         </div>
 
-        <Stagger staggerDelay={0.08} className="flex flex-col sm:flex-row">
-          {categories.map((cat, i) => (
-            <StaggerItem key={cat.label} className="flex-1">
-              <a
-                href={cat.href}
-                className="group block relative overflow-hidden"
-                style={{
-                  height: 'clamp(220px, 30vw, 380px)',
-                  background: 'var(--surface)',
-                  borderRight: i < categories.length - 1 ? '1px solid var(--border)' : 'none',
-                  borderTop: '1px solid var(--border)',
-                  borderBottom: '1px solid var(--border)',
-                }}
-              >
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: cat.shade }}
-                />
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[2px] scale-y-0 group-hover:scale-y-100 transition-transform duration-400 origin-top"
-                  style={{ background: 'var(--accent)' }}
-                />
-                <div className="absolute bottom-0 left-0 p-6 md:p-8 transition-transform duration-300 group-hover:-translate-y-1">
-                  <p className="font-display uppercase leading-none mb-2" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)', color: 'var(--page-fg)' }}>
-                    {cat.label}
-                  </p>
-                  <p style={{
-                    fontFamily: 'var(--font-rajdhani)',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    letterSpacing: '0.32em',
-                    textTransform: 'uppercase',
-                    color: 'var(--muted)',
-                  }}>
-                    {cat.sub}
-                  </p>
-                </div>
-                <div
-                  className="absolute top-5 right-5 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                  style={{ color: 'var(--muted)', fontSize: '1.1rem' }}
-                >
-                  →
-                </div>
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
-                  style={{ background: 'linear-gradient(90deg, var(--accent), transparent)' }}
-                />
-              </a>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <CategoryGrid />
       </section>
 
-      {/* §5 · MANIFESTO */}
+      {/* §5 · FEATURED PRODUCTS — real catalog on the homepage */}
+      <FeaturedProducts isLuxury={isLuxury} />
+
+      {/* §6 · MANIFESTO */}
       <section className="relative py-40 md:py-60 overflow-hidden" style={{ background: 'var(--section-dark)' }}>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" aria-hidden>
-          <div style={{ width: 'min(800px, 90vw)', height: 'min(800px, 90vw)', opacity: 0.06 }}>
-            <RavenMark />
-          </div>
+          {isLuxury ? (
+            <DustField count={14} color="#C9A961" />
+          ) : (
+            <div style={{ width: 'min(760px, 90vw)', height: 'min(760px, 90vw)', opacity: 0.13 }}>
+              <Reticle color="#FF2B3A" accentColor="#C8FF2E" />
+            </div>
+          )}
         </div>
         <div className="absolute left-0 right-0 pointer-events-none" style={{ top: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }} />
         <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }} />
 
-        <div className="relative mx-auto px-6 md:px-10 lg:px-14 text-center" style={{ maxWidth: '1440px' }}>
+        <div className="relative shell text-center">
           <FadeIn>
-            <p style={{
-              fontFamily: 'var(--font-rajdhani)',
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.52em',
-              textTransform: 'uppercase',
-              color: 'var(--accent)',
-              marginBottom: '3rem',
-            }}>
+            <p className="eyebrow" style={{ letterSpacing: '0.52em', marginBottom: '3rem' }}>
               {isLuxury ? '· The Corvo House ·' : '· The Raven Standard ·'}
             </p>
+            {isLuxury && (
+              <GoldFlourish color="#C9A961" width={230} style={{ margin: '-1.5rem auto 2.5rem' }} />
+            )}
             <blockquote>
               {isLuxury ? (
                 <p
@@ -490,7 +516,7 @@ export default async function Home() {
                 >
                   &ldquo;True quality requires no announcement.
                   <br />
-                  <span style={{ color: 'var(--accent)' }}>It simply endures.&rdquo;</span>
+                  <span style={{ color: 'var(--footer-accent)', fontStyle: 'italic' }}>It simply endures.&rdquo;</span>
                 </p>
               ) : (
                 <p
@@ -505,14 +531,10 @@ export default async function Home() {
                 </p>
               )}
               <footer className="mt-10">
-                <p style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  letterSpacing: '0.3em',
-                  textTransform: 'uppercase',
-                  color: 'var(--footer-muted)',
-                }}>
+                <p
+                  className="tech-label"
+                  style={{ fontSize: '13px', letterSpacing: '0.3em', color: 'var(--footer-muted)', fontWeight: 600 }}
+                >
                   — Corvo Athletic, Est. New Zealand
                 </p>
               </footer>
@@ -521,23 +543,30 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* §6 · STANDARDS */}
-      <section className="py-28" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
-        <div className="mx-auto px-6 md:px-10 lg:px-14" style={{ maxWidth: '1440px' }}>
+      {/* §7 · STANDARDS — fabric texture background */}
+      <section
+        className="relative py-28 overflow-hidden"
+        style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${isLuxury ? '/fabric_luxury.png' : '/fabric_savage.png'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.18,
+          }}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'var(--surface)', opacity: 0.82 }}
+        />
+
+        <div className="relative shell">
           <FadeIn className="mb-16">
             <div className="flex flex-col md:flex-row md:items-end gap-6">
               <div>
-                <p style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.48em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                  marginBottom: '0.75rem',
-                }}>
-                  ── Why Corvo
-                </p>
+                <p className="eyebrow mb-3">── Why Corvo</p>
                 <h2 className="font-display uppercase leading-none" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}>
                   The Corvo Standard
                 </h2>
@@ -585,9 +614,16 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* §7 · STATS */}
+      {/* §8 · STATS — alive divider above the numbers */}
       <section className="py-24" style={{ background: 'var(--page-bg)', borderTop: '1px solid var(--border)' }}>
-        <div className="mx-auto px-6 md:px-10 lg:px-14" style={{ maxWidth: '1440px' }}>
+        <div className="shell">
+          <div className="mb-14">
+            {isLuxury ? (
+              <GoldFlourish width={240} style={{ margin: '0 auto' }} />
+            ) : (
+              <EKGPulse height={44} style={{ opacity: 0.5 }} />
+            )}
+          </div>
           <Stagger staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-px">
             {stats.map((s, i) => (
               <StaggerItem key={s.label}>
@@ -598,14 +634,10 @@ export default async function Home() {
                   <p className="font-display leading-none mb-3" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--accent)' }}>
                     {s.value}
                   </p>
-                  <p style={{
-                    fontFamily: 'var(--font-rajdhani)',
-                    fontSize: '10px',
-                    fontWeight: 700,
-                    letterSpacing: '0.3em',
-                    textTransform: 'uppercase',
-                    color: 'var(--muted)',
-                  }}>
+                  <p
+                    className="tech-label"
+                    style={{ fontSize: '10px', letterSpacing: '0.3em', fontWeight: 700 }}
+                  >
                     {s.label}
                   </p>
                 </div>
@@ -615,28 +647,20 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* §8 · NEWSLETTER */}
+      {/* §9 · NEWSLETTER */}
       <section className="border-t" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
-        <div className="mx-auto px-6 md:px-10 lg:px-14" style={{ maxWidth: '1440px' }}>
+        <div className="shell">
           <div className="flex flex-col lg:flex-row">
             <div className="flex-1 py-20 lg:py-28">
               <FadeIn>
-                <p style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.52em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                  marginBottom: '1.5rem',
-                }}>
+                <p className="eyebrow" style={{ letterSpacing: '0.52em', marginBottom: '1.5rem' }}>
                   · Inner Circle ·
                 </p>
                 <h2 className={`font-display leading-[0.9] mb-6${isLuxury ? '' : ' uppercase'}`} style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5rem)' }}>
                   {isLuxury ? (
-                    <>The Inner <span style={{ color: 'var(--accent)' }}>Circle.</span></>
+                    <>The Inner <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>Circle.</span></>
                   ) : (
-                    <>JOIN THE<br /><span style={{ color: 'var(--accent)' }}>INNER</span><br />CIRCLE.</>
+                    <>JOIN THE<br /><span className="text-outline-accent">INNER</span><br />CIRCLE.</>
                   )}
                 </h2>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)', maxWidth: '320px' }}>
@@ -653,54 +677,55 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* §9 · FINAL CTA */}
+      {/* §10 · FINAL CTA */}
       <section className="relative py-40 md:py-56 overflow-hidden" style={{ background: 'var(--accent)' }}>
-        <div className="absolute inset-0 pointer-events-none opacity-10" aria-hidden>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '900px', height: '900px', opacity: 0.15 }}>
-            <RavenMark />
-          </div>
+        {!isLuxury && (
+          <div className="absolute top-0 left-0 right-0 hazard-stripes" style={{ height: '12px' }} />
+        )}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          {isLuxury ? (
+            <DustField count={20} color="rgba(255,255,255,0.75)" />
+          ) : (
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '900px', height: '900px', opacity: 0.1 }}>
+              <Reticle color="#FFFFFF" accentColor="#FFFFFF" />
+            </div>
+          )}
         </div>
+        {!isLuxury && (
+          <div className="absolute bottom-0 left-0 right-0 hazard-stripes" style={{ height: '12px' }} />
+        )}
         <div
           className="absolute pointer-events-none"
           style={{ top: 0, left: 0, right: 0, height: '100%', backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.08) 100%)' }}
         />
-        <div className="relative mx-auto px-6 md:px-10 lg:px-14 text-center" style={{ maxWidth: '1440px' }}>
+        <div className="relative shell text-center">
           <FadeIn>
             <Logo
               height={40}
               style={{ color: 'rgba(255,255,255,0.38)', margin: '0 auto 2.25rem' }}
             />
-            <p style={{
-              fontFamily: 'var(--font-rajdhani)',
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.52em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.55)',
-              marginBottom: '2rem',
-            }}>
+            <p
+              className="eyebrow"
+              style={{ letterSpacing: '0.52em', color: 'rgba(255,255,255,0.55)', marginBottom: '2rem' }}
+            >
               {isLuxury ? '· The Collection ·' : '· Corvo Elite ·'}
             </p>
             <h2
               className={`font-display leading-[0.88] mb-14${isLuxury ? '' : ' uppercase'}`}
               style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', color: '#FFFFFF', letterSpacing: '-0.01em' }}
             >
-              {isLuxury ? <>The Collection<br />Awaits.</> : <>CLAIM<br />YOUR EDGE.</>}
+              {isLuxury ? <>The Collection<br /><span style={{ fontStyle: 'italic' }}>Awaits.</span></> : <>CLAIM<br />YOUR EDGE.</>}
             </h2>
             <Button href="/shop" size="lg" variant="outline">
               {isLuxury ? 'View the Collection →' : 'Shop the Collection →'}
             </Button>
-            <p className="mt-8" style={{
-              fontFamily: 'var(--font-rajdhani)',
-              fontSize: '11px',
-              fontWeight: 600,
-              letterSpacing: '0.32em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.4)',
-            }}>
+            <p
+              className="tech-label mt-8"
+              style={{ letterSpacing: '0.32em', color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}
+            >
               {isLuxury
                 ? 'Reserved for those who know the value of excellence.'
-                : "Engineered for athletes who don\u2019t quit."}
+                : "Engineered for athletes who don’t quit."}
             </p>
           </FadeIn>
         </div>

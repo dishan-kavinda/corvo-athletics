@@ -248,7 +248,7 @@ export default async function DashboardPage() {
                 {orders.map((order) => {
                   const isPaid =
                     order.paymentStatus === 'PAID' || order.paymentStatus === 'FULLY_PAID';
-                  const statusColor = isPaid ? '#00BDAC' : '#838DAA';
+                  const statusColor = isPaid ? '#C8FF2E' : '#8F919C';
                   const statusLabel = isPaid
                     ? 'Paid'
                     : order.paymentStatus === 'PENDING'

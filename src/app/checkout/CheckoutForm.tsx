@@ -250,7 +250,7 @@ function CheckoutInner({
       </section>
 
       {err && (
-        <div style={{ border: '1px solid rgba(216,24,41,0.4)', background: 'rgba(216,24,41,0.08)', padding: '1rem', fontSize: '0.875rem', color: '#FF6070' }}>
+        <div style={{ border: '1px solid rgba(255,43,58,0.4)', background: 'rgba(255,43,58,0.08)', padding: '1rem', fontSize: '0.875rem', color: '#FF6070' }}>
           {err}
         </div>
       )}
@@ -361,7 +361,7 @@ export function CheckoutForm() {
     appearance: {
       theme: 'night',
       variables: {
-        colorPrimary:    '#D81829',
+        colorPrimary:    '#FF2B3A',
         colorBackground: '#131825',
         colorText:       '#E8ECF4',
         colorDanger:     '#FF6070',
@@ -371,13 +371,13 @@ export function CheckoutForm() {
       },
       rules: {
         '.Input': {
-          backgroundColor: '#0C0F1B',
-          border:          '1px solid #1B2038',
+          backgroundColor: '#16161A',
+          border:          '1px solid #26262C',
           color:           '#E8ECF4',
         },
         '.Input:focus': {
-          border:     '1px solid #D81829',
-          boxShadow:  '0 0 0 1px #D81829',
+          border:     '1px solid #FF2B3A',
+          boxShadow:  '0 0 0 1px #FF2B3A',
         },
         '.Label': {
           textTransform: 'uppercase',
@@ -388,12 +388,12 @@ export function CheckoutForm() {
           fontWeight:    '700',
         },
         '.Tab': {
-          border:          '1px solid #1B2038',
-          backgroundColor: '#0C0F1B',
+          border:          '1px solid #26262C',
+          backgroundColor: '#16161A',
         },
         '.Tab--selected': {
-          border:          '1px solid #D81829',
-          backgroundColor: '#0C0F1B',
+          border:          '1px solid #FF2B3A',
+          backgroundColor: '#16161A',
         },
       },
     },

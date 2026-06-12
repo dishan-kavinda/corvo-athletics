@@ -1810,6 +1810,672 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-25T09:06:17.681Z"
+    },
+    {
+      "id": "bug-112",
+      "timestamp": "2026-05-26T08:03:02.082Z",
+      "error_message": "Wrong reference: 1169 should be 2169",
+      "file": "src/components/layout/Logo.tsx",
+      "root_cause": "Used \"1169\" instead of \"2169\"",
+      "fix": "Changed 1169 → 2169",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T08:03:02.083Z"
+    },
+    {
+      "id": "bug-113",
+      "timestamp": "2026-05-26T08:14:12.915Z",
+      "error_message": "Type error",
+      "file": "src/components/layout/MobileNav.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation | Also: transition: { ease: [0.16, 1, 0.3, 1] as [number, number, nu",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-26T08:14:17.102Z"
+    },
+    {
+      "id": "bug-114",
+      "timestamp": "2026-05-26T08:16:26.391Z",
+      "error_message": "Type error",
+      "file": "src/components/ui/ProductCard.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T08:16:26.391Z"
+    },
+    {
+      "id": "bug-115",
+      "timestamp": "2026-05-26T08:53:11.024Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Had \"relative h-full flex items-end md:items-center px",
+      "fix": "Changed to \"relative h-full flex flex-col justify-end px-6 md",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-26T08:53:25.230Z"
+    },
+    {
+      "id": "bug-116",
+      "timestamp": "2026-05-26T08:53:29.961Z",
+      "error_message": "CSS fix: md",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "md: py-44 border-y\" → py-28 border-y\"",
+      "fix": "Changed md: py-44 border-y\" → py-28 border-y\"",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-26T08:53:51.488Z"
+    },
+    {
+      "id": "bug-117",
+      "timestamp": "2026-05-26T09:03:31.987Z",
+      "error_message": "Type error",
+      "file": "src/components/motion/FadeIn.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:03:31.987Z"
+    },
+    {
+      "id": "bug-118",
+      "timestamp": "2026-05-26T09:03:34.951Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/SearchModal.tsx",
+      "root_cause": "Had 'var(--font-cormorant, serif)'",
+      "fix": "Changed to 'var(--font-display)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:03:34.951Z"
+    },
+    {
+      "id": "bug-119",
+      "timestamp": "2026-05-26T09:03:42.615Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Had \"overflow-hidden py-[1.1rem]\"",
+      "fix": "Changed to \"overflow-hidden py-[1rem]\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-26T09:04:07.418Z"
+    },
+    {
+      "id": "bug-120",
+      "timestamp": "2026-05-26T09:03:48.660Z",
+      "error_message": "CSS fix: background",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "background: 'linear-gradient(135deg, rgba(7,9,15,0.72) 0%, rgba(7,9,15,0.45) 50%, rgba(7,9,15,0.72) 100%)', → 'var(--surface)', opacity: 0.82",
+      "fix": "Changed background: 'linear-gradient(135deg, rgba(7,9,15,0.72) 0%, rgba(7,9,15,0.45) 50%, rgba(7,9,15,0.72) 100%)', → 'var(--surface)', opacity: 0.82",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:03:48.660Z"
+    },
+    {
+      "id": "bug-121",
+      "timestamp": "2026-05-26T09:04:12.866Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/ProductCard.tsx",
+      "root_cause": "Had '0 2px 12px rgba(0,0,0,0.06)'",
+      "fix": "Changed to 'var(--card-shadow)'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:04:12.866Z"
+    },
+    {
+      "id": "bug-122",
+      "timestamp": "2026-05-26T09:04:25.417Z",
+      "error_message": "CSS fix: background",
+      "file": "src/components/motion/ParallaxImage.tsx",
+      "root_cause": "background: 'linear-gradient(to bottom, rgba(7,9,15,0.58) 0%, rgba(7,9,15,0.12) 42%, rgba(7,9,15,0.72) 100%)', → overlay,",
+      "fix": "Changed background: 'linear-gradient(to bottom, rgba(7,9,15,0.58) 0%, rgba(7,9,15,0.12) 42%, rgba(7,9,15,0.72) 100%)', → overlay,",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:04:25.417Z"
+    },
+    {
+      "id": "bug-123",
+      "timestamp": "2026-06-11T02:55:08.905Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Had '@/components/ui/MarqueeStrip'",
+      "fix": "Changed to '@/components/ui/FeaturedProducts'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-11T02:57:30.264Z"
+    },
+    {
+      "id": "bug-124",
+      "timestamp": "2026-06-11T02:57:08.131Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "src/app/shop/[slug]/page.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T02:57:08.131Z"
+    },
+    {
+      "id": "bug-125",
+      "timestamp": "2026-06-11T02:57:22.136Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/shop/[slug]/page.tsx",
+      "root_cause": "71 lines replaced/restructured",
+      "fix": "Rewrote 74→4 lines (71 removed) | Also: {/* ── Related CTA ───────────────────────────────; <div",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-11T02:57:48.903Z"
+    },
+    {
+      "id": "bug-126",
+      "timestamp": "2026-06-11T02:57:40.342Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/shop/[slug]/page.tsx",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T02:57:40.342Z"
+    },
+    {
+      "id": "bug-127",
+      "timestamp": "2026-06-11T02:59:00.946Z",
+      "error_message": "CSS fix: label",
+      "file": "src/components/layout/Header.tsx",
+      "root_cause": "label: 'About', href: '/about' → 'Contact', href: '/contact'",
+      "fix": "Changed label: 'About', href: '/about' → 'Contact', href: '/contact'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T02:59:00.946Z"
+    },
+    {
+      "id": "bug-128",
+      "timestamp": "2026-06-11T02:59:07.151Z",
+      "error_message": "CSS fix: label",
+      "file": "src/components/layout/MobileNav.tsx",
+      "root_cause": "label: 'Account', href: '/account', num: '05' → 'Account', href: '/account', num: '04'",
+      "fix": "Changed label: 'Account', href: '/account', num: '05' → 'Account', href: '/account', num: '04'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T02:59:07.151Z"
+    },
+    {
+      "id": "bug-129",
+      "timestamp": "2026-06-11T03:01:35.569Z",
+      "error_message": "Type error",
+      "file": "src/components/layout/Footer.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:01:35.569Z"
+    },
+    {
+      "id": "bug-130",
+      "timestamp": "2026-06-11T03:05:01.013Z",
+      "error_message": "CSS fix: color",
+      "file": "src/app/shop/page.tsx",
+      "root_cause": "color: 'var(--muted)', fontSize: '0.875rem' → 'var(--muted)', maxWidth: '380px', margin: '0 auto 2.5rem'",
+      "fix": "Changed color: 'var(--muted)', fontSize: '0.875rem' → 'var(--muted)', maxWidth: '380px', margin: '0 auto 2.5rem'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:05:01.013Z"
+    },
+    {
+      "id": "bug-131",
+      "timestamp": "2026-06-11T03:08:29.247Z",
+      "error_message": "Footer links /shop/supplements and /shop/apparel resolve to /shop/[slug] product route and 404 (no such product slugs)",
+      "file": "src/components/layout/Footer.tsx",
+      "root_cause": "Footer link hrefs written as category-style URLs but no category routes exist; /shop/[slug] treats them as product slugs and calls notFound()",
+      "fix": "Footer links now point to real routes only (/shop, /account, /about, /contact, /shipping, /returns)",
+      "tags": [
+        "broken-link",
+        "routing",
+        "footer"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:08:29.247Z"
+    },
+    {
+      "id": "bug-132",
+      "timestamp": "2026-06-11T03:08:29.247Z",
+      "error_message": "Contact/Shipping/Returns pages silently redirect('/about') — footer links dead-end users on the About page",
+      "file": "src/app/contact/page.tsx",
+      "root_cause": "Placeholder pages were stubbed with redirect(/about) instead of content",
+      "fix": "Built real Contact (channel cards), Shipping (rates table), and Returns (3-step process) pages with metadata + canonical",
+      "tags": [
+        "ux",
+        "placeholder",
+        "redirect"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:08:29.247Z"
+    },
+    {
+      "id": "bug-133",
+      "timestamp": "2026-06-11T03:08:29.247Z",
+      "error_message": "openwolf designqc --routes / /home captures fail: Cannot navigate to invalid URL (routes become C:/Program Files/Git/...)",
+      "file": "(tooling)",
+      "root_cause": "Git Bash (MSYS) converts leading-slash args to Windows paths before they reach the CLI",
+      "fix": "Run openwolf designqc from PowerShell, not the Bash tool. Also: it only reliably captures the FIRST route per invocation — run one route at a time and warm-compile dev routes first",
+      "tags": [
+        "designqc",
+        "git-bash",
+        "msys",
+        "tooling"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:08:29.247Z"
+    },
+    {
+      "id": "bug-134",
+      "timestamp": "2026-06-11T03:21:15.987Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "5 lines replaced/restructured",
+      "fix": "Rewrote 7→8 lines (5 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:21:15.987Z"
+    },
+    {
+      "id": "bug-135",
+      "timestamp": "2026-06-11T03:21:19.563Z",
+      "error_message": "CSS fix: width",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "width: 'min(800px, 90vw)', height: 'min(800px, 90vw)', opacity: 0.06 → 'min(760px, 90vw)', height: 'min(760px, 90vw)', opacity: 0.13",
+      "fix": "Changed width: 'min(800px, 90vw)', height: 'min(800px, 90vw)', opacity: 0.06 → 'min(760px, 90vw)', height: 'min(760px, 90vw)', opacity: 0.13",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-06-11T03:22:01.097Z"
+    },
+    {
+      "id": "bug-136",
+      "timestamp": "2026-06-11T03:22:30.995Z",
+      "error_message": "Wrong reference: D81829 should be FF2B3A",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Used \"D81829\" instead of \"FF2B3A\"",
+      "fix": "Changed D81829 → FF2B3A",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-06-11T03:22:36.632Z"
+    },
+    {
+      "id": "bug-137",
+      "timestamp": "2026-06-11T03:22:37.587Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Had '#07090F'",
+      "fix": "Changed to '#070708'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 7,
+      "last_seen": "2026-06-11T03:22:53.762Z"
+    },
+    {
+      "id": "bug-138",
+      "timestamp": "2026-06-11T03:22:55.680Z",
+      "error_message": "CSS fix: color",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "color: '#9C7C26' → '#9C7C26', fontStyle: 'italic'",
+      "fix": "Changed color: '#9C7C26' → '#9C7C26', fontStyle: 'italic'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:22:55.681Z"
+    },
+    {
+      "id": "bug-139",
+      "timestamp": "2026-06-11T03:22:57.074Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/ui/ThemeToggle.tsx",
+      "root_cause": "Had '#B8962C'",
+      "fix": "Changed to '#9C7C26'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-11T03:22:58.350Z"
+    },
+    {
+      "id": "bug-140",
+      "timestamp": "2026-06-11T03:23:20.018Z",
+      "error_message": "Type error",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-11T03:23:20.018Z"
+    },
+    {
+      "id": "bug-141",
+      "timestamp": "2026-06-12T04:56:04.864Z",
+      "error_message": "Null/undefined access in ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T04:56:04.864Z"
+    },
+    {
+      "id": "bug-142",
+      "timestamp": "2026-06-12T04:56:12.386Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 6→4 lines (3 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T04:56:12.386Z"
+    },
+    {
+      "id": "bug-143",
+      "timestamp": "2026-06-12T04:56:31.304Z",
+      "error_message": "Missing guard clause",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "No early return/throw for edge case: typeof input.paymentIntentId !== 'string' || !/^pi_[A-Za-z0-",
+      "fix": "Added guard clause: if (typeof input.paymentIntentId !== 'string)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T04:56:31.304Z"
+    },
+    {
+      "id": "bug-144",
+      "timestamp": "2026-06-12T04:57:04.243Z",
+      "error_message": "CSS fix: __html",
+      "file": "src/app/shop/[slug]/page.tsx",
+      "root_cause": "__html: product.description → sanitizeHtml(product.description)",
+      "fix": "Changed __html: product.description → sanitizeHtml(product.description)",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T04:57:04.243Z"
+    },
+    {
+      "id": "bug-134",
+      "timestamp": "2026-06-12T05:01:43.437Z",
+      "error_message": "VULN: completeCheckoutOrder created PAID Wix orders from client-supplied cart lines without verifying the Stripe PI amount matched — pay for a cheap cart, submit an expensive one for fulfillment",
+      "file": "src/app/checkout/actions.ts",
+      "root_cause": "Server action trusted input.lines after only checking intent.status === succeeded; no amount, currency, or cart-content verification, no replay protection",
+      "fix": "Recompute total server-side and require intent.amount === expectedCents; verify cart fingerprint (PI metadata.cart_items) matches submitted lines; reject PI reuse via metadata.order_created flag set after order creation; validate paymentIntentId format; validate/clamp all shipping fields incl. email regex and ISO-2 country",
+      "tags": [
+        "security",
+        "payments",
+        "stripe",
+        "wix-orders",
+        "idor"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:01:43.437Z"
+    },
+    {
+      "id": "bug-135",
+      "timestamp": "2026-06-12T05:01:43.437Z",
+      "error_message": "VULN: no security headers (CSP/HSTS/nosniff/frame protections) on any response; Wix product description rendered via dangerouslySetInnerHTML unsanitized",
+      "file": "next.config.ts",
+      "root_cause": "next.config.ts had no headers(); product page injected CMS HTML raw",
+      "fix": "Added CSP (Stripe+Wix allowlist, unsafe-eval dev-only), HSTS preload, X-Content-Type-Options, Referrer-Policy, X-Frame-Options, Permissions-Policy; created src/lib/sanitize.ts and wrapped product.description",
+      "tags": [
+        "security",
+        "headers",
+        "csp",
+        "xss"
+      ],
+      "related_bugs": [
+        "bug-134"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:01:43.437Z"
+    },
+    {
+      "id": "bug-147",
+      "timestamp": "2026-06-12T05:08:27.522Z",
+      "error_message": "CSS fix: right",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "right: '2rem', top: 0, bottom: 0 → '4rem', top: 0, bottom: 0",
+      "fix": "Changed right: '2rem', top: 0, bottom: 0 → '4rem', top: 0, bottom: 0",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:08:27.522Z"
+    },
+    {
+      "id": "bug-148",
+      "timestamp": "2026-06-12T05:08:29.345Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/app/home/page.tsx",
+      "root_cause": "Had \"mt-16 flex items-center justify-center gap-8\"",
+      "fix": "Changed to \"mt-16 flex flex-wrap items-center justify-center ",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:08:29.345Z"
+    },
+    {
+      "id": "bug-149",
+      "timestamp": "2026-06-12T05:12:58.944Z",
+      "error_message": "Incorrect value in code",
+      "file": "next.config.ts",
+      "root_cause": "Had ' https://api.stripe.com https://m.stripe.network ",
+      "fix": "Changed to ' https://api.stripe.com https://m.stripe.network ",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:12:58.944Z"
+    },
+    {
+      "id": "bug-150",
+      "timestamp": "2026-06-12T05:13:14.246Z",
+      "error_message": "Missing guard clause",
+      "file": "src/components/svg/ScrollSpine.tsx",
+      "root_cause": "No early return/throw for edge case: !mounted",
+      "fix": "Added guard clause: if (!mounted)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:13:14.246Z"
+    },
+    {
+      "id": "bug-147",
+      "timestamp": "2026-06-12T05:17:48.230Z",
+      "error_message": "CSP blocked Wix cart: Fetch API cannot load https://edge.wixapis.com/ecom/v1/carts/current — Refused to connect (CSP connect-src)",
+      "file": "next.config.ts",
+      "root_cause": "CSP connect-src allowed www.wixapis.com only, but the Wix browser SDK actually calls edge.wixapis.com",
+      "fix": "connect-src now uses https://*.wixapis.com (covers www + edge)",
+      "tags": [
+        "security",
+        "csp",
+        "wix",
+        "cart"
+      ],
+      "related_bugs": [
+        "bug-135"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:17:48.230Z"
+    },
+    {
+      "id": "bug-148",
+      "timestamp": "2026-06-12T05:17:48.230Z",
+      "error_message": "Hydration failed: server-rendered HTML did not match client — appeared on every page after ScrollSpine was mounted in layout",
+      "file": "src/components/svg/ScrollSpine.tsx",
+      "root_cause": "framer-motion MotionValues inside SVG path styles (pathLength/dasharray) serialize differently during SSR than on first client render",
+      "fix": "Mount-gate: component returns null until useEffect sets mounted, then fades in (initial opacity 0 -> 1). No SSR output = no hydration surface",
+      "tags": [
+        "hydration",
+        "framer-motion",
+        "svg",
+        "ssr"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:17:48.230Z"
     }
   ]
 }

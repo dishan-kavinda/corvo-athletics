@@ -33,10 +33,70 @@ export interface CreatePaymentIntentResult {
 
 const SHIPPING_FLAT_NZD = 0; // free shipping for v1; refine via Wix shipping API later
 
+/* ── Input validation ─────────────────────────────────
+   Server actions are public HTTP endpoints — every field that arrives
+   here is attacker-controlled, regardless of what our UI sends. */
+
+const MAX_LINES = 50;
+const MAX_QTY = 50;
+const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,24}$/;
+
+function assertValidLines(lines: CartLineItemIn[]): void {
+  if (!Array.isArray(lines) || lines.length === 0) throw new Error('Cart is empty');
+  if (lines.length > MAX_LINES) throw new Error('Too many cart lines');
+  for (const l of lines) {
+    if (typeof l.productId !== 'string' || !l.productId || l.productId.length > 64) {
+      throw new Error('Invalid product reference');
+    }
+    if (!Number.isInteger(l.quantity) || l.quantity < 1 || l.quantity > MAX_QTY) {
+      throw new Error('Invalid quantity');
+    }
+    if (l.variantId !== undefined && (typeof l.variantId !== 'string' || l.variantId.length > 64)) {
+      throw new Error('Invalid variant reference');
+    }
+  }
+}
+
+function clamp(s: string | undefined, max: number): string | undefined {
+  if (s === undefined) return undefined;
+  return String(s).slice(0, max).trim() || undefined;
+}
+
+function sanitizeShipping(s: ShippingAddress): ShippingAddress {
+  const email = clamp(s.email, 254) ?? '';
+  if (!EMAIL_RE.test(email)) throw new Error('Invalid email address');
+  const required = (v: string | undefined, name: string): string => {
+    const out = clamp(v, 200);
+    if (!out) throw new Error(`Missing ${name}`);
+    return out;
+  };
+  return {
+    firstName: required(s.firstName, 'first name'),
+    lastName: required(s.lastName, 'last name'),
+    email,
+    phone: clamp(s.phone, 40),
+    addressLine1: required(s.addressLine1, 'address'),
+    addressLine2: clamp(s.addressLine2, 200),
+    city: required(s.city, 'city'),
+    postalCode: required(s.postalCode, 'postal code'),
+    country: required(s.country, 'country').slice(0, 2).toUpperCase(),
+    state: clamp(s.state, 100),
+  };
+}
+
+/* Stable fingerprint of the cart, stored on the PaymentIntent at creation
+   and verified again at order completion so the lines that get fulfilled
+   are exactly the lines that were paid for. */
+function cartFingerprint(lines: CartLineItemIn[]): string {
+  return JSON.stringify(
+    lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
+  ).slice(0, 500);
+}
+
 export async function createCheckoutPaymentIntent(
   lines: CartLineItemIn[],
 ): Promise<CreatePaymentIntentResult> {
-  if (!lines.length) throw new Error('Cart is empty');
+  assertValidLines(lines);
 
   const productsRes = await wixClient.products.queryProducts().find();
   const products = new Map(productsRes.items.map((p) => [p._id ?? '', p]));
@@ -68,9 +128,7 @@ export async function createCheckoutPaymentIntent(
     automatic_payment_methods: { enabled: true },
     metadata: {
       cart_line_count: String(lines.length),
-      cart_items: JSON.stringify(
-        lines.map((l) => ({ p: l.productId.slice(-8), q: l.quantity, v: l.variantId?.slice(-8) })),
-      ).slice(0, 500),
+      cart_items: cartFingerprint(lines),
     },
   });
 
@@ -101,9 +159,28 @@ export interface CompleteOrderResult {
 export async function completeCheckoutOrder(
   input: CompleteOrderInput,
 ): Promise<CompleteOrderResult> {
+  assertValidLines(input.lines);
+  const shipping = sanitizeShipping(input.shipping);
+  if (typeof input.paymentIntentId !== 'string' || !/^pi_[A-Za-z0-9_]{8,}$/.test(input.paymentIntentId)) {
+    throw new Error('Invalid payment reference');
+  }
+
   const intent = await stripe.paymentIntents.retrieve(input.paymentIntentId);
   if (intent.status !== 'succeeded') {
     throw new Error(`Payment not completed (status: ${intent.status})`);
+  }
+
+  // Replay protection — one Wix order per PaymentIntent. The flag is set
+  // on the PI metadata after the order is created (see below).
+  if (intent.metadata?.order_created === 'true') {
+    throw new Error('An order has already been created for this payment');
+  }
+
+  // The submitted lines must be EXACTLY the lines this payment was created
+  // for — otherwise a client could pay for a cheap cart and submit a
+  // different one for fulfillment.
+  if (intent.metadata?.cart_items !== cartFingerprint(input.lines)) {
+    throw new Error('Cart does not match the payment');
   }
 
   // Re-fetch products server-side so we can populate Wix's required line-item
@@ -113,23 +190,34 @@ export async function completeCheckoutOrder(
 
   const enrichedLines = input.lines.map((l) => {
     const p = productsById.get(l.productId);
-    const unit = p?.priceData?.discountedPrice ?? p?.priceData?.price ?? 0;
+    if (!p) throw new Error(`Product ${l.productId} not found`);
+    const unit = p.priceData?.discountedPrice ?? p.priceData?.price ?? 0;
     return {
       ...l,
-      productName: p?.name ?? 'Product',
+      productName: p.name ?? 'Product',
       unitPrice: unit,
       lineTotal: unit * l.quantity,
     };
   });
   const subtotal = enrichedLines.reduce((sum, l) => sum + l.lineTotal, 0);
-  const shippingCost = 0; // v1: free shipping
+  const shippingCost = SHIPPING_FLAT_NZD;
   const total = subtotal + shippingCost;
   const currencyUpper = (intent.currency ?? 'nzd').toUpperCase();
+
+  // The amount actually captured by Stripe must equal the server-side
+  // re-pricing of the cart. Catches price tampering AND price drift
+  // between PI creation and completion.
+  const expectedCents = enrichedLines.reduce((sum, l) => sum + Math.round(l.lineTotal * 100), 0)
+    + Math.round(shippingCost * 100);
+  if (intent.amount !== expectedCents) {
+    console.error(`PAY_MISMATCH pi=${intent.id} paid=${intent.amount} expected=${expectedCents}`);
+    throw new Error('Paid amount does not match the cart total');
+  }
 
   const orderId = await createWixOrder({
     paymentIntentId: input.paymentIntentId,
     enrichedLines,
-    shipping: input.shipping,
+    shipping,
     subtotal,
     shippingCost,
     total,
@@ -139,6 +227,16 @@ export async function completeCheckoutOrder(
     console.error(`WIX_ORDER_FAIL ${msg.slice(0, 200)}`);
     return `stripe_${input.paymentIntentId}`;
   });
+
+  // Mark the PI as consumed so it can't create a second order. Best-effort:
+  // a failure here must not lose the order the customer just paid for.
+  try {
+    await stripe.paymentIntents.update(intent.id, {
+      metadata: { ...intent.metadata, order_created: 'true', wix_order_id: orderId },
+    });
+  } catch (err: unknown) {
+    console.error(`PI_FLAG_FAIL ${err instanceof Error ? err.message.slice(0, 120) : 'unknown'}`);
+  }
 
   return { orderId };
 }

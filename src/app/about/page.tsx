@@ -71,7 +71,7 @@ export default async function AboutPage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: 'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(216,24,41,0.12) 49.5%, rgba(216,24,41,0.12) 50.5%, transparent 50.5%)',
+            backgroundImage: 'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(255,43,58,0.12) 49.5%, rgba(255,43,58,0.12) 50.5%, transparent 50.5%)',
           }}
         />
 
@@ -176,7 +176,7 @@ export default async function AboutPage() {
         >
           <FadeIn className="mb-16">
             <h2
-              className="font-display uppercase leading-none"
+              className={`font-display leading-none${isLuxury ? '' : ' uppercase'}`}
               style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
             >
               What We Stand For
@@ -207,7 +207,7 @@ export default async function AboutPage() {
                   {/* Content */}
                   <div className="flex-1 md:pt-1.5">
                     <h3
-                      className="font-display uppercase mb-4"
+                      className={`font-display mb-4${isLuxury ? '' : ' uppercase'}`}
                       style={{ fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)' }}
                     >
                       {p.title}

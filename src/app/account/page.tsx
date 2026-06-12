@@ -51,7 +51,7 @@ export default async function AccountPage({
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(216,24,41,0.08) 49.5%, rgba(216,24,41,0.08) 50.5%, transparent 50.5%)',
+            'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(255,43,58,0.08) 49.5%, rgba(255,43,58,0.08) 50.5%, transparent 50.5%)',
         }}
       />
 
@@ -96,8 +96,8 @@ export default async function AccountPage({
             <div
               className="mb-8 px-5 py-4 text-sm"
               style={{
-                border: '1px solid rgba(216,24,41,0.4)',
-                background: 'rgba(216,24,41,0.08)',
+                border: '1px solid rgba(255,43,58,0.4)',
+                background: 'rgba(255,43,58,0.08)',
                 color: '#FF6070',
                 maxWidth: '480px',
                 fontFamily: 'var(--font-rajdhani)',

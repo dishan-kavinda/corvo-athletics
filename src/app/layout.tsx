@@ -6,6 +6,8 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartProvider } from '@/components/cart/CartProvider';
 import { CartDrawer } from '@/components/cart/CartDrawer';
+import { SmoothScroll } from '@/components/layout/SmoothScroll';
+import { ScrollSpine } from '@/components/svg/ScrollSpine';
 
 const anton = Anton({
   weight: '400',
@@ -116,10 +118,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className="min-h-full flex flex-col font-sans">
         <CartProvider>
-          {!isChooser && <Header />}
-          <main className="flex-1">{children}</main>
-          {!isChooser && <Footer />}
-          <CartDrawer />
+          <SmoothScroll>
+            {!isChooser && <Header />}
+            <main className="flex-1">{children}</main>
+            {!isChooser && <Footer />}
+            {!isChooser && <ScrollSpine variant={themeClass === 'luxury' ? 'luxury' : 'savage'} />}
+            <CartDrawer />
+          </SmoothScroll>
         </CartProvider>
       </body>
     </html>

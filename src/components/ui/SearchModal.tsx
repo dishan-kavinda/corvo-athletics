@@ -191,7 +191,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 }}>
                   {p.name}
                 </p>
-                <p style={{ fontFamily: 'var(--font-cormorant, serif)', fontSize: '1rem', color: 'var(--accent)' }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', color: 'var(--accent)' }}>
                   {p.price}
                 </p>
               </div>

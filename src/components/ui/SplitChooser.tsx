@@ -3,6 +3,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/layout/Logo';
+import { EKGPulse } from '@/components/svg/EKGPulse';
+import { DustField } from '@/components/svg/DustField';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -128,7 +130,7 @@ function GoldAuraEffect() {
           style={{
             position: 'absolute', left: '50%', top: '46%',
             width: '240px', height: '240px', borderRadius: '50%',
-            border: '1px solid rgba(184,150,44,0.8)',
+            border: '1px solid rgba(156,124,38,0.8)',
             transform: 'translate(-50%, -50%)',
           }}
         />
@@ -141,7 +143,7 @@ function GoldAuraEffect() {
         style={{
           position: 'absolute', left: '50%', top: '44%',
           width: '380px', height: '380px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(240,200,70,0.45) 0%, rgba(184,150,44,0.15) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(240,200,70,0.45) 0%, rgba(156,124,38,0.15) 45%, transparent 70%)',
           transform: 'translate(-50%, -50%)',
         }}
       />
@@ -221,19 +223,22 @@ export function SplitChooser() {
         transition={{ duration: 0.55, ease: EASE }}
         style={{
           flexShrink: 1, flexBasis: 0, minHeight: '20svh',
-          background: '#FAF7F0', cursor: 'pointer',
+          background: '#F4EFE4', cursor: 'pointer',
           position: 'relative', overflow: 'hidden',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: 'clamp(2rem, 5vw, 4rem)',
         }}
       >
         {/* Static decorative elements */}
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, background: '#B8962C', opacity: 0.5 }} />
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 1, background: '#9C7C26', opacity: 0.5 }} />
         <div style={{
           position: 'absolute', inset: 0, opacity: 0.03,
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #B8962C 1px, transparent 0)',
+          backgroundImage: 'radial-gradient(circle at 1px 1px, #9C7C26 1px, transparent 0)',
           backgroundSize: '26px 26px',
         }} />
+
+        {/* Always-on gold dust — the panel breathes even at rest */}
+        <DustField count={12} color="#9C7C26" />
 
         {/* Animated gold aura */}
         <AnimatePresence>{luxuryActive && <GoldAuraEffect />}</AnimatePresence>
@@ -243,7 +248,7 @@ export function SplitChooser() {
           position: 'absolute', top: '50%', left: '50%',
           width: '118%', aspectRatio: '2 / 1',
           transform: 'translate(-50%, -50%) scaleX(-1)',
-          background: '#B8962C',
+          background: '#9C7C26',
           WebkitMaskImage: 'url(/logo-savage-clean.svg)',
           maskImage: 'url(/logo-savage-clean.svg)',
           WebkitMaskSize: 'contain', maskSize: 'contain',
@@ -260,23 +265,23 @@ export function SplitChooser() {
         >
           <Logo
             height={34}
-            style={{ color: '#B8962C', opacity: 0.5, margin: '0 auto 2.25rem' }}
+            style={{ color: '#9C7C26', opacity: 0.5, margin: '0 auto 2.25rem' }}
           />
-          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 11, fontWeight: 400, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#B8962C', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 11, fontWeight: 400, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#9C7C26', marginBottom: '2rem' }}>
             The House of Corvo
           </p>
-          <h2 style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 'clamp(2.8rem, 6.5vw, 6rem)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '0.02em', textTransform: 'uppercase', color: '#1A1008', marginBottom: '1.5rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 'clamp(2.8rem, 6.5vw, 6rem)', fontWeight: 400, lineHeight: 0.92, letterSpacing: '0.02em', textTransform: 'uppercase', color: '#1C150C', marginBottom: '1.5rem' }}>
             Grace<br />Under<br />
-            <span style={{ color: '#B8962C' }}>Pressure.</span>
+            <span style={{ color: '#9C7C26', fontStyle: 'italic' }}>Pressure.</span>
           </h2>
-          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 16, fontWeight: 400, letterSpacing: '0.04em', color: '#8B7355' }}>
+          <p style={{ fontFamily: 'var(--font-cormorant), "Bodoni MT", Georgia, serif', fontSize: 16, fontWeight: 400, letterSpacing: '0.04em', color: '#6E5E45' }}>
             The standard worth keeping.
           </p>
           <button
             onClick={(e) => { e.stopPropagation(); pick('luxury'); }}
-            style={{ ...BTN, color: '#B8962C', border: '1px solid rgba(184,150,44,0.5)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#B8962C'; e.currentTarget.style.background = 'rgba(184,150,44,0.08)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(184,150,44,0.5)'; e.currentTarget.style.background = 'transparent'; }}
+            style={{ ...BTN, color: '#9C7C26', border: '1px solid rgba(156,124,38,0.5)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#9C7C26'; e.currentTarget.style.background = 'rgba(156,124,38,0.08)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(156,124,38,0.5)'; e.currentTarget.style.background = 'transparent'; }}
           >
             Enter the House →
           </button>
@@ -288,7 +293,7 @@ export function SplitChooser() {
         className="h-px w-full md:h-full md:w-px"
         animate={{ opacity: (hovered || mobileFocused) ? 0.8 : 0.4 }}
         transition={{ duration: 0.3 }}
-        style={{ flexShrink: 0, background: 'linear-gradient(to bottom, #B8962C 0%, #B8962C 45%, #D81829 55%, #D81829 100%)' }}
+        style={{ flexShrink: 0, background: 'linear-gradient(to bottom, #9C7C26 0%, #9C7C26 45%, #FF2B3A 55%, #FF2B3A 100%)' }}
       />
 
       {/* ── SAVAGE ──────────────────────────────────── */}
@@ -296,7 +301,7 @@ export function SplitChooser() {
         onClick={() => handlePanel('savage')}
         onHoverStart={() => !chosen && !isTouch && setHovered('savage')}
         onHoverEnd={() => !isTouch && setHovered(null)}
-        animate={{ flexGrow: savageGrow, opacity: luxuryActive ? 0.5 : 1, backgroundColor: savageActive ? '#0C0418' : '#07090F' }}
+        animate={{ flexGrow: savageGrow, opacity: luxuryActive ? 0.5 : 1, backgroundColor: savageActive ? '#140709' : '#070708' }}
         transition={{ duration: 0.55, ease: EASE }}
         style={{
           flexShrink: 1, flexBasis: 0, minHeight: '20svh', cursor: 'pointer',
@@ -306,13 +311,18 @@ export function SplitChooser() {
         }}
       >
         {/* Static decorative elements */}
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 2, background: '#D81829', opacity: 0.7 }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 2, background: '#FF2B3A', opacity: 0.7 }} />
         <div style={{
           position: 'absolute', inset: 0, opacity: 0.035,
-          backgroundImage: 'repeating-linear-gradient(135deg, #D81829 0px, #D81829 1px, transparent 0px, transparent 50%)',
+          backgroundImage: 'repeating-linear-gradient(135deg, #FF2B3A 0px, #FF2B3A 1px, transparent 0px, transparent 50%)',
           backgroundSize: '28px 28px',
         }} />
-        <div style={{ position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(circle, rgba(216,24,41,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '-10%', width: '60%', height: '60%', background: 'radial-gradient(circle, rgba(255,43,58,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+        {/* Always-on heartbeat — the panel is alive even at rest */}
+        <div style={{ position: 'absolute', bottom: '7%', left: 0, right: 0, opacity: 0.45, pointerEvents: 'none' }}>
+          <EKGPulse height={38} color="#FF2B3A" echoColor="#C8FF2E" />
+        </div>
 
         {/* Crimson fire */}
         <AnimatePresence>{savageActive && <FireEffect />}</AnimatePresence>
@@ -341,21 +351,22 @@ export function SplitChooser() {
             height={34}
             style={{ color: '#FFFFFF', opacity: 0.38, margin: '0 auto 2.25rem' }}
           />
-          <p style={{ fontFamily: 'var(--font-rajdhani), sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: '0.52em', textTransform: 'uppercase', color: '#D81829', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: 'var(--font-rajdhani), sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: '0.52em', textTransform: 'uppercase', color: '#FF2B3A', marginBottom: '2rem' }}>
             ── Corvo Athletic ──
           </p>
-          <h2 style={{ fontFamily: 'var(--font-anton), Anton, sans-serif', fontSize: 'clamp(3rem, 7vw, 6.5rem)', fontWeight: 400, lineHeight: 0.88, letterSpacing: '-0.01em', textTransform: 'uppercase', color: '#CDD4EA', marginBottom: '1.5rem' }}>
-            HUNT<br />WITHOUT<br />
-            <span style={{ color: '#D81829' }}>MERCY.</span>
+          <h2 style={{ fontFamily: 'var(--font-anton), Anton, sans-serif', fontSize: 'clamp(3rem, 7vw, 6.5rem)', fontWeight: 400, lineHeight: 0.88, letterSpacing: '-0.01em', textTransform: 'uppercase', color: '#F2F1EC', marginBottom: '1.5rem' }}>
+            HUNT<br />
+            <span style={{ color: 'transparent', WebkitTextStroke: '1.5px #F2F1EC' }}>WITHOUT</span><br />
+            <span style={{ color: '#FF2B3A' }}>MERCY.</span>
           </h2>
-          <p style={{ fontFamily: 'var(--font-rajdhani), sans-serif', fontSize: 12, fontWeight: 600, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#47516B' }}>
+          <p style={{ fontFamily: 'var(--font-rajdhani), sans-serif', fontSize: 12, fontWeight: 600, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#8F919C' }}>
             Raw. Athletic. No compromise.
           </p>
           <button
             onClick={(e) => { e.stopPropagation(); pick('savage'); }}
-            style={{ ...BTN, color: '#D81829', border: '1px solid rgba(216,24,41,0.4)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#D81829'; e.currentTarget.style.background = 'rgba(216,24,41,0.08)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(216,24,41,0.4)'; e.currentTarget.style.background = 'transparent'; }}
+            style={{ ...BTN, color: '#FF2B3A', border: '1px solid rgba(255,43,58,0.4)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#FF2B3A'; e.currentTarget.style.background = 'rgba(255,43,58,0.08)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,43,58,0.4)'; e.currentTarget.style.background = 'transparent'; }}
           >
             Enter the Arena →
           </button>

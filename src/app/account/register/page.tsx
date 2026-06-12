@@ -45,7 +45,7 @@ export default async function RegisterPage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(216,24,41,0.08) 49.5%, rgba(216,24,41,0.08) 50.5%, transparent 50.5%)',
+            'linear-gradient(135deg, transparent 0%, transparent 49.5%, rgba(255,43,58,0.08) 49.5%, rgba(255,43,58,0.08) 50.5%, transparent 50.5%)',
         }}
       />
 

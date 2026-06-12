@@ -44,7 +44,7 @@ export function CartDrawer() {
         style={{
           position: 'fixed',
           inset: 0,
-          backgroundColor: 'rgba(10, 10, 10, 0.85)',
+          backgroundColor: 'rgba(7,9,15,0.82)',
           backdropFilter: 'blur(6px)',
           WebkitBackdropFilter: 'blur(6px)',
           zIndex: 9998,
@@ -62,9 +62,9 @@ export function CartDrawer() {
           height: '100%',
           width: '100%',
           maxWidth: '28rem',
-          backgroundColor: '#000000',
-          borderLeft: '1px solid #262626',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'var(--surface)',
+          borderLeft: '1px solid var(--border)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
           zIndex: 9999,
           transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1)',
@@ -75,7 +75,7 @@ export function CartDrawer() {
       >
         <header
           className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: '1px solid #1B2038' }}
+          style={{ borderBottom: '1px solid var(--border)' }}
         >
           <div className="flex items-center gap-3">
             <span className="block w-4 h-[1.5px]" style={{ background: 'var(--accent)' }} />
@@ -90,7 +90,7 @@ export function CartDrawer() {
             type="button"
             onClick={close}
             className="cursor-pointer transition-colors duration-200 hover:text-blade"
-            style={{ color: '#47516B' }}
+            style={{ color: 'var(--muted)' }}
             aria-label="Close cart"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -101,15 +101,34 @@ export function CartDrawer() {
 
         <div className="flex-1 overflow-y-auto px-6 py-6">
           {error && (
-            <div className="mb-6 border border-red-500/40 bg-red-500/10 p-4">
-              <p className="text-red-300 text-xs uppercase tracking-wider font-display mb-2">
+            <div
+              className="mb-6 p-4"
+              style={{
+                border: '1px solid var(--accent)',
+                background: 'rgba(255,43,58,0.08)',
+              }}
+            >
+              <p
+                className="text-xs uppercase font-display mb-2"
+                style={{ color: 'var(--accent)', letterSpacing: '0.1em' }}
+              >
                 Couldn&apos;t add to cart
               </p>
-              <p className="text-red-200/80 text-xs leading-relaxed break-words">{error}</p>
+              <p className="text-xs leading-relaxed break-words" style={{ color: 'var(--muted)' }}>
+                {error}
+              </p>
               <button
                 type="button"
                 onClick={clearError}
-                className="mt-3 text-[10px] text-red-300/70 hover:text-red-200 uppercase tracking-wider cursor-pointer"
+                style={{
+                  marginTop: '0.75rem',
+                  fontSize: '10px',
+                  color: 'var(--muted)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.2em',
+                  cursor: 'pointer',
+                }}
+                className="hover:text-blade transition-colors"
               >
                 Dismiss
               </button>
@@ -117,11 +136,27 @@ export function CartDrawer() {
           )}
           {lineItems.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <p className="text-ash text-sm uppercase tracking-widest mb-6">Your cart is empty</p>
+              <p
+                className="text-sm uppercase mb-6"
+                style={{ color: 'var(--muted)', letterSpacing: '0.22em', fontFamily: 'var(--font-rajdhani)', fontWeight: 700 }}
+              >
+                Your cart is empty
+              </p>
               <button
                 type="button"
                 onClick={close}
-                className="inline-flex items-center justify-center font-display uppercase tracking-wider transition-all duration-300 ease-out hover:scale-[1.02] active:scale-100 cursor-pointer border border-graphite text-bone hover:border-bone hover:bg-onyx h-11 px-6 text-sm"
+                className="font-display uppercase cursor-pointer transition-all duration-300 ease-out hover:scale-[1.02] active:scale-100"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  letterSpacing: '0.14em',
+                  border: '1px solid var(--border)',
+                  color: 'var(--page-fg)',
+                  height: '2.75rem',
+                  padding: '0 1.5rem',
+                  fontSize: '0.875rem',
+                }}
               >
                 Continue Shopping
               </button>
@@ -133,7 +168,15 @@ export function CartDrawer() {
                 return (
                   <li key={item._id} className="flex gap-4">
                     {img && (
-                      <div className="relative w-20 h-20 bg-ink flex-shrink-0 overflow-hidden border border-graphite">
+                      <div
+                        className="relative flex-shrink-0 overflow-hidden"
+                        style={{
+                          width: '5rem',
+                          height: '5rem',
+                          background: 'var(--surface-elevated)',
+                          border: '1px solid var(--border)',
+                        }}
+                      >
                         <Image
                           src={img}
                           alt={item.productName?.original ?? ''}
@@ -144,10 +187,13 @@ export function CartDrawer() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate uppercase tracking-wider">
+                      <p
+                        className="text-sm font-medium truncate uppercase"
+                        style={{ letterSpacing: '0.1em' }}
+                      >
                         {item.productName?.original}
                       </p>
-                      <p className="text-blade text-sm mt-1 font-display">
+                      <p className="font-display text-sm mt-1" style={{ color: 'var(--accent)' }}>
                         {item.price?.formattedAmount}
                       </p>
                       <div className="flex items-center gap-2 mt-3">
@@ -157,7 +203,13 @@ export function CartDrawer() {
                             item._id && updateQuantity(item._id, (item.quantity ?? 1) - 1)
                           }
                           disabled={loading}
-                          className="w-7 h-7 border border-graphite hover:border-bone text-bone transition-colors text-sm cursor-pointer disabled:opacity-50"
+                          className="text-sm cursor-pointer transition-colors disabled:opacity-50"
+                          style={{
+                            width: '1.75rem',
+                            height: '1.75rem',
+                            border: '1px solid var(--border)',
+                            color: 'var(--page-fg)',
+                          }}
                           aria-label="Decrease quantity"
                         >
                           −
@@ -169,7 +221,13 @@ export function CartDrawer() {
                             item._id && updateQuantity(item._id, (item.quantity ?? 1) + 1)
                           }
                           disabled={loading}
-                          className="w-7 h-7 border border-graphite hover:border-bone text-bone transition-colors text-sm cursor-pointer disabled:opacity-50"
+                          className="text-sm cursor-pointer transition-colors disabled:opacity-50"
+                          style={{
+                            width: '1.75rem',
+                            height: '1.75rem',
+                            border: '1px solid var(--border)',
+                            color: 'var(--page-fg)',
+                          }}
                           aria-label="Increase quantity"
                         >
                           +
@@ -178,7 +236,13 @@ export function CartDrawer() {
                           type="button"
                           onClick={() => item._id && removeFromCart(item._id)}
                           disabled={loading}
-                          className="ml-auto text-xs text-ash hover:text-bone transition-colors uppercase tracking-wider cursor-pointer disabled:opacity-50"
+                          className="ml-auto text-xs uppercase cursor-pointer transition-colors disabled:opacity-50 hover:text-blade"
+                          style={{
+                            color: 'var(--muted)',
+                            letterSpacing: '0.18em',
+                            fontFamily: 'var(--font-rajdhani)',
+                            fontWeight: 600,
+                          }}
                         >
                           Remove
                         </button>
@@ -192,7 +256,7 @@ export function CartDrawer() {
         </div>
 
         {lineItems.length > 0 && (
-          <footer className="px-6 py-6" style={{ borderTop: '1px solid #1B2038' }}>
+          <footer className="px-6 py-6" style={{ borderTop: '1px solid var(--border)' }}>
             <div className="flex justify-between items-baseline mb-5">
               <span
                 style={{
@@ -201,7 +265,7 @@ export function CartDrawer() {
                   fontWeight: 700,
                   letterSpacing: '0.38em',
                   textTransform: 'uppercase',
-                  color: '#838DAA',
+                  color: 'var(--muted)',
                 }}
               >
                 Subtotal
@@ -217,8 +281,17 @@ export function CartDrawer() {
             >
               {loading ? 'Processing…' : 'Checkout'}
             </Button>
-            <p className="text-[10px] text-ash text-center mt-3 uppercase tracking-[0.2em]">
-              Taxes & shipping calculated at checkout
+            <p
+              className="text-center mt-3"
+              style={{
+                fontFamily: 'var(--font-rajdhani)',
+                fontSize: '10px',
+                color: 'var(--muted)',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+              }}
+            >
+              Taxes &amp; shipping calculated at checkout
             </p>
           </footer>
         )}

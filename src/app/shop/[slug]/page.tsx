@@ -1,14 +1,17 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { AddToCartButton } from '@/components/cart/AddToCartButton';
 import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
-import { getProductBySlug } from '@/lib/wix-products';
+import { getProductBySlug, getAllProducts } from '@/lib/wix-products';
 import { WishlistButton } from '@/components/ui/WishlistButton';
 import { SizeGuideButton } from '@/components/ui/SizeGuideButton';
 import { StickyAddToCart } from '@/components/ui/StickyAddToCart';
 import { RestockNotify } from '@/components/ui/RestockNotify';
+import { ProductGallery } from '@/components/ui/ProductGallery';
+import { InfoAccordion } from '@/components/ui/InfoAccordion';
+import { ProductCard } from '@/components/ui/ProductCard';
+import { sanitizeHtml } from '@/lib/sanitize';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -42,6 +45,19 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const mainImage = product.media?.mainMedia?.image?.url;
   const gallery = product.media?.items ?? [];
+  const galleryUrls = gallery
+    .map((item) => item.image?.url)
+    .filter((url): url is string => Boolean(url));
+  const images = galleryUrls.length > 0 ? galleryUrls : mainImage ? [mainImage] : [];
+
+  // Related products — same catalog, excluding the current item
+  let related: Awaited<ReturnType<typeof getAllProducts>> = [];
+  try {
+    const all = await getAllProducts();
+    related = all.filter((p) => p._id !== product._id).slice(0, 4);
+  } catch {
+    related = [];
+  }
 
   let defaultVariantId: string | undefined;
   if (product.manageVariants && product.variants && product.variants.length > 0) {
@@ -128,83 +144,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
       <section style={{ background: 'var(--page-bg)' }}>
         <div className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: '80vh' }}>
 
-          {/* ── Image panel ────────────────────────────── */}
+          {/* ── Image panel — interactive gallery ──────── */}
           <FadeIn duration={0.7} className="relative">
-            {/* Main image */}
-            <div
-              className="sticky top-[72px]"
-              style={{
-                background: 'var(--surface)',
-                borderRight: '1px solid var(--border)',
-              }}
-            >
-              <div
-                className="relative"
-                style={{ aspectRatio: '1 / 1', overflow: 'hidden' }}
-              >
-                {mainImage ? (
-                  <Image
-                    src={mainImage}
-                    alt={product.name ?? ''}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ background: 'var(--surface-elevated)' }}
-                  >
-                    <span
-                      className="font-display uppercase"
-                      style={{ fontSize: '5rem', color: 'var(--border)', opacity: 0.3 }}
-                    >
-                      C
-                    </span>
-                  </div>
-                )}
-                {/* Accent left bar */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-[3px]"
-                  style={{ background: 'var(--accent)' }}
-                />
-              </div>
-
-              {/* Gallery thumbnails */}
-              {gallery.length > 1 && (
-                <div
-                  className="flex gap-[1px]"
-                  style={{ background: 'var(--border)' }}
-                >
-                  {gallery.slice(0, 4).map((item, i) => (
-                    <div
-                      key={item._id ?? i}
-                      className="relative flex-1"
-                      style={{
-                        aspectRatio: '1 / 1',
-                        overflow: 'hidden',
-                        background: 'var(--surface-elevated)',
-                      }}
-                    >
-                      {item.image?.url && (
-                        <Image
-                          src={item.image.url}
-                          alt=""
-                          fill
-                          className="object-cover"
-                          sizes="120px"
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            <ProductGallery images={images} alt={product.name ?? ''} />
           </FadeIn>
 
           {/* ── Info panel ─────────────────────────────── */}
-          <div className="px-8 md:px-12 lg:px-14 py-12">
+          <div className="px-6 md:px-10 lg:px-14 py-12">
 
             <HeroReveal delay={0.08} y={15}>
               <p
@@ -249,9 +195,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     fontWeight: 700,
                     letterSpacing: '0.32em',
                     textTransform: 'uppercase',
-                    color: product.stock?.inStock ? '#00BDAC' : '#838DAA',
+                    color: product.stock?.inStock ? 'var(--color-pulse)' : 'var(--muted)',
                     padding: '0.25rem 0.6rem',
-                    border: `1px solid ${product.stock?.inStock ? '#00BDAC' : '#838DAA'}`,
+                    border: `1px solid ${product.stock?.inStock ? 'var(--color-pulse)' : 'var(--muted)'}`,
                   }}
                 >
                   {product.stock?.inStock ? 'In Stock' : 'Out of Stock'}
@@ -266,7 +212,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <div
                   className="text-sm leading-relaxed mb-10 max-w-prose"
                   style={{ color: 'var(--muted)' }}
-                  dangerouslySetInnerHTML={{ __html: product.description }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.description) }}
                 />
               </HeroReveal>
             )}
@@ -323,32 +269,80 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   ))}
                 </div>
               </div>
+
+              {/* Details accordion */}
+              <div className="mt-10">
+                <InfoAccordion
+                  items={[
+                    {
+                      title: 'Shipping',
+                      body: 'Free shipping on all New Zealand orders over $100. Orders are dispatched within 1–2 business days and typically arrive within 2–5 business days nationwide.',
+                    },
+                    {
+                      title: 'Returns & Exchanges',
+                      body: 'Not right? You have 30 days from delivery to return unworn items in original condition for a full refund or exchange. No questions, no friction.',
+                    },
+                    {
+                      title: 'The Corvo Standard',
+                      body: 'Every product is independently lab-tested and verified before it carries the Corvo name. Premium materials, precision construction, zero compromise.',
+                    },
+                  ]}
+                />
+              </div>
             </HeroReveal>
           </div>
         </div>
       </section>
 
-      {/* ── Related CTA ──────────────────────────────── */}
-      <div
-        className="py-12 text-center border-t"
-        style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
-      >
-        <a
-          href="/shop"
-          style={{
-            fontFamily: 'var(--font-rajdhani)',
-            fontSize: '12px',
-            fontWeight: 700,
-            letterSpacing: '0.32em',
-            textTransform: 'uppercase',
-            color: 'var(--accent)',
-            textDecoration: 'underline',
-            textUnderlineOffset: '4px',
-          }}
+      {/* ── Related products ─────────────────────────── */}
+      {related.length > 0 && (
+        <section
+          className="py-16 md:py-20 border-t"
+          style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
         >
-          ← Back to All Products
-        </a>
-      </div>
+          <div className="shell">
+            <FadeIn>
+              <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+                <div>
+                  <p className="eyebrow mb-3">── Keep Hunting</p>
+                  <h2
+                    className="font-display uppercase leading-none"
+                    style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+                  >
+                    You May Also Like
+                  </h2>
+                </div>
+                <a
+                  href="/shop"
+                  className="tech-label"
+                  style={{
+                    color: 'var(--accent)',
+                    fontWeight: 700,
+                    textDecoration: 'underline',
+                    textUnderlineOffset: '4px',
+                  }}
+                >
+                  View All →
+                </a>
+              </div>
+            </FadeIn>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {related.map((p) => (
+                <ProductCard
+                  key={p._id}
+                  slug={p.slug ?? ''}
+                  name={p.name ?? ''}
+                  price={p.priceData?.formatted?.price ?? ''}
+                  image={p.media?.mainMedia?.image?.url ?? ''}
+                  imageAlt={p.name ?? undefined}
+                  productId={p._id}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
     </>
   );
 }

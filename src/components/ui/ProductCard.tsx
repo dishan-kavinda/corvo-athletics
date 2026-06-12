@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/cn';
 import { WishlistButton } from '@/components/ui/WishlistButton';
 import { QuickView, type QuickViewProduct } from '@/components/ui/QuickView';
@@ -30,6 +31,12 @@ export function ProductCard({ slug, name, price, image, imageAlt, className, pro
 
   return (
     <>
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.12 }}
+        transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+      >
       <Link
         href={`/shop/${slug}`}
         className={cn('group block', className)}
@@ -46,7 +53,7 @@ export function ProductCard({ slug, name, price, image, imageAlt, className, pro
             transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
             boxShadow: hovered
               ? '0 16px 40px rgba(0,0,0,0.18), -2px 0 0 var(--accent)'
-              : '0 2px 12px rgba(0,0,0,0.06)',
+              : 'var(--card-shadow)',
           }}
         >
           {/* Image */}
@@ -192,6 +199,7 @@ export function ProductCard({ slug, name, price, image, imageAlt, className, pro
         </div>
       </Link>
 
+      </motion.div>
       <QuickView product={quickView} onClose={() => setQuickView(null)} />
     </>
   );

@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { NewsletterForm } from '@/components/ui/NewsletterForm';
+import { BackToTop } from '@/components/layout/BackToTop';
 
 const footerLinks = {
   Shop: [
     { label: 'All Products', href: '/shop' },
-    { label: 'Supplements', href: '/shop/supplements' },
-    { label: 'Apparel', href: '/shop/apparel' },
+    { label: 'Account', href: '/account' },
   ],
   Company: [
     { label: 'About', href: '/about' },
@@ -15,23 +16,19 @@ const footerLinks = {
     { label: 'Returns', href: '/returns' },
   ],
   Follow: [
-    { label: 'Instagram', href: '#' },
-    { label: 'TikTok', href: '#' },
+    { label: 'Instagram', href: 'https://instagram.com/corvoathletic', external: true },
+    { label: 'TikTok', href: 'https://tiktok.com/@corvoathletic', external: true },
   ],
-};
+} as const;
 
 export function Footer() {
   return (
     <footer style={{ background: 'var(--footer-bg)', borderTop: '1px solid var(--footer-border)' }}>
       {/* ── Wordmark hero ─────────────────────────────── */}
       <div style={{ borderBottom: '1px solid var(--footer-border)' }}>
-        <div
-          className="mx-auto px-6 md:px-10 lg:px-14 py-16"
-          style={{ maxWidth: '1440px' }}
-        >
+        <div className="shell py-16">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <div>
-              {/* ── Brand mark ── */}
               <img
                 src="/logo-savage-clean.svg"
                 alt="Corvo Athletic"
@@ -82,47 +79,91 @@ export function Footer() {
         </div>
       </div>
 
-      {/* ── Links grid ─────────────────────────────────── */}
-      <div
-        className="mx-auto px-6 md:px-10 lg:px-14 py-14"
-        style={{ maxWidth: '1440px' }}
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
-          {Object.entries(footerLinks).map(([title, items]) => (
-            <div key={title}>
-              <h4
-                style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.38em',
-                  textTransform: 'uppercase',
-                  color: 'var(--footer-accent)',
-                  marginBottom: '1.25rem',
-                }}
-              >
-                {title}
-              </h4>
-              <ul className="space-y-3">
-                {items.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm transition-colors duration-200 hover:text-blade"
-                      style={{ color: 'var(--footer-muted)' }}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      {/* ── Links + newsletter ─────────────────────────── */}
+      <div className="shell py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-20 mb-14">
+          {/* Link columns */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+            {Object.entries(footerLinks).map(([title, items]) => (
+              <div key={title}>
+                <h4
+                  style={{
+                    fontFamily: 'var(--font-rajdhani)',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '0.38em',
+                    textTransform: 'uppercase',
+                    color: 'var(--footer-accent)',
+                    marginBottom: '1.25rem',
+                  }}
+                >
+                  {title}
+                </h4>
+                <ul className="space-y-3">
+                  {items.map((link) => (
+                    <li key={link.label}>
+                      {'external' in link && link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm transition-colors duration-200 hover:text-blade"
+                          style={{ color: 'var(--footer-muted)' }}
+                        >
+                          {link.label} ↗
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-sm transition-colors duration-200 hover:text-blade"
+                          style={{ color: 'var(--footer-muted)' }}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4
+              style={{
+                fontFamily: 'var(--font-rajdhani)',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.38em',
+                textTransform: 'uppercase',
+                color: 'var(--footer-accent)',
+                marginBottom: '1.25rem',
+              }}
+            >
+              The Inner Circle
+            </h4>
+            <p style={{ color: 'var(--footer-muted)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+              First access to drops, athlete programs, and Corvo updates.
+            </p>
+            {/* Footer is always dark — re-scope the page-level vars the form reads */}
+            <div
+              style={{
+                '--surface-elevated': 'rgba(255,255,255,0.05)',
+                '--border': 'var(--footer-border)',
+                '--page-fg': 'var(--footer-fg)',
+                '--muted': 'var(--footer-muted)',
+                '--accent': 'var(--footer-accent)',
+              } as React.CSSProperties}
+            >
+              <NewsletterForm />
             </div>
-          ))}
+          </div>
         </div>
 
         {/* ── Legal row ──────────────────────────────────── */}
         <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8"
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8"
           style={{ borderTop: '1px solid var(--footer-border)' }}
         >
           <div className="flex items-center gap-3">
@@ -146,6 +187,7 @@ export function Footer() {
           <p style={{ fontSize: '11px', color: 'var(--footer-muted)' }}>
             &copy; {new Date().getFullYear()} Corvo Athletic. Built for those who don&apos;t quit.
           </p>
+          <BackToTop />
         </div>
       </div>
     </footer>
