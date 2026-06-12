@@ -233,3 +233,9 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
 
 - [2026-06-12] **Homepage is one continuous scroll sequence**: pinned hero (Descent/Vault) → ticker → ScrubReveal on sections 3 (collection), 6 (manifesto), 7 (standards), 8 (stats), 9 (newsletter), 10 (CTA), each themed (slash vs curtain) + VelocityWarp shear + ScrollSpine thread. ScrubReveal offsets: ["start 0.96", "start 0.5"], transforms complete by t=0.85-0.9.
 - [2026-06-12] **GoldBezel** (src/components/svg/GoldBezel.tsx): luxury counterpart to Reticle — counter-rotating watch-bezel rings (130s/90s), 60 minute ticks, diamond quarter markers. Lives behind LuxuryHeroCinematic content w/ scroll-reactive scale/rotate/fade. `.text-gradient-gold` = shimmer class for gold headline words.
+
+## Key Learnings (2026-06-12 Threshold)
+
+- [2026-06-12] **The Threshold** (SplitChooser) is the permanent front door: proxy.ts no longer redirects / to /home when the aesthetic cookie exists — root ALWAYS shows the chooser; the cookie only controls theming inside. Pick sequence: setChosen -> portal animation (SavagePortal red rift detonation + screen shake / LuxuryPortal espresso circle + gold rim + Welcome to the House.) -> navigate to /home after 1250ms.
+- [2026-06-12] **Chooser ambient kit:** GoldBezel + DustField + sheen-sweep + hairline frame (luxury) vs Reticle + scanlines + EmberField + EKGPulse + .glitch-burst headline (savage), separated by RiftSeam (bolt-flicker lightning arcs + ekg-run gold filament). "CHOOSE YOUR DIMENSION" label uses mix-blend-mode: difference to read on both panels.
+- [2026-06-12] **De-AI details:** marquee separators are rotated 5px diamonds (not unicode stars); product trust row uses hairline stroke SVG icons. Pattern: replace typographic-dingbat/arrow placeholders with drawn SVG when polishing.

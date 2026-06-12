@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-12T07:18:10.662Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-12T07:36:55.632Z
 > Files: 95 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../../../AppData/Local/Temp/
@@ -28,18 +28,18 @@
 
 ## src/
 
-- `proxy.ts` — Next.js 16 proxy (formerly middleware): injects x-pathname header; redirects `/`→`/home` if corvo_aesthetic cookie set, `/home`→`/` if not (~188 tok)
+- `proxy.ts` — API routes: GET (1 endpoints) (~192 tok)
 
 ## src/app/
 
-- `globals.css` — Styles: 46 rules, 64 vars (~3947 tok)
+- `globals.css` — Styles: 46 rules, 64 vars (~4159 tok)
 - `layout.tsx` — anton (~1240 tok)
 - `page.tsx` — metadata (~73 tok)
 - `template.tsx` — EASE (~342 tok)
 
 ## src/app/about/
 
-- `page.tsx` — metadata (~3842 tok)
+- `page.tsx` — metadata (~3768 tok)
 
 ## src/app/account/
 
@@ -122,7 +122,7 @@
 
 ## src/app/shop/[slug]/
 
-- `page.tsx` — dynamic (~3834 tok)
+- `page.tsx` — dynamic (~4008 tok)
 
 ## src/app/thank-you/
 
@@ -182,7 +182,7 @@
 - `CategoryGrid.tsx` — Client component: 2×2 grid (sm:grid-cols-2) of Framer Motion category cards using motion.create(Link) with variant propagation for hover effects (blade, glow, label lift, bottom line) (~850 tok)
 - `FeaturedProducts.tsx` — async server section for /home: fetches catalog, 4-product grid; returns null on empty/error (~674 tok)
 - `InfoAccordion.tsx` — client accordion (single-open, height animation) for product detail shipping/returns/quality (~635 tok)
-- `MarqueeStrip.tsx` — WORDS (~455 tok)
+- `MarqueeStrip.tsx` — WORDS (~514 tok)
 - `NewsletterForm.tsx` — NewsletterForm — renders form (~1093 tok)
 - `ProductCard.tsx` — ProductCard (~1910 tok)
 - `ProductGallery.tsx` — client gallery: crossfade main image + clickable thumbnails, sticky top-[72px] (~903 tok)
@@ -192,7 +192,7 @@
 - `ShopGrid.tsx` — client grid: live search, sort (featured/price asc-desc/name), aria-live count, animated empty state (~1685 tok)
 - `SizeGuideButton.tsx` — SizeGuideButton (~338 tok)
 - `SizeGuideModal.tsx` — sizes — renders table (~2490 tok)
-- `SplitChooser.tsx` — EASE (~5004 tok)
+- `SplitChooser.tsx` — EASE (~6041 tok)
 - `StickyAddToCart.tsx` — StickyAddToCart (~1011 tok)
 - `ThemeToggle.tsx` — ThemeToggle (~432 tok)
 - `WishlistButton.tsx` — WishlistButton (~471 tok)

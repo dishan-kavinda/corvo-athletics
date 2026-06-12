@@ -85,16 +85,7 @@ export default async function AboutPage() {
               <span
                 style={{ display: 'block', width: '22px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
               />
-              <span
-                style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.52em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                }}
-              >
+              <span className="eyebrow" style={{ letterSpacing: '0.52em' }}>
                 {isLuxury ? 'The House' : 'The Brand'}
               </span>
             </div>

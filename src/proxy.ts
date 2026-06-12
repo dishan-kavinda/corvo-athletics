@@ -4,10 +4,8 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const aesthetic = request.cookies.get('corvo_aesthetic')?.value;
 
-  // Redirect logic
-  if (aesthetic && pathname === '/') {
-    return NextResponse.redirect(new URL('/home', request.url));
-  }
+  // The Threshold (chooser) always opens first at the root — even with a
+  // saved aesthetic. The cookie only controls theming once inside.
   if (!aesthetic && pathname.startsWith('/home')) {
     return NextResponse.redirect(new URL('/', request.url));
   }

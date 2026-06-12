@@ -2713,6 +2713,38 @@
       ],
       "occurrences": 1,
       "last_seen": "2026-06-12T07:18:23.010Z"
+    },
+    {
+      "id": "bug-167",
+      "timestamp": "2026-06-12T07:34:38.459Z",
+      "error_message": "CSS fix: icon, color, fontSize",
+      "file": "src/app/shop/[slug]/page.tsx",
+      "root_cause": "icon: '→', label: 'Lab-Tested & Independently Verified' → (; color: 'var(--muted)', → 'var(--accent)', display: 'inline-flex', flexShrink: 0; fontSize: '12px', → '12px', letterSpacing: '0.22em'",
+      "fix": "Changed icon: '→', label: 'Lab-Tested & Independently Verified' → (; color: 'var(--muted)', → 'var(--accent)', display: 'inline-flex', flexShrink: 0; fontSize: '12px', → '12px', letterSpacing: '0.22em'",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-06-12T07:35:12.208Z"
+    },
+    {
+      "id": "bug-168",
+      "timestamp": "2026-06-12T07:36:55.649Z",
+      "error_message": "CSS fix: ease",
+      "file": "src/components/ui/SplitChooser.tsx",
+      "root_cause": "ease: EASE as unknown as number[] → [0.16, 1, 0.3, 1] as [number, number, number, number]",
+      "fix": "Changed ease: EASE as unknown as number[] → [0.16, 1, 0.3, 1] as [number, number, number, number]",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T07:36:55.649Z"
     }
   ]
 }

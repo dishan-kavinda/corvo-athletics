@@ -153,17 +153,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           <div className="px-6 md:px-10 lg:px-14 py-12">
 
             <HeroReveal delay={0.08} y={15}>
-              <p
-                style={{
-                  fontFamily: 'var(--font-rajdhani)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  letterSpacing: '0.52em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                  marginBottom: '1rem',
-                }}
-              >
+              <p className="eyebrow mb-4" style={{ letterSpacing: '0.52em' }}>
                 Corvo Athletic
               </p>
             </HeroReveal>
@@ -244,24 +234,36 @@ export default async function ProductDetailPage({ params }: PageProps) {
               >
                 <div className="space-y-4">
                   {[
-                    { icon: '→', label: 'Free Shipping on Orders Over $100' },
-                    { icon: '→', label: '30-Day Returns' },
-                    { icon: '→', label: 'Lab-Tested & Independently Verified' },
+                    {
+                      icon: (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M1 7h13v10H1zM14 10h4l3 3v4h-7z" /><circle cx="5.5" cy="17" r="1.8" /><circle cx="17.5" cy="17" r="1.8" />
+                        </svg>
+                      ),
+                      label: 'Free Shipping on Orders Over $100',
+                    },
+                    {
+                      icon: (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 2v4h4" />
+                        </svg>
+                      ),
+                      label: '30-Day Returns',
+                    },
+                    {
+                      icon: (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" /><path d="M8.5 12l2.5 2.5L16 9.5" />
+                        </svg>
+                      ),
+                      label: 'Lab-Tested & Independently Verified',
+                    },
                   ].map((item, idx) => (
                     <div key={item.label} className="flex items-center gap-3">
-                      <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '14px' }}>
+                      <span style={{ color: 'var(--accent)', display: 'inline-flex', flexShrink: 0 }}>
                         {item.icon}
                       </span>
-                      <p
-                        style={{
-                          fontFamily: 'var(--font-rajdhani)',
-                          fontSize: '12px',
-                          fontWeight: 600,
-                          letterSpacing: '0.22em',
-                          textTransform: 'uppercase',
-                          color: 'var(--muted)',
-                        }}
-                      >
+                      <p className="tech-label" style={{ fontSize: '12px', letterSpacing: '0.22em' }}>
                         {item.label}
                       </p>
                       {idx === 0 && <SizeGuideButton />}

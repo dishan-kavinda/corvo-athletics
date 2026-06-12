@@ -40,28 +40,37 @@ export function MarqueeStrip({ reverse = false, light = false, className = '' }:
           animation: `${reverse ? 'marquee-reverse' : 'marquee'} 28s linear infinite`,
         }}
       >
-        {doubled.map((word, i) => (
-          <span
-            key={i}
-            style={{
-              fontFamily: word === '✦' ? 'inherit' : 'var(--font-rajdhani)',
-              fontSize: word === '✦' ? '10px' : '11px',
-              fontWeight: 700,
-              letterSpacing: word === '✦' ? '0' : '0.42em',
-              textTransform: 'uppercase',
-              color: light
-                ? word === '✦'
-                  ? 'rgba(255,255,255,0.4)'
-                  : 'rgba(255,255,255,0.82)'
-                : word === '✦'
-                ? 'var(--accent)'
-                : 'var(--muted)',
-              flexShrink: 0,
-            }}
-          >
-            {word}
-          </span>
-        ))}
+        {doubled.map((word, i) =>
+          word === '✦' ? (
+            <span
+              key={i}
+              aria-hidden
+              style={{
+                display: 'block',
+                width: '5px',
+                height: '5px',
+                transform: 'rotate(45deg)',
+                background: light ? 'rgba(255,255,255,0.45)' : 'var(--accent)',
+                flexShrink: 0,
+              }}
+            />
+          ) : (
+            <span
+              key={i}
+              style={{
+                fontFamily: 'var(--font-rajdhani)',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '0.42em',
+                textTransform: 'uppercase',
+                color: light ? 'rgba(255,255,255,0.82)' : 'var(--muted)',
+                flexShrink: 0,
+              }}
+            >
+              {word}
+            </span>
+          ),
+        )}
       </div>
     </div>
   );

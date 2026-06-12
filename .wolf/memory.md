@@ -1109,3 +1109,17 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 15:00 | Verified: full-page scroll walk both themes — all sections render, console clean (only benign Wix no-cart 404, which is also what the dev-overlay "1 Issue" badge counts). tsc + build clean | — | verified | ~10000 |
 | 19:18 | Created ../../../../AppData/Local/Temp/corvo-bug163.cjs | — | ~315 |
 | 19:18 | Session end: 153 writes across 39 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 33 reads | ~101197 tok |
+| 19:32 | Edited src/proxy.ts | 7→5 lines | ~74 |
+| 19:32 | Edited src/app/globals.css | expanded (+19 lines) | ~231 |
+| 19:34 | Created src/components/ui/SplitChooser.tsx | — | ~6026 |
+| 19:34 | Edited src/components/ui/MarqueeStrip.tsx | expanded (+9 lines) | ~262 |
+| 19:34 | Edited src/app/shop/[slug]/page.tsx | CSS: display, flexShrink | ~648 |
+| 19:34 | Edited src/app/shop/[slug]/page.tsx | reduced (-10 lines) | ~57 |
+| 19:35 | Edited src/app/about/page.tsx | reduced (-9 lines) | ~44 |
+| 19:36 | Edited src/components/ui/SplitChooser.tsx | inline fix | ~17 |
+| 19:39 | designqc: captured 2 screenshots (84KB, ~5000 tok) | / | ready for eval | ~0 |
+
+| 15:40 | THE THRESHOLD: SplitChooser fully rebuilt — luxury Atelier (GoldBezel, dust, sheen, hairline frame, shimmer italic) vs savage Void (Reticle, scanlines, EmberField, EKG, glitch-burst headline, live-dot); RiftSeam between (gold-to-red core, flickering lightning arcs on savage flank, drifting gold filament on luxury flank); pick portals swallow the screen (red rift detonation + shake + ENTERING THE ARENA / espresso-gold portal + Welcome to the House.), navigate after 1250ms | SplitChooser.tsx, globals.css | front door is epic | ~5500 |
+| 15:45 | proxy.ts: root ALWAYS opens the chooser now (removed cookie redirect / to /home); cookie only themes the site. Verified 200 + chooser content with cookie set | src/proxy.ts | launch flow per owner request | ~200 |
+| 15:50 | De-AI sweep: marquee star chars replaced w/ crafted rotated-diamond separators; product trust row got hairline SVG icons (truck/returns/shield) replacing arrow chars; eyebrow inline styles converted to .eyebrow on product + about pages | MarqueeStrip, shop/[slug], about | high-end detailing | ~900 |
+| 19:41 | Session end: 161 writes across 41 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 34 reads | ~108744 tok |

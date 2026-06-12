@@ -220,6 +220,25 @@ body {
   97%       { opacity: 0.85; }
   98%       { opacity: 1; }
 }
+/* Reality glitch — brief RGB-split burst every few seconds */
+@keyframes glitch-shadow {
+  0%, 90%, 100% { text-shadow: none; transform: none; }
+  91%  { text-shadow: -4px 0 #FF2B3A, 4px 0 #C8FF2E; transform: translateX(3px) skewX(-3deg); }
+  93%  { text-shadow: 4px 0 #FF2B3A, -4px 0 #C8FF2E; transform: translateX(-3px) skewX(2deg); }
+  95%  { text-shadow: -2px 0 #FF2B3A, 2px 0 #C8FF2E; transform: translateX(1px); }
+  96%  { text-shadow: none; transform: none; }
+}
+.glitch-burst { animation: glitch-shadow 4.6s linear infinite; }
+
+/* Lightning arc flicker along the rift seam */
+@keyframes bolt-flicker {
+  0%, 84%, 100% { opacity: 0; }
+  85%  { opacity: 1; }
+  87%  { opacity: 0.15; }
+  88%  { opacity: 0.9; }
+  91%  { opacity: 0; }
+}
+
 /* Light sheen sweeping across a surface — luxury polish pass */
 @keyframes sheen-sweep {
   0%   { transform: translateX(-130%) skewX(-18deg); }
