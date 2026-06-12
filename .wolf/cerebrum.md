@@ -207,3 +207,29 @@ Utilities: `bg-ink`, `text-bone`, `border-graphite`, `text-gold`, etc.
 ## Key Learnings (2026-06-12)
 
 - [2026-06-12] **ScrollSpine** (src/components/svg/ScrollSpine.tsx) is the persistent cross-page scroll companion, mounted in layout.tsx (hidden on chooser). Savage = Vital Spine seismograph w/ scroll-velocity-reactive tip (volt flare on fast scroll); luxury = Golden Thread silk curve w/ diamond charm. Slimmer + 55% opacity under 768px; static hairline under prefers-reduced-motion. Savage hero vertical rail sits at right:4rem to clear it.
+
+## Do-Not-Repeat (2026-06-12 cinematic session)
+
+- [2026-06-12] **Headless Chrome (puppeteer headless new) forces prefers-reduced-motion: reduce.** All automated visual checks of framer-motion animations silently exercise the reduced/static fallback unless you call page.emulateMediaFeatures with prefers-reduced-motion: no-preference. This also means useReducedMotion-conditional TREES hydration-mismatch in headless checks (and for real reduce-pref users).
+- [2026-06-12] **The hydration-safe pattern for scroll-driven framer components is: dyn = mounted AND !reduced.** Server and first client render must emit identical static styles; attach MotionValue styles and swap reduced trees only after mount. Never return a different JSX tree based on useReducedMotion at SSR/hydration time.
+- [2026-06-12] **pnpm build EPERM unlink on .next while the dev server runs** — stop the port-3000 process and delete .next before judging it a real failure (repo lives in OneDrive; sync can hold locks too).
+
+## Key Learnings (2026-06-12 cinematic)
+
+- [2026-06-12] **Pinned scroll scenes** (wrapper 230-260vh + sticky 100svh inner + useScroll target progress) are the site signature: SavageHeroCinematic = the Descent (text divergence, speedlines, crimson rift, blackout), LuxuryHeroCinematic = the Vault (gold gun-barrel iris, espresso dark, Corvo. House of Corvo. title). Both degrade to a static composition for reduced motion.
+- [2026-06-12] **HoloRaven** (src/components/hero/HoloRaven.tsx): CSS-3D 7-layer raven hologram with mouse tilt, HUD brackets, scan-sweep, threat readouts — fills the savage hero right column (hidden under lg).
+- [2026-06-12] **Section transitions:** SlashReveal (savage diagonal blade wipe) and CurtainReveal (luxury parting panels + gold seam) share interchangeable props incl. panelColor. VelocityWarp wraps main children in layout — safe because ALL fixed UI is body-portaled. template.tsx does an accent-veil scaleY wipe on every route change.
+
+## Do-Not-Repeat (2026-06-12 reduced-motion incident)
+
+- [2026-06-12] **THE OWNER''S WINDOWS MACHINE REPORTS prefers-reduced-motion: reduce.** Any animation gated behind useReducedMotion or a global reduced-motion CSS kill-switch is INVISIBLE TO THE OWNER. By explicit owner decision, the site does NOT honor prefers-reduced-motion — never re-add useReducedMotion gates or the global @media (prefers-reduced-motion) kill block. Hydration mount-gates (dyn = mounted) stay. When the user says "I can''t see the animation," check this FIRST before touching animation code.
+
+## Do-Not-Repeat (2026-06-12 empty-sections incident)
+
+- [2026-06-12] **whileInView clip-path reveals left sections PERMANENTLY BLANK on the user''s machine** (initial clip hides content; the in-view trigger never fired for them). Rule: never gate section VISIBILITY behind an IntersectionObserver trigger. Use ScrubReveal (src/components/motion/ScrubReveal.tsx) — scroll-position-driven via useScroll target offsets, springed, reversible, and pre-mount it renders children fully visible. SlashReveal/CurtainReveal are DELETED — do not recreate trigger-based clip reveals.
+- [2026-06-12] **The Next dev-overlay "1 Issue" badge on this project = the benign Wix carts/current 404** (no cart yet for fresh visitor). Confirm via console capture before chasing it.
+
+## Key Learnings (2026-06-12 continuity pass)
+
+- [2026-06-12] **Homepage is one continuous scroll sequence**: pinned hero (Descent/Vault) → ticker → ScrubReveal on sections 3 (collection), 6 (manifesto), 7 (standards), 8 (stats), 9 (newsletter), 10 (CTA), each themed (slash vs curtain) + VelocityWarp shear + ScrollSpine thread. ScrubReveal offsets: ["start 0.96", "start 0.5"], transforms complete by t=0.85-0.9.
+- [2026-06-12] **GoldBezel** (src/components/svg/GoldBezel.tsx): luxury counterpart to Reticle — counter-rotating watch-bezel rings (130s/90s), 60 minute ticks, diamond quarter markers. Lives behind LuxuryHeroCinematic content w/ scroll-reactive scale/rotate/fade. `.text-gradient-gold` = shimmer class for gold headline words.

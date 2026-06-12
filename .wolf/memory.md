@@ -1032,3 +1032,80 @@ Verified working with real customer orders #10005 (DISHAN BULUGODA, 8 Mt Street 
 | 11:55 | Console-error hunt via puppeteer: FIXED CSP blocking edge.wixapis.com cart calls (bug-147) + hydration mismatch from ScrollSpine SSR (bug-148, mount-gate). Remaining 404 carts/current is normal Wix no-cart-yet response | next.config.ts, ScrollSpine.tsx | console clean | ~3000 |
 | 12:05 | Mobile verified (390px puppeteer shots): savage+luxury heroes, category grid, chooser all clean; luxury hero stats got flex-wrap; savage hero rail moved right:4rem to clear spine | home/page.tsx | mobile good | ~8000 |
 | 17:18 | Session end: 87 writes across 24 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 31 reads | ~79036 tok |
+| 17:29 | Edited src/app/globals.css | expanded (+23 lines) | ~254 |
+| 17:30 | Created src/components/motion/VelocityWarp.tsx | — | ~378 |
+| 17:30 | Created src/components/motion/SlashReveal.tsx | — | ~521 |
+| 17:30 | Created src/components/motion/CurtainReveal.tsx | — | ~721 |
+| 17:30 | Created src/components/hero/HoloRaven.tsx | — | ~1558 |
+| 17:31 | Created src/components/hero/SavageHeroCinematic.tsx | — | ~3000 |
+| 17:32 | Created src/components/hero/LuxuryHeroCinematic.tsx | — | ~2532 |
+| 17:32 | Edited src/components/motion/SlashReveal.tsx | modified SlashReveal() | ~81 |
+| 17:32 | Edited src/app/home/page.tsx | added 3 import(s) | ~292 |
+| 17:33 | Edited src/app/home/page.tsx | CSS: transition, CurtainReveal | ~74 |
+| 17:33 | Edited src/app/home/page.tsx | 6→7 lines | ~88 |
+| 17:34 | Edited src/app/home/page.tsx | 6→7 lines | ~35 |
+| 17:34 | Edited src/app/home/page.tsx | 5→6 lines | ~80 |
+| 17:34 | Edited src/app/home/page.tsx | 7→8 lines | ~50 |
+| 17:34 | Edited src/app/home/page.tsx | 6→7 lines | ~74 |
+| 17:34 | Edited src/app/home/page.tsx | 10→11 lines | ~74 |
+| 17:35 | Created src/app/template.tsx | — | ~342 |
+| 17:35 | Edited src/app/layout.tsx | added 1 import(s) | ~54 |
+| 17:35 | Edited src/app/layout.tsx | CSS: 0, 35 | ~70 |
+| 17:50 | Created src/app/api/preview-aesthetic/route.ts | — | ~154 |
+| 17:50 | Created ../../../../AppData/Local/Temp/corvo-cinematic-verify.mjs | — | ~664 |
+| 17:55 | Created src/components/hero/SavageHeroCinematic.tsx | — | ~2988 |
+| 17:55 | Created src/components/hero/LuxuryHeroCinematic.tsx | — | ~2510 |
+| 17:56 | Edited src/components/motion/SlashReveal.tsx | added 1 import(s) | ~34 |
+| 17:56 | Edited src/components/motion/SlashReveal.tsx | modified SlashReveal() | ~124 |
+| 17:56 | Edited src/components/motion/CurtainReveal.tsx | added 1 import(s) | ~34 |
+| 17:56 | Edited src/components/motion/CurtainReveal.tsx | 3→7 lines | ~107 |
+| 18:16 | Edited ../../../../AppData/Local/Temp/corvo-cinematic-verify.mjs | 3→6 lines | ~116 |
+| 18:19 | Created ../../../../AppData/Local/Temp/corvo-buglog-append.cjs | — | ~472 |
+
+| 13:30 | CINEMATIC DIMENSION UPDATE: SavageHeroCinematic (pinned 260vh Descent — text divergence, warp speedlines, crimson rift, flash, blackout + HoloRaven CSS-3D specimen HUD fills right column) / LuxuryHeroCinematic (pinned 230vh Vault — gun-barrel gold iris, dark consumes screen, Corvo. House of Corvo. title) | src/components/hero/* | both verified mid-scroll via puppeteer | ~9000 |
+| 13:35 | Section transitions: SlashReveal (diagonal blade wipe + red-volt edge chase) and CurtainReveal (parting panels + gold seam) wrap home sections 3, 7, 10; VelocityWarp page shear in layout (savage 1.0, luxury 0.35); template.tsx accent-veil route wipe | motion components, layout.tsx, template.tsx | noticeable transitions everywhere | ~3500 |
+| 13:50 | Hydration round 2 fixed via dyn = mounted AND not-reduced gating in heroes + reveals (bug-153). Discovery: headless Chrome forces prefers-reduced-motion reduce — emulateMediaFeatures needed to verify animated paths. Build lock (.next + OneDrive) resolved by stopping dev and clearing .next (bug-154) | heroes, reveals | console clean, build clean | ~6000 |
+| 18:21 | Session end: 116 writes across 33 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 33 reads | ~95257 tok |
+| 18:23 | Edited src/app/globals.css | media() → decision() | ~83 |
+| 18:23 | Edited src/components/svg/ScrollSpine.tsx | 8→7 lines | ~29 |
+| 18:23 | Edited src/components/svg/ScrollSpine.tsx | 5→4 lines | ~41 |
+| 18:23 | Edited src/components/svg/ScrollSpine.tsx | removed 23 lines | ~12 |
+| 18:24 | Edited src/components/hero/SavageHeroCinematic.tsx | inline fix | ~19 |
+| 18:24 | Edited src/components/hero/SavageHeroCinematic.tsx | 4→3 lines | ~54 |
+| 18:24 | Edited src/components/hero/SavageHeroCinematic.tsx | 2→2 lines | ~23 |
+| 18:24 | Edited src/components/hero/LuxuryHeroCinematic.tsx | inline fix | ~19 |
+| 18:24 | Edited src/components/hero/LuxuryHeroCinematic.tsx | 4→3 lines | ~54 |
+| 18:24 | Edited src/components/hero/LuxuryHeroCinematic.tsx | inline fix | ~7 |
+| 18:24 | Edited src/components/motion/SlashReveal.tsx | 4→3 lines | ~16 |
+| 18:24 | Edited src/components/motion/SlashReveal.tsx | removed 7 lines | ~24 |
+| 18:24 | Edited src/components/motion/CurtainReveal.tsx | 4→3 lines | ~16 |
+| 18:24 | Edited src/components/motion/CurtainReveal.tsx | removed 7 lines | ~7 |
+| 18:24 | Edited src/components/motion/VelocityWarp.tsx | inline fix | ~26 |
+| 18:24 | Edited src/components/motion/VelocityWarp.tsx | 2→1 lines | ~10 |
+| 18:24 | Edited src/components/motion/VelocityWarp.tsx | inline fix | ~26 |
+| 18:24 | Created ../../../../AppData/Local/Temp/corvo-reduce-sim.mjs | — | ~412 |
+| 18:24 | Created src/app/api/preview-aesthetic/route.ts | — | ~154 |
+| 18:26 | Created ../../../../AppData/Local/Temp/corvo-buglog-156.cjs | — | ~323 |
+| 18:26 | Session end: 136 writes across 35 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 33 reads | ~96664 tok |
+| 18:34 | Created src/components/motion/ScrubReveal.tsx | — | ~1207 |
+| 18:34 | Created src/components/svg/GoldBezel.tsx | — | ~149 |
+| 18:35 | Created src/components/svg/GoldBezel.tsx | — | ~665 |
+| 18:35 | Edited src/app/globals.css | CSS: transform, transform, transform | ~88 |
+| 18:35 | Edited src/app/globals.css | expanded (+9 lines) | ~163 |
+| 18:35 | Edited src/components/hero/LuxuryHeroCinematic.tsx | added 1 import(s) | ~50 |
+| 18:35 | Edited src/components/hero/LuxuryHeroCinematic.tsx | 6→9 lines | ~145 |
+| 18:35 | Edited src/components/hero/LuxuryHeroCinematic.tsx | expanded (+29 lines) | ~412 |
+| 18:35 | Edited src/components/hero/LuxuryHeroCinematic.tsx | 3→3 lines | ~64 |
+| 18:37 | Edited src/app/home/page.tsx | 5→6 lines | ~95 |
+| 18:37 | Edited src/app/home/page.tsx | 7→8 lines | ~52 |
+| 18:37 | Edited src/app/home/page.tsx | 3→4 lines | ~71 |
+| 18:37 | Edited src/app/home/page.tsx | 9→11 lines | ~110 |
+| 18:37 | Edited src/app/home/page.tsx | 7→8 lines | ~53 |
+| 19:15 | Created ../../../../AppData/Local/Temp/corvo-final-verify.mjs | — | ~600 |
+| 19:15 | Created src/app/api/preview-aesthetic/route.ts | — | ~154 |
+
+| 14:40 | User reported 3 EMPTY SECTIONS (the SlashReveal/CurtainReveal-wrapped ones — whileInView clip never fired on their machine) + bland luxury hero + wants continuous full-page animation. Fix: built ScrubReveal (scroll-scrubbed, no IntersectionObserver — reveals play forward/backward with scroll position, content visible pre-mount so sections can never be blank); replaced and EXTENDED to sections 3, 6, 7, 8, 9, 10 — whole homepage is now one continuous animated sequence. Deleted SlashReveal.tsx + CurtainReveal.tsx | ScrubReveal.tsx, home/page.tsx | empty sections fixed + continuity | ~4000 |
+| 14:50 | Luxury hero richness: GoldBezel (counter-rotating watch-bezel rings w/ minute ticks + diamond markers, scroll-reactive scale/rotate/fade), .text-gradient-gold shimmer on "of Excellence.", periodic sheen-sweep light pass | GoldBezel.tsx, LuxuryHeroCinematic.tsx, globals.css | Bond-grade hero | ~1800 |
+| 15:00 | Verified: full-page scroll walk both themes — all sections render, console clean (only benign Wix no-cart 404, which is also what the dev-overlay "1 Issue" badge counts). tsc + build clean | — | verified | ~10000 |
+| 19:18 | Created ../../../../AppData/Local/Temp/corvo-bug163.cjs | — | ~315 |
+| 19:18 | Session end: 153 writes across 39 files (globals.css, FeaturedProducts.tsx, page.tsx, ShopGrid.tsx, ProductGallery.tsx) | 33 reads | ~101197 tok |

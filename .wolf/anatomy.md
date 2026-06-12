@@ -1,12 +1,18 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-12T05:13:30.393Z
-> Files: 81 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-12T07:18:10.662Z
+> Files: 95 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../../../AppData/Local/Temp/
 
+- `corvo-bug163.cjs` — Declares fs (~315 tok)
+- `corvo-buglog-156.cjs` — Declares fs (~323 tok)
+- `corvo-buglog-append.cjs` — Declares fs (~472 tok)
+- `corvo-cinematic-verify.mjs` — Verify the cinematic pinned heroes: console errors + screenshots at (~728 tok)
 - `corvo-console-check.mjs` — Declares globalRoot (~366 tok)
+- `corvo-final-verify.mjs` — Final verification: scroll the full savage + luxury homepages, capture the (~600 tok)
 - `corvo-mobile-shots.mjs` — Mobile screenshot helper — uses openwolf's bundled puppeteer. (~610 tok)
+- `corvo-reduce-sim.mjs` — Simulate the user's reduced-motion machine: headless Chrome WITHOUT the (~412 tok)
 
 ## ./
 
@@ -26,10 +32,10 @@
 
 ## src/app/
 
-- `globals.css` — Styles: 44 rules, 87 vars (~3560 tok)
-- `layout.tsx` — anton (~1178 tok)
+- `globals.css` — Styles: 46 rules, 64 vars (~3947 tok)
+- `layout.tsx` — anton (~1240 tok)
 - `page.tsx` — metadata (~73 tok)
-- `template.tsx` — Template (~110 tok)
+- `template.tsx` — EASE (~342 tok)
 
 ## src/app/about/
 
@@ -100,7 +106,7 @@
 
 ## src/app/home/
 
-- `page.tsx` — metadata (~8299 tok)
+- `page.tsx` — metadata (~5779 tok)
 
 ## src/app/returns/
 
@@ -134,6 +140,12 @@
 - `CartIcon.tsx` — CartIcon (~501 tok)
 - `CartProvider.tsx` — WIX_STORES_APP_ID (~1631 tok)
 
+## src/components/hero/
+
+- `HoloRaven.tsx` — LAYERS (~1558 tok)
+- `LuxuryHeroCinematic.tsx` — EASE (~2882 tok)
+- `SavageHeroCinematic.tsx` — EASE (~2968 tok)
+
 ## src/components/layout/
 
 - `BackToTop.tsx` — BackToTop (~356 tok)
@@ -145,18 +157,23 @@
 
 ## src/components/motion/
 
+- `CurtainReveal.tsx` — Panel color — defaults to the page background (~686 tok)
 - `FadeIn.tsx` — FadeIn (~214 tok)
 - `ParallaxImage.tsx` — ParallaxImage (~578 tok)
 - `RevealImage.tsx` — Parallax image reveal — scales from 1.1 to 1 as the image scrolls into view. (~265 tok)
 - `RevealText.tsx` — Clip-mask text reveal — container clips at its border, text slides up into view. (~246 tok)
+- `ScrubReveal.tsx` — Curtain panel color — match the section background (~1207 tok)
+- `SlashReveal.tsx` — Accepted for interchangeability with CurtainReveal; unused here. (~514 tok)
+- `VelocityWarp.tsx` — 1 = savage (pronounced), ~0.35 = luxury (restrained) (~358 tok)
 
 ## src/components/svg/
 
 - `DustField.tsx` — DustField (~360 tok)
 - `EKGPulse.tsx` — Primary runner color (~552 tok)
+- `GoldBezel.tsx` — GoldBezel (~665 tok)
 - `GoldFlourish.tsx` — Delay before the draw starts (s) (~477 tok)
 - `Reticle.tsx` — Reticle (~833 tok)
-- `ScrollSpine.tsx` — H (~1717 tok)
+- `ScrollSpine.tsx` — H (~1585 tok)
 
 ## src/components/ui/
 

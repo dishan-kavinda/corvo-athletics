@@ -2476,6 +2476,243 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-12T05:17:48.230Z"
+    },
+    {
+      "id": "bug-153",
+      "timestamp": "2026-06-12T05:29:57.012Z",
+      "error_message": "CSS fix: opacity",
+      "file": "src/app/globals.css",
+      "root_cause": "opacity: 0.25 → 0",
+      "fix": "Changed opacity: 0.25 → 0",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "css"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:29:57.012Z"
+    },
+    {
+      "id": "bug-154",
+      "timestamp": "2026-06-12T05:35:11.806Z",
+      "error_message": "Type error",
+      "file": "src/app/layout.tsx",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:35:11.806Z"
+    },
+    {
+      "id": "bug-155",
+      "timestamp": "2026-06-12T05:56:12.333Z",
+      "error_message": "Wrong condition in logic",
+      "file": "src/components/motion/SlashReveal.tsx",
+      "root_cause": "Condition was: if (reduced)",
+      "fix": "Changed to: if (mounted && reduced)",
+      "tags": [
+        "auto-detected",
+        "logic-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:56:12.333Z"
+    },
+    {
+      "id": "bug-156",
+      "timestamp": "2026-06-12T05:56:16.475Z",
+      "error_message": "Wrong condition in logic",
+      "file": "src/components/motion/CurtainReveal.tsx",
+      "root_cause": "Condition was: if (reduced)",
+      "fix": "Changed to: if (mounted && reduced)",
+      "tags": [
+        "auto-detected",
+        "logic-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T05:56:16.475Z"
+    },
+    {
+      "id": "bug-153",
+      "timestamp": "2026-06-12T06:19:54.812Z",
+      "error_message": "Hydration failed + (motion) Target ref is defined but not hydrated — on every page after cinematic heroes added",
+      "file": "src/components/hero/SavageHeroCinematic.tsx",
+      "root_cause": "Two compounding causes: (1) framer MotionValues in SSR styles serialize differently client-side; (2) useReducedMotion-based CONDITIONAL TREES mismatch for reduce-pref users — and headless Chrome forces prefers-reduced-motion: reduce, which is why automated checks always hit it",
+      "fix": "dyn = mounted && !reduced pattern: server + first client render output identical static rest-state styles; scroll-driven MotionValues and reduced-motion tree swaps attach only after mount. Applied to both heroes, SlashReveal, CurtainReveal. Verify scripts must emulateMediaFeatures prefers-reduced-motion: no-preference to test the animated path",
+      "tags": [
+        "hydration",
+        "framer-motion",
+        "reduced-motion",
+        "headless-chrome",
+        "ssr"
+      ],
+      "related_bugs": [
+        "bug-148"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:19:54.812Z"
+    },
+    {
+      "id": "bug-154",
+      "timestamp": "2026-06-12T06:19:54.812Z",
+      "error_message": "pnpm build fails: EPERM unlink .next/static/<hash> (persisted across retries)",
+      "file": "(build)",
+      "root_cause": "Dev server held .next locks + OneDrive sync grabs files in the project dir (repo lives inside OneDrive)",
+      "fix": "Stop dev server on port 3000, delete .next, rebuild. If it recurs, suspect OneDrive sync of .next",
+      "tags": [
+        "build",
+        "windows",
+        "onedrive",
+        "file-lock"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:19:54.812Z"
+    },
+    {
+      "id": "bug-159",
+      "timestamp": "2026-06-12T06:23:55.265Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/svg/ScrollSpine.tsx",
+      "root_cause": "18 lines replaced/restructured",
+      "fix": "Rewrote 23→3 lines (18 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:23:55.265Z"
+    },
+    {
+      "id": "bug-160",
+      "timestamp": "2026-06-12T06:24:21.854Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/motion/SlashReveal.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 4→3 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:24:21.854Z"
+    },
+    {
+      "id": "bug-161",
+      "timestamp": "2026-06-12T06:24:26.574Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/motion/CurtainReveal.tsx",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 4→3 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:24:26.574Z"
+    },
+    {
+      "id": "bug-159",
+      "timestamp": "2026-06-12T06:26:39.394Z",
+      "error_message": "User reports: no animations visible on localhost:3000, page \"just scrolls down normally\" — while puppeteer verification showed everything working",
+      "file": "src/app/globals.css",
+      "root_cause": "User's Windows machine reports prefers-reduced-motion: reduce (Windows 'Animation effects' off). The site's global CSS kill-switch + useReducedMotion gates served the static fallback — to the site owner, on every visit, the entire time",
+      "fix": "Owner decision: removed the global reduced-motion CSS kill-switch and all useReducedMotion gates (ScrollSpine, both cinematic heroes, SlashReveal, CurtainReveal, VelocityWarp). Mounted hydration gates kept. Verified by running headless Chrome WITHOUT the no-preference override — animations now play under forced reduce",
+      "tags": [
+        "reduced-motion",
+        "windows",
+        "accessibility",
+        "animations",
+        "user-reported"
+      ],
+      "related_bugs": [
+        "bug-153"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:26:39.394Z"
+    },
+    {
+      "id": "bug-163",
+      "timestamp": "2026-06-12T06:35:17.577Z",
+      "error_message": "CSS fix: background, background-size, animation",
+      "file": "src/app/globals.css",
+      "root_cause": "background: linear-gradient(135deg, #FF2B3A 0%, #FF6B76 45%, #FF2B3A 100%) → linear-gradient(110deg, #9C7C26 0%, #E8CC7A 38%, #9C7C26 60%, #C9A961 100%); background-size: 200% auto → 220% auto; animation: shimmer-blade 3s linear infinite → shimmer-gold 5.5s linear infinite",
+      "fix": "Changed background: linear-gradient(135deg, #FF2B3A 0%, #FF6B76 45%, #FF2B3A 100%) → linear-gradient(110deg, #9C7C26 0%, #E8CC7A 38%, #9C7C26 60%, #C9A961 100%); background-size: 200% auto → 220% auto; animation: shimmer-blade 3s linear infinite → shimmer-gold 5.5s linear infinite",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "css"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:35:17.577Z"
+    },
+    {
+      "id": "bug-164",
+      "timestamp": "2026-06-12T06:35:25.717Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/hero/LuxuryHeroCinematic.tsx",
+      "root_cause": "Had '@/components/svg/DustField'",
+      "fix": "Changed to '@/components/svg/GoldBezel'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-12T06:35:40.678Z"
+    },
+    {
+      "id": "bug-165",
+      "timestamp": "2026-06-12T06:35:38.113Z",
+      "error_message": "CSS fix: background",
+      "file": "src/components/hero/LuxuryHeroCinematic.tsx",
+      "root_cause": "background: 'radial-gradient(ellipse 60% 50% at 50% 42%, rgba(201,169,97,0.1) 0%, transparent 70%)' → 'linear-gradient(90deg, transparent 0%, rgba(255,252,240,0.0) 20%, rgba(232,204,122,0.16) 50%, rgba(255,252,240,0.0) 80%, transparent 100%)',",
+      "fix": "Changed background: 'radial-gradient(ellipse 60% 50% at 50% 42%, rgba(201,169,97,0.1) 0%, transparent 70%)' → 'linear-gradient(90deg, transparent 0%, rgba(255,252,240,0.0) 20%, rgba(232,204,122,0.16) 50%, rgba(255,252,240,0.0) 80%, transparent 100%)',",
+      "tags": [
+        "auto-detected",
+        "style-fix",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T06:35:38.113Z"
+    },
+    {
+      "id": "bug-163",
+      "timestamp": "2026-06-12T07:18:23.010Z",
+      "error_message": "User reported: three sections of the homepage render completely empty (collection feature, standards, final CTA) — exactly the SlashReveal/CurtainReveal-wrapped sections",
+      "file": "src/components/motion/SlashReveal.tsx",
+      "root_cause": "Reveals hid content behind an initial clip-path and depended on whileInView (IntersectionObserver) to un-hide it; the trigger never fired on the user machine, leaving content clipped to nothing forever",
+      "fix": "Replaced trigger-based reveals with ScrubReveal: reveal progress driven directly by useScroll section offsets (no IO), reversible, springed — and pre-mount the children render fully visible, so a blank section is structurally impossible. SlashReveal/CurtainReveal deleted",
+      "tags": [
+        "whileinview",
+        "intersection-observer",
+        "clip-path",
+        "blank-content",
+        "user-reported"
+      ],
+      "related_bugs": [
+        "bug-159"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-12T07:18:23.010Z"
     }
   ]
 }

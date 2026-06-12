@@ -204,15 +204,41 @@ body {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.25; }
 }
-
-/* ── Reduced motion — pause all animations ─────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* HUD scan line sweeping a containment panel */
+@keyframes scan-sweep {
+  0%   { top: -4%; opacity: 0; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.9; }
+  100% { top: 104%; opacity: 0; }
 }
+/* Holographic flicker — sub-perceptual instability */
+@keyframes holo-flicker {
+  0%, 100% { opacity: 1; }
+  92%       { opacity: 1; }
+  93%       { opacity: 0.72; }
+  94%       { opacity: 1; }
+  97%       { opacity: 0.85; }
+  98%       { opacity: 1; }
+}
+/* Light sheen sweeping across a surface — luxury polish pass */
+@keyframes sheen-sweep {
+  0%   { transform: translateX(-130%) skewX(-18deg); }
+  18%  { transform: translateX(230%) skewX(-18deg); }
+  100% { transform: translateX(230%) skewX(-18deg); }
+}
+
+/* Scroll cue line dropping */
+@keyframes cue-drop {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  35%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  70%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* NOTE: the global prefers-reduced-motion kill-switch was removed by owner
+   decision (2026-06-12) — the cinematic motion IS the brand experience, and
+   Windows machines with "Animation effects" off were getting a fully static
+   site. Scroll-driven scenes are user-controlled motion. */
 
 /* ── Performance — off-screen sections ─────────────── */
 .cv-auto {
@@ -346,6 +372,15 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer-blade 3s linear infinite;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(110deg, #9C7C26 0%, #E8CC7A 38%, #9C7C26 60%, #C9A961 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-gold 5.5s linear infinite;
 }
 
 .blade-line {

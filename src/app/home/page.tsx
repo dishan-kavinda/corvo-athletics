@@ -1,9 +1,9 @@
 import { cookies } from 'next/headers';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/layout/Logo';
-import { HeroReveal } from '@/components/motion/HeroReveal';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { Stagger, StaggerItem } from '@/components/motion/Stagger';
+import { ScrubReveal } from '@/components/motion/ScrubReveal';
 import { CategoryGrid } from '@/components/ui/CategoryGrid';
 import { FeaturedProducts } from '@/components/ui/FeaturedProducts';
 import { MarqueeStrip } from '@/components/ui/MarqueeStrip';
@@ -12,6 +12,8 @@ import { EKGPulse } from '@/components/svg/EKGPulse';
 import { Reticle } from '@/components/svg/Reticle';
 import { GoldFlourish } from '@/components/svg/GoldFlourish';
 import { DustField } from '@/components/svg/DustField';
+import { SavageHeroCinematic } from '@/components/hero/SavageHeroCinematic';
+import { LuxuryHeroCinematic } from '@/components/hero/LuxuryHeroCinematic';
 
 export const metadata = {
   title: 'Home',
@@ -70,303 +72,6 @@ const statsLuxury = [
   { value: '0',    label: 'Exceptions Made' },
 ];
 
-/* ── Heroes — typographic, zero photography ───────── */
-
-function SavageHero() {
-  return (
-    <section
-      className="relative flex flex-col justify-center overflow-hidden"
-      style={{ minHeight: '100svh', background: 'var(--page-bg)' }}
-    >
-      {/* Scanline texture */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 4px)',
-        }}
-      />
-
-      {/* Targeting reticle — rotates slowly off the right edge */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none hidden md:block"
-        style={{
-          top: '50%',
-          right: '-14%',
-          transform: 'translateY(-50%)',
-          width: 'min(820px, 64vw)',
-          aspectRatio: '1 / 1',
-          opacity: 0.13,
-        }}
-      >
-        <Reticle />
-      </div>
-
-      {/* Raven watermark */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/logo-savage-clean.svg"
-        alt=""
-        aria-hidden
-        style={{
-          position: 'absolute',
-          bottom: '-5%',
-          left: '-3%',
-          height: '50vh',
-          width: 'auto',
-          opacity: 0.05,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Left accent rule */}
-      <div
-        aria-hidden
-        className="absolute hidden lg:block"
-        style={{
-          left: 'max(1.5rem, calc(50vw - 680px))',
-          top: 0,
-          bottom: 0,
-          width: '2px',
-          background:
-            'linear-gradient(to bottom, transparent 0%, var(--accent) 15%, var(--accent) 85%, transparent 100%)',
-          opacity: 0.45,
-        }}
-      />
-
-      {/* Vertical rail — right edge */}
-      <div
-        aria-hidden
-        className="absolute hidden lg:flex items-center"
-        style={{ right: '4rem', top: 0, bottom: 0 }}
-      >
-        <p
-          style={{
-            writingMode: 'vertical-rl',
-            fontFamily: 'var(--font-rajdhani)',
-            fontSize: '10px',
-            fontWeight: 700,
-            letterSpacing: '0.52em',
-            textTransform: 'uppercase',
-            color: 'var(--muted)',
-            opacity: 0.55,
-          }}
-        >
-          Est. New Zealand ── The Raven Standard ── No Compromise
-        </p>
-      </div>
-
-      {/* Heartbeat */}
-      <div
-        aria-hidden
-        className="absolute left-0 right-0 pointer-events-none"
-        style={{ bottom: '88px', opacity: 0.5 }}
-      >
-        <EKGPulse height={50} />
-      </div>
-
-      {/* Content */}
-      <div className="relative shell w-full py-28">
-        <HeroReveal delay={0.05} y={10}>
-          <div className="flex items-center gap-3 mb-10">
-            <Logo height={20} style={{ color: 'var(--accent)', opacity: 0.88, flexShrink: 0 }} />
-            <span
-              className="block"
-              style={{ width: '26px', height: '1.5px', background: 'var(--accent)', flexShrink: 0 }}
-            />
-            <span className="eyebrow" style={{ letterSpacing: '0.52em' }}>
-              Corvo Athletic
-            </span>
-            <span className="live-dot" aria-hidden />
-          </div>
-        </HeroReveal>
-
-        <HeroReveal delay={0.18} y={60} duration={1.1}>
-          <h1
-            className="font-display uppercase leading-[0.82] mb-8"
-            style={{ fontSize: 'clamp(4rem, 13vw, 11rem)', letterSpacing: '-0.01em' }}
-          >
-            <span className="block" style={{ color: 'var(--page-fg)' }}>HUNT</span>
-            <span className="block text-outline">WITHOUT</span>
-            <span className="block text-gradient-blade">MERCY.</span>
-          </h1>
-        </HeroReveal>
-
-        <HeroReveal delay={0.45}>
-          <p
-            className="text-base md:text-lg leading-relaxed mb-10"
-            style={{ color: 'var(--muted)', maxWidth: '420px' }}
-          >
-            Elite training gear for those who thrive where others fold.
-            No shortcuts. Zero compromise.
-          </p>
-        </HeroReveal>
-
-        <HeroReveal delay={0.65}>
-          <div className="flex flex-wrap gap-4 items-center">
-            <Button href="/shop" size="lg" variant="primary">
-              Enter the Collection →
-            </Button>
-            <Button href="/about" size="lg" variant="ghost">
-              Our Story
-            </Button>
-          </div>
-        </HeroReveal>
-
-        <HeroReveal delay={1.0}>
-          <div className="mt-16 flex items-center gap-6 sm:gap-10">
-            {[
-              { v: '10K+', l: 'Athletes' },
-              { v: '5★',   l: 'Rated' },
-              { v: 'NZ',   l: 'Based' },
-            ].map((s, i) => (
-              <div key={s.l} className="flex items-center gap-6 sm:gap-10">
-                {i > 0 && (
-                  <span
-                    className="block"
-                    style={{ width: '1px', height: '24px', background: 'var(--border)', flexShrink: 0 }}
-                  />
-                )}
-                <div>
-                  <p className="font-display leading-none" style={{ fontSize: '1rem', color: 'var(--accent)' }}>
-                    {s.v}
-                  </p>
-                  <p
-                    className="tech-label"
-                    style={{ fontSize: '9px', letterSpacing: '0.32em', marginTop: '2px' }}
-                  >
-                    {s.l}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </HeroReveal>
-      </div>
-    </section>
-  );
-}
-
-function LuxuryHero() {
-  return (
-    <section
-      className="relative flex items-center justify-center overflow-hidden"
-      style={{ minHeight: '100svh', background: 'var(--page-bg)' }}
-    >
-      {/* Double hairline frame — invitation card */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none"
-        style={{ inset: 'clamp(12px, 2.5vw, 28px)', border: '1px solid rgba(156,124,38,0.42)' }}
-      />
-      <div
-        aria-hidden
-        className="absolute pointer-events-none"
-        style={{ inset: 'clamp(22px, 3.8vw, 44px)', border: '1px solid rgba(156,124,38,0.16)' }}
-      />
-
-      {/* Warm center light */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 42%, rgba(201,169,97,0.1) 0%, transparent 70%)',
-        }}
-      />
-
-      <DustField count={20} color="#9C7C26" />
-
-      {/* Content — centered, symmetric */}
-      <div className="relative text-center px-6 py-32" style={{ maxWidth: '880px' }}>
-        <HeroReveal delay={0.05} y={10}>
-          <Logo height={38} style={{ color: 'var(--accent)', opacity: 0.75, margin: '0 auto 2.5rem' }} />
-        </HeroReveal>
-
-        <HeroReveal delay={0.16} y={12}>
-          <p
-            style={{
-              fontFamily: 'var(--font-cormorant), Georgia, serif',
-              fontSize: '13px',
-              letterSpacing: '0.42em',
-              textTransform: 'uppercase',
-              color: 'var(--accent)',
-              marginBottom: '2.5rem',
-            }}
-          >
-            The House of Corvo
-          </p>
-        </HeroReveal>
-
-        <HeroReveal delay={0.3} y={50} duration={1.1}>
-          <h1
-            className="font-display leading-[0.98] mb-8"
-            style={{ fontSize: 'clamp(3.2rem, 9vw, 8rem)', letterSpacing: '0.005em' }}
-          >
-            <span className="block" style={{ color: 'var(--page-fg)' }}>The Pursuit</span>
-            <span className="block" style={{ color: 'var(--accent)', fontStyle: 'italic' }}>
-              of Excellence.
-            </span>
-          </h1>
-        </HeroReveal>
-
-        <HeroReveal delay={0.55}>
-          <GoldFlourish width={240} style={{ margin: '0 auto 2.5rem' }} delay={0.4} />
-        </HeroReveal>
-
-        <HeroReveal delay={0.62}>
-          <p
-            className="text-base leading-relaxed mx-auto mb-12"
-            style={{ color: 'var(--muted)', maxWidth: '460px' }}
-          >
-            Meticulously crafted performance wear for athletes who understand
-            that true excellence requires no compromise.
-          </p>
-        </HeroReveal>
-
-        <HeroReveal delay={0.8}>
-          <div className="flex flex-wrap gap-4 items-center justify-center">
-            <Button href="/shop" size="lg" variant="primary">
-              View the Collection →
-            </Button>
-            <Button href="/about" size="lg" variant="ghost">
-              Our Story
-            </Button>
-          </div>
-        </HeroReveal>
-
-        <HeroReveal delay={1.05}>
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {['10K+ Members', '5★ Rated', 'Est. New Zealand'].map((s, i) => (
-              <div key={s} className="flex items-center gap-8">
-                {i > 0 && (
-                  <span
-                    className="block"
-                    style={{ width: '1px', height: '16px', background: 'rgba(156,124,38,0.35)', flexShrink: 0 }}
-                  />
-                )}
-                <p
-                  style={{
-                    fontFamily: 'var(--font-cormorant), Georgia, serif',
-                    fontSize: '12px',
-                    letterSpacing: '0.22em',
-                    textTransform: 'uppercase',
-                    color: 'var(--muted)',
-                  }}
-                >
-                  {s}
-                </p>
-              </div>
-            ))}
-          </div>
-        </HeroReveal>
-      </div>
-    </section>
-  );
-}
-
 /* ── Page ─────────────────────────────────────────── */
 
 export default async function Home() {
@@ -374,11 +79,13 @@ export default async function Home() {
   const isLuxury = cookieStore.get('corvo_aesthetic')?.value === 'luxury';
   const standards = isLuxury ? standardsLuxury : standardsSavage;
   const stats = isLuxury ? statsLuxury : statsSavage;
+  // Theme-matched scroll-scrub transition: blade slash (savage) / curtains (luxury)
+  const variant = isLuxury ? ('curtain' as const) : ('slash' as const);
 
   return (
     <>
       {/* §1 · HERO — brand-native typography, no photography */}
-      {isLuxury ? <LuxuryHero /> : <SavageHero />}
+      {isLuxury ? <LuxuryHeroCinematic /> : <SavageHeroCinematic />}
 
       {/* §2 · MOTION TICKER — hazard-striped edges in savage */}
       <div style={{ background: 'var(--accent)' }}>
@@ -394,6 +101,7 @@ export default async function Home() {
         className="py-20 md:py-28 border-y"
         style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}
       >
+        <ScrubReveal variant={variant} panelColor="var(--surface)">
         <div className="shell">
           <div className="flex flex-col lg:flex-row lg:items-end gap-10 lg:gap-20">
             <FadeIn className="flex-1">
@@ -459,6 +167,7 @@ export default async function Home() {
             </FadeIn>
           </div>
         </div>
+        </ScrubReveal>
       </section>
 
       {/* §4 · CATEGORY GRID */}
@@ -500,6 +209,7 @@ export default async function Home() {
         <div className="absolute left-0 right-0 pointer-events-none" style={{ top: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }} />
         <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: '12%', height: '1px', background: 'linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent)' }} />
 
+        <ScrubReveal variant={variant} panelColor="var(--section-dark)">
         <div className="relative shell text-center">
           <FadeIn>
             <p className="eyebrow" style={{ letterSpacing: '0.52em', marginBottom: '3rem' }}>
@@ -541,6 +251,7 @@ export default async function Home() {
             </blockquote>
           </FadeIn>
         </div>
+        </ScrubReveal>
       </section>
 
       {/* §7 · STANDARDS — fabric texture background */}
@@ -562,6 +273,7 @@ export default async function Home() {
           style={{ background: 'var(--surface)', opacity: 0.82 }}
         />
 
+        <ScrubReveal variant={variant} panelColor="var(--surface)">
         <div className="relative shell">
           <FadeIn className="mb-16">
             <div className="flex flex-col md:flex-row md:items-end gap-6">
@@ -612,10 +324,12 @@ export default async function Home() {
             ))}
           </Stagger>
         </div>
+        </ScrubReveal>
       </section>
 
       {/* §8 · STATS — alive divider above the numbers */}
       <section className="py-24" style={{ background: 'var(--page-bg)', borderTop: '1px solid var(--border)' }}>
+        <ScrubReveal variant={variant} panelColor="var(--page-bg)">
         <div className="shell">
           <div className="mb-14">
             {isLuxury ? (
@@ -645,10 +359,12 @@ export default async function Home() {
             ))}
           </Stagger>
         </div>
+        </ScrubReveal>
       </section>
 
       {/* §9 · NEWSLETTER */}
       <section className="border-t" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+        <ScrubReveal variant={variant} panelColor="var(--surface)">
         <div className="shell">
           <div className="flex flex-col lg:flex-row">
             <div className="flex-1 py-20 lg:py-28">
@@ -675,6 +391,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
+        </ScrubReveal>
       </section>
 
       {/* §10 · FINAL CTA */}
@@ -698,6 +415,7 @@ export default async function Home() {
           className="absolute pointer-events-none"
           style={{ top: 0, left: 0, right: 0, height: '100%', backgroundImage: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, rgba(0,0,0,0.08) 100%)' }}
         />
+        <ScrubReveal variant={variant} panelColor="var(--accent)">
         <div className="relative shell text-center">
           <FadeIn>
             <Logo
@@ -729,6 +447,7 @@ export default async function Home() {
             </p>
           </FadeIn>
         </div>
+        </ScrubReveal>
       </section>
     </>
   );

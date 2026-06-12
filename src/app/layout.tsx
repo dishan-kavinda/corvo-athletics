@@ -8,6 +8,7 @@ import { CartProvider } from '@/components/cart/CartProvider';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SmoothScroll } from '@/components/layout/SmoothScroll';
 import { ScrollSpine } from '@/components/svg/ScrollSpine';
+import { VelocityWarp } from '@/components/motion/VelocityWarp';
 
 const anton = Anton({
   weight: '400',
@@ -120,7 +121,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <CartProvider>
           <SmoothScroll>
             {!isChooser && <Header />}
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <VelocityWarp intensity={isChooser ? 0 : themeClass === 'luxury' ? 0.35 : 1}>
+                {children}
+              </VelocityWarp>
+            </main>
             {!isChooser && <Footer />}
             {!isChooser && <ScrollSpine variant={themeClass === 'luxury' ? 'luxury' : 'savage'} />}
             <CartDrawer />

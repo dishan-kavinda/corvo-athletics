@@ -7,7 +7,6 @@ import {
   useSpring,
   useTransform,
   useVelocity,
-  useReducedMotion,
 } from 'framer-motion';
 
 /* ScrollSpine — the site's continuous companion animation.
@@ -65,7 +64,6 @@ export function ScrollSpine({ variant }: ScrollSpineProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const reduced = useReducedMotion();
   const { scrollYProgress, scrollY } = useScroll();
 
   // Smoothed draw progress — never fully empty so the thread is always present
@@ -104,26 +102,6 @@ export function ScrollSpine({ variant }: ScrollSpineProps) {
   const stroke = variant === 'savage' ? '#FF2B3A' : '#9C7C26';
 
   if (!mounted) return null;
-
-  if (reduced) {
-    // Static hairline for reduced-motion users
-    return (
-      <div
-        aria-hidden
-        style={{
-          position: 'fixed',
-          top: 0,
-          bottom: 0,
-          right: 'clamp(6px, 1.2vw, 18px)',
-          width: '1px',
-          background: stroke,
-          opacity: 0.25,
-          zIndex: 5,
-          pointerEvents: 'none',
-        }}
-      />
-    );
-  }
 
   return (
     <motion.div
